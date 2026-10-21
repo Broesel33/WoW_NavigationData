@@ -1,18 +1,30 @@
--- Independent target catalog; contains no graph bindings.
-local LogicalTargets = {["converterSha256"]="39D8E5DB25AFA0E76A95D44CF35E420BAFB130629BB16C23A84642A6335E7C82",["coordinateSpace"]="world",["dropped"]={"creature_34119","creature_34120","creature_34121","creature_34122","creature_48268","creature_48296","creature_53789","creature_53790","creature_53791","gameobject_18512"},["layer"]="logical",["payloadSha256"]="648AD8DC5A1C1FBB1A598FB48F649BE675C662F34B5F1538D0D4B4BC254EC93E",["schema"]=1,["sourceSha256"]="654A20E1BE158E23D378CC762EA5CCC870AC4508AA35EDE46D02D1D1B80DD67B",["zoneId"]=499}
+-- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=499,coordinateSpace="world",nativeMapId=369,availability="static",sourceSha256="3956C06803DD495D319886C01336463FD360C9D059A423CC317B70EA928E14B7",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="81BF55F89EED10D42C47F2918E8F79DBC0723B7E1D6D9DA99595B840CF777A26",dropped={"creature_34119","creature_34120","creature_34121","creature_34122","creature_48268","creature_48296","creature_53789","creature_53790","creature_53791","gameobject_18512"}}
+LogicalTargets.classes = {
+{"npc","quest_giver",12997,"Monty (Rat Extermination Specialist)","Monty (Rattenvernichtungsspezialist)"},
+{"npc",{"quest_giver","vendor"},13018,"Nipsy"},
+{"creature","npc_or_mob",14041,"Haggle",a="possible_spawn"},
+{"gameobject","object_type_11",176085,"Subway"},
+{"gameobject","object_type_11",176084,"Subway"},
+{"gameobject","object_type_11",176083,"Subway"},
+{"gameobject","object_type_11",176082,"Subway"},
+{"gameobject","object_type_11",176081,"Subway"},
+{"gameobject","object_type_11",176080,"Subway"},
+{"gameobject","object",178304,"Box o' Squirrels"},
+}
 LogicalTargets.targets = {
-  {["availability"]="static",["category"]={"quest_giver"},["coordinateSpace"]="world",["entry"]=12997,["id"]="creature_52957",["kind"]="npc",["nameDe"]="Monty (Rat Extermination Specialist)",["nameEn"]="Monty (Rat Extermination Specialist)",["nativeMapId"]=369,["searchAliases"]={},["source"]={["description"]="cMaNGOS classic-db (Vanilla 1.12), Release latest",["provider"]="cmangos",["record"]="creature_52957"},["type"]="creature",["x"]=-19.631,["y"]=40.075,["z"]=-4.214,["zStatus"]="known"},
-  {["availability"]="static",["category"]={"quest_giver","vendor"},["coordinateSpace"]="world",["entry"]=13018,["id"]="creature_52990",["kind"]="npc",["nameDe"]="Nipsy",["nameEn"]="Nipsy",["nativeMapId"]=369,["searchAliases"]={},["source"]={["description"]="cMaNGOS classic-db (Vanilla 1.12), Release latest",["provider"]="cmangos",["record"]="creature_52990"},["type"]="creature",["x"]=-20.984,["y"]=2459.93,["z"]=-4.297,["zStatus"]="known"},
-  {["availability"]="possible_spawn",["category"]={"npc_or_mob"},["coordinateSpace"]="world",["entry"]=14041,["id"]="creature_53788",["kind"]="creature",["nameDe"]="Haggle",["nameEn"]="Haggle",["nativeMapId"]=369,["searchAliases"]={},["source"]={["description"]="cMaNGOS classic-db (Vanilla 1.12), Release latest",["provider"]="cmangos",["record"]="creature_53788"},["type"]="creature",["x"]=-18.497,["y"]=-17.03,["z"]=-4.297,["zStatus"]="known"},
-  {["availability"]="static",["category"]={"object_type_11"},["coordinateSpace"]="world",["entry"]=176085,["id"]="gameobject_18807",["kind"]="gameobject",["nameDe"]="Subway",["nameEn"]="Subway",["nativeMapId"]=369,["searchAliases"]={},["source"]={["description"]="cMaNGOS classic-db (Vanilla 1.12), Release latest",["provider"]="cmangos",["record"]="gameobject_18807"},["type"]="gameobject",["x"]=4.499,["y"]=-11.347,["z"]=7.011,["zStatus"]="known"},
-  {["availability"]="static",["category"]={"object_type_11"},["coordinateSpace"]="world",["entry"]=176084,["id"]="gameobject_18806",["kind"]="gameobject",["nameDe"]="Subway",["nameEn"]="Subway",["nativeMapId"]=369,["searchAliases"]={},["source"]={["description"]="cMaNGOS classic-db (Vanilla 1.12), Release latest",["provider"]="cmangos",["record"]="gameobject_18806"},["type"]="gameobject",["x"]=-45.393,["y"]=2472.93,["z"]=6.989,["zStatus"]="known"},
-  {["availability"]="static",["category"]={"object_type_11"},["coordinateSpace"]="world",["entry"]=176083,["id"]="gameobject_18805",["kind"]="gameobject",["nameDe"]="Subway",["nameEn"]="Subway",["nativeMapId"]=369,["searchAliases"]={},["source"]={["description"]="cMaNGOS classic-db (Vanilla 1.12), Release latest",["provider"]="cmangos",["record"]="gameobject_18805"},["type"]="gameobject",["x"]=-45.401,["y"]=2512.15,["z"]=6.989,["zStatus"]="known"},
-  {["availability"]="static",["category"]={"object_type_11"},["coordinateSpace"]="world",["entry"]=176082,["id"]="gameobject_18804",["kind"]="gameobject",["nameDe"]="Subway",["nameEn"]="Subway",["nativeMapId"]=369,["searchAliases"]={},["source"]={["description"]="cMaNGOS classic-db (Vanilla 1.12), Release latest",["provider"]="cmangos",["record"]="gameobject_18804"},["type"]="gameobject",["x"]=-45.401,["y"]=2492.79,["z"]=6.989,["zStatus"]="known"},
-  {["availability"]="static",["category"]={"object_type_11"},["coordinateSpace"]="world",["entry"]=176081,["id"]="gameobject_18803",["kind"]="gameobject",["nameDe"]="Subway",["nameEn"]="Subway",["nativeMapId"]=369,["searchAliases"]={},["source"]={["description"]="cMaNGOS classic-db (Vanilla 1.12), Release latest",["provider"]="cmangos",["record"]="gameobject_18803"},["type"]="gameobject",["x"]=4.528,["y"]=8.435,["z"]=7.011,["zStatus"]="known"},
-  {["availability"]="static",["category"]={"object_type_11"},["coordinateSpace"]="world",["entry"]=176080,["id"]="gameobject_18802",["kind"]="gameobject",["nameDe"]="Subway",["nameEn"]="Subway",["nativeMapId"]=369,["searchAliases"]={},["source"]={["description"]="cMaNGOS classic-db (Vanilla 1.12), Release latest",["provider"]="cmangos",["record"]="gameobject_18802"},["type"]="gameobject",["x"]=4.581,["y"]=28.21,["z"]=7.011,["zStatus"]="known"},
-  {["availability"]="static",["category"]={"object"},["coordinateSpace"]="world",["entry"]=178304,["id"]="gameobject_20738",["kind"]="gameobject",["nameDe"]="Box o' Squirrels",["nameEn"]="Box o' Squirrels",["nativeMapId"]=369,["searchAliases"]={},["source"]={["description"]="cMaNGOS classic-db (Vanilla 1.12), Release latest",["provider"]="cmangos",["record"]="gameobject_20738"},["type"]="gameobject",["x"]=-19.664,["y"]=44.256,["z"]=-4.297,["zStatus"]="known"},
-  {["availability"]="static",["category"]={"object"},["coordinateSpace"]="world",["entry"]=178304,["id"]="gameobject_20739",["kind"]="gameobject",["nameDe"]="Box o' Squirrels",["nameEn"]="Box o' Squirrels",["nativeMapId"]=369,["searchAliases"]={},["source"]={["description"]="cMaNGOS classic-db (Vanilla 1.12), Release latest",["provider"]="cmangos",["record"]="gameobject_20739"},["type"]="gameobject",["x"]=-22.504,["y"]=44.436,["z"]=-4.297,["zStatus"]="known"},
-  {["availability"]="static",["category"]={"object"},["coordinateSpace"]="world",["entry"]=178304,["id"]="gameobject_20740",["kind"]="gameobject",["nameDe"]="Box o' Squirrels",["nameEn"]="Box o' Squirrels",["nativeMapId"]=369,["searchAliases"]={},["source"]={["description"]="cMaNGOS classic-db (Vanilla 1.12), Release latest",["provider"]="cmangos",["record"]="gameobject_20740"},["type"]="gameobject",["x"]=-16.772,["y"]=44.478,["z"]=-4.297,["zStatus"]="known"},
+{"creature_52957",1,-19.631,40.075,-4.214},
+{"creature_52990",2,-20.984,2459.93,-4.297},
+{"creature_53788",3,-18.497,-17.03,-4.297},
+{"gameobject_18807",4,4.499,-11.347,7.011},
+{"gameobject_18806",5,-45.393,2472.93,6.989},
+{"gameobject_18805",6,-45.401,2512.15,6.989},
+{"gameobject_18804",7,-45.401,2492.79,6.989},
+{"gameobject_18803",8,4.528,8.435,7.011},
+{"gameobject_18802",9,4.581,28.21,7.011},
+{"gameobject_20738",10,-19.664,44.256,-4.297},
+{"gameobject_20739",10,-22.504,44.436,-4.297},
+{"gameobject_20740",10,-16.772,44.478,-4.297},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[499] = LogicalTargets
