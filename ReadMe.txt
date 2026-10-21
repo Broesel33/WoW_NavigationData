@@ -62,7 +62,7 @@ At a glance (snapshot of the data in this repository):
   about 99,300 logical targets     232 dynamic targets
   2,782 seams between zones        63 neighbouring zone pairs
   about 54 MB of Lua files         the largest zone file (The Barrens, navdata.lua) is about 2.6 MB;
-                                   the logical target catalogues of all zones take about 7 MB of it
+                                   the logical target catalogues of all zones take about 6 MB of it
 
 Supported game version
   WoW Forever (client series 1.60.1; the demo addon declares interface 16001).
@@ -496,7 +496,7 @@ A worked example: decoding the first waypoints and the first cell of the Deeprun
 The file defines a catalogue of the targets of one zone. It comes in a compact form (format 2) that
 keeps the constants of the file once in the header and what targets of one kind share once per
 "class", so that a target itself is one short line. The catalogues of all zones together take about
-7 MB; the same catalogues with every field written out in every row took 46.7 MB.
+6 MB; the same catalogues with every field written out in every row took 46.7 MB.
 
   -- Logical target catalogue, compact format 2. No graph bindings, no provenance.
   local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=84,coordinateSpace="world",
@@ -519,11 +519,11 @@ keeps the constants of the file once in the header and what targets of one kind 
   WVN7Logical[84] = LogicalTargets
 
 Header fields
-  format            2 for the compact form described here. A file without this field (a zone whose
-                    catalogue was not generated again; in this snapshot Deeprun Tram, Silverpine
-                    Forest and Undercity) has the older form: one table per target with all the
-                    fields in the list "Fields of an older row" below. A consumer should accept
-                    both; a format number it does not know has to be refused.
+  format            2: the compact form described here, the only form of logical catalogues. Earlier
+                    snapshots of this data also contained logical catalogues without this field (one
+                    table per target with all fields in every row); there are none any more, and a
+                    consumer should refuse a file with another format number (the demo addon does,
+                    with a message).
   schema            The version of the target contract. Currently 1.
   layer             "logical" (the catalogue of this file; the dyn catalogue says "dyn").
   zoneId            The zone ID.
@@ -579,13 +579,6 @@ targets: one line per target
   p                 true for an approximate target: its position was attached to the network
                     afterwards (see "Attaching a target to the network").
 
-Fields of an older row (a file without format)
-  id, entry, type ("creature" or "gameobject"), kind, category (a list), nameEn, nameDe,
-  searchAliases (a list), nativeMapId, coordinateSpace, x, y, z, zStatus ("known" or "unknown"),
-  availability, levels, radius, approx, and source = {provider, record, description}. It says what
-  the compact form says; the constants of the header are written in every row and the type of
-  the population is a field of its own.
-
 Where a target comes from is not part of the files (it was in the field "source"). The provider
 is recognisable by the ID: "creature_" and "gameobject_" come from cmangos (a public Vanilla
 database), "questie_" from the Forever database of the Questie addon, "thottbot_" from the
@@ -613,8 +606,8 @@ Attaching a target to the network
 8. dyn_targets.lua - TRANSIT AND ZONE TRANSITIONS
 -------------------------------------------------
 
-The dyn catalogue keeps the older row form of section 7 (a header table with layer = "dyn" and no
-format field, then one table with all fields per target, then WVN7Dyn[zoneId] = DynTargets) with the
+The dyn catalogue is a list of rows (a header table with layer = "dyn" and no format field, then
+one table with all fields per target, then WVN7Dyn[zoneId] = DynTargets) with the
 common fields id, kind, type, category, nameEn, nameDe, searchAliases, nativeMapId,
 coordinateSpace, x, y, z, zStatus, availability, source and entry. It contains 232 targets of two
 kinds:
@@ -747,7 +740,7 @@ is a good model for other implementations.
 
  1. LOAD  Load all files at start-up (the demo lists them in its .toc). Keep the raw tables, and read
     the continent indexes into a table of zones and a table of seams. A logical catalogue is kept
-    in its compact form (small arrays; about 7 MB of file for all zones) and expanded to one
+    in its compact form (small arrays; about 6 MB of file for all zones) and expanded to one
     table per target only for the zones of the active continent: for each row the class gives
     kind, categories, entry, names and availability, and the header gives the native map, the
     coordinate space and the default availability (section 7).
@@ -816,7 +809,7 @@ working addon with these parts:
   Guidance.lua          Arrival at a waypoint, gate line, angle bisector, height and re-entry.
   TargetCatalog.lua     The catalogues of all zones of the active continent; it expands the compact
                         logical catalogues (section 7) into one table per target (function
-                        ExpandCatalog) and still loads the older row form.
+                        ExpandCatalog) and refuses any other format of a logical catalogue.
   TargetResolver.lua    Binds targets to attachment cells (exact, approximate, ambiguous).
   TargetProviders.lua, TargetSelection.lua
                         Live targets (corpse, group member) and the choice of a target.
@@ -869,11 +862,10 @@ in the game world.
 
 Format version
   The format of navdata.lua is "Schema 7": version=7 in every file header. The target catalogues
-  carry schema=1; a logical catalogue also carries format=2 when it is in the compact form of
-  section 7 (no format field: the older row form, which dyn_targets.lua still uses). The version
-  number is the compatibility marker: an implementation that expects version 7 should refuse files
-  with another number, and one that reads format 2 should refuse a format it does not know. This
-  ReadMe describes version 7 with the logical catalogues in both forms.
+  carry schema=1; a logical catalogue also carries format=2, the compact form of section 7 (the
+  dyn catalogue has no format field). The version number is the compatibility marker: an
+  implementation that expects version 7 should refuse files with another number, and one that
+  reads format 2 should refuse a format it does not know. This ReadMe describes version 7.
 
 How the data is made
   The files are generated zone by zone from the game's terrain, buildings and tables, and from
@@ -909,10 +901,6 @@ continent together with the files of every zone that changed.
     included only where a source gave their position; entrances of some dungeons, in particular of
     dungeons that are new in WoW Forever, are missing.
   * The Ruins of Gilneas are not included: the client does not ship terrain or a map for them.
-  * Three zones have logical catalogues of the earlier generation: Deeprun Tram, Silverpine Forest and
-    Undercity. They are in the older row form (section 7) and contain no mailboxes, anvils and
-    forges, because the update of their catalogues did not reach the reachability limit of 95
-    percent of the target groups and was not written.
   * Some places cannot be reached: Dalaran in Alterac Mountains (a magical barrier) and Ravenholdt
     (the way in the game leads over short, steep pieces of terrain that the network does not use).
   * Some targets are only approximate. A target whose position lies outside every attachment cell
