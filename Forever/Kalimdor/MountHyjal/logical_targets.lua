@@ -1,14 +1,21 @@
--- Independent target catalog; contains no graph bindings.
-local LogicalTargets = {["converterSha256"]="FADEA31CCF132E611112512D972DCD80A9D5F86122B2482D885EC67374967FD6",["coordinateSpace"]="world",["dropped"]={},["layer"]="logical",["payloadSha256"]="39F52569EF292A446628315568669D89112DAE827A15E5705B235C623A81DCF5",["schema"]=1,["sourceSha256"]="CE2C3AE65B64DD694E6C6D24E5F9EF911C0A328C593CFB83F7FB055E8067B48D",["zoneId"]=2482}
+-- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=2482,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="BC35A27B8D16E8AAF05D4EEECB668A53689883408C363077E02025DAAE81002E",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="7B8714A7E8628FB32836DA330333F00F2CDB8031FA5D4B915B174E02336F3831",dropped={}}
+LogicalTargets.classes = {
+{"mob","npc_or_mob",243509,"Noxious Slime","Giftiger Schleim"},
+{"mob","npc_or_mob",251321,"Peon"},
+{"mob","npc_or_mob",259358,"Treant"},
+{"gameobject","object",602722,"Mailbox"},
+{"gameobject","object",655669,"Mailbox"},
+}
 LogicalTargets.targets = {
-  {["availability"]="static",["category"]={"npc_or_mob"},["coordinateSpace"]="world",["entry"]=243509,["id"]="questie_creature_243509_616_0",["kind"]="mob",["nameDe"]="Giftiger Schleim",["nameEn"]="Noxious Slime",["nativeMapId"]=1,["searchAliases"]={},["source"]={["description"]="QuestieDB Forever (percent of UiMap 2482, no z)",["provider"]="questie",["record"]="npc/243509"},["type"]="creature",["x"]=4460.6,["y"]=-2439.54,["z"]=1128.894,["zStatus"]="known"},
-  {["availability"]="static",["category"]={"npc_or_mob"},["coordinateSpace"]="world",["entry"]=251321,["id"]="questie_creature_251321_616_0",["kind"]="mob",["nameDe"]="Peon",["nameEn"]="Peon",["nativeMapId"]=1,["searchAliases"]={},["source"]={["description"]="QuestieDB Forever (percent of UiMap 2482, no z)",["provider"]="questie",["record"]="npc/251321"},["type"]="creature",["x"]=5119.1,["y"]=-1367.45,["z"]=1347.932,["zStatus"]="known"},
-  {["availability"]="static",["category"]={"npc_or_mob"},["coordinateSpace"]="world",["entry"]=251321,["id"]="questie_creature_251321_616_1",["kind"]="mob",["nameDe"]="Peon",["nameEn"]="Peon",["nativeMapId"]=1,["searchAliases"]={},["source"]={["description"]="QuestieDB Forever (percent of UiMap 2482, no z)",["provider"]="questie",["record"]="npc/251321"},["type"]="creature",["x"]=5086.7,["y"]=-1374.4,["z"]=1343.506,["zStatus"]="known"},
-  {["availability"]="static",["category"]={"npc_or_mob"},["coordinateSpace"]="world",["entry"]=251321,["id"]="questie_creature_251321_616_2",["kind"]="mob",["nameDe"]="Peon",["nameEn"]="Peon",["nativeMapId"]=1,["searchAliases"]={},["source"]={["description"]="QuestieDB Forever (percent of UiMap 2482, no z)",["provider"]="questie",["record"]="npc/251321"},["type"]="creature",["x"]=5063.55,["y"]=-1395.23,["z"]=1340.356,["zStatus"]="known"},
-  {["availability"]="static",["category"]={"npc_or_mob"},["coordinateSpace"]="world",["entry"]=259358,["id"]="questie_creature_259358_616_0",["kind"]="mob",["nameDe"]="Treant",["nameEn"]="Treant",["nativeMapId"]=1,["searchAliases"]={},["source"]={["description"]="QuestieDB Forever (percent of UiMap 2482, no z)",["provider"]="questie",["record"]="npc/259358"},["type"]="creature",["x"]=4361.07,["y"]=-2798.99,["z"]=1102.297,["zStatus"]="known"},
-  {["availability"]="static",["category"]={"object"},["coordinateSpace"]="world",["entry"]=602722,["id"]="questie_gameobject_602722_616_0",["kind"]="gameobject",["levels"]={1644.556,2480.282},["nameDe"]="Mailbox",["nameEn"]="Mailbox",["nativeMapId"]=1,["searchAliases"]={},["source"]={["description"]="QuestieDB Forever (percent of UiMap 2482, no z)",["provider"]="questie",["record"]="object/602722"},["type"]="gameobject",["x"]=5211.68,["y"]=-3329.65,["zStatus"]="unknown"},
-  {["availability"]="static",["category"]={"object"},["coordinateSpace"]="world",["entry"]=602722,["id"]="questie_gameobject_602722_616_1",["kind"]="gameobject",["nameDe"]="Mailbox",["nameEn"]="Mailbox",["nativeMapId"]=1,["searchAliases"]={},["source"]={["description"]="QuestieDB Forever (percent of UiMap 2482, no z)",["provider"]="questie",["record"]="object/602722"},["type"]="gameobject",["x"]=5200.11,["y"]=-3329.65,["z"]=1644.324,["zStatus"]="known"},
-  {["availability"]="static",["category"]={"object"},["coordinateSpace"]="world",["entry"]=655669,["id"]="questie_gameobject_655669_616_0",["kind"]="gameobject",["nameDe"]="Mailbox",["nameEn"]="Mailbox",["nativeMapId"]=1,["searchAliases"]={},["source"]={["description"]="QuestieDB Forever (percent of UiMap 2482, no z)",["provider"]="questie",["record"]="object/655669"},["type"]="gameobject",["x"]=5151.5,["y"]=-3381.74,["z"]=1629.097,["zStatus"]="known"},
+{"questie_creature_243509_616_0",1,4460.6,-2439.54,1128.894},
+{"questie_creature_251321_616_0",2,5119.1,-1367.45,1347.932},
+{"questie_creature_251321_616_1",2,5086.7,-1374.4,1343.506},
+{"questie_creature_251321_616_2",2,5063.55,-1395.23,1340.356},
+{"questie_creature_259358_616_0",3,4361.07,-2798.99,1102.297},
+{"questie_gameobject_602722_616_0",4,5211.68,-3329.65,l={1644.556,2480.282}},
+{"questie_gameobject_602722_616_1",4,5200.11,-3329.65,1644.324},
+{"questie_gameobject_655669_616_0",5,5151.5,-3381.74,1629.097},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[2482] = LogicalTargets

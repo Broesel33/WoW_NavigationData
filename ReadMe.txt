@@ -59,9 +59,10 @@ At a glance (snapshot of the data in this repository):
 
   51 zones in 4 continent groups   EasternKingdoms 26, Kalimdor 23, DeeprunTram 1, ZephrasIsle 1
   about 1.05 million waypoints     about 1.41 million links, about 1.03 million attachment cells
-  about 99,000 logical targets     232 dynamic targets
+  about 99,300 logical targets     232 dynamic targets
   2,782 seams between zones        63 neighbouring zone pairs
-  about 90 MB of Lua files         the largest zone file (The Barrens) is about 2.6 MB
+  about 54 MB of Lua files         the largest zone file (The Barrens, navdata.lua) is about 2.6 MB;
+                                   the logical target catalogues of all zones take about 7 MB of it
 
 Supported game version
   WoW Forever (client series 1.60.1; the demo addon declares interface 16001).
@@ -190,7 +191,8 @@ should do on demand (section 10).
 
   maps/<Continent>/index.lua                   WVN7Index["<Continent>"] = { mapId, zones }
   maps/<Continent>/<Zone>/navdata.lua          WVN7[zoneId]        = W  (the raw tables of section 6)
-  maps/<Continent>/<Zone>/logical_targets.lua  WVN7Logical[zoneId] = { ..., targets = { ... } }
+  maps/<Continent>/<Zone>/logical_targets.lua  WVN7Logical[zoneId] = { ..., classes = { ... }, targets = { ... } }
+                                               (compact format, section 7)
   maps/<Continent>/<Zone>/dyn_targets.lua      WVN7Dyn[zoneId]     = { ..., targets = { ... } }
 
 Each file creates its global table when it does not exist yet (for example "WVN7 = WVN7 or {}"), so
@@ -491,64 +493,103 @@ A worked example: decoding the first waypoints and the first cell of the Deeprun
 7. logical_targets.lua - NPCS, MOBS AND OBJECTS
 -----------------------------------------------
 
-The file defines a catalogue of the targets of one zone. The Lua file is a header table and a list
-with one target per line:
+The file defines a catalogue of the targets of one zone. It comes in a compact form (format 2) that
+keeps the constants of the file once in the header and what targets of one kind share once per
+"class", so that a target itself is one short line. The catalogues of all zones together take about
+7 MB; the same catalogues with every field written out in every row took 46.7 MB.
 
-  local LogicalTargets = {["converterSha256"]="...",["coordinateSpace"]="world",
-     ["dropped"]={"creature_37606",...},["layer"]="logical",["payloadSha256"]="...",
-     ["schema"]=1,["sourceSha256"]="...",["zoneId"]=84}
+  -- Logical target catalogue, compact format 2. No graph bindings, no provenance.
+  local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=84,coordinateSpace="world",
+     nativeMapId=0,availability="static",sourceSha256="...",converterSha256="...",
+     payloadSha256="...",dropped={"creature_37606",...}}
+  LogicalTargets.classes = {
+    {"npc",{"quest_giver","trainer"},376,"High Priestess Laurena (Priest Trainer)",
+       "Hohepriesterin Laurena (Priesterlehrerin)"},
+    {"mob","npc_or_mob",589,"Defias Pillager","Plünderer der Defias",a="possible_spawn"},
+    {"gameobject","anvil",1731,"Anvil"},
+    ...
+  }
   LogicalTargets.targets = {
-    {["availability"]="static",["category"]={"quest_giver","trainer"},["coordinateSpace"]="world",
-     ["entry"]=376,["id"]="creature_1079",["kind"]="npc",
-     ["nameDe"]="Hohepriesterin Laurena (Priesterlehrerin)",
-     ["nameEn"]="High Priestess Laurena (Priest Trainer)",["nativeMapId"]=0,["searchAliases"]={},
-     ["source"]={["description"]="cMaNGOS classic-db (Vanilla 1.12), Release latest",
-        ["provider"]="cmangos",["record"]="creature_1079"},
-     ["type"]="creature",["x"]=-8512.4,["y"]=862.364,["z"]=109.927,["zStatus"]="known"},
+    {"creature_1079",1,-8512.4,862.364,109.927},
+    {"creature_191599-589",2,-10976,1488.09,43.833},
+    {"gameobject_10202",3,-10603.2,1058.4,l={12.5,31}},
     ...
   }
   WVN7Logical = WVN7Logical or {}
   WVN7Logical[84] = LogicalTargets
 
 Header fields
-  schema            The format version of the catalogue. Currently 1.
+  format            2 for the compact form described here. A file without this field (a zone whose
+                    catalogue was not generated again; in this snapshot Deeprun Tram, Silverpine
+                    Forest and Undercity) has the older form: one table per target with all the
+                    fields in the list "Fields of an older row" below. A consumer should accept
+                    both; a format number it does not know has to be refused.
+  schema            The version of the target contract. Currently 1.
   layer             "logical" (the catalogue of this file; the dyn catalogue says "dyn").
   zoneId            The zone ID.
-  coordinateSpace   "world": positions are in world coordinates (section 3).
+  coordinateSpace   "world": positions are in world coordinates (section 3). It holds for every target
+                    of the file.
+  nativeMapId       The native map of the zone (0, 1, 369 or 2991). It holds for every target.
+  availability      The default availability of a class ("static"), see below.
   dropped           The IDs of target entries that were removed because the network could not
                     reach them (see below).
   converterSha256, payloadSha256, sourceSha256
-                    Hashes that identify the export.
+                    Hashes that identify the export. payloadSha256 is the SHA-256 of the canonical
+                    JSON of the header constants and of the rows as expanded below.
 
-Fields of a target
-  id             Unique ID within the zone, e.g. "creature_1079", "gameobject_18807" or
-                 "questie_creature_251787_36_0" (the number in the first form is the ID of the single
-                 spawn in the source data).
-  entry          The template ID of the creature or object. Several targets with the same entry
-                 are different spawns of the same kind (a "population", for example all the boars of
-                 a zone); a list that shows names should usually fold them into one line.
-  type, kind     type is "creature" or "gameobject". kind is a finer class: "npc", "mob", "creature"
-                 or "gameobject".
-  category       A list of English category keys. The ones in use: quest_giver, trainer, vendor,
-                 flight_master, innkeeper, stable_master, auctioneer, banker, spirit_healer,
-                 npc_or_mob, chest, herb_or_ore, object, quest_item, interaction_object, and a few
-                 generic ones of the form object_type_N. Localise them in the consumer.
-  nameEn, nameDe The name in English and German. For about 4 percent of the targets the two are equal:
-                 either the name is the same in both languages, or no German name is known.
-  searchAliases  A list of alternative names for searching (usually empty).
-  nativeMapId    The native map (0, 1, 369 or 2991).
-  x, y           World position in yards.
-  z, zStatus     The height, and "known" or "unknown". If the source has no height and the network
-                 shows one walkable level at the spot, z is that level's height. If it is not known,
-                 z is absent (never 0) and zStatus is "unknown".
-  levels         Present instead of z when a target without a source height lies over several
-                 walkable floors: a list of the floor heights, lowest first. The consumer has to find
-                 out which floor is meant (the demo addon asks the player).
-  availability   "static", or "possible_spawn" for a placement that need not be occupied at any
-                 moment (random or pooled spawns, a single unconfirmed observation).
-  source         {provider, record, description}: where the entry comes from. In the data:
-                 "cmangos" (a public Vanilla database), "questie" (the Forever database of the
-                 Questie addon), "thottbot" (the Thottbot4ever observations).
+classes: what the targets of one population share
+  A class is a list; the position says what a value is.
+    [1] kind          "npc", "mob", "creature", "gameobject", "herb", "mining", "mailbox",
+                      "search_area" or "live". npc, mob and creature are spawns of a creature
+                      (an NPC, a mob, a creature without a known role); gameobject, herb, mining and
+                      mailbox are spawns of a game object. Two targets with the same kind group
+                      and the same entry are the same population.
+    [2] category      One English category key, or a list of keys. The ones in use: quest_giver,
+                      trainer, vendor, flight_master, innkeeper, stable_master, auctioneer, banker,
+                      spirit_healer, npc_or_mob, chest, herb_or_ore, object, quest_item,
+                      interaction_object, mailbox, anvil, forge, and a few generic ones of the
+                      form object_type_N. Localise them in the consumer. mailbox, anvil and forge
+                      are recognised from the type of the game object in the source database (a
+                      mailbox; a spell focus of the kind anvil or forge), never from the name.
+    [3] entry         The template ID of the creature or object, or false when there is none.
+                      Several targets with the same entry are different spawns of the same kind
+                      (for example all the boars of a zone); a list that shows names should usually
+                      fold them into one line.
+    [4] nameEn        The English name.
+    [5] nameDe        The German name; absent when it is the same as nameEn (the name is the same
+                      in both languages, or no German name is known: about 4 percent).
+    a                 The availability when it is not the default of the header: "possible_spawn"
+                      for a placement that need not be occupied at any moment (random or pooled
+                      spawns, a single unconfirmed observation). "static" is the default.
+    s                 A list of alternative names for searching; absent when there are none.
+
+targets: one line per target
+  [1] id            Unique ID within the zone, e.g. "creature_1079", "gameobject_18807" or
+                    "questie_creature_251787_36_0" (the number in the first form is the ID of the
+                    single spawn in the source data).
+  [2] class         The index (starting at 1) into classes.
+  [3] x, [4] y      World position in yards.
+  [5] z             The height. If the source has no height and the network shows one walkable
+                    level at the spot, z is that level's height. If it is not known, z is absent
+                    (never 0; 0 is a height). A consumer treats "no z" as height unknown.
+  l                 Present instead of z when a target without a source height lies over several
+                    walkable floors: a list of the floor heights, lowest first. The consumer has to
+                    find out which floor is meant (the demo addon asks the player).
+  r                 The radius in yards of an area target (kind "search_area").
+  p                 true for an approximate target: its position was attached to the network
+                    afterwards (see "Attaching a target to the network").
+
+Fields of an older row (a file without format)
+  id, entry, type ("creature" or "gameobject"), kind, category (a list), nameEn, nameDe,
+  searchAliases (a list), nativeMapId, coordinateSpace, x, y, z, zStatus ("known" or "unknown"),
+  availability, levels, radius, approx, and source = {provider, record, description}. It says what
+  the compact form says; the constants of the header are written in every row and the type of
+  the population is a field of its own.
+
+Where a target comes from is not part of the files (it was in the field "source"). The provider
+is recognisable by the ID: "creature_" and "gameobject_" come from cmangos (a public Vanilla
+database), "questie_" from the Forever database of the Questie addon, "thottbot_" from the
+Thottbot4ever observations.
 
 A target carries no waypoint ID and no distance to the network. The data tells where the target
 is; where the player enters the network to reach it is decided when the addon binds it (section 10).
@@ -572,10 +613,11 @@ Attaching a target to the network
 8. dyn_targets.lua - TRANSIT AND ZONE TRANSITIONS
 -------------------------------------------------
 
-The dyn catalogue has the same layout as the logical one (a header table with layer = "dyn", then
-targets, then WVN7Dyn[zoneId] = DynTargets) and the same common fields (id, kind, type, category,
-nameEn, nameDe, searchAliases, nativeMapId, x, y, z, zStatus, availability, source, entry). It
-contains 232 targets of two kinds:
+The dyn catalogue keeps the older row form of section 7 (a header table with layer = "dyn" and no
+format field, then one table with all fields per target, then WVN7Dyn[zoneId] = DynTargets) with the
+common fields id, kind, type, category, nameEn, nameDe, searchAliases, nativeMapId,
+coordinateSpace, x, y, z, zStatus, availability, source and entry. It contains 232 targets of two
+kinds:
 
   kind "transit_facility" (92 targets), with a facilityKind:
     dungeon   20   An instance entrance (15 different dungeons). Role "entrance". The position is
@@ -704,7 +746,11 @@ The following is the procedure that the demo addon (NavNetwork.lua and its neigh
 is a good model for other implementations.
 
  1. LOAD  Load all files at start-up (the demo lists them in its .toc). Keep the raw tables, and read
-    the continent indexes into a table of zones and a table of seams.
+    the continent indexes into a table of zones and a table of seams. A logical catalogue is kept
+    in its compact form (small arrays; about 7 MB of file for all zones) and expanded to one
+    table per target only for the zones of the active continent: for each row the class gives
+    kind, categories, entry, names and availability, and the header gives the native map, the
+    coordinate space and the default availability (section 7).
 
  2. LOCATE  Find the zone of the player. The demo asks the client for the player's current map and
     walks up the parent maps until it finds a UiMap ID that is listed in the "uiMaps" of a zone; an
@@ -768,7 +814,9 @@ working addon with these parts:
 
   NavNetwork.lua        Decoder, graph over the zones, seams, attachment cells, A* search.
   Guidance.lua          Arrival at a waypoint, gate line, angle bisector, height and re-entry.
-  TargetCatalog.lua     The catalogues of all zones of the active continent.
+  TargetCatalog.lua     The catalogues of all zones of the active continent; it expands the compact
+                        logical catalogues (section 7) into one table per target (function
+                        ExpandCatalog) and still loads the older row form.
   TargetResolver.lua    Binds targets to attachment cells (exact, approximate, ambiguous).
   TargetProviders.lua, TargetSelection.lua
                         Live targets (corpse, group member) and the choice of a target.
@@ -821,8 +869,11 @@ in the game world.
 
 Format version
   The format of navdata.lua is "Schema 7": version=7 in every file header. The target catalogues
-  carry schema=1. The version number is the compatibility marker: an implementation that expects
-  version 7 should refuse files with another number. This ReadMe describes version 7.
+  carry schema=1; a logical catalogue also carries format=2 when it is in the compact form of
+  section 7 (no format field: the older row form, which dyn_targets.lua still uses). The version
+  number is the compatibility marker: an implementation that expects version 7 should refuse files
+  with another number, and one that reads format 2 should refuse a format it does not know. This
+  ReadMe describes version 7 with the logical catalogues in both forms.
 
 How the data is made
   The files are generated zone by zone from the game's terrain, buildings and tables, and from
@@ -858,6 +909,10 @@ continent together with the files of every zone that changed.
     included only where a source gave their position; entrances of some dungeons, in particular of
     dungeons that are new in WoW Forever, are missing.
   * The Ruins of Gilneas are not included: the client does not ship terrain or a map for them.
+  * Three zones have logical catalogues of the earlier generation: Deeprun Tram, Silverpine Forest and
+    Undercity. They are in the older row form (section 7) and contain no mailboxes, anvils and
+    forges, because the update of their catalogues did not reach the reachability limit of 95
+    percent of the target groups and was not written.
   * Some places cannot be reached: Dalaran in Alterac Mountains (a magical barrier) and Ravenholdt
     (the way in the game leads over short, steep pieces of terrain that the network does not use).
   * Some targets are only approximate. A target whose position lies outside every attachment cell
