@@ -579,11 +579,6 @@ targets: one line per target
   p                 true for an approximate target: its position was attached to the network
                     afterwards (see "Attaching a target to the network").
 
-Where a target comes from is not part of the files (it was in the field "source"). The provider
-is recognisable by the ID: "creature_" and "gameobject_" come from cmangos (a public Vanilla
-database), "questie_" from the Forever database of the Questie addon, "thottbot_" from the
-Thottbot4ever observations.
-
 A target carries no waypoint ID and no distance to the network. The data tells where the target
 is; where the player enters the network to reach it is decided when the addon binds it (section 10).
 
@@ -924,8 +919,3 @@ continent together with the files of every zone that changed.
 This repository contains no licence file. This ReadMe does not grant any licence; ask the owner of
 the repository (GitHub: Broesel33) about the terms of use before you reuse or redistribute the data.
 
-The target entries name their origin in the "source" field. In the files the providers are "cmangos"
-(the cMaNGOS classic database), "questie" (the Forever database of the Questie addon) and "thottbot"
-(Thottbot4ever observations). Dynamic targets carry the provider "world_geometry": they are derived
-from the game client's own tables and geometry and, for some elevators and dungeon entrances, from
-the cMaNGOS database.
