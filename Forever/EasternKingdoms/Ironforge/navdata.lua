@@ -1,5 +1,5 @@
 -- WVN7 schema 7, zone Ironforge (id 87); written by export_schema7_zone.py
-local W = {version=7,zoneId=87,mapId=0,prototype=0,nodeCount=2603,linkCount=2840,cellCount=3311,fingerprint="DEF8508563FE49DE1B6C6A28E32F92F597F8941C422CB4CD73F2F3F3151DA1DD",codes={
+local W = {version=7,zoneId=87,mapId=0,prototype=0,nodeCount=2603,linkCount=2840,cellCount=3311,fingerprint="2F6ACB97EF69FCD0958F54C817084AD4353C0BFB72F7E119B65EB3872E920AA0",codes={
 9217,1025,1280,9472,1,9344,8193,1041,8320,1152,9728,20608,128,16512,1536,1026,9218,1062913,1063168,1042,20992,8704,9360,512,1032,1088,1168,6152,6400,9504,16640,16896,1054721,1054976
 },radii={
 5,6,10,12,20,40
@@ -180,9 +180,7 @@ WVN7[87] = W
 },branches={
 154,1,3,1,-23,-1,2,-3,-1,117,-3,11,20,48,-56,52,1,-4,222,-59,2,7,-5,14,70,-2,3,12,-5,1,280,-1,-3,69,-72,1,8,-7,717,48,-1,22,51,3,-1,26,-43,3,46,-6,272,212,7,-2,13,-1,26,50,-2,2,241,-1,6,10,
 672,1,31,-727,1,57,2,-37,42,-2,2,89,111,-41,197,-4,2,4,-1,4,2,-1,2,104,-4,1,30,-1,8,10,13,-82,287,-1,1
-},seams={
-624,87001
-},captures={{["activationCaptureRadius"]=1.0,["activationMode"]="walk_into_trigger",["activationPreX"]=-4839.0,["activationPreY"]=-1322.0,["activationPreZ"]=502.0,["approachProofId"]="approach:facility:areatrigger:2175:0:entrance",["facilityRole"]="entrance",["nativeMapId"]=0,["x"]=-4839.14,["y"]=-1322.94,["z"]=502}},actions={{["activation"]={["mode"]="walk_into_volume",["proof"]="client AreaTrigger 2175",["verified"]=true},["arrival"]={["mode"]="native_map_volume",["proof"]="areatrigger_teleport:2175 target map 369"},["arrivalVolume"]={["radius"]=14.796025313881247,["type"]="sphere",["x"]=69.2542,["y"]=10.257,["z"]=-4.29664},["conditions"]={["proof"]="areatrigger_teleport:2175",["status"]="unconditional"},["cost"]=9.4,["from"]=711,["id"]="tram:areatrigger:2175",["kind"]="tram",["sourceVolume"]={["radius"]=10.0,["type"]="sphere",["x"]=-4840.259765625,["y"]=-1330.4599609375,["z"]=508.17199707031},["timing"]={["timeout_seconds"]=30.0},["to"]=4990000385,["toMapId"]=369,["toZone"]=499}}} end)()
+},captures={{["activationCaptureRadius"]=1.0,["activationMode"]="walk_into_trigger",["activationPreX"]=-4839.0,["activationPreY"]=-1322.0,["activationPreZ"]=502.0,["approachProofId"]="approach:facility:areatrigger:2175:0:entrance",["facilityRole"]="entrance",["nativeMapId"]=0,["x"]=-4839.14,["y"]=-1322.94,["z"]=502}},actions={{["activation"]={["mode"]="walk_into_volume",["proof"]="client AreaTrigger 2175",["verified"]=true},["arrival"]={["mode"]="native_map_volume",["proof"]="areatrigger_teleport:2175 target map 369"},["arrivalVolume"]={["radius"]=14.796025313881247,["type"]="sphere",["x"]=69.2542,["y"]=10.257,["z"]=-4.29664},["conditions"]={["proof"]="areatrigger_teleport:2175",["status"]="unconditional"},["cost"]=9.4,["from"]=711,["id"]="tram:areatrigger:2175",["kind"]="tram",["sourceVolume"]={["radius"]=10.0,["type"]="sphere",["x"]=-4840.259765625,["y"]=-1330.4599609375,["z"]=508.17199707031},["timing"]={["timeout_seconds"]=30.0},["to"]=4990000371,["toMapId"]=369,["toZone"]=499}}} end)()
 ;(function() W.cx = {
 -634,0,-1,0,1,0,-2,1,0,1,0,-2,0,1,0,1,0,-3,0,1,0,1,0,1,0,-3,0,1,0,1,0,1,-3,0,1,0,1,1,-2,1,1,-1,1,0,1,0,0,1,0,-1,0,1,0,1,1,-3,0,1,1,1,1,12,-16,0,1,1,1,0,1,0,6,1,1,1,1,1,1,1,0,-17,0,1,0,1,0,1,
 0,1,1,1,4,0,1,1,1,0,1,1,1,0,1,1,-18,0,1,0,1,0,1,0,1,0,1,1,1,3,0,1,0,1,0,1,1,1,1,1,0,1,-18,1,0,1,0,1,0,1,0,1,0,1,1,4,0,1,0,1,1,1,1,1,0,1,-18,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-18,0,
