@@ -740,10 +740,12 @@ is a good model for other implementations.
 
  1. LOAD  Load all files at start-up (the demo lists them in its .toc). Keep the raw tables, and read
     the continent indexes into a table of zones and a table of seams. A logical catalogue is kept
-    in its compact form (small arrays; about 6 MB of file for all zones) and expanded to one
-    table per target only for the zones of the active continent: for each row the class gives
-    kind, categories, entry, names and availability, and the header gives the native map, the
-    coordinate space and the default availability (section 7).
+    in its compact form (small arrays; about 6 MB of file for all zones). The demo checks the
+    catalogues of the active continent when the continent becomes active and reads the compact
+    rows as they are; it builds one table per target only for the targets it needs (the hits of
+    a search, a single target by ID): for each row the class gives kind, categories, entry,
+    names and availability, and the header gives the native map, the coordinate space and the
+    default availability (section 7).
 
  2. LOCATE  Find the zone of the player. The demo asks the client for the player's current map and
     walks up the parent maps until it finds a UiMap ID that is listed in the "uiMaps" of a zone; an
@@ -807,9 +809,10 @@ working addon with these parts:
 
   NavNetwork.lua        Decoder, graph over the zones, seams, attachment cells, A* search.
   Guidance.lua          Arrival at a waypoint, gate line, angle bisector, height and re-entry.
-  TargetCatalog.lua     The catalogues of all zones of the active continent; it expands the compact
-                        logical catalogues (section 7) into one table per target (function
-                        ExpandCatalog) and refuses any other format of a logical catalogue.
+  TargetCatalog.lua     The catalogues of all zones of the active continent; it validates the compact
+                        logical catalogues (section 7), turns rows into one table per target on
+                        demand (functions Materialize and ExpandCatalog), scans the compact rows for
+                        the target search and refuses any other format of a logical catalogue.
   TargetResolver.lua    Binds targets to attachment cells (exact, approximate, ambiguous).
   TargetProviders.lua, TargetSelection.lua
                         Live targets (corpse, group member) and the choice of a target.

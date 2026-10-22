@@ -4,7 +4,7 @@ local Dock = { reached = nil, passive = nil, generation = 0 }
 WowVisionNavigationDockNavigation = Dock
 local function targetList(nav)
     return _G.WowVisionNavigationTargetList
-        and WowVisionNavigationTargetList(nav, function(target) return target.type == "transit_facility" end)
+        and WowVisionNavigationTargetList(nav, function(target) return target.type == "transit_facility" end, true)
         or {}
 end
 

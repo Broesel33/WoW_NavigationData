@@ -564,7 +564,7 @@ local function WaypointIsReached(x, y, distance, waypointId, previousId, afterId
     if Navigation.waitTargetId and not afterId then
         local featureModule = _G.WowVisionNavigationDockNavigation
         local target
-        for _, candidate in ipairs(WowVisionNavigationTargetList(NavData, function(t) return t.id == Navigation.waitTargetId end)) do
+        for _, candidate in ipairs(WowVisionNavigationTargetList(NavData, function(t) return t.id == Navigation.waitTargetId end, true)) do
             if candidate.id == Navigation.waitTargetId then target = candidate; break end
         end
         -- The normal arrival radius can be larger than the proven waiting area. Then keep guiding to the pier.
@@ -1206,7 +1206,7 @@ function WowVisionNavigationStartDirect(entry)
     if entry and entry.boardingTargetId then
         local featureModule = _G.WowVisionNavigationDockNavigation
         local current
-        for _, target in ipairs(WowVisionNavigationTargetList(NavData, function(t) return t.id == entry.boardingTargetId end)) do
+        for _, target in ipairs(WowVisionNavigationTargetList(NavData, function(t) return t.id == entry.boardingTargetId end, true)) do
             if target.id == entry.boardingTargetId and featureModule then
                 current = featureModule:BoardingTarget(target, NavData); break
             end
@@ -1265,7 +1265,7 @@ local function StartNavigationToNode(targetNodeId, targetName, targetStatus, foo
                                        waitTargetId, activationTargetId, logicalSource, logicalResult)
     local activationTarget
     if activationTargetId then
-        for _, candidate in ipairs(WowVisionNavigationTargetList(NavData, function(t) return t.id == activationTargetId end)) do
+        for _, candidate in ipairs(WowVisionNavigationTargetList(NavData, function(t) return t.id == activationTargetId end, true)) do
             if candidate.id == activationTargetId then activationTarget = candidate; break end
         end
         local featureModule = _G.WowVisionNavigationTransitActivation
@@ -1516,9 +1516,7 @@ function WowVisionNavigationLayerTargetNew()
     local providers=_G.WowVisionNavigationTargetProviders
     if source.providerId then
         target=nil
-        for _,item in ipairs(catalog and catalog:List(NavData.zoneId) or {}) do
-            if item.catalogKey==source.catalogKey then target=item;break end
-        end
+        target=catalog and catalog:Find(source.providerId,source.id) or nil
     elseif source.unit then
         target=providers and providers:GroupMember(source.unit) or nil
     elseif source.id=="corpse" then
@@ -1782,7 +1780,7 @@ frame:SetScript("OnUpdate", function(_, elapsed)
         if Navigation.pathIndex >= #Navigation.path then
             if Navigation.waitTargetId then
                 local target
-                for _, candidate in ipairs(WowVisionNavigationTargetList(NavData, function(t) return t.id == Navigation.waitTargetId end)) do
+                for _, candidate in ipairs(WowVisionNavigationTargetList(NavData, function(t) return t.id == Navigation.waitTargetId end, true)) do
                     if candidate.id == Navigation.waitTargetId then target = candidate; break end
                 end
                 local featureModule = _G.WowVisionNavigationDockNavigation
@@ -1962,114 +1960,143 @@ function WowVisionNavigationResolveListed(target)
     return result
 end
 
--- Both lists offer the same proof-bound boarding direction on site.
-function Navigation.SelectionTargets()
-    local catalog=_G.WowVisionNavigationTargetCatalog
-    local radius,tolerance=WowVisionNavigationTargetResolver:Settings()
-    local cache=Navigation.listCache
-    -- the waiting context (arrival, passive mode) changes the boarding point of a dock: the list follows its generation
-    local dock=_G.WowVisionNavigationDockNavigation
-    local dockGeneration=dock and dock.generation or 0
-    local x,y=GetPlayerWorldPosition()
-    -- The cache survives the closing of the window. The start list is the only one that depends on the position, and a decoded
-    -- zone (generation) can turn an unchecked entry into a checked one.
-    if cache and cache.nav==NavData and cache.revision==catalog.revision
-        and cache.mode==SelectionMode and cache.radius==radius and cache.tolerance==tolerance
-        and cache.auto==ShowAutoPoints() and cache.dockGeneration==dockGeneration
-        and cache.generation==NavNetwork.generation
-        and (SelectionMode ~= "start" or (cache.x==x and cache.y==y)) then return cache.list end
-    local generation=NavNetwork.generation
-    local volatile=false
-    local list={}
-    for _,target in ipairs(catalog:List(NavData.zoneSet)) do
-        if (target.nativeMapId == nil or target.nativeMapId == NavData.nativeMapId)
-            and (ShowAutoPoints() or not AutomaticListEntry(target))
-            and (SelectionMode ~= "start" or (x and (target.x-x)^2+(target.y-y)^2<=200^2)) then
-            target.layeredTarget=true
-            target.reachable=true
-            -- Zones are decoded on demand: a target of a zone that no route has needed yet is offered without
-            -- a check and resolved when it is selected.
-            if target.expiresAt~=nil then volatile=true end
-            if SelectionMode ~= "direct" and NavNetwork.PointZoneLoaded(target.x,target.y) then
-                local result=WowVisionNavigationResolveListed(target)
-                target.layerResolution=result
-                target.reachable=result.endNodeId~=nil or result.bands~=nil
-            end
-            if target.reachable then list[#list+1]=target end
-        end
-    end
-    local featureModule=_G.WowVisionNavigationDockNavigation
-    if SelectionMode ~= "start" and featureModule then
-        for _,target in ipairs(featureModule:BoardingTargets(x,y,NavData)) do list[#list+1]=target end
-    end
-    Navigation.listCache={nav=NavData,revision=catalog.revision,mode=SelectionMode,radius=radius,tolerance=tolerance,
-        auto=ShowAutoPoints(),dockGeneration=dockGeneration,generation=generation,x=x,y=y,volatile=volatile,list=list}
-    return list
-end
 -- Range within which in start point mode (/vn hier) raw door nodes are offered for selection in addition to real
 -- target points - important when no NPC is nearby.
 local NODE_SELECTION_RADIUS = 60.0
 
-local function TargetSortKey(t)
-    return t.distanceFromPlayer or math.huge
-end
-
 -- The text a list filter searches in: everything the row says except the distance (which changes while walking) - the name in
 -- both languages with the search aliases, the category group, the level and the zone (localized and English). "Zephras" finds
 -- every target of Zephras Isle, not only the ones with the word in their name.
-local function TargetSearchText(entry)
+-- zoneId: the zone of the provider, for a stored row or a class of a compact catalogue that carries none of its own.
+local function TargetSearchText(entry, zoneId)
     local parts = { TargetName(entry) or "", entry.nameDe or "", entry.nameEn or "", WowVisionNavigationCategories(entry.category) }
     for _, alias in ipairs(entry.searchAliases or {}) do parts[#parts + 1] = alias end
     if entry.layerNumber then parts[#parts + 1] = WowVisionNavigationText("entry_layer", entry.layerNumber) end
-    local zoneName = TargetZoneName(entry)
+    zoneId = entry.zoneId or zoneId
+    local zone = zoneId and NavNetwork.index[zoneId]
+    local zoneName = zone and LocalizedZoneName(zoneId, zone) or entry.zoneName
     if zoneName then parts[#parts + 1] = zoneName end
-    local zone = entry.zoneId and NavNetwork.index[entry.zoneId]
     if zone and zone.name then parts[#parts + 1] = zone.name end
     return table.concat(parts, " | "):lower()
 end
 
-local function TargetMatchesFilter(entry, filterLower)
-    return filterLower == "" or TargetSearchText(entry):find(filterLower, 1, true) ~= nil
+local function TargetMatchesFilter(entry, filterLower, zoneId)
+    return filterLower == "" or TargetSearchText(entry, zoneId):find(filterLower, 1, true) ~= nil
 end
 
-local function UpdateFilter()
-    local filterText = FilterBox:GetText():lower()
-    wipe(filteredList)
-    if type(_G.NavData) ~= "table" then
-        selectionIndex = 1
-        return
+-- The search of the target list (/vn, /vn direkt, /vn hier). Nothing is prepared before it: the window opens empty and this runs when
+-- the player confirms the search field. At most WowVisionNavigationTargetCatalog.SEARCH_LIMIT entries come back, the nearest ones in the
+-- order of the list (distance). The text is tested once per class of a compact catalogue, the distance is taken from the compact
+-- rows, and a row becomes a table (and is resolved) only when it is among the nearest hits, so the work is bounded by the limit and not
+-- by the number of matches. Navigation.searchInfo = { total = matches before the reachability check, limit, shown, capped }.
+-- filterText "": no text filter, the nearest targets of the zone scope. No position: catalogue order.
+function Navigation.SearchTargets(filterText)
+    local catalog = _G.WowVisionNavigationTargetCatalog
+    local limit = catalog.SEARCH_LIMIT
+    local info = { total = 0, limit = limit, shown = 0, capped = false }
+    Navigation.searchInfo = info
+    if type(_G.NavData) ~= "table" then return {} end
+    local filterLower = (filterText or ""):match("^%s*(.-)%s*$"):lower()
+    local mode, auto = SelectionMode, ShowAutoPoints()
+    local radius, tolerance = WowVisionNavigationTargetResolver:Settings()
+    local dock = _G.WowVisionNavigationDockNavigation
+    local dockGeneration = dock and dock.generation or 0
+    local x, y = GetPlayerWorldPosition()
+    -- The cache survives the closing of the window; a decoded zone (generation) can turn an unchecked entry into a checked one.
+    local cache = Navigation.listCache
+    if cache and cache.nav == NavData and cache.revision == catalog.revision and cache.mode == mode and cache.filter == filterLower
+        and cache.radius == radius and cache.tolerance == tolerance and cache.auto == auto and cache.dockGeneration == dockGeneration
+        and cache.generation == NavNetwork.generation and cache.x == x and cache.y == y then
+        Navigation.searchInfo = cache.info
+        return cache.list
     end
-    for _, z in ipairs(Navigation.SelectionTargets()) do
-        if z.reachable and TargetMatchesFilter(z, filterText) then
-            table.insert(filteredList, z)
-        end
+    local generation = NavNetwork.generation
+    local function accept(entry, zoneId)
+        return (auto or not AutomaticListEntry(entry)) and TargetMatchesFilter(entry, filterLower, zoneId)
     end
-    -- In start point mode (/vn hier) additionally offer raw door nodes (see the same logic in
-    -- UpdateTargetListForWowVision) - not every place has an NPC within hearing range. Since the voxel graph there are
-    -- no "portal" nodes any more; choke points/doors are marked sparsely over NavData.knoten_label ("durchgang", the key
-    -- is the 1-based Lua index). A level indication (k.ebene) no longer exists in the new format.
-    if ShowAutoPoints() then
-        local x, y = GetPlayerWorldPosition()
-        if x then
-            for _, id in ipairs(NavNetwork.NodesWithin(NavData.zoneId, x, y, NODE_SELECTION_RADIUS)) do
-                local kx, ky = NodePosition(id)
-                local dx, dy = kx - x, ky - y
-                if dx * dx + dy * dy <= NODE_SELECTION_RADIUS * NODE_SELECTION_RADIUS then
-                    local nameDe, nameEn = NodeDisplayName(id)
-                    local _, _, kz = NodePosition(id)
-                    local point = nameDe and {
-                        id = "node_" .. id, nameDe = nameDe, nameEn = nameEn,
-                        category = { "waypoint" }, x = kx, y = ky, z = kz,
-                        nodeId = id,
-                    }
-                    if point and TargetMatchesFilter(point, filterText) then
-                        table.insert(filteredList, point)
-                    end
-                end
+    local n, rows, owners, d2 = 0, {}, {}, {}
+    if mode ~= "start" or x then
+        n, rows, owners, d2 = catalog:Scan(NavData.zoneSet, NavData.nativeMapId, accept, x, y, mode == "start" and 200 * 200 or nil)
+    end
+    local function ready(entry, distance2)       -- an entry that already is a table: boarding point, door node
+        n = n + 1
+        rows[n], owners[n], d2[n] = entry, false, distance2
+    end
+    -- Both lists offer the same proof-bound boarding direction on site.
+    if mode ~= "start" and dock then
+        for _, entry in ipairs(dock:BoardingTargets(x, y, NavData)) do
+            if entry.reachable and TargetMatchesFilter(entry, filterLower) then
+                ready(entry, x and (entry.x - x) ^ 2 + (entry.y - y) ^ 2 or 0)
             end
         end
     end
+    -- Door nodes (showauto): not every place has an NPC within hearing range. Since the voxel graph there are no "portal" nodes and no
+    -- level indication any more; choke points/doors come sparsely from NavData.knoten_label ("durchgang", the key is the 1-based Lua
+    -- index). In start point mode (/vn hier) they are offered whatever the search says.
+    if auto and x then
+        for _, id in ipairs(NavNetwork.NodesWithin(NavData.zoneId, x, y, NODE_SELECTION_RADIUS)) do
+            local kx, ky, kz = NodePosition(id)
+            local distance2 = (kx - x) ^ 2 + (ky - y) ^ 2
+            if distance2 <= NODE_SELECTION_RADIUS ^ 2 then
+                local nameDe, nameEn = NodeDisplayName(id)
+                local point = nameDe and {
+                    id = "node_" .. id, nameDe = nameDe, nameEn = nameEn,
+                    category = { "waypoint" }, x = kx, y = ky, z = kz,
+                    nodeId = id,
+                }
+                if point and (mode == "start" or TargetMatchesFilter(point, filterLower)) then ready(point, distance2) end
+            end
+        end
+    end
+    info.total = n
+    -- Walk the candidates nearest first until the limit is reached. A hit that is not reachable (checked zone) or an automatic ID is
+    -- skipped, so more candidates than the limit may be read; the order is stable, a longer prefix extends the shorter one.
+    local list, count, position, want, volatile = {}, 0, 0, limit * 2, false
+    while true do
+        local order = catalog.Nearest(d2, n, want)
+        for j = position + 1, #order do
+            position = j
+            local i = order[j]
+            local owner, item = owners[i], rows[i]
+            if owner then
+                item = catalog:Materialize(owner, item)
+                if not auto and AutomaticListEntry(item) then
+                    item = nil
+                else
+                    item.layeredTarget, item.reachable = true, true
+                    -- Zones are decoded on demand: a target of a zone that no route has needed yet is offered without
+                    -- a check and resolved when it is selected.
+                    if item.expiresAt ~= nil then volatile = true end
+                    if mode ~= "direct" and NavNetwork.PointZoneLoaded(item.x, item.y) then
+                        local result = WowVisionNavigationResolveListed(item)
+                        item.layerResolution = result
+                        item.reachable = result.endNodeId ~= nil or result.bands ~= nil
+                    end
+                    if not item.reachable then item = nil end
+                end
+            end
+            if item then
+                count = count + 1
+                list[count] = item
+                item.distanceFromPlayer = x and math.sqrt(d2[i]) or nil
+                if count >= limit then break end
+            end
+        end
+        if count >= limit or #order >= n then break end
+        want = want * 4
+    end
+    info.shown, info.capped = count, count >= limit and position < n
+    Navigation.listCache = not volatile and { nav = NavData, revision = catalog.revision, mode = mode, filter = filterLower,
+        radius = radius, tolerance = tolerance, auto = auto, dockGeneration = dockGeneration, generation = generation,
+        x = x, y = y, list = list, info = info } or nil
+    return list
+end
+
+local function UpdateFilter()
+    wipe(filteredList)
     selectionIndex = 1
+    for _, entry in ipairs(Navigation.SearchTargets(FilterBox:GetText())) do table.insert(filteredList, entry) end
+    FilterBox.searched = true
 end
 
 local RowHeight = 18
@@ -2102,21 +2129,11 @@ end
 function WowVisionNavigationTargetCatalogChanged()
     Navigation.listCache=nil
     if not NavData or NavData.packageLayoutVersion ~= 3 or not FilterBox or not ListFrame then return end
-    -- Loading only activates the catalog, not the closed target list.
-    -- On opening it is filtered afresh anyway; open lists stay current.
-    if not ListFrame:IsShown() then return end
+    -- Loading only activates the catalog, not the closed target list. An open window that has not searched yet stays empty; one
+    -- that shows hits is searched again with its text (the hits are sorted by distance already).
+    if not ListFrame:IsShown() or not rawget(FilterBox, "searched") then return end
     UpdateFilter()
     DrawList()
-end
-
-local function ComputeDistances()
-    local x, y = GetPlayerWorldPosition()
-    if not x then return end
-    for _, z in ipairs(filteredList) do
-        local dx, dy = z.x - x, z.y - y
-        z.distanceFromPlayer = math.sqrt(dx * dx + dy * dy)
-    end
-    table.sort(filteredList, function(a, b) return TargetSortKey(a) < TargetSortKey(b) end)
 end
 
 -- Outputs the currently selected list entry as chat text. This is the only place where a blind player learns which
@@ -2198,15 +2215,18 @@ function WowVisionNavigationLayerResolvedRouteStart(entry,travelOrder,startOverr
     return started
 end
 
--- Filtering scans the complete local and regional target list, sorts the hits and then triggers a screen reader
+-- The search reads the catalogue of the zone scope (at most SEARCH_LIMIT hits come back) and then triggers a screen reader
 -- announcement. It must therefore never run in OnTextChanged or in a timer started from it: letters only change the
--- EditBox. Only Enter accepts the finished text. A second Enter then activates the marked hit.
+-- EditBox. The window opens without a list; the first Enter (also on an empty field) and every Enter after a change of the text
+-- searches. The Enter after that activates the marked hit.
 function WowVisionNavigationUpdateFilterNow()
     FilterBox.filterGeneration = (rawget(FilterBox, "filterGeneration") or 0) + 1
     FilterBox.filterDirty = false
     UpdateFilter()
-    ComputeDistances()
     DrawList()
+    if Navigation.searchInfo and Navigation.searchInfo.capped then
+        WowVisionNavigationSay("search_capped", Navigation.searchInfo.shown, Navigation.searchInfo.total)
+    end
     AnnounceSelection()
 end
 
@@ -2217,7 +2237,7 @@ FilterBox:SetScript("OnTextChanged", function(_, byUser)
 end)
 
 FilterBox:SetScript("OnEnterPressed", function()
-    if rawget(FilterBox, "filterDirty") then
+    if rawget(FilterBox, "filterDirty") or not rawget(FilterBox, "searched") then
         WowVisionNavigationUpdateFilterNow()
         return
     end
@@ -2236,8 +2256,8 @@ end)
 
 FilterBox:SetScript("OnKeyDown", function(_, key)
     -- An input not yet accepted with Enter deliberately has no new list. In this state the arrow keys must operate
-    -- neither the expensive scan nor the old list.
-    if rawget(FilterBox, "filterDirty") then return end
+    -- neither the expensive scan nor the old list. Before the first search there is nothing to browse.
+    if rawget(FilterBox, "filterDirty") or not rawget(FilterBox, "searched") then return end
     if key == "DOWN" then
         selectionIndex = math.min(selectionIndex + 1, #filteredList)
         DrawList()
@@ -2260,17 +2280,18 @@ end)
 ListFrame:SetScript("OnShow", function()
     FilterBox.filterGeneration = (rawget(FilterBox, "filterGeneration") or 0) + 1
     FilterBox.filterDirty = false
-    ComputeDistances()
-    UpdateFilter()
-    ComputeDistances()
+    -- Opening builds no list: the search field only. The targets are searched when the player confirms the field with Enter.
+    FilterBox.searched = false
+    wipe(filteredList)
+    selectionIndex = 1
+    FilterBox:SetText("")
     DrawList()
     FilterBox:SetFocus()
     local action = SelectionMode == "direct" and WowVisionNavigationText("enter_starts_direct")
         or (SelectionMode == "start" and WowVisionNavigationText("enter_sets_start")
             or WowVisionNavigationText("enter_starts_route"))
     HintText:SetText(WowVisionNavigationText("list_hint_action", action))
-    WowVisionNavigationSay("list_opened", #filteredList, action)
-    AnnounceSelection()
+    WowVisionNavigationSay("list_opened", action)
 end)
 
 ListFrame:SetScript("OnHide", function()
@@ -2297,64 +2318,10 @@ local WowVisionAvailable = false
 -- WowVision reuses the same screen table.
 local WowVisionOpenings = 0
 
--- Delivers the target list: from 2 characters on it is filtered by substring of the row text (TargetSearchText), otherwise the nearest
--- reachable targets are offered (at most 40, sorted by distance).
+-- Delivers the hits of a confirmed search (at most SEARCH_LIMIT, nearest first); an empty text lists the nearest targets of the zone
+-- scope. Navigation.searchInfo says whether the limit cut the list. The window calls this on Enter only, never while it opens.
 local function TargetListForWowVision(filterText)
-    local x, y = GetPlayerWorldPosition()
-    local source=Navigation.SelectionTargets()
-    local cached=Navigation.uiListCache
-    if cached and cached.source==source and cached.filter==filterText
-        and cached.x==x and cached.y==y then return cached.list end
-    local filterActive = filterText and #filterText >= 2
-    local filterLower = filterActive and filterText:lower() or nil
-    local candidates = {}
-    for _, z in ipairs(source) do
-        if z.reachable then
-            if not filterActive or TargetMatchesFilter(z, filterLower) then
-                local dist = math.huge
-                if x then
-                    local dx, dy = z.x - x, z.y - y
-                    dist = math.sqrt(dx * dx + dy * dy)
-                end
-                table.insert(candidates, { z = z, dist = dist })
-            end
-        end
-    end
-    -- In start point mode (/vn hier) additionally offer raw door nodes nearby - not every place has an NPC within hearing
-    -- range. Since the voxel graph there are no "portal" nodes and no level indication any more; choke points/doors come
-    -- sparsely from NavData.knoten_label ("durchgang", the key is the 1-based Lua index).
-    if ShowAutoPoints() and x then
-        for _, id in ipairs(NavNetwork.NodesWithin(NavData.zoneId, x, y, NODE_SELECTION_RADIUS)) do
-            local kx, ky = NodePosition(id)
-                local dx, dy = kx - x, ky - y
-                local dist = math.sqrt(dx * dx + dy * dy)
-                if dist <= NODE_SELECTION_RADIUS then
-                    local nameDe, nameEn = NodeDisplayName(id)
-                    local _, _, kz = NodePosition(id)
-                    local point = nameDe and {
-                        id = "node_" .. id,
-                        nameDe = nameDe,
-                        nameEn = nameEn,
-                        category = { "waypoint" },
-                        x = kx, y = ky, z = kz,
-                        nodeId = id,
-                    }
-                    if point and (SelectionMode == "start" or not filterActive or TargetMatchesFilter(point, filterLower)) then
-                        table.insert(candidates, { dist = dist, z = point })
-                    end
-                end
-        end
-    end
-
-    table.sort(candidates, function(a, b) return a.dist < b.dist end)
-    local list = {}
-    for i = 1, #candidates do
-        local entry = candidates[i].z
-        entry.distanceFromPlayer = candidates[i].dist
-        list[#list + 1] = entry
-    end
-    Navigation.uiListCache={source=source,filter=filterText,x=x,y=y,list=list}
-    return list
+    return Navigation.SearchTargets(filterText)
 end
 
 -- Builds module and window exactly once as soon as WowVision is safely loaded (via PLAYER_LOGIN, because our addon
@@ -2373,9 +2340,9 @@ local function BuildWowVisionIntegration()
     local featureModule = WowVision.base:createModule("wowVisionNavigation")
     featureModule:setLabel("WowVision Navigation")
 
-    -- Own, real input field (invisible): Tab/Enter on the filter node gives it the keyboard focus, every typed letter
-    -- filters immediately (no confirmation needed, as in the former window). Enter or Escape return the focus to the
-    -- list.
+    -- Own, real input field (invisible): Tab/Enter on the filter node gives it the keyboard focus. Typed letters only change the
+    -- text; Enter confirms it and searches (the window opens without a list, so the first Enter on an empty field lists the
+    -- nearest targets). Enter returns the focus to the list, Escape returns it without searching.
     local filterBox = CreateFrame("EditBox", "WowVisionNavigationFilterBox", UIParent)
     filterBox:SetSize(300, 20)
     filterBox:SetPoint("TOP", UIParent, "TOP", 0, -140)
@@ -2383,12 +2350,52 @@ local function BuildWowVisionIntegration()
     filterBox:SetAlpha(0)
     filterBox:SetAutoFocus(false)
     filterBox:EnableMouse(false)
+    -- One row of the result list as the graph shows it: the key of the node, the spoken label and the entry. Built once per search,
+    -- not at every render (the graph is rebuilt regularly and a search can return a thousand entries).
+    local function ResultRows(list)
+        local rows, seen = {}, {}
+        for _, entry in ipairs(list) do
+            local key = tostring(entry.id or entry.nodeId or entry.nameDe)
+            seen[key] = (seen[key] or 0) + 1
+            if seen[key] > 1 then key = key .. "#" .. seen[key] end
+            local distanceText = (entry.distanceFromPlayer and entry.distanceFromPlayer < math.huge)
+                and WowVisionNavigationText("entry_distance", entry.distanceFromPlayer) or ""
+            -- Announce the level only for indoor targets with a known floor number (see build_nav_data.py:
+            -- EBENEN_CLUSTER_ABSTAND) - helps to confirm when setting a manual start point (/vn hier) that one has chosen the
+            -- right NPC.
+            local layerText = entry.layerNumber and WowVisionNavigationText("entry_layer", entry.layerNumber) or ""
+            local zoneName = TargetZoneName(entry)
+            local zoneText = zoneName and WowVisionNavigationText("row_in_zone", zoneName) or ""
+            rows[#rows + 1] = { key = key, entry = entry, label = string.format("%s, %s%s%s%s", TargetName(entry),
+                WowVisionNavigationCategories(entry.category), layerText, distanceText, zoneText) }
+        end
+        return rows
+    end
+    -- Runs the search of the screen for its text and keeps the result on the screen. The cut-off message is spoken at once (chat
+    -- line for the screen reader) and stays as the first node of the list.
+    local function Search(screen)
+        screen._searched = true
+        screen._showauto = ShowAutoPoints()
+        local ok, list = pcall(TargetListForWowVision, screen._filter)
+        if not ok then
+            screen._list, screen._rows, screen._info = {}, {}, nil
+            WowVisionNavigationSay("search_failed", tostring(list))
+            return
+        end
+        screen._list, screen._info = list, Navigation.searchInfo
+        screen._rows = ResultRows(list)
+        if screen._info and screen._info.capped then
+            WowVisionNavigationSay("search_capped", screen._info.shown, screen._info.total)
+        else
+            WowVisionNavigationSay("search_done", #list)
+        end
+    end
     local function ApplyFilter(box)
         local screen = box.currentScreen
-        if screen and screen._filterDirty then
+        if screen and (screen._filterDirty or not screen._searched) then
             screen._filter = box:GetText() or ""
             screen._filterDirty = false
-            screen._list = nil
+            Search(screen)
         end
     end
     filterBox:SetScript("OnTextChanged", function(box, byUser)
@@ -2411,7 +2418,7 @@ local function BuildWowVisionIntegration()
             screen._filter = ""
             screen._filterDirty = false
             screen._filterGeneration = (screen._filterGeneration or 0) + 1
-            screen._list = nil
+            screen._list, screen._rows, screen._info, screen._searched = nil, nil, nil, false     -- opening builds no list
             filterBox:SetText("")
             -- As in the former window: the focus is in the search field immediately, one can start typing without Enter.
             -- Slightly delayed so that the graph has announced the first node beforehand.
@@ -2424,11 +2431,8 @@ local function BuildWowVisionIntegration()
                 end)
             end
         end
-        -- Recalculate the list only on opening or filter change, not on every tick.
-        if screen._list == nil or screen._showauto ~= ShowAutoPoints() then
-            screen._showauto = ShowAutoPoints()
-            screen._list = TargetListForWowVision(screen._filter)
-        end
+        -- The list is searched on Enter only (and again when showauto changes under a shown list), never on opening or per tick.
+        if screen._searched and screen._showauto ~= ShowAutoPoints() then Search(screen) end
 
         builder:pushContext("targetnavigation", "Zielnavigation")
 
@@ -2459,26 +2463,25 @@ local function BuildWowVisionIntegration()
                     and WowVisionNavigationText("wv_info_direct")
                     or WowVisionNavigationText("wv_info_target")),
         }))
+        if not screen._searched then
+            -- Opened, nothing searched yet: only the search field and what to do with it.
+            builder:addItem(ControlId.structural("searchhint"), nodes.text({ label = WowVisionNavigationText("wv_search_hint") }))
+            builder:popContext()
+            return
+        end
+        local info = screen._info
+        if info and info.capped then
+            builder:addItem(ControlId.structural("capped"), nodes.text({
+                label = WowVisionNavigationText("search_capped", info.shown, info.total),
+            }))
+        end
         if #screen._list == 0 then
             builder:addItem(ControlId.structural("empty"), nodes.text({ label = WowVisionNavigationText("wv_no_targets") }))
         end
-        local seen = {}
-        for _, entry in ipairs(screen._list) do
-            local key = tostring(entry.id or entry.nodeId or entry.nameDe)
-            seen[key] = (seen[key] or 0) + 1
-            if seen[key] > 1 then key = key .. "#" .. seen[key] end
-            local distanceText = (entry.distanceFromPlayer and entry.distanceFromPlayer < math.huge)
-                and WowVisionNavigationText("entry_distance", entry.distanceFromPlayer) or ""
-            -- Announce the level only for indoor targets with a known floor number (see build_nav_data.py:
-            -- EBENEN_CLUSTER_ABSTAND) - helps to confirm when setting a manual start point (/vn hier) that one has chosen the
-            -- right NPC.
-            local layerText = entry.layerNumber and WowVisionNavigationText("entry_layer", entry.layerNumber) or ""
-            local zoneName = TargetZoneName(entry)
-            local zoneText = zoneName and WowVisionNavigationText("row_in_zone", zoneName) or ""
-            local label = string.format("%s, %s%s%s%s", TargetName(entry),
-                WowVisionNavigationCategories(entry.category), layerText, distanceText, zoneText)
-            builder:addItem(ControlId.structural("target:" .. key), nodes.button({
-                label = label,
+        for _, row in ipairs(screen._rows) do
+            local entry = row.entry
+            builder:addItem(ControlId.structural("target:" .. row.key), nodes.button({
+                label = row.label,
                 onActivate = function()
                     if WowVisionNavigationSelectListEntry(entry) then
                         WowVision.UIHost:closeWindow(WOWVISION_WINDOW_NAME)
@@ -2553,8 +2556,8 @@ end
 -- Opens the target list via WowVision if available; otherwise fall back to the chat text window.
 -- mode: "target" (default), "start" (/vn hier) or "direct" (/vn direkt).
 local function OpenTargetWindow(mode)
-    -- The list of the last opening stays valid (its key decides); only a list with expiring entries is built afresh.
-    if Navigation.listCache and Navigation.listCache.volatile then Navigation.listCache=nil end
+    -- Opening builds no list (the player's search does, see Navigation.SearchTargets); the result of the last search stays cached
+    -- under its key (a result with expiring entries is never cached).
     SelectionMode = mode or "target"
     -- Only the route list needs a usable start; /vn here is the remedy and /vn direct needs no route.
     if SelectionMode == "target" then WowVisionNavigationCheckStartAtOpen() end
@@ -3687,10 +3690,11 @@ local function ExecuteSlashCommand(msg)
             return
         end
         WowVisionNavigationSay("showauto_status", ShowAutoPoints() and "On" or "Off")
-        Navigation.listCache, Navigation.uiListCache = nil, nil
-        UpdateFilter()
-        ComputeDistances()
-        DrawList()
+        Navigation.listCache = nil
+        if ListFrame:IsShown() and rawget(FilterBox, "searched") then
+            UpdateFilter()
+            DrawList()
+        end
     elseif msgLower == "autonew" or msgLower:match("^autonew%s") then
         -- 10.6dg: The former switch is removed. Automatic redirecting on blockage must never happen again - the user decides
         -- himself how to follow a route.
@@ -4199,7 +4203,7 @@ function WowVisionNavigationClearZoneState(reason, transitRetained)
     local setQuestSelection = Navigation.SetQuestSelection
     local findQuestieTargetPoints = Navigation.FindQuestieTargetPoints
     local bestQuestieTargetPoint = Navigation.BestQuestieTargetPoint
-    local selectionTargets = Navigation.SelectionTargets
+    local searchTargets = Navigation.SearchTargets
     local listNodes = Navigation.ListNodes
     local appendLogicalTarget = Navigation.AppendLogicalTarget
     wipe(Navigation)
@@ -4207,7 +4211,7 @@ function WowVisionNavigationClearZoneState(reason, transitRetained)
     Navigation.SetQuestSelection = setQuestSelection
     Navigation.FindQuestieTargetPoints = findQuestieTargetPoints
     Navigation.BestQuestieTargetPoint = bestQuestieTargetPoint
-    Navigation.SelectionTargets = selectionTargets
+    Navigation.SearchTargets = searchTargets
     Navigation.ListNodes = listNodes
     Navigation.AppendLogicalTarget = appendLogicalTarget
     Navigation.actionContinuation = continuation
@@ -4473,11 +4477,10 @@ function WowVisionNavigationZoneLoader:ActivatePackage(zoneInfo)
     return true
 end
 
--- Prepares the first /vn in a zone: decodes the zones that share a seam with it (index, one zone per frame), then resolves the
--- route target list of the zones decoded so far (200 targets per frame). Called at every activation, so entering the next zone
--- prepares its neighbours the same way. Zones and resolutions stay in memory (NavNetwork.decoded, Navigation.resolveCache): the
--- memory grows with the zones visited or adjacent to them, not with the continent. WowVisionNavigationDB.preload = false
--- switches it off.
+-- Prepares the first /vn in a zone: decodes the zones that share a seam with it (index, one zone per frame). Called at every
+-- activation, so entering the next zone prepares its neighbours the same way. Zones stay in memory (NavNetwork.decoded): the memory
+-- grows with the zones visited or adjacent to them, not with the continent. The target list is not prepared here (the search
+-- resolves what it returns). WowVisionNavigationDB.preload = false switches it off.
 function WowVisionNavigationZoneLoader:PreloadNeighbours(zoneInfo)
     local nav = _G.NavData
     local timer = _G.C_Timer
@@ -4487,7 +4490,7 @@ function WowVisionNavigationZoneLoader:PreloadNeighbours(zoneInfo)
         if nav.zoneSet[id] and not NavNetwork.decoded[id] and NavNetwork.ZoneAvailable(id) then pending[#pending + 1] = id end
     end
     self.preloadToken = (self.preloadToken or 0) + 1
-    local token, index, list, position = self.preloadToken, 0, nil, 0
+    local token, index = self.preloadToken, 0
     local loader = self
     local function step()
         if _G.NavData ~= nav or loader.preloadToken ~= token then return end     -- another zone or continent meanwhile
@@ -4496,19 +4499,7 @@ function WowVisionNavigationZoneLoader:PreloadNeighbours(zoneInfo)
             NavNetwork.LoadZone(pending[index])
             return timer.After(0, step)
         end
-        if not list then
-            list = {}
-            for _, target in ipairs(_G.WowVisionNavigationTargetCatalog:List(nav.zoneSet)) do
-                if (target.nativeMapId == nil or target.nativeMapId == nav.nativeMapId) and not AutomaticListEntry(target)
-                    and NavNetwork.PointZoneLoaded(target.x, target.y) then
-                    list[#list + 1] = target
-                end
-            end
-        end
-        local last = math.min(position + 200, #list)
-        for i = position + 1, last do WowVisionNavigationResolveListed(list[i]) end
-        position = last
-        if position < #list then timer.After(0, step) end
+        -- Nothing is resolved in advance: a search resolves the nearest hits it returns (at most one thousand), and keeps them.
     end
     timer.After(0, step)
 end
