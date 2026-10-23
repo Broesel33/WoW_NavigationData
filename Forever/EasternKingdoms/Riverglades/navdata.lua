@@ -1,5 +1,5 @@
 -- WVN7 schema 7, zone Riverglades (id 2548); written by export_schema7_zone.py
-local W = {version=7,zoneId=2548,mapId=0,prototype=0,nodeCount=37937,linkCount=52183,cellCount=61879,fingerprint="C7B98A7AE3BCA02248F51FAAFBB97675C225B37B3EC17CFBBE6435C9FDC8D96C",codes={
+local W = {version=7,zoneId=2548,mapId=0,prototype=0,nodeCount=37937,linkCount=52183,cellCount=61879,fingerprint="B9E6BA2418278A14C21A04F20BDA9DFC79257AD027C1F8B126D1863AACBF3CF8",codes={
 9217,9218,1025,1,1026,9472,1280,8193,6145,256,8448,24577,14344,14337,16640,4,24580,6152,24832,30976,8,16385,16392,1028,16388,9220,1032,24584,1054976,14592,1063168,8200,9224,1027,1071360,
 1079552,6400,8196,2,22784,1062913,8194,24704,1041,16386,16448,9219,9344,1054721,1152,30784,1088,8449,9280,16512,24640,128,512,1042,8256,24578,30848,257,1281,9360,9473,9504,1054848
 },radii={
@@ -2830,7 +2830,7 @@ WVN7[2548] = W
 },seams={
 4523,2548834,4,2548833,133,2548832,3,2548831,4255,2548344,26,2548343,2,2548333,3,2548341,8,2548342,10,2548340,1,2548334,714,2548346,7,2548345,1,2548338,6,2548347,2234,2548336,1,2548337,59,
 2548335,30,2548339,19314,2548666,54,2548667,7,2548668,21,2548665
-},captures={{["boardingDirX"]=-0.510562,["boardingDirY"]=-0.859841,["boardingHintStatus"]="certified",["boardingPreviewDistance"]=22.27,["facilityRole"]="waiting",["interactionMode"]="manual_wait",["nativeMapId"]=0,["waitingRadius"]=2.0,["waitpointProofId"]="waitpoint:facility:transport:geometry_validated:TaxiPath%3A11391:TaxiPathNode%3A174059:0:waiting",["x"]=-8222.0,["y"]=-5781.0,["z"]=6.1}}} end)()
+},captures={{["boardingDirX"]=-0.624695,["boardingDirY"]=-0.780869,["boardingHintStatus"]="certified",["boardingPreviewDistance"]=22.41,["facilityRole"]="waiting",["interactionMode"]="manual_wait",["nativeMapId"]=0,["waitingRadius"]=2.0,["waitpointProofId"]="waitpoint:facility:transport:geometry_validated:TaxiPath%3A11391:TaxiPathNode%3A174059:0:waiting",["x"]=-8222.0,["y"]=-5781.0,["z"]=6.1}}} end)()
 ;(function() W.cx = {
 -1220,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,
 4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,-8,4,4,4,4,4,4,4,-16,4,4,4,4,-16,4,4,4,4,-16,4,4,

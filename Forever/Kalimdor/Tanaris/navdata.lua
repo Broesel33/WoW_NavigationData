@@ -1,5 +1,5 @@
 -- WVN7 schema 7, zone Tanaris (id 1446); written by export_schema7_zone.py
-local W = {version=7,zoneId=1446,mapId=1,prototype=0,nodeCount=35047,linkCount=53913,cellCount=48650,fingerprint="FC2EBDB31976216B2E005AAE0DE9502B409CCA1AA064C956682A741AE843CAF7",codes={
+local W = {version=7,zoneId=1446,mapId=1,prototype=0,nodeCount=35047,linkCount=53913,cellCount=48650,fingerprint="F1E44B3BA53F4EAD34B96CE169863F9C6CE4BC842A0A18B6BC9C1D93C9E953F2",codes={
 9217,9218,1025,1,1026,8193,1280,9472,24704,9220,6145,1028,14337,256,128,30976,24580,16512,8448,16388,24832,24577,8320,8704,16640,512,16385,9344,30848,4,14344,8196,6152,25088,8,9728,16392,
 16896,1054976,1152,8194,14592,8200,9224,24584,22656,24578,2,1032,1536,16386,22784,1027,6272,14464,1063168,8449,9219,1054848,1079552,1281,6400,8256,9249,9280,9473,24640,1071360
 },radii={
@@ -2666,7 +2666,7 @@ WVN7[1446] = W
 1
 },seams={
 28090,1446001,29,1446002,1,1446003
-},captures={{["boardingDirX"]=-0.091871,["boardingDirY"]=-0.995771,["boardingHintStatus"]="certified",["boardingPreviewDistance"]=22.33,["facilityRole"]="waiting",["interactionMode"]="manual_wait",["nativeMapId"]=1,["waitingRadius"]=2.0,["waitpointProofId"]="waitpoint:facility:transport:geometry_validated:TaxiPath%3A11391:TaxiPathNode%3A174070:1:waiting",["x"]=-6942.9,["y"]=-4927.4,["z"]=5.8}}} end)()
+},captures={{["boardingDirX"]=0.260523,["boardingDirY"]=-0.965468,["boardingHintStatus"]="certified",["boardingPreviewDistance"]=13.05,["facilityRole"]="waiting",["interactionMode"]="manual_wait",["nativeMapId"]=1,["waitingRadius"]=2.0,["waitpointProofId"]="waitpoint:facility:transport:geometry_validated:TaxiPath%3A11391:TaxiPathNode%3A174070:1:waiting",["x"]=-6942.9,["y"]=-4927.4,["z"]=5.8}}} end)()
 ;(function() W.cx = {
 -1320,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,
 4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,4,-12,4,4,

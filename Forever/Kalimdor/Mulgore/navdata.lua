@@ -1,5 +1,5 @@
 -- WVN7 schema 7, zone Mulgore (id 7); written by export_schema7_zone.py
-local W = {version=7,zoneId=7,mapId=1,prototype=0,nodeCount=15467,linkCount=20418,cellCount=20425,fingerprint="ADD9AF67084FFD1F3E9DC496D22D99B00E69A286DAD4784137913471A8CE753C",codes={
+local W = {version=7,zoneId=7,mapId=1,prototype=0,nodeCount=15467,linkCount=20418,cellCount=20425,fingerprint="B42F3C09C767E46B1732029F998A0CE68CCB4C69701C1295E68ABE79E1C02C2F",codes={
 9217,9218,1,1025,24704,8193,9472,1026,1280,6145,16512,8448,8320,24640,24832,256,128,16640,14337,24580,24577,9344,9280,14344,4,16385,6152,9220,1028,25088,8,16388,16448,16392,1088,8200,8704,
 16896,1152,512,8196,8256,9224,24584,9728,16386,1054976,1027,1032,24578,8449,9219,1063168,64,1536,6400,8194,9504,14592,22529,1079552
 },radii={
@@ -1159,7 +1159,7 @@ WVN7[7] = W
 7124,3,7123,779,7177,1,7178,1,7176,1,7175,11,7179,34,7174,865,7155,68,7152,40,7154,17,7153,125,7159,6,7157,22,7158,129,7156,15,7131,31,7132,352,7134,1,7135,4,7133,68,7136,7,7169,1,7137,10,
 7170,24,7167,2,7164,1,7138,28,7160,3,7139,3,7161,4,7162,17,7163,3,7140,5,7165,1,7166,1,7141,3,7142,1,7168,28,7143,13,7171,3,7145,195,7147,25,7146,1,7144,1,7172,33,7150,10,7149,29,7151,17,
 7148,2,7173
-},captures={{["boardingDirX"]=-0.787053,["boardingDirY"]=-0.616886,["boardingHintStatus"]="certified",["boardingPreviewDistance"]=10.87,["facilityRole"]="waiting",["interactionMode"]="manual_wait",["nativeMapId"]=1,["waitingRadius"]=2.0,["waitpointProofId"]="waitpoint:facility:transport:geometry_validated:TaxiPath%3A11457:TaxiPathNode%3A174802:1:waiting",["x"]=-786.0,["y"]=363.7,["z"]=192.2}}} end)()
+},captures={{["boardingDirX"]=-0.660747,["boardingDirY"]=-0.750609,["boardingHintStatus"]="certified",["boardingPreviewDistance"]=18.92,["facilityRole"]="waiting",["interactionMode"]="manual_wait",["nativeMapId"]=1,["waitingRadius"]=2.0,["waitpointProofId"]="waitpoint:facility:transport:geometry_validated:TaxiPath%3A11457:TaxiPathNode%3A174802:1:waiting",["x"]=-786.0,["y"]=363.7,["z"]=192.2}}} end)()
 ;(function() W.cx = {
 -442,-4,2,2,0,-4,2,2,-2,2,-2,2,0,0,0,0,0,0,0,0,0,0,0,0,18,-6,2,0,2,0,2,-6,2,0,2,0,0,2,-6,2,2,2,-6,2,0,2,0,2,-10,2,2,2,2,2,-16,2,2,2,2,2,2,2,2,0,-16,2,2,0,2,0,2,0,2,2,2,0,2,-16,2,2,2,2,0,2,2,
 2,2,-16,2,2,2,0,2,0,2,0,0,2,0,2,2,-16,0,2,2,2,2,2,2,2,2,-16,2,2,2,2,2,2,2,2,-16,2,2,2,2,2,2,2,2,-16,2,2,2,2,2,2,2,2,-16,2,2,2,2,2,2,2,2,-16,2,2,2,0,0,2,2,2,2,2,-16,2,2,2,2,0,2,2,2,2,-16,4,2,
