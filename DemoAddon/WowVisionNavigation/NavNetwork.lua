@@ -284,6 +284,22 @@ local function Decode(raw)
         zone.actionsFrom[record.from] = list
         zone.actions[#zone.actions + 1] = action
     end
+    -- Z2: the ranges of the hostile outposts (gap, length - 1 pairs per faction, schema7_codec.py); the table of the player's opponents is built on demand
+    zone.factionRanges, zone.hasFactions = {}, false
+    for _, faction in ipairs({ "horde", "alliance" }) do
+        local list = raw.factions and raw.factions[faction]
+        if list then
+            local ranges, expected = {}, 0
+            for i = 1, #list, 2 do
+                local first = expected + list[i]
+                local last = first + list[i + 1]
+                if last >= n then error("faction range outside the network") end
+                ranges[#ranges + 1] = { first, last }
+                expected = last + 1
+            end
+            zone.factionRanges[faction], zone.hasFactions = ranges, true
+        end
+    end
     zone.seam = {}
     -- Attachment cells (K10)
     local cx, cy, cz, ch = raw.cx, raw.cy, raw.cz, raw.ch
@@ -1183,9 +1199,105 @@ local function Options(binding, road, asStart)
     return options
 end
 
+-- ---------------------------------------------------------------------------
+-- Z2: outposts and capitals of the opposing faction. A route avoids their waypoints (a detour), never fails because of them: when no
+-- route exists without one, the route leads through (N.Route). An outpost that holds the start or the target of the route is open.
+-- ---------------------------------------------------------------------------
+N.avoidOutposts = true                      -- /vn outposts on|off
+local OPPONENT = { horde = "alliance", alliance = "horde" }
+
+function N.SetAvoidOutposts(enabled)
+    N.avoidOutposts = enabled ~= false
+end
+
+-- group: "Alliance" | "Horde" (UnitFactionGroup("player")); anything else means no faction and no avoidance
+function N.SetPlayerFaction(group)
+    local faction = type(group) == "string" and group:lower() or nil
+    N.playerFaction = OPPONENT[faction] and faction or nil
+end
+
+function N.PlayerFaction()
+    if N.playerFaction then return N.playerFaction end
+    if type(_G.UnitFactionGroup) == "function" then
+        local ok, group = pcall(_G.UnitFactionGroup, "player")
+        if ok then N.SetPlayerFaction(group) end
+    end
+    return N.playerFaction
+end
+
+-- zone.hostile[local index + 1] = group key (the global ID of one waypoint of the connected hostile waypoints) for the opponents of faction
+local function HostileTable(zone, faction)
+    if zone.hostileFor ~= faction then
+        zone.hostileFor, zone.hostile = faction, nil
+        local ranges = zone.factionRanges[OPPONENT[faction]]
+        if ranges then
+            local parent = {}
+            for _, range in ipairs(ranges) do
+                for i = range[1] + 1, range[2] + 1 do parent[i] = i end
+            end
+            local function find(i)
+                while parent[i] ~= i do
+                    parent[i] = parent[parent[i]]
+                    i = parent[i]
+                end
+                return i
+            end
+            for k = 1, #zone.lu do
+                local u, v = zone.lu[k] + 1, zone.lv[k] + 1
+                if parent[u] and parent[v] then
+                    local ru, rv = find(u), find(v)
+                    if ru ~= rv then parent[ru] = rv end
+                end
+            end
+            local hostile = {}
+            for i in pairs(parent) do hostile[i] = zone.base + find(i) - 1 end
+            zone.hostile = hostile
+        end
+    end
+    return zone.hostile
+end
+
+-- The group key of a hostile waypoint (global ID) for the player of `faction`, else nil.
+local function HostileGroup(id, faction)
+    if id >= VIRT_BASE then return nil end
+    local zone = N.zones[floor(id / ZONE_BASE)]
+    if not zone or not zone.hasFactions then return nil end
+    local hostile = HostileTable(zone, faction)
+    return hostile and hostile[id - zone.base + 1] or nil
+end
+
+local function BindingEnds(binding)
+    if binding.type == "node" then return { binding.id } end
+    local zone, k = binding.zone, binding.link
+    return { zone.base + zone.lu[k], zone.base + zone.lv[k] }
+end
+
+-- nil without avoidance (off, no faction known); else { faction, open = {group key = true}, targetInside = bool }
+local function AvoidanceFor(startBinding, targetBinding)
+    if not N.avoidOutposts then return nil end
+    local faction = N.PlayerFaction()
+    if not faction then return nil end
+    local avoid = { faction = faction, open = {}, targetInside = false }
+    for _, binding in ipairs({ startBinding, targetBinding }) do
+        for _, id in ipairs(BindingEnds(binding)) do
+            local group = HostileGroup(id, faction)
+            if group then
+                avoid.open[group] = true
+                if binding == targetBinding then avoid.targetInside = true end
+            end
+        end
+    end
+    return avoid
+end
+
+local function Blocked(avoid, id)
+    local group = HostileGroup(id, avoid.faction)
+    return group ~= nil and not avoid.open[group]
+end
+
 -- One pass. road = with road factor. Returns { path = {global IDs}, edges = {link refs}, length = geometric length
 -- of the links walked, cost }
-local function Pass(startBinding, targetBinding, road, penalties, footOnly)
+local function Pass(startBinding, targetBinding, road, penalties, footOnly, avoid)
     local starts = Options(startBinding, road, true)
     local targets = Options(targetBinding, road, false)
     local targetMap = {}
@@ -1262,7 +1374,7 @@ local function Pass(startBinding, targetBinding, road, penalties, footOnly)
                         local row = penalties[id]
                         if row and row[vid] then new = new + row[vid] end
                     end
-                    if new < (g[vid] or math.huge) then
+                    if new < (g[vid] or math.huge) and not (avoid and Blocked(avoid, vid)) then
                         g[vid] = new
                         previous[vid] = { id, zone, k }
                         HeapPush(heap, new + estimate(vid), vid, new)
@@ -1274,7 +1386,7 @@ local function Pass(startBinding, targetBinding, road, penalties, footOnly)
                         local allowed = N.WalkingAction(action) and (not N.ActionAllowed or N.ActionAllowed(action))
                         local otherZone = floor(action.toNode / ZONE_BASE)
                         if allowed and not N.zones[otherZone] then N.LoadZone(otherZone) end
-                        if allowed and N.zones[otherZone] then
+                        if allowed and N.zones[otherZone] and not (avoid and Blocked(avoid, action.toNode)) then
                             local new = cost + action.cost
                             if new < (g[action.toNode] or math.huge) then
                                 g[action.toNode] = new
@@ -1308,7 +1420,8 @@ local function Pass(startBinding, targetBinding, road, penalties, footOnly)
                         else
                             local otherZone = floor(seam[1] / ZONE_BASE)
                             if not N.zones[otherZone] then N.LoadZone(otherZone) end
-                            if N.zones[otherZone] and not (seam.seamId and N.zones[otherZone].seamBad[seam.seamId]) then
+                            if N.zones[otherZone] and not (seam.seamId and N.zones[otherZone].seamBad[seam.seamId])
+                                and not (avoid and Blocked(avoid, seam[1])) then
                                 local new = cost + seam[2] * (seam.water and N.SWIM_COMFORT or 1)
                                 if new < (g[seam[1]] or math.huge) then
                                     g[seam[1]] = new
@@ -1327,7 +1440,7 @@ local function Pass(startBinding, targetBinding, road, penalties, footOnly)
                     local otherZone = floor(partner.gid / ZONE_BASE)
                     if not N.zones[otherZone] then N.LoadZone(otherZone) end
                     local oz = N.zones[otherZone]
-                    if oz and not oz.seamBad[partner.seamId] then relax(partner.gid, cost + partner.cost * (partner.water and N.SWIM_COMFORT or 1), { id, false, false }) end
+                    if oz and not oz.seamBad[partner.seamId] and not (avoid and Blocked(avoid, partner.gid)) then relax(partner.gid, cost + partner.cost * (partner.water and N.SWIM_COMFORT or 1), { id, false, false }) end
                 end
                 local came = previous[id]
                 if not (came and came[5]) then
@@ -1378,9 +1491,15 @@ end
 -- Two passes: (a) comfort costs, (b) with the road factor 1/r; (b) wins when its geometric length is at most r x that
 -- of (a) (r = 1 + comfort/100, default 1.5; comfort 0 has no pass (b)). Start and target are bindings from N.Bind.
 function N.Route(startBinding, targetBinding, penalties, footOnly)
-    local a = Pass(startBinding, targetBinding, false, penalties, footOnly)
+    local avoid = AvoidanceFor(startBinding, targetBinding)
+    local function passes(avoidance)
+        local a = Pass(startBinding, targetBinding, false, penalties, footOnly, avoidance)
+        if not a then return nil end
+        return a, N.comfort > 0 and Pass(startBinding, targetBinding, true, penalties, footOnly, avoidance) or nil
+    end
+    local a, b = passes(avoid)
+    if not a and avoid then a, b = passes(nil) end     -- Z2: no route without a hostile outpost: through it, never no route
     if not a then return nil, "no_route" end
-    local b = N.comfort > 0 and Pass(startBinding, targetBinding, true, penalties, footOnly) or nil
     local chosen, pass = a, "a"
     if b and b.length <= N.ROAD_MAX_RATIO * a.length then chosen, pass = b, "b" end
     local path = {}
@@ -1388,8 +1507,15 @@ function N.Route(startBinding, targetBinding, penalties, footOnly)
     if startBinding.type == "link" then path[#path + 1] = startBinding.id end
     for _, id in ipairs(chosen.path) do path[#path + 1] = id end
     if targetBinding.type == "link" then path[#path + 1] = targetBinding.id end
+    local outpost
+    if avoid then
+        for _, id in ipairs(path) do
+            if Blocked(avoid, id) then outpost = "through"; break end
+        end
+        if not outpost and avoid.targetInside then outpost = "target" end
+    end
     return { path = path, edges = chosen.edges, length = chosen.length, cost = chosen.cost, pass = pass,
-        lengthA = a.length, lengthB = b and b.length or nil, expansions = chosen.expansions }
+        lengthA = a.length, lengthB = b and b.length or nil, expansions = chosen.expansions, outpost = outpost }
 end
 
 -- Steering targets of a route: the waypoints, except a pure BRANCH point that the route walks through over the

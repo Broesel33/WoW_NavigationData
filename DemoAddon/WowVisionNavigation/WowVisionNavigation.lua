@@ -1378,6 +1378,12 @@ local function StartNavigationToNode(targetNodeId, targetName, targetStatus, foo
     else
         WowVisionNavigationSay("route_started", targetName, #path)
     end
+    -- Z2: no way around an enemy outpost (the route leads through it) or a target inside one: say so
+    if routeResult and routeResult.outpost == "through" then
+        WowVisionNavigationSay("outpost_through")
+    elseif routeResult and routeResult.outpost == "target" then
+        WowVisionNavigationSay("outpost_target")
+    end
     -- 4.38 S1b: a target from a target update has no ZIEL waypoint; the guidance ends at the attachment cell, then the final
     -- approach goes to the coordinate (the logical end point), which the map does not prove
     if logicalSource and logicalSource.approx == true then WowVisionNavigationSay("approx_target") end
@@ -3576,6 +3582,30 @@ function WowVisionNavigationArrivalCommand(argument)
     WowVisionNavigationSay("arrival_set", string.format("%g", number))
 end
 
+-- /vn outposts [on|off] (German: /vn posten [an|aus]): avoid the outposts and capitals of the opposing faction when routing (Z2), saved. A
+-- route never fails because of them: without a way around, it leads through one and says so. (Global: the file is at the limit of file locals.)
+function WowVisionNavigationOutpostsCommand(argument)
+    argument = argument:match("^%s*(.-)%s*$")
+    local on = { on = true, an = true, ein = true, ["1"] = true, ["true"] = true, ja = true, yes = true }
+    local off = { off = true, aus = true, ["0"] = true, ["false"] = true, nein = true, no = true }
+    if argument == "" then
+        WowVisionNavigationSay(NavNetwork.avoidOutposts and "outposts_status_on" or "outposts_status_off")
+        return
+    end
+    local enabled
+    if on[argument] then enabled = true elseif off[argument] then enabled = false else
+        WowVisionNavigationSay("outposts_invalid", argument)
+        return
+    end
+    NavNetwork.SetAvoidOutposts(enabled)
+    if enabled then WowVisionNavigationDB.outposts = nil else WowVisionNavigationDB.outposts = false end
+    WowVisionNavigationSay(enabled and "outposts_set_on" or "outposts_set_off")
+    if Navigation.active and Navigation.path and not Navigation.directTarget then
+        WowVisionNavigationSay("outposts_recalculated")
+        RecalculateRunningRoute(false)
+    end
+end
+
 local function ExecuteSlashCommand(msg)
     -- The German command words and their English aliases are both valid; the core works with the English word.
     local msgLower = WowVisionNavigationNormalizeCommand(msg:lower())
@@ -3599,6 +3629,8 @@ local function ExecuteSlashCommand(msg)
         ComfortCommand(msgLower:sub(8))
     elseif msgLower == "arrival" or msgLower:match("^arrival%s") then
         WowVisionNavigationArrivalCommand(msgLower:sub(8))
+    elseif msgLower == "outposts" or msgLower:match("^outposts%s") then
+        WowVisionNavigationOutpostsCommand(msgLower:sub(10))
     elseif msgLower == "stop" then
         if _G.WowVisionNavigationTargetSelection then
             _G.WowVisionNavigationTargetSelection.pending = nil
@@ -4613,6 +4645,8 @@ eventFrame:SetScript("OnEvent", function(_, event, addonName)
         if WowVisionNavigationDB.fineBearing == nil then
             WowVisionNavigationDB.fineBearing = true
         end
+        -- Z2: avoiding the outposts of the opposing faction is on unless the saved value says false.
+        NavNetwork.SetAvoidOutposts(WowVisionNavigationDB.outposts ~= false)
         -- Comfort level (4.34): an invalid or missing saved value means the default.
         if not NavNetwork.SetComfort(WowVisionNavigationDB.comfort) then
             WowVisionNavigationDB.comfort = nil

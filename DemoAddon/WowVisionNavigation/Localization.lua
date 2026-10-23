@@ -129,7 +129,7 @@ function WowVisionNavigationNodeTypeName(key) return L.Text("nodetype." .. tostr
 -- Command words: the German words stay valid and every German word has an English alias, on all clients. The core
 -- works with the English word.
 L.commandAliases = {
-    sprache = "lang", komfort = "comfort", ankunft = "arrival",
+    sprache = "lang", komfort = "comfort", ankunft = "arrival", posten = "outposts",
     hier = "here", neu = "new", direkt = "direct", ebene = "level", fein = "fine", endanflug = "finalapproach",
     rueckfall = "fallback", ["rückfall"] = "fallback", aktion = "action", weiter = "continue",
     toleranz = "tolerance", leiche = "corpse", gruppe = "group", stopp = "stop", hilfe = "help",
@@ -142,7 +142,7 @@ function WowVisionNavigationNormalizeCommand(message)
     return canonical and (canonical .. rest) or message
 end
 
-L.helpKeys = { "help_title", "help_open", "help_direct", "help_here", "help_status", "help_stop", "help_prevnext", "help_new", "help_level", "help_radius", "help_finalapproach", "help_fallback", "help_showauto", "help_action", "help_live", "help_quest", "help_log", "help_lang", "help_comfort", "help_arrival", "help_key" }
+L.helpKeys = { "help_title", "help_open", "help_direct", "help_here", "help_status", "help_stop", "help_prevnext", "help_new", "help_level", "help_radius", "help_finalapproach", "help_fallback", "help_showauto", "help_action", "help_live", "help_quest", "help_log", "help_lang", "help_comfort", "help_arrival", "help_outposts", "help_key" }
 
 -- /vn help: the command words of the client language.
 function WowVisionNavigationHelp()
@@ -284,6 +284,15 @@ L.en = {
     ["comfort_set"] = "Comfort level set to %s percent.",
     ["comfort_invalid"] = "Invalid comfort level '%s'. Use a number from 0 to 300, e.g. /vn comfort 50.",
     ["comfort_recalculated"] = "The running navigation is recalculated with the new level.",
+    ["help_outposts"] = "/vn outposts [on|off] - routes avoid outposts and capitals of the opposing faction (default on); without a way around they lead through one and warn",
+    ["outposts_status_on"] = "Routes avoid enemy outposts. Switch off with /vn outposts off.",
+    ["outposts_status_off"] = "Routes do not avoid enemy outposts. Switch on with /vn outposts on.",
+    ["outposts_set_on"] = "Routes now avoid enemy outposts.",
+    ["outposts_set_off"] = "Routes no longer avoid enemy outposts.",
+    ["outposts_invalid"] = "Invalid value '%s'. Use /vn outposts on or /vn outposts off.",
+    ["outposts_recalculated"] = "The running navigation is recalculated.",
+    ["outpost_through"] = "Warning: there is no way around the enemy outpost, the route leads through it.",
+    ["outpost_target"] = "Warning: the target lies in an enemy outpost.",
     ["arrival_status"] = "Minimum arrival radius: %s yards. A waypoint counts as reached within the larger of this value and its own radius.",
     ["arrival_status_off"] = "Minimum arrival radius: off, the radii of the waypoints apply. Set one with /vn arrival 1.",
     ["arrival_set"] = "Minimum arrival radius set to %s yards.",
@@ -654,6 +663,15 @@ L.de = {
     ["comfort_set"] = "Komfortstufe auf %s Prozent gestellt.",
     ["comfort_invalid"] = "Ungueltige Komfortstufe '%s'. Gib eine Zahl von 0 bis 300 an, z. B. /vn komfort 50.",
     ["comfort_recalculated"] = "Die laufende Navigation wird mit der neuen Stufe neu berechnet.",
+    ["help_outposts"] = "/vn posten [an|aus] - Routen meiden Posten und Hauptstaedte der gegnerischen Fraktion (Standard an); ohne Umweg fuehren sie hindurch und warnen",
+    ["outposts_status_on"] = "Routen meiden feindliche Posten. Ausschalten mit /vn posten aus.",
+    ["outposts_status_off"] = "Routen meiden feindliche Posten nicht. Einschalten mit /vn posten an.",
+    ["outposts_set_on"] = "Routen meiden jetzt feindliche Posten.",
+    ["outposts_set_off"] = "Routen meiden feindliche Posten nicht mehr.",
+    ["outposts_invalid"] = "Ungueltiger Wert '%s'. Benutze /vn posten an oder /vn posten aus.",
+    ["outposts_recalculated"] = "Die laufende Navigation wird neu berechnet.",
+    ["outpost_through"] = "Warnung: Es gibt keinen Weg um den feindlichen Posten, die Route fuehrt hindurch.",
+    ["outpost_target"] = "Warnung: Das Ziel liegt in einem feindlichen Posten.",
     ["arrival_status"] = "Mindest-Ankunftsradius: %s Yards. Ein Wegpunkt gilt als erreicht, sobald du innerhalb des größeren Wertes aus dieser Einstellung und seinem eigenen Radius bist.",
     ["arrival_status_off"] = "Mindest-Ankunftsradius: aus, es gelten die Radien der Wegpunkte. Stelle einen mit /vn ankunft 1 ein.",
     ["arrival_set"] = "Mindest-Ankunftsradius auf %s Yards gestellt.",

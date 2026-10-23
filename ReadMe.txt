@@ -345,6 +345,8 @@ File structure
     }}
     WVN7 = WVN7 or {}
     WVN7[499] = W
+    -- WVN7 factions: hostile outposts as waypoint ranges, per faction {gap, length - 1, ...}; ...
+    W.factions = {alliance={0,1064}}
     ;(function() W.x = {
     1,-216,81,4,-6,-6,17,-261,-22,0,8,20,...
     } end)()
@@ -366,6 +368,29 @@ File structure
     codes         The code dictionary of this zone (see below), at most 92 entries.
     radii         The arrival radii used in the zone in units of 0.1 yd (5,10,20 mean 0.5, 1.0, 2.0
                   yd).
+
+Faction outposts (W.factions)
+  Right after the registration line a zone may carry one extra statement, W.factions. It marks the
+  waypoints that belong to an outpost or capital city of one faction, so that a router can keep an
+  Alliance player out of Horde towns and the other way round:
+    horde      the waypoints of Horde outposts and cities (hostile for Alliance players)
+    alliance   the waypoints of Alliance outposts and cities (hostile for Horde players)
+  Each list holds waypoint number ranges as pairs {gap, length - 1, gap, length - 1, ...}. Waypoint
+  numbers are 0-based, the ranges ascend: the first range starts at its gap, every further range
+  starts at (end of the previous range + 1 + gap) and covers length waypoints. Example:
+  horde={12,3,40,7} marks the waypoints 12 to 15 and 56 to 63. Waypoints in no range are neutral
+  (Booty Bay, Ratchet, Gadgetzan and the open land). A zone without W.factions is neutral, and a
+  capital city is one range over all its waypoints (the Deeprun Tram counts as Alliance).
+  The statement is added after the export and is not part of the fingerprint: waypoints, links,
+  cells and seams are the same with and without it, so a consumer that does not know W.factions
+  can ignore it. The outposts come from the client's flight masters and from several wiki and
+  WoW Forever sources (a town counts when the sources agree); the extent of an outpost is its sub-area in the client's
+  area table (the terrain chunks that carry it).
+  How the demo addon uses it: it routes around the hostile waypoints first (a detour). Only when no
+  route without them exists, the route goes through and the player is warned; a route never fails
+  because of an outpost. An outpost in which the start or the target lies is open, so a player can
+  leave a town they stand in and reach a target inside a hostile town (with a warning).
+  /vn outposts on|off (German: /vn posten an|aus) switches the avoidance; the setting is saved.
 
 Encoding
   Character fields use an alphabet of 92 printable ASCII characters: 0x21 to 0x7E without the double
@@ -867,7 +892,9 @@ Format version
 
 How the data is made
   The files are generated zone by zone from the game's terrain, buildings and tables, and from
-  public databases for the targets. They are not meant to be edited by hand. A manual change would
+  public databases for the targets. The faction outposts (W.factions) are added to a finished
+  navdata.lua in a separate step; it changes nothing else in the file. They are not meant to be
+  edited by hand. A manual change would
   break more than it fixes: the files refer to each other by waypoint numbers, link numbers and
   seam IDs, and the fingerprint in the index must match the one in the zone file.
 
