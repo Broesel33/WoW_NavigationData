@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=7,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="2332D8F8A918ECF04BA4F70DCBBC4E6A6CDC7D952BCF7A33234F730C53F69C61",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="6EC16B2DFFEA5198620AA3B023AEBE29BD80BBD3E8E101C6D03729275187E1D4",dropped={"creature_25347","creature_25351","creature_25356","creature_25623","creature_25660","creature_25678","creature_25679","creature_25680","creature_25683","creature_25684","creature_25687","creature_25859","creature_25903","creature_26178","creature_26817","creature_26869","gameobject_1399","gameobject_1439","gameobject_20648","gameobject_20649","gameobject_521","gameobject_631","gameobject_704","gameobject_715","gameobject_716","gameobject_834"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=7,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="2332D8F8A918ECF04BA4F70DCBBC4E6A6CDC7D952BCF7A33234F730C53F69C61",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="EA763A95ABE2EEA25CE0D786BF6BE5423291DFCC074BACBDAE0DD5831733CC0D",dropped={"creature_25347","creature_25351","creature_25356","creature_25623","creature_25660","creature_25678","creature_25679","creature_25680","creature_25683","creature_25684","creature_25687","creature_25859","creature_25903","creature_26178","creature_26817","creature_26869","gameobject_1399","gameobject_1439","gameobject_20648","gameobject_20649","gameobject_521","gameobject_631","gameobject_704","gameobject_715","gameobject_716","gameobject_834"}}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",5890,"Redrock Earth Spirit","Rotfelserdgeist",a="possible_spawn"},
 {"npc","quest_giver",5891,"Minor Manifestation of Earth","Schwache Erdmanifestation"},
@@ -193,7 +193,7 @@ LogicalTargets.classes = {
 {"npc","quest_giver",276171,"Oura Stormspinner (Windshapers Cloth Quartermaster)","Oura Sturmspinner (Stoffrüstmeisterin der Windformer)"},
 {"gameobject","object",450006,"Basic Campfire"},
 {"gameobject","object",658827,"Mailbox","Briefkasten"},
-{"creature","npc_or_mob",264072,"Yorn Grimtotem",a="possible_spawn"},
+{"creature","npc_or_mob",264072,"Yorn Grimtotem","Yorn Grimmtotem",a="possible_spawn"},
 {"npc","npc_or_mob",268557,"Olana Brighthoof",a="possible_spawn"},
 {"creature","npc_or_mob",272633,"Nuara Tremorhoof",a="possible_spawn"},
 }

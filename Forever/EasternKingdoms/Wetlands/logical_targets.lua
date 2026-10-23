@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1437,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="6F582E8990C99ECE08F02F34780E326096BC3E212155ABB2F7E37B0307BE3D7C",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="32E7D259C7915DF08295AC1A2C11FD7820EDA68965A534E5466EB07D4C67596F",dropped={"creature_10015","creature_10019","creature_10039","creature_10224","creature_10822","creature_10825","creature_10826","creature_10828","creature_10829","creature_10831","creature_10866","creature_11105","creature_11119","creature_180828","creature_9417","creature_9418","creature_9420","creature_9725","creature_9763","creature_9912","creature_9913","creature_9914","creature_9924","creature_9925","creature_9927","creature_9929","creature_9932","creature_9933","gameobject_1080234-180657","gameobject_1080234-180662","gameobject_1080234-180664","gameobject_1080239-180657","gameobject_1080239-180662","gameobject_1080239-180664","gameobject_1080243-180657","gameobject_1080243-180662","gameobject_1080243-180664","gameobject_1080250-180657","gameobject_1080250-180662","gameobject_1080250-180664","gameobject_1080252-180657","gameobject_1080252-180662","gameobject_1080252-180664","gameobject_142573-1731","gameobject_142590-1731","gameobject_33397","gameobject_3880","gameobject_3896","thottbot_npc_264850_6"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1437,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="6F582E8990C99ECE08F02F34780E326096BC3E212155ABB2F7E37B0307BE3D7C",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="625FFCEDF303AE8433C7A72111F6F195C3D5C8754BFF54092B5A4A3DE4DE5F98",dropped={"creature_10015","creature_10019","creature_10039","creature_10224","creature_10822","creature_10825","creature_10826","creature_10828","creature_10829","creature_10831","creature_10866","creature_11105","creature_11119","creature_180828","creature_9417","creature_9418","creature_9420","creature_9725","creature_9763","creature_9912","creature_9913","creature_9914","creature_9924","creature_9925","creature_9927","creature_9929","creature_9932","creature_9933","gameobject_1080234-180657","gameobject_1080234-180662","gameobject_1080234-180664","gameobject_1080239-180657","gameobject_1080239-180662","gameobject_1080239-180664","gameobject_1080243-180657","gameobject_1080243-180662","gameobject_1080243-180664","gameobject_1080250-180657","gameobject_1080250-180662","gameobject_1080250-180664","gameobject_1080252-180657","gameobject_1080252-180662","gameobject_1080252-180664","gameobject_142573-1731","gameobject_142590-1731","gameobject_33397","gameobject_3880","gameobject_3896","thottbot_npc_264850_6"}}
 LogicalTargets.classes = {
 {"npc","quest_giver",620,"Chicken","Huhn",a="possible_spawn"},
 {"npc","npc_or_mob",12998,"Dwarven Farmer","Zwergenbauer"},
@@ -291,9 +291,9 @@ LogicalTargets.classes = {
 {"gameobject","object",670771,"Khaz Modan Timber","Holz aus Khaz Modan"},
 {"gameobject","object",670773,"Khaz Modan Timber","Holz aus Khaz Modan"},
 {"gameobject","object",670774,"Khaz Modan Iron","Eisen aus Khaz Modan"},
-{"creature","npc_or_mob",264850,"Hawk"},
-{"creature","npc_or_mob",264850,"Hawk",a="possible_spawn"},
-{"creature","npc_or_mob",268744,"Frog Familiar",a="possible_spawn"},
+{"creature","npc_or_mob",264850,"Hawk","Falke"},
+{"creature","npc_or_mob",264850,"Hawk","Falke",a="possible_spawn"},
+{"creature","npc_or_mob",268744,"Frog Familiar","Froschfamiliar",a="possible_spawn"},
 }
 LogicalTargets.targets = {
 {"creature_590048",1,-4080.96,-1256.69,146.684},

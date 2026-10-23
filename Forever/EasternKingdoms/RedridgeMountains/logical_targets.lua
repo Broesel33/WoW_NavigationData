@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=49,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="3D2A36570E7556427CE4F00B913F463664C12D0F99D58AA1845D9F9A2D9BF643",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="EC28546C96F6BC34BF5C5B5294FB18B0416E691B8212A39FF15A03FFEBBB2C14",dropped={"creature_10100-545","creature_10104-422","creature_10106-422","creature_10106-548","creature_134160","creature_6171","creature_6186-545","creature_6701","creature_6702","gameobject_1497","gameobject_171329","gameobject_1740","gameobject_3654","gameobject_75951","gameobject_75952","gameobject_75953","gameobject_76029","gameobject_76030","gameobject_76031","gameobject_76065","gameobject_76066","gameobject_76067","gameobject_76071","gameobject_76072","gameobject_76073","gameobject_76101","gameobject_76102","gameobject_76103","gameobject_76116","gameobject_76117","gameobject_76118","gameobject_85457"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=49,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="3D2A36570E7556427CE4F00B913F463664C12D0F99D58AA1845D9F9A2D9BF643",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="DE8E8027C5ECBE7D2716862A7ABE2A831D776D47135DA31AA1F8325331BDBEBC",dropped={"creature_10100-545","creature_10104-422","creature_10106-422","creature_10106-548","creature_134160","creature_6171","creature_6186-545","creature_6701","creature_6702","gameobject_1497","gameobject_171329","gameobject_1740","gameobject_3654","gameobject_75951","gameobject_75952","gameobject_75953","gameobject_76029","gameobject_76030","gameobject_76031","gameobject_76065","gameobject_76066","gameobject_76067","gameobject_76071","gameobject_76072","gameobject_76073","gameobject_76101","gameobject_76102","gameobject_76103","gameobject_76116","gameobject_76117","gameobject_76118","gameobject_85457"}}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",433,"Shadowhide Gnoll","Gnoll der Schattenfelle",a="possible_spawn"},
 {"mob","npc_or_mob",434,"Rabid Shadowhide Gnoll","Tollwütiger Gnoll der Schattenfelle",a="possible_spawn"},
@@ -204,11 +204,11 @@ LogicalTargets.classes = {
 {"mob","npc_or_mob",256741,"Basket of Textile Supplies","Korb mit Stoffvorräten"},
 {"npc","npc_or_mob",258878,"Auctioneer Quickcoin","Auktionator Quickcoin"},
 {"mob","npc_or_mob",271898,"Greater Tarantula","Große Tarantel"},
-{"creature","npc_or_mob",256393,"Pack Mule",a="possible_spawn"},
-{"creature","npc_or_mob",256739,"Crate of Blacksmithing Goods",a="possible_spawn"},
-{"creature","npc_or_mob",256740,"Crate of Enchanting Supplies",a="possible_spawn"},
-{"creature","npc_or_mob",264850,"Hawk",a="possible_spawn"},
-{"mob","npc_or_mob",276246,"Mistmantle Prowler"},
+{"creature","npc_or_mob",256393,"Pack Mule","Packmuli",a="possible_spawn"},
+{"creature","npc_or_mob",256739,"Crate of Blacksmithing Goods","Kiste mit Schmiedebedarf",a="possible_spawn"},
+{"creature","npc_or_mob",256740,"Crate of Enchanting Supplies","Kiste mit Verzauberkunstbedarf",a="possible_spawn"},
+{"creature","npc_or_mob",264850,"Hawk","Falke",a="possible_spawn"},
+{"mob","npc_or_mob",276246,"Mistmantle Prowler","Mistmantle-Streuner"},
 }
 LogicalTargets.targets = {
 {"creature_10053-433",1,-9263.246,-3208.555,102.128},

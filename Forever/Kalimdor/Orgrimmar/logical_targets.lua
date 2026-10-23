@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1454,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="3086921CC805517829110ED6E7F24940D090E1408C310B0D9A9026B058903ADC",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="89E6DCD998AE0D7C45D65C00D41F3C1A277443B0C3872108F5AD882126DB08DA",dropped={"creature_11796","creature_7949","creature_8530","gameobject_12435","gameobject_12436","gameobject_12439"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1454,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="3086921CC805517829110ED6E7F24940D090E1408C310B0D9A9026B058903ADC",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="7E56BF24C54AC7244202ACF78D88B880B03C07DAD70D25AC050D62EF65525506",dropped={"creature_11796","creature_7949","creature_8530","gameobject_12435","gameobject_12436","gameobject_12439"}}
 LogicalTargets.classes = {
 {"npc","quest_giver",5875,"Gan'rul Bloodeye"},
 {"npc","quest_giver",8659,"Jes'rimon"},
@@ -297,8 +297,8 @@ LogicalTargets.classes = {
 {"gameobject","object",658980,"The Armor of Mannoroth","Die Rüstung von Mannoroth"},
 {"gameobject","object",659159,"Mailbox","Briefkasten"},
 {"gameobject","object",659167,"Horde Military Ranks","Militärische Ränge der Horde"},
-{"creature","npc_or_mob",267299,"Brown Riding Wolf",a="possible_spawn"},
-{"creature","npc_or_mob",267301,"Timber Riding Wolf",a="possible_spawn"},
+{"creature","npc_or_mob",267299,"Brown Riding Wolf","Brauner Wolf",a="possible_spawn"},
+{"creature","npc_or_mob",267301,"Timber Riding Wolf","Waldwolf",a="possible_spawn"},
 }
 LogicalTargets.targets = {
 {"creature_256",1,1850.31,-4357.3,-14.798},

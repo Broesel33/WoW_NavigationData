@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=84,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="45FDD0293A1582D5066D3C1466C97BE221D23FF77160D33E0114AFD2E1284A0E",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="452B0B08E979B589D1B0819D9825E41CBE07468F9DCB170B98F03570D266AF1D",dropped={"creature_37606","creature_79730","creature_79731","creature_79732","creature_79733","creature_90476"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=84,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="45FDD0293A1582D5066D3C1466C97BE221D23FF77160D33E0114AFD2E1284A0E",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="EA249366C93D137B12B344F39D68BC4B551F428E7DB5FF9D1562B5D0BC5B657D",dropped={"creature_37606","creature_79730","creature_79731","creature_79732","creature_79733","creature_90476"}}
 LogicalTargets.classes = {
 {"npc",{"quest_giver","trainer"},376,"High Priestess Laurena (Priest Trainer)","Hohepriesterin Laurena (Priesterlehrerin)"},
 {"npc","quest_giver",656,"Wilder Thistlenettle"},
@@ -455,17 +455,17 @@ LogicalTargets.classes = {
 {"gameobject","object",696374,"Mailbox","Briefkasten"},
 {"gameobject","object",696376,"Alliance Military Ranks","Militärische Ränge der Allianz"},
 {"gameobject","object",696751,"Mailbox","Briefkasten"},
-{"creature","npc_or_mob",185317,"Qaryond",a="possible_spawn"},
-{"npc","npc_or_mob",205278,"Brother Romulus"},
-{"npc","npc_or_mob",238374,"Dockhand",a="possible_spawn"},
+{"creature","npc_or_mob",185317,"Qaryond","Inkubus",a="possible_spawn"},
+{"npc","npc_or_mob",205278,"Brother Romulus","Bruder Romulus"},
+{"npc","npc_or_mob",238374,"Dockhand","Dockarbeiter",a="possible_spawn"},
 {"npc","npc_or_mob",259003,"Terry Lawrence",a="possible_spawn"},
-{"creature","npc_or_mob",266025,"Rat Familiar",a="possible_spawn"},
-{"npc","npc_or_mob",267064,"Stormwind Cannoneer",a="possible_spawn"},
+{"creature","npc_or_mob",266025,"Rat Familiar","Rattenfamiliar",a="possible_spawn"},
+{"npc","npc_or_mob",267064,"Stormwind Cannoneer","Kanonier von Stormwind",a="possible_spawn"},
 {"creature","npc_or_mob",268047,"Theramore Emissary"},
 {"creature","npc_or_mob",268047,"Theramore Emissary",a="possible_spawn"},
-{"creature","npc_or_mob",268744,"Frog Familiar",a="possible_spawn"},
+{"creature","npc_or_mob",268744,"Frog Familiar","Froschfamiliar",a="possible_spawn"},
 {"npc","npc_or_mob",273065,"Ribbly Spinwhistle"},
-{"creature","npc_or_mob",274334,"Tallstrider Hatchling",a="possible_spawn"},
+{"creature","npc_or_mob",274334,"Tallstrider Hatchling","Weitschreiterjunges",a="possible_spawn"},
 }
 LogicalTargets.targets = {
 {"creature_1079",1,-8512.4,862.364,109.927},
