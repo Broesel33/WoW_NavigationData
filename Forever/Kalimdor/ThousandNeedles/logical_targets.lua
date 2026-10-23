@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1441,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="6182A61EC5DD9E3CB78DD332BB453E6E874A293738A0F5531839FF9D7C946E38",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="002F53505F70E1CBB7D6C17372BB5EF7FB4DCB6FCF3DEE3E5DD8C525630037E3",dropped={"creature_21706","creature_21707","creature_21708","gameobject_16755","gameobject_16873","gameobject_573672","gameobject_573673","gameobject_573675","gameobject_573677","gameobject_573680","gameobject_5979","gameobject_95523-1734","gameobject_95523-2040","gameobject_95523-2047"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1441,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="E006802B52DBE10B764B776997A002D4A62B72DE6BEDA6DCE74D0AD691AD102A",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="834C11BA1D0FEEA70EC049EF4E0B085BB03F632148BDBE8C6383CB9EEED6CAF2",dropped={"creature_21706","creature_21707","creature_21708","gameobject_16755","gameobject_16873","gameobject_573672","gameobject_573673","gameobject_573675","gameobject_573677","gameobject_573680","gameobject_5979","gameobject_95523-1734","gameobject_95523-2040","gameobject_95523-2047"}}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",4158,"Salt Flats Vulture","Salzwüstengeier",a="possible_spawn"},
 {"creature","npc_or_mob",4093,"Galak Wrangler","Zänker der Galak",a="possible_spawn"},
@@ -197,7 +197,11 @@ LogicalTargets.classes = {
 {"gameobject","interaction_object",19878,"Parts Crate","Ersatzteilkiste"},
 {"gameobject","chest",2040,"Mithril Deposit","Mithrilablagerung",a="possible_spawn"},
 {"gameobject","chest",2047,"Truesilver Deposit","Echtsilberablagerung",a="possible_spawn"},
+{"mob","npc_or_mob",165189,"Cat"},
 {"mob","npc_or_mob",218871,"Death's Head Cultist","Kultistin der Totenköpfe"},
+{"mob","npc_or_mob",264850,"Hawk","Falke"},
+{"mob","npc_or_mob",268744,"Frog Familiar","Froschfamiliar"},
+{"gameobject","herb_or_ore",657387,"Wild Steelbloom"},
 }
 LogicalTargets.targets = {
 {"creature_32583",1,-6040.3,-4084.69,-58.625},
@@ -2204,7 +2208,28 @@ LogicalTargets.targets = {
 {"gameobject_95535-2040",195,-4909.81,-920.933,-4.001},
 {"gameobject_95535-2047",196,-4909.81,-920.933,-4.001},
 {"gameobject_300434",152,-4952.89,-2295.17,-64.641},
-{"questie_creature_218871_400_0",197,-5163.47,-2844.53,87.46},
+{"questie_creature_165189_400_0",197,-5071.65,-983.77,-5.023,p=true},
+{"questie_creature_165189_400_1",197,-5203.65,-1194.53,46.263,p=true},
+{"questie_creature_165189_400_2",197,-4675.95,-1249.53,-51.214,p=true},
+{"questie_creature_165189_400_3",197,-4776.56,-1324.33,-50.269,p=true},
+{"questie_creature_165189_400_4",197,-4678.59,-1478.33,l={-47.837,-43.03,-25.695},p=true},
+{"questie_creature_165189_400_6",197,-5513.12,-1585.25,28.424,p=true},
+{"questie_creature_165189_400_10",197,-5496.4,-1616.05,28.989,p=true},
+{"questie_creature_165189_400_11",197,-5471.17,-1634.97,29.468,p=true},
+{"questie_creature_165189_400_13",197,-4713.49,-1911.29,-44.898,p=true},
+{"questie_creature_165189_400_14",197,-4998.32,-2101.37,84.586,p=true},
+{"questie_creature_165189_400_15",197,-5000.08,-2244.81,-52.122,p=true},
+{"questie_creature_165189_400_16",197,-5157.01,-2293.65,-44.258,p=true},
+{"questie_creature_165189_400_17",197,-5130.03,-2398.81,-53.293,p=true},
+{"questie_creature_165189_400_18",197,-5153.49,-2398.81,-49.919,p=true},
+{"questie_creature_165189_400_19",197,-5199.84,-2438.85,-48.27,p=true},
+{"questie_creature_165189_400_20",197,-5382.88,-2489.45,-45.703,p=true},
+{"questie_creature_165189_400_21",197,-6372.29,-4097.21,-58.6,p=true},
+{"questie_creature_218871_400_0",198,-5163.47,-2844.53,87.46},
+{"questie_creature_264850_400_0",199,-4841.97,-1847.05,l={-45.478,63.545},p=true},
+{"questie_creature_264850_400_1",199,-5087.2,-2319.61,-53.874,p=true},
+{"questie_creature_268744_400_0",200,-6108.59,-3661.61,-58.4,p=true},
+{"questie_gameobject_657387_400_0",201,-5744.27,-3297.73,-16.147,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1441] = LogicalTargets

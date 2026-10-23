@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1445,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="76E47E70F5F8AEB06CA6F0CA2489A9EAC1BD7BD90A1E6606658F76DBB7E69714",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="8F74966CE49FB61BF992C223127B9560A525202B7F24B87F52654B8F64216742",dropped={"creature_170249","creature_170250","creature_170251","creature_170252","creature_170253","creature_170254","creature_170255","creature_170256","creature_170257","creature_170258","creature_170259","creature_170262","creature_170264","creature_170265","creature_18622","creature_191434","creature_191436","creature_22563","creature_22650","creature_30433","creature_30435","creature_30436","creature_30462","creature_30479","creature_30504","creature_30618","creature_30619","creature_30622","creature_30741","creature_30742","creature_30751","creature_30767","creature_30769","creature_30770","creature_30771","creature_30772","creature_30773","creature_30776","creature_30792","creature_30839","creature_30872","creature_30884","creature_30893","creature_31034","creature_31035","creature_31131","creature_31132","creature_31135","creature_31305","creature_31335","creature_31350","creature_31446","creature_31498","creature_31499","creature_31516","creature_31561","creature_31705","creature_33879","creature_7887","creature_8445","creature_8449","creature_8450","gameobject_10223","gameobject_1080426-180682","gameobject_1080426-180683","gameobject_1080426-180685","gameobject_11755","gameobject_120414","gameobject_120803","gameobject_120804","gameobject_13669","gameobject_55806","gameobject_55809","gameobject_85718","gameobject_86332","gameobject_86897","gameobject_87386","gameobject_9104","gameobject_9122"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1445,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="A34CEEBB65AF50DA13E79FEBD4CDF51E972D1FBB5FC100E6B6C37015415A3886",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="22243B01A057FD9B69ACD0D535E77F94F75541AB1400F524BAD87DFA7BC8F1F3",dropped={"creature_170249","creature_170250","creature_170251","creature_170252","creature_170253","creature_170254","creature_170255","creature_170256","creature_170257","creature_170258","creature_170259","creature_170262","creature_170264","creature_170265","creature_18622","creature_191434","creature_191436","creature_22563","creature_22650","creature_30433","creature_30435","creature_30436","creature_30462","creature_30479","creature_30504","creature_30618","creature_30619","creature_30622","creature_30741","creature_30742","creature_30751","creature_30767","creature_30769","creature_30770","creature_30771","creature_30772","creature_30773","creature_30776","creature_30792","creature_30839","creature_30872","creature_30884","creature_30893","creature_31034","creature_31035","creature_31131","creature_31132","creature_31135","creature_31305","creature_31335","creature_31350","creature_31446","creature_31498","creature_31499","creature_31516","creature_31561","creature_31705","creature_33879","creature_7887","creature_8445","creature_8449","creature_8450","gameobject_10223","gameobject_1080426-180682","gameobject_1080426-180683","gameobject_1080426-180685","gameobject_11755","gameobject_120414","gameobject_120803","gameobject_120804","gameobject_13669","gameobject_55806","gameobject_55809","gameobject_85718","gameobject_86332","gameobject_86897","gameobject_87386","gameobject_9104","gameobject_9122"}}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",4343,"Drywallow Snapper","Staubsuhlerschnapper",a="possible_spawn"},
 {"npc","quest_giver",4501,"Draz'Zilb"},
@@ -277,7 +277,9 @@ LogicalTargets.classes = {
 {"gameobject","object",21128,"Orc Spy Report"},
 {"gameobject","object",2872,"Enchanted Sea Kelp"},
 {"gameobject","object",20917,"Blue aura. short column. scale 3"},
+{"mob","npc_or_mob",165189,"Cat"},
 {"mob","npc_or_mob",261485,"Theramore Guard","Wache von Theramore"},
+{"mob","npc_or_mob",276890,"Swift Palomino"},
 }
 LogicalTargets.targets = {
 {"creature_1734",1,-3618.52,-3176.49,29.147},
@@ -2046,7 +2048,14 @@ LogicalTargets.targets = {
 {"gameobject_141042-1734",254,-2784.04,-2644.28,32.207},
 {"gameobject_141042-2040",255,-2784.04,-2644.28,32.207},
 {"gameobject_141042-2047",256,-2784.04,-2644.28,32.207},
-{"questie_creature_261485_15_0",277,-3755.33,-4461,l={27.506,39.773,56.419,65.2},p=true},
+{"questie_creature_165189_15_0",277,-3121.13,-3197.85,33.134,p=true},
+{"questie_creature_165189_15_1",277,-2754.68,-3921.3,47.045,p=true},
+{"questie_creature_165189_15_2",277,-2629.73,-3943.87,1.715,p=true},
+{"questie_creature_165189_15_3",277,-2625.88,-3957,1.603,p=true},
+{"questie_creature_165189_15_4",277,-2750.13,-4026.82,46.125,p=true},
+{"questie_creature_165189_15_5",277,-3984.58,-4708.8,4.493,p=true},
+{"questie_creature_261485_15_0",278,-3755.33,-4461,l={27.506,39.773,56.419,65.2},p=true},
+{"questie_creature_276890_15_0",279,-3846.33,-4398,l={10.396,21.971},p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1445] = LogicalTargets

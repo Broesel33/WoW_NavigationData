@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=2548,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="D345CA303966F71CF3C7FD53BA93A959AEB2421F0176BEEE5B161E053E6900A5",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="7209CBD7EF7B8D5DE68852B9A57D2139FF653B3598FDD839E6D092340025EA9D",dropped={}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=2548,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="64C273377BEF30DD52347B643ABEFF960B07F8E0ACA95769F75C40D1530E7E3E",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="F53A8198DC209F2D86CB13D725C62453866C29F1FEA22F95F77D4F7BE509FE1E",dropped={}}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",5434,"Coral Shark","Korallenhai",a="possible_spawn"},
 {"mob","npc_or_mob",255769,"Redridge Brute","Schläger der Rotkammgnolle"},
@@ -14,13 +14,15 @@ LogicalTargets.classes = {
 }
 LogicalTargets.targets = {
 {"creature_170053",1,-9540.26,-4662.27,-48.318},
-{"questie_creature_255769_16591_0",2,-8644.64,-2855.36,188.764},
-{"questie_creature_255769_16591_1",2,-8641.08,-2876.7,188.6},
-{"questie_creature_255769_16591_2",2,-8642.7,-2883.98,188.79},
-{"questie_creature_255769_16591_3",2,-8260.2,-3241.42,l={148.568,163.699}},
-{"questie_creature_255769_16591_4",2,-8263.11,-3241.42,l={148.4,163.913}},
-{"questie_creature_255898_16591_0",3,-8730,-5509.77,15.758},
-{"questie_creature_255901_16591_0",4,-8419.6,-5470.97,0.409},
+{"questie_creature_255769_16591_1",2,-8673.09,-2728.78,187.6,p=true},
+{"questie_creature_255769_16591_2",2,-8644.64,-2855.36,188.764,p=true},
+{"questie_creature_255769_16591_3",2,-8641.08,-2876.7,188.6,p=true},
+{"questie_creature_255769_16591_4",2,-8642.7,-2883.98,188.79,p=true},
+{"questie_creature_255769_16591_5",2,-8260.2,-3241.42,l={148.568,163.699},p=true},
+{"questie_creature_255769_16591_6",2,-8263.11,-3241.42,l={148.4,163.913},p=true},
+{"questie_creature_255898_16591_0",3,-8993.19,-5169.3,1.314,p=true},
+{"questie_creature_255901_16591_0",4,-8861.27,-5000.52,0.22,p=true},
+{"questie_creature_255901_16591_1",4,-9300.04,-5096.06,0.217,p=true},
 {"questie_creature_256801_16591_0",5,-8710.6,-5694.07,l={-7.819,0.2}},
 {"questie_creature_256807_16591_0",6,-8099.5,-5720.26,0.2},
 {"questie_creature_256807_16591_1",6,-8069.43,-5780.4,0.77},
@@ -32,14 +34,13 @@ LogicalTargets.targets = {
 {"questie_creature_256807_16591_7",6,-7563.41,-6185.86,-2.101},
 {"questie_creature_256807_16591_8",6,-7594.45,-6197.98,-2.962},
 {"questie_creature_256807_16591_9",6,-7599.3,-6198.47,-3.058},
-{"questie_creature_269686_16591_0",7,-9247.33,-4908.37,l={61.4,66.2}},
-{"questie_gameobject_659816_16591_0",8,-8203.94,-5701.34,5.906},
+{"questie_creature_269686_16591_0",7,-9254.45,-4919.04,l={62.084,66.4},p=true},
+{"questie_gameobject_659816_16591_0",8,-8203.61,-5701.83,5.957,p=true},
 {"questie_gameobject_659816_16591_1",8,-8201.67,-5702.8,6.057},
+{"questie_gameobject_659816_16591_2",8,-8208.79,-5702.8,6.33,p=true},
 {"questie_gameobject_659829_16591_0",9,-7931.37,-4743.47,23.467},
 {"questie_gameobject_659829_16591_1",9,-7937.83,-4743.47,23.382},
-{"questie_gameobject_659837_16591_0",10,-9163.27,-5015.07,36.541},
-{"questie_gameobject_659837_16591_1",10,-9163.27,-5024.77,38.142},
-{"questie_gameobject_659837_16591_2",10,-9172.97,-5029.62,l={39.549,49.9}},
+{"questie_gameobject_659837_16591_0",10,-9169.09,-5023.8,38.442,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[2548] = LogicalTargets

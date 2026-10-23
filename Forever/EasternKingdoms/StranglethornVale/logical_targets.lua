@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1434,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="3FCA79B118EC5C9BAF45AD95A3831CD3D9E447E7BD0E1562B7EAF8728FA37D75",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="87A9BE147F730F91AF7264006E981A10C3BEB928B1436CEECB8C6F9F7CB95746",dropped={"creature_1283","creature_1414","creature_1423","creature_1846","creature_2193","creature_2201","creature_2202","creature_2204","creature_2207","creature_2208","creature_391","creature_538","creature_539","creature_570","creature_581","creature_584","creature_602","creature_70","creature_900","creature_903","creature_917","gameobject_1080024","gameobject_1080036","gameobject_1080049","gameobject_1080077-180712","gameobject_1080077-180900","gameobject_1080077-180901","gameobject_1080077-180902","gameobject_1080119-180682","gameobject_1080119-180683","gameobject_1080119-180685","gameobject_1080131-180682","gameobject_1080131-180683","gameobject_1080131-180685","gameobject_1080136-180682","gameobject_1080136-180683","gameobject_1080136-180685","gameobject_1080175-180684","gameobject_1080175-180685","gameobject_11646","gameobject_170307","gameobject_191716-3706","gameobject_191716-3707","gameobject_64057","gameobject_7489","gameobject_8291","gameobject_8308","gameobject_8512","gameobject_8564","gameobject_8802","gameobject_9217"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1434,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="0BB66A58E5C78BAAF4DB7CA388A1E30500A19CBBA51074F6B8489E2BA03B0787",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="1BAB74099EBE0891F0998D5E98620C1A44FDB06EEDCAB3B20BFA87D6574CF211",dropped={"creature_1283","creature_1414","creature_1423","creature_1846","creature_2193","creature_2201","creature_2202","creature_2204","creature_2207","creature_2208","creature_391","creature_538","creature_539","creature_570","creature_581","creature_584","creature_602","creature_70","creature_900","creature_903","creature_917","gameobject_1080024","gameobject_1080036","gameobject_1080049","gameobject_1080077-180712","gameobject_1080077-180900","gameobject_1080077-180901","gameobject_1080077-180902","gameobject_1080119-180682","gameobject_1080119-180683","gameobject_1080119-180685","gameobject_1080131-180682","gameobject_1080131-180683","gameobject_1080131-180685","gameobject_1080136-180682","gameobject_1080136-180683","gameobject_1080136-180685","gameobject_1080175-180684","gameobject_1080175-180685","gameobject_11646","gameobject_170307","gameobject_191716-3706","gameobject_191716-3707","gameobject_64057","gameobject_7489","gameobject_8291","gameobject_8308","gameobject_8512","gameobject_8564","gameobject_8802","gameobject_9217"}}
 LogicalTargets.classes = {
 {"npc","vendor",2843,"Jutak (Blade Trader)","Jutak (Klingentrödlerin)"},
 {"npc","quest_giver",7853,"Scooty (Chief Engineer)","Scooty (Chefingenieur)"},
@@ -408,9 +408,10 @@ LogicalTargets.classes = {
 {"gameobject","object",2333,"Stranglevine Wine"},
 {"gameobject","object",2562,"Baked Bread"},
 {"gameobject","object",180402,"Heart of Hakkar Object"},
+{"mob","npc_or_mob",165189,"Cat"},
 {"npc","npc_or_mob",219822,"Chained Spirit","Angeketteter Geist"},
-{"gameobject","object",656700,"Mailbox","Briefkasten"},
-{"gameobject","object",656748,"Mailbox","Briefkasten"},
+{"mob","npc_or_mob",264850,"Hawk","Falke"},
+{"mob","npc_or_mob",266735,"Excitable Slime","Erregbarer Schleim"},
 }
 LogicalTargets.targets = {
 {"creature_1",1,-14467.8,468.374,15.106},
@@ -5281,19 +5282,27 @@ LogicalTargets.targets = {
 {"gameobject_300387",374,-11640.3,-628.344,31.462},
 {"gameobject_300388",374,-12223.7,665.631,-70.009},
 {"gameobject_300438",372,-14595.4,-244.479,24.978},
-{"questie_creature_219822_33_0",408,-14282.8,293.7,32.214},
-{"questie_creature_219822_33_1",408,-13823.35,76.73,23.695},
-{"questie_creature_219822_33_2",408,-13406.44,63.97,25.292},
-{"questie_creature_219822_33_3",408,-13891.42,-165.75,4.149},
-{"questie_creature_219822_33_4",408,-11543.12,-229.57,28.2},
-{"questie_creature_219822_33_5",408,-13117.16,-267.85,14.701},
-{"questie_creature_219822_33_6",408,-11934.5,-293.38,11.965},
-{"questie_creature_219822_33_7",408,-12232.29,-612.44,30.402},
-{"questie_creature_219822_33_8",408,-12232.29,-625.2,17.307},
-{"questie_creature_219822_33_9",408,-11738.81,-676.25,33.182},
-{"questie_creature_219822_33_10",408,-12623.67,-816.64,57.864},
-{"questie_gameobject_656700_33_0",409,-14423.19,510.66,l={-16.986,0.239,5}},
-{"questie_gameobject_656748_33_0",410,-14465.73,472.37,l={1.825,15.031,30.152,38.753},p=true},
+{"questie_creature_165189_33_4",408,-11997.04,845.04,0.2,p=true},
+{"questie_creature_165189_33_6",408,-14309.6,505.55,8.84,p=true},
+{"questie_creature_165189_33_7",408,-14368.73,433.45,7.4,p=true},
+{"questie_creature_165189_33_8",408,-14393.83,425.79,l={0.2,7.673},p=true},
+{"questie_creature_165189_33_9",408,-11315.09,310.29,l={12.667,15.907},p=true},
+{"questie_creature_165189_33_10",408,-12275.68,278.38,3.843,p=true},
+{"questie_creature_165189_33_11",408,-13127.37,-183.62,-3.737,p=true},
+{"questie_creature_165189_33_12",408,-12170.61,-451.63,30.46,p=true},
+{"questie_creature_219822_33_0",409,-14282.8,293.7,32.214},
+{"questie_creature_219822_33_1",409,-13823.35,76.73,23.695},
+{"questie_creature_219822_33_2",409,-13406.44,63.97,25.292},
+{"questie_creature_219822_33_3",409,-13891.42,-165.75,4.149},
+{"questie_creature_219822_33_4",409,-11543.12,-229.57,28.2},
+{"questie_creature_219822_33_5",409,-13117.16,-267.85,14.701},
+{"questie_creature_219822_33_6",409,-11934.5,-293.38,11.965},
+{"questie_creature_219822_33_7",409,-12232.29,-612.44,30.402},
+{"questie_creature_219822_33_8",409,-12232.29,-625.2,17.307},
+{"questie_creature_219822_33_9",409,-11738.81,-676.25,33.182},
+{"questie_creature_219822_33_10",409,-12623.67,-816.64,57.864},
+{"questie_creature_264850_33_0",410,-11506.96,-274.24,38.386,p=true},
+{"questie_creature_266735_33_0",411,-14289.18,532.35,9,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1434] = LogicalTargets

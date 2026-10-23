@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=2652,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="CA96CA83D660DE0DF0FBA46780AF0AD59EE5EE6C261C2ED8A285AA8CAC75BF98",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="FB7F0F89BDA31E5261A17C80659FEDD5108024D9BA860174985343AB8DC1939E",dropped={"creature_27141","creature_27203","creature_27204","creature_27205","creature_27206"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=2652,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="D60C2D65CB7BC70C98D78D5B90419088A65D08EA316CEEFEB2E97F915ECE85C6",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="005DC1CAA83E4BEDAB0B46A4BEB4C29D32874FA83FA7B799AADBF24A1F8768DD",dropped={"creature_27141","creature_27203","creature_27204","creature_27205","creature_27206"}}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",11559,"Outcast Necromancer","Ausgestoßener Totenbeschwörer"},
 {"mob","npc_or_mob",11559,"Outcast Necromancer","Ausgestoßener Totenbeschwörer",a="possible_spawn"},
@@ -36,7 +36,8 @@ LogicalTargets.targets = {
 {"gameobject_6175",4,-2077,1268.84,96.274},
 {"gameobject_6267",4,-2255,1459.23,71.1},
 {"gameobject_6549",4,-2283,1579.92,87.37},
-{"questie_creature_255238_16651_0",5,-2599.73,1077.9,104.371},
+{"questie_creature_255238_16651_0",5,-3073.42,1049.61,150.833,p=true},
+{"questie_creature_255238_16651_1",5,-2662.46,1010.25,89.485,p=true},
 {"questie_creature_262838_16651_0",6,-2435.73,1098.4,136.743},
 {"questie_creature_262838_16651_1",6,-2484.93,1090.2,133.6},
 {"questie_creature_262838_16651_2",6,-2840.27,790.9,95.889},

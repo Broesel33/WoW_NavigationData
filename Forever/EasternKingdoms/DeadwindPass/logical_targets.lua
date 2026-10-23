@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1430,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="6893B3FA478DA639C396B58FEF5AA980822CD694DB5C4F64F9004B8BA7CB6DCA",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="B0CB873346567DB385BEE81C5C4FE4F8DFF910207B60C1145D5180C47DD6CABD",dropped={"creature_3961","creature_3965","creature_3966","creature_3967","creature_3968"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1430,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="3E87D903F58C5B65D86CD6FC77087151B2EF769AEB54BAA4BC4006A2666B85ED",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="61357B6D95CDC16C95EEFBC8AEA254D8B42C551E3741D504C801E4DE1B7EAB28",dropped={"creature_3961","creature_3965","creature_3966","creature_3967","creature_3968"}}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",7376,"Sky Shadow","Himmelsschatten",a="possible_spawn"},
 {"creature","npc_or_mob",7369,"Deadwind Brute","Schläger der Totenwindoger",a="possible_spawn"},
@@ -23,6 +23,7 @@ LogicalTargets.classes = {
 {"gameobject","object",177186,"Turn Back!"},
 {"gameobject","object",177185,"Abandon hope, all ye who enter here."},
 {"gameobject","chest",181963,"Charred Bone Fragment"},
+{"mob","npc_or_mob",276246,"Mistmantle Prowler","Mistmantle-Streuner"},
 }
 LogicalTargets.targets = {
 {"creature_3945",1,-10744.3,-1833.58,114.789},
@@ -142,6 +143,7 @@ LogicalTargets.targets = {
 {"gameobject_13985",20,-10451.5,-1721.78,87.889},
 {"gameobject_13986",21,-10451.6,-1721.82,86.445},
 {"gameobject_14048",22,-11182.6,-1958.32,55.733},
+{"questie_creature_276246_41_0",23,-10462.17,-1720.83,84.42,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1430] = LogicalTargets

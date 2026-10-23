@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1418,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="7332667726C537694D03DBA4EF5BA98457530F1B29B7B8D054208F59D8537B34",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="C20E9EFE43C9B98CFB76338C2EA87070CE7D9BC38B0E72DB7753C495BB47BADA",dropped={"creature_6900","creature_6947","creature_7149","creature_7150","creature_7151","creature_7152","creature_7153","creature_7154","creature_7155","creature_7156","creature_7157","creature_7158","creature_7199","creature_7200","creature_90782","gameobject_10643","gameobject_10644","gameobject_15891","gameobject_39967"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1418,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="D18C27E0397643D215606E3CC7B8911B8BF0FFABA722EB47AC8F18EBEDE105B5",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="FD2D164ED922A5749896CDBFC05F755635721C73FC49FD7B915BB64DC4A37F0B",dropped={"creature_6900","creature_6947","creature_7149","creature_7150","creature_7151","creature_7152","creature_7153","creature_7154","creature_7155","creature_7156","creature_7157","creature_7158","creature_7199","creature_7200","creature_90782","gameobject_10643","gameobject_10644","gameobject_15891","gameobject_39967"}}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",2719,"Dustbelcher Lord","Lord der Staubspeier",a="possible_spawn"},
 {"npc","quest_giver",2785,"Theldurin the Lost","Theldurin der Verirrte"},
@@ -137,6 +137,7 @@ LogicalTargets.classes = {
 {"gameobject","chest",2040,"Mithril Deposit","Mithrilablagerung",a="possible_spawn"},
 {"gameobject","chest",2047,"Truesilver Deposit","Echtsilberablagerung",a="possible_spawn"},
 {"gameobject","chest",4149,"Solid Chest","Robuste Truhe",a="possible_spawn"},
+{"mob","npc_or_mob",165189,"Cat"},
 }
 LogicalTargets.targets = {
 {"creature_5262",1,-7392.65,-2241.63,235.011},
@@ -1272,6 +1273,8 @@ LogicalTargets.targets = {
 {"gameobject_300038",123,-7055.18,-3638.68,241.667},
 {"gameobject_300041",136,-7311.24,-2277.52,245.914},
 {"gameobject_300043",136,-7387.19,-2237.2,233.927},
+{"questie_creature_165189_3_0",137,-7046.1,-3340.08,242,p=true},
+{"questie_creature_165189_3_1",137,-6993.2,-3404.51,242,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1418] = LogicalTargets

@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1446,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="0C2E10A448F44BA513EC2851F14509C580FA95AA25F59C5DFD0777E5672DA29A",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="CEBCCD13CCE22B7FE0112898A9B25CA57310757AE574E72A71BE8C7A73B17E3F",dropped={"creature_21862","creature_23352","creature_23360","creature_23653","creature_23656","creature_5719","gameobject_17446","gameobject_17447","gameobject_17448","gameobject_5976","questie_creature_228142_440_2","questie_creature_228142_440_40","questie_creature_228142_440_43","questie_creature_228142_440_45","questie_creature_228142_440_46","questie_creature_228142_440_47","questie_creature_228142_440_48","questie_creature_228142_440_49","questie_creature_228142_440_50","questie_creature_228142_440_52","questie_creature_228142_440_54","questie_creature_228142_440_55","questie_creature_228142_440_57"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1446,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="11AE9B71B3FF1E47DCDD4CEAE126BAEC0E6F2AEEF28EBA81AB6B73BC54DC615D",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="05D25478B7CDF615974EDDA2A9E694DB11BBBB265F20E8F86F1FF5986B965C45",dropped={"creature_21862","creature_23352","creature_23360","creature_23653","creature_23656","creature_5719","gameobject_17446","gameobject_17447","gameobject_17448","gameobject_5976","questie_creature_228142_440_2","questie_creature_228142_440_40","questie_creature_228142_440_43","questie_creature_228142_440_45","questie_creature_228142_440_46","questie_creature_228142_440_47","questie_creature_228142_440_48","questie_creature_228142_440_49","questie_creature_228142_440_50","questie_creature_228142_440_52","questie_creature_228142_440_54","questie_creature_228142_440_55","questie_creature_228142_440_57"}}
 LogicalTargets.classes = {
 {"npc","spirit_healer",6491,"Spirit Healer","Geistheiler"},
 {"creature","npc_or_mob",5419,"Glasshide Basilisk","Glashautbasilisk",a="possible_spawn"},
@@ -206,7 +206,7 @@ LogicalTargets.classes = {
 {"gameobject","object",164827,"Aura 2 - Linken"},
 {"gameobject","interaction_object",142189,"Inconspicuous Landmark","Unauffälliger Orientierungspunkt",a="possible_spawn"},
 {"npc","npc_or_mob",208518,"Gaeriyan","[Gaeriyan]"},
-{"npc","npc_or_mob",228142,"Techbot","A.L.T.-Techbot"},
+{"npc","npc_or_mob",228142,"Techbot (D.E.L.T.A)","A.L.T.-Techbot (D.E.L.T.A)"},
 {"gameobject","object",441248,"Book","Buch"},
 }
 LogicalTargets.targets = {

@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1417,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="430822D98D7B4E39EB579CFD7A80FE0E2589FE69A76577F9831936E832030BA3",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="2748391EC03C8A1D61A83DFE658BE6328D9B67B841C6A216170B425B703C604B",dropped={"creature_11228","creature_11301","gameobject_16794","gameobject_3920","gameobject_4098","gameobject_4188","gameobject_7947"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1417,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="7A2A27BC338DBCBE422DF6DF152306C3EC1CB9CEF6BF66F0136703F2E8703359",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="A05E26DE7DA5B2EE79952BDFBF9024250755CE697EECC9CEB9031FBE2A73A2F5",dropped={"creature_11228","creature_11301","gameobject_16794","gameobject_3920","gameobject_4098","gameobject_4188","gameobject_7947"}}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",2595,"Daggerspine Raider","Räuber der Säbelflossen",a="possible_spawn"},
 {"mob","npc_or_mob",1418,"Bluegill Raider","Räuber der Blaukiemen",a="possible_spawn"},
@@ -241,7 +241,9 @@ LogicalTargets.classes = {
 {"gameobject","chest",3706,"Barrel of Sweet Nectar","Fass mit süßem Nektar",a="possible_spawn"},
 {"gameobject","chest",3707,"Food Crate","Nahrungsmittelkiste",a="possible_spawn"},
 {"gameobject","object",2870,"Yellow aura, very tall column"},
+{"mob","npc_or_mob",165189,"Cat"},
 {"npc","quest_giver",257296,"Muggol Breezebeard (Wildhammer Clan)","Muggol Breezebeard (Wildhammerklan)"},
+{"mob","npc_or_mob",264850,"Hawk","Falke"},
 {"gameobject","object",422911,"Sealed Barrel","Versiegeltes Fass"},
 }
 LogicalTargets.targets = {
@@ -3086,8 +3088,38 @@ LogicalTargets.targets = {
 {"gameobject_300393",222,-1641.21,-1894.65,81.44},
 {"gameobject_300394",222,-2092.36,-2817.31,81.432},
 {"gameobject_300395",226,-1466.3,-3081.7,13.294},
-{"questie_creature_257296_45_0",241,-1468.93,-2618.79,49.023},
-{"questie_gameobject_422911_45_0",242,-2149.33,-1633.47,l={-46.576,-38.593,-27.713,0.205}},
+{"questie_creature_165189_45_1",241,-1486.93,-1814.19,68.352,p=true},
+{"questie_creature_165189_45_2",241,-1794.61,-2412.87,56.807,p=true},
+{"questie_creature_165189_45_3",241,-1704.37,-2420.07,68.021,p=true},
+{"questie_creature_165189_45_4",241,-1692.13,-2424.03,68.82,p=true},
+{"questie_creature_165189_45_5",241,-1679.41,-2431.59,70.47,p=true},
+{"questie_creature_165189_45_6",241,-1667.89,-2438.79,72.136,p=true},
+{"questie_creature_165189_45_7",241,-1654.93,-2446.35,71.406,p=true},
+{"questie_creature_165189_45_8",241,-1643.41,-2453.55,71.733,p=true},
+{"questie_creature_165189_45_9",241,-1997.89,-2461.11,78.624,p=true},
+{"questie_creature_165189_45_10",241,-2008.45,-2462.19,78.884,p=true},
+{"questie_creature_165189_45_11",241,-2013.49,-2462.91,78.601,p=true},
+{"questie_creature_165189_45_12",241,-2015.65,-2463.27,78.375,p=true},
+{"questie_creature_165189_45_13",241,-1994.53,-2464.35,79.2,p=true},
+{"questie_creature_165189_45_14",241,-1545.73,-2470.47,60.857,p=true},
+{"questie_creature_165189_45_15",241,-1552.21,-2472.27,62.167,p=true},
+{"questie_creature_165189_45_16",241,-1458.85,-2472.63,60.4,p=true},
+{"questie_creature_165189_45_17",241,-2253.73,-2495.31,80.429,p=true},
+{"questie_creature_165189_45_18",241,-2337.73,-2501.79,85.672,p=true},
+{"questie_creature_165189_45_19",241,-1651.09,-2542.83,56.615,p=true},
+{"questie_creature_165189_45_20",241,-1541.17,-2675.31,39.321,p=true},
+{"questie_creature_165189_45_21",241,-1396.21,-2838.75,37.622,p=true},
+{"questie_creature_165189_45_22",241,-1362.37,-2899.23,34.991,p=true},
+{"questie_creature_165189_45_23",241,-1822.69,-3069.87,54.685,p=true},
+{"questie_creature_165189_45_24",241,-1702.45,-3290.19,22.4,p=true},
+{"questie_creature_165189_45_25",241,-1268.29,-3346.71,34.539,p=true},
+{"questie_creature_165189_45_26",241,-1700.53,-3514.83,60.69,p=true},
+{"questie_creature_257296_45_0",242,-1473.49,-2616.99,50.059,p=true},
+{"questie_creature_264850_45_0",243,-1651.09,-2542.83,56.615,p=true},
+{"questie_creature_264850_45_1",243,-1642.93,-2543.19,54.489,p=true},
+{"questie_creature_264850_45_2",243,-1627.81,-2546.07,52.058,p=true},
+{"questie_creature_264850_45_3",243,-1820.29,-3057.63,53.357,p=true},
+{"questie_gameobject_422911_45_0",244,-2149.33,-1633.47,l={-46.576,-38.593,-27.713,0.205}},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1417] = LogicalTargets

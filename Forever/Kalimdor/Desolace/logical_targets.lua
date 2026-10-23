@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1443,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="CF2419C1DA9528D850AB59DEAED96296CEB79225F82A40520BF75368A1DD349D",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="CCFF6825EA082B38B8DFF0F33F5D549EA9660B998F6E20ABD9F6112A7F9C0298",dropped={"creature_27874","creature_28240","creature_28717","creature_28757","creature_28811","creature_28956","creature_29012","creature_29015","gameobject_4499","gameobject_65072","gameobject_7173"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1443,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="4FAD7A382B239642EDFC996CDC65A51AF1AFE201952CE1F5A9AA78F94380BDE3",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="F9CE091C4E2892372031B293B48EF7379FA4AA2B1D06ECB6F02F9F7ACD53B806",dropped={"creature_27874","creature_28240","creature_28717","creature_28757","creature_28811","creature_28956","creature_29012","creature_29015","gameobject_4499","gameobject_65072","gameobject_7173"}}
 LogicalTargets.classes = {
 {"npc","quest_giver",13717,"Centaur Pariah","Zentaurenpariah",a="possible_spawn"},
 {"creature","npc_or_mob",4666,"Burning Blade Felsworn","Teufelsanbeter der Burning Blade",a="possible_spawn"},
@@ -277,6 +277,7 @@ LogicalTargets.classes = {
 {"gameobject","interaction_object",177400,"Demon Portal","Dämonenportal"},
 {"gameobject","anvil",51705,"Anvil","Amboss"},
 {"gameobject","chest",177784,"Giant Softshell Clam","Riesen-Weichpanzermuschel",a="possible_spawn"},
+{"mob","npc_or_mob",165189,"Cat"},
 }
 LogicalTargets.targets = {
 {"creature_29069",1,-2145.71,1966.42,84.492},
@@ -2408,6 +2409,8 @@ LogicalTargets.targets = {
 {"gameobject_300436",233,-339.986,838.234,99.059},
 {"gameobject_300437",237,-1902.34,1107.68,92.341},
 {"gameobject_300447",233,-1054.44,1008.37,90.526},
+{"questie_creature_165189_405_0",277,-1817.94,3014.96,12.873,p=true},
+{"questie_creature_165189_405_1",277,-1370.65,2804.11,112.969,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1443] = LogicalTargets
