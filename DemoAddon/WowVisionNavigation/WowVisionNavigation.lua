@@ -1746,6 +1746,8 @@ frame:SetScript("OnUpdate", function(_, elapsed)
         Navigation.activationPrepointAnnounced = true
         if activationTarget.actionSemanticStatus == "unresolved" then
             WowVisionNavigationSay("prepoint_reached_unresolved")
+        elseif activationTarget.facilityKind == "dive" then
+            WowVisionNavigationSay("prepoint_reached_dive")
         else
             WowVisionNavigationSay("prepoint_reached_go_through")
         end
@@ -1768,6 +1770,8 @@ frame:SetScript("OnUpdate", function(_, elapsed)
             if activationTarget.actionSemanticStatus == "unresolved" then
                 WowVisionNavigationSay("activation_position_reached",
                     activationObservationMode == "xy_only" and WowVisionNavigationText("height_not_confirmed") or "")
+            elseif activationTarget.facilityKind == "dive" then
+                WowVisionNavigationSay("activation_area_dive")
             else
                 WowVisionNavigationSay("activation_area_entered")
             end

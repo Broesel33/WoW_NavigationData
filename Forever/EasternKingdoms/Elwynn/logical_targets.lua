@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=37,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="BD2318C1AFC442D3E8B83BC2466E38E05206F6E656AE6E678B1C23EEA90D6C49",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="24049FDA0A59458C79D18C78BD1312F4B6FAAE5C6656DC70E7EB8BB32C710196",dropped={"creature_191127","creature_191128","creature_191129","creature_191130","creature_191131","creature_191132","creature_191133","creature_191134","creature_191135","creature_191136","creature_53996","creature_53997","creature_53998","creature_81052","creature_81288-46","creature_81288-732","gameobject_1080198","gameobject_74881","gameobject_74891","gameobject_74894","gameobject_74914","gameobject_934","questie_creature_165189_1519_173","questie_gameobject_562111_12_40","questie_gameobject_694772_12_4"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=37,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="9BD564FADAD44CEE318D7A3FD746580B88AD03F95F2BA5B575786FB44E931ACF",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="E6A57516F83B2009D6CF3C248DF67C3F0CA9352BD72D989990B9970249E97DA6",dropped={"creature_191127","creature_191128","creature_191129","creature_191130","creature_191131","creature_191132","creature_191133","creature_191134","creature_191135","creature_191136","creature_53996","creature_53997","creature_53998","creature_81052","creature_81288-46","creature_81288-732","gameobject_1080198","gameobject_74881","gameobject_74891","gameobject_74894","gameobject_74914","gameobject_934","questie_gameobject_562111_12_40","questie_gameobject_694772_12_4"}}
 LogicalTargets.classes = {
 {"npc",{"quest_giver","trainer"},1215,"Alchemist Mallory (Journeyman Alchemist)","Alchimist Mallory (Alchimiegeselle)"},
 {"npc","trainer",1218,"Herbalist Pomeroy (Herbalism Trainer)","Kräuterkundige Pomeroy (Kräuterkundelehrerin)"},
@@ -2493,7 +2493,6 @@ LogicalTargets.targets = {
 {"questie_creature_165189_12_131",235,-9798.89,-1526.55,42.664},
 {"questie_creature_165189_12_132",235,-9761.62,-1590.76,49.247},
 {"questie_creature_165189_12_133",235,-9627.61,-1648.03,56.008},
-{"questie_creature_165189_1519_174",235,-9075.29,425.7,92.667},
 {"questie_creature_202093_12_0",236,-9865.32,542.76,33.316,p=true},
 {"questie_creature_202093_12_1",236,-9883.83,514.99,32.424,p=true},
 {"questie_creature_202093_12_2",236,-9883.83,508.05,33.987,p=true},

@@ -31,6 +31,18 @@ local function inVolume(volume, position)
     return false
 end
 
+-- Kind-specific phase texts (Localization keys): a dive transition is dived into and surfaced from by the player himself, so the portal
+-- texts do not fit it. An action kind without an entry uses the generic text of the phase.
+local KIND_TEXT = {
+    dive = { approach = "action_approach_prepoint.dive", waiting = "action_waiting.dive", activating = "action_activating.dive" },
+    surface = { approach = "action_approach_prepoint.surface", waiting = "action_waiting.surface", activating = "action_activating.surface" },
+}
+
+local function phaseText(action, phase, generic, ...)
+    local specific = type(action) == "table" and KIND_TEXT[action.kind] or nil
+    return WowVisionNavigationText(specific and specific[phase] or generic, ...)
+end
+
 local function speak(self, message)
     if type(self.announce) == "function" then self.announce(message) end
 end
@@ -98,13 +110,13 @@ function Actions:Start(actionId, context)
     self:Cancel(nil)
     self.current = { action = action, phase = nil, enteredAt = now(), activated = false,
                      sourceEntered = false, sourceLeft = false, confirmed = false }
-    enter(self, "approach", WowVisionNavigationText("action_approach_prepoint", actionId))
+    enter(self, "approach", phaseText(action, "approach", "action_approach_prepoint", actionId))
     return true
 end
 
 function Actions:ReachedPrepoint()
     if not self.current or self.current.phase ~= "approach" then return false end
-    return enter(self, "waiting", WowVisionNavigationText("action_waiting"))
+    return enter(self, "waiting", phaseText(self.current.action, "waiting", "action_waiting"))
 end
 
 function Actions:Confirm()
@@ -114,7 +126,7 @@ function Actions:Confirm()
         if current.action.activation.mode == "board" then
             enter(self, "boarding", WowVisionNavigationText("action_boarding"))
         else
-            enter(self, "activating", WowVisionNavigationText("action_activating"))
+            enter(self, "activating", phaseText(current.action, "activating", "action_activating"))
         end
         return true
     end

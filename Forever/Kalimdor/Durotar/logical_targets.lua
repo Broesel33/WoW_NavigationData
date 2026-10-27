@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="E1B7EE7D24E5A09D4D7D1F3EFE160C73714684842553D496EFD1A455EA04AAE3",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="59F53A5D2CE191460BF757046F27B9E724C05FAFF391CD7B36ABCAF015DCCC6A",dropped={"creature_10260","creature_10386","creature_10398","creature_10421","creature_10423","creature_10424","creature_12227","creature_12231","creature_12949","creature_21026","creature_4751","creature_4753","creature_4755","creature_4758","creature_4794","creature_6511","creature_6661","creature_6663","creature_6969","creature_7276","creature_7278","creature_7387","creature_7555","creature_7557","creature_7646","creature_7998","creature_7999","creature_8400","creature_8406","creature_8414","creature_8679","gameobject_12405","gameobject_12411","gameobject_12418","gameobject_12420","gameobject_12421","gameobject_12422","gameobject_12493","gameobject_191063-3658","gameobject_191063-3719","gameobject_85741","questie_gameobject_656161_14_39"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="3D4E6CC77DF36917C42220BE402C90887BFC2AFF10E51102DD444B6B0D11FEE5",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="0BF56676F70FA76527C6254DA796E7A096542488D49AE7A17BB7091B1B648BAA",dropped={"creature_10260","creature_10386","creature_10398","creature_10421","creature_10423","creature_10424","creature_12227","creature_12231","creature_12949","creature_21026","creature_4751","creature_4753","creature_4755","creature_4758","creature_4794","creature_6511","creature_6661","creature_6663","creature_6969","creature_7276","creature_7278","creature_7387","creature_7555","creature_7557","creature_7646","creature_7998","creature_7999","creature_8400","creature_8406","creature_8414","creature_8679","gameobject_12405","gameobject_12411","gameobject_12418","gameobject_12420","gameobject_12421","gameobject_12422","gameobject_12493","gameobject_191063-3658","gameobject_191063-3719","gameobject_85741","questie_gameobject_656161_14_39"}}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",5893,"Minor Manifestation of Fire","Schwache Feuermanifestation"},
 {"npc","quest_giver",3294,"Ophek"},
@@ -2664,7 +2664,6 @@ LogicalTargets.targets = {
 {"questie_creature_165189_14_148",229,-1229.86,-5571.75,8.75},
 {"questie_creature_165189_14_149",229,-1239.03,-5572.28,8.12},
 {"questie_creature_165189_14_150",229,-720.85,-5683.84,23.728},
-{"questie_creature_165189_1637_23",229,1384.2,-4376.29,26.3},
 {"questie_creature_203079_14_0",230,137.48,-3866,36.201,p=true},
 {"questie_creature_203079_14_1",230,116.33,-3866,36.47,p=true},
 {"questie_creature_203079_14_2",230,66.98,-4130.37,61.184,p=true},
@@ -4419,9 +4418,11 @@ LogicalTargets.targets = {
 {"questie_creature_275662_14_546",259,914.75,-5141.87,0.2,p=true},
 {"questie_creature_275662_14_547",259,920.39,-5145.57,0.2,p=true},
 {"questie_creature_275662_14_548",259,983.13,-5146.63,0.2,p=true},
+{"questie_creature_275662_14_549",259,912.63,-5149.8,0.2,p=true},
 {"questie_creature_275662_14_550",259,985.25,-5152.45,0.2,p=true},
 {"questie_creature_275662_14_551",259,986.66,-5158.79,0.2,p=true},
 {"questie_creature_275662_14_552",259,987.71,-5168.84,0.2,p=true},
+{"questie_creature_275662_14_553",259,923.56,-5170.95,0.2,p=true},
 {"questie_creature_275663_14_0",260,733.56,-4954.7,17.436,p=true},
 {"questie_creature_275663_14_1",260,825.92,-4962.1,14.536,p=true},
 {"questie_creature_275663_14_2",260,829.09,-4976.9,12.414,p=true},
@@ -4782,8 +4783,10 @@ LogicalTargets.targets = {
 {"questie_creature_275663_14_357",260,920.39,-5144.52,0.2,p=true},
 {"questie_creature_275663_14_358",260,915.1,-5145.05,0.2,p=true},
 {"questie_creature_275663_14_359",260,916.51,-5147.16,0.2,p=true},
+{"questie_creature_275663_14_360",260,913.34,-5147.16,0.2,p=true},
 {"questie_creature_275663_14_361",260,919.33,-5147.69,0.2,p=true},
 {"questie_creature_275663_14_362",260,990.18,-5157.74,0.2,p=true},
+{"questie_creature_275663_14_363",260,927.44,-5160.91,0.2,p=true},
 {"questie_creature_275663_14_364",260,971.15,-5162.49,0.2,p=true},
 {"questie_creature_275663_14_365",260,993.35,-5163.55,0.2,p=true},
 {"questie_creature_275663_14_366",260,987.36,-5163.55,0.2,p=true},

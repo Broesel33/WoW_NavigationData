@@ -869,13 +869,12 @@ Every zone was checked when it was generated. In general terms:
   * Coverage. For each zone, positions on walkable ground were sampled and tested for whether they
     can be attached to the network with a route. In every zone at least about 95 percent of the
     sampled positions can; the values lie between about 95 and 99 percent, depending on the zone.
-  * Target reachability. In 48 of the 51 zones at least 95 percent of the target groups are
-    reachable through the network (many zones reach 100 percent). Three zones are documented
-    exceptions: Darkshore (about 93.3 percent; the Ruins of Blackfathom can be reached only by
-    diving), Alterac Mountains (about 94.6 percent; Ravenholdt, and Dalaran behind a magical
-    barrier) and Shendralas (about 93.9 percent; two creatures, Perith Stormhoof and Snarlsnout,
-    cannot be attached to the network). The tightest of the other zones are Undercity (95.0 percent) and Zephras Isle
-    (95.1 percent). Targets that cannot be reached are not in the catalogues ("dropped").
+  * Target reachability. In all 51 zones at least 95 percent of the target groups are
+    reachable through the network (many zones reach 100 percent). The Ruins of Blackfathom in
+    Darkshore are reached by a dive transition point that announces "Dive here" at the entrance.
+    Seven groups of Shatterspear Vale remain unreachable (an isolated part of the water network).
+    The tightest zones are Undercity (95.0 percent) and Zephras Isle (95.1 percent). Targets that
+    cannot be reached are not in the catalogues ("dropped").
     A target group is all the spawns of one creature or object (for example all the boars of a
     zone); one reachable member is enough.
   * Target sources. The catalogues are built from the QuestieDB of WoW Forever (version 1.0.6)
@@ -932,14 +931,13 @@ continent together with the files of every zone that changed.
   * No avoidance of dangerous areas. Targets and waypoints carry no information about enemy
     creatures or their levels (the "levels" field of a target is a list of floor heights).
   * Water is two-dimensional. A body of water has one surface, and there are no diving routes into
-    flooded caves. Targets that can be reached only by diving, such as the Ruins of Blackfathom in
-    Darkshore, are missing from the catalogue.
+    flooded caves. The one exception is the dive transition at the Ruins of Blackfathom in
+    Darkshore: a pair of points that work like a portal, "Dive here" at the entrance.
   * No dungeon or raid interiors. The Deeprun Tram is the only instance map. Dungeon entrances are
     included only where a source gave their position; entrances of some dungeons, in particular of
     dungeons that are new in WoW Forever, are missing.
   * The Ruins of Gilneas are not included: the client does not ship terrain or a map for them.
-  * Some places cannot be reached: Dalaran in Alterac Mountains (a magical barrier) and Ravenholdt
-    (the way in the game leads over short, steep pieces of terrain that the network does not use).
+  * Some places cannot be reached: Dalaran in Alterac Mountains (a magical barrier).
   * Some targets are only approximate. A target whose position lies outside every attachment cell
     is attached to the nearest cell (up to 30 yd away in the demo addon) and reported as
     approximate. A target without a source height over several floors needs a floor choice.

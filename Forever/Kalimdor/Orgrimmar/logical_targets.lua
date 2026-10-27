@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1454,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="B4695499504066B0E81B86594B5DE58FFCAC5CAB6EA530AB9E68056D4DEAAB45",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="27AA9CEF62C16176FA598CE9B819E2DAF95ECAD1FBE517C6C827216D04445D45",dropped={"creature_11796","creature_7949","creature_8530","gameobject_12435","gameobject_12436","gameobject_12439","questie_creature_165189_1637_71","questie_creature_273003_1637_2"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1454,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="9897C35F6278E018A2501C281876D9056291FF8D8EEFE2501E019C4FADF93C9F",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="AB80FD983E705B67AD0DE97155DCCEFBBC64563EC61810F0CA23C8B2709999EF",dropped={"creature_11796","creature_7949","creature_8530","gameobject_12435","gameobject_12436","gameobject_12439","questie_creature_165189_1637_71","questie_creature_273003_1637_2"}}
 LogicalTargets.classes = {
 {"npc","quest_giver",5875,"Gan'rul Bloodeye"},
 {"npc","quest_giver",8659,"Jes'rimon"},
@@ -492,6 +492,7 @@ LogicalTargets.targets = {
 {"creature_6562",17,1628.11,-4282.33,22.171},
 {"creature_6563",16,1623.15,-4279.64,22.569},
 {"creature_6564",16,1921.7,-4375.67,22.572},
+{"creature_6565",16,1387.28,-4379.89,27.098,p=true},
 {"creature_6566",16,1889.53,-4485.08,21.31},
 {"creature_6567",16,1576.2,-4394.43,6.555},
 {"creature_6593",120,1762.88,-4296.38,7.531},
@@ -537,6 +538,7 @@ LogicalTargets.targets = {
 {"creature_7395",14,1924.73,-4245.42,41.941},
 {"creature_7396",14,1941.71,-4124.25,43.543},
 {"creature_7398",16,1628.89,-4274.76,24.086},
+{"creature_7399",16,1696.56,-3929.77,51.634,p=true},
 {"creature_7415",16,1928.32,-4424.41,23.75},
 {"creature_7416",16,1906.25,-4564.21,33.976},
 {"creature_7417",16,1557.74,-4364.25,1.08},
@@ -581,10 +583,12 @@ LogicalTargets.targets = {
 {"creature_8528",16,1561.79,-4360.5,1.195},
 {"creature_8529",16,1829.26,-4507.27,21.456},
 {"creature_10297",16,2126.41,-4738.09,50.449},
+{"creature_10298",16,1684.94,-3911.59,51.634,p=true},
 {"creature_10299",16,1620.45,-4252.84,47.527},
 {"creature_10347",17,1613.801,-4267.545,48.003},
 {"creature_10348",16,1615.63,-4376.11,12.402},
 {"creature_10350",16,1603.48,-4449.95,8.116},
+{"creature_10351",16,1384.62,-4358.56,27.098,p=true},
 {"creature_10352",16,1748.53,-4260.13,27.072},
 {"creature_10353",16,2131.15,-4729.88,50.43},
 {"creature_10450",16,1523.92,-4429.44,16.735},
@@ -594,6 +598,7 @@ LogicalTargets.targets = {
 {"creature_10466",16,1596.65,-4388.67,9.983},
 {"creature_10467",17,1681.3,-4393.21,21.406},
 {"creature_10468",16,1910.24,-4623.92,33.976},
+{"creature_10469",16,1698.85,-3902.94,51.634,p=true},
 {"creature_10470",17,1911.64,-4563.69,34.208},
 {"creature_11789",17,1714.04,-4380.45,29.8},
 {"creature_11790",16,1566.45,-4179.18,41.028},

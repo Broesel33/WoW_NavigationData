@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1446,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="A95CD25A15C50EE8A50DAA8C68FE213335FA6858C23E9B1D8AB5B5E45125328F",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="707DCA2EA789FF8030EADE1A4844C8A067276B46EDA829666A90B8493F86A6A3",dropped={"creature_21862","creature_23352","creature_23360","creature_23653","creature_23656","creature_5719","gameobject_17446","gameobject_17447","gameobject_17448","gameobject_5976","questie_creature_228142_440_2","questie_creature_228142_440_40","questie_creature_228142_440_43","questie_creature_228142_440_45","questie_creature_228142_440_46","questie_creature_228142_440_47","questie_creature_228142_440_48","questie_creature_228142_440_49","questie_creature_228142_440_50","questie_creature_228142_440_52","questie_creature_228142_440_54","questie_creature_228142_440_55","questie_creature_228142_440_57"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1446,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="5324E73B29E914FBFDE67981CC9089191B047432C31A8951C34D6F21C5512E23",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="F4BACB63851B37B3C28DF24CAAB08758DD51F3FF5B76CB0DA48E6A6B9249FF14",dropped={"creature_21862","creature_23352","creature_23360","creature_23653","creature_23656","creature_5719","gameobject_17446","gameobject_17447","gameobject_17448","gameobject_5976","questie_creature_228142_440_2","questie_creature_228142_440_40","questie_creature_228142_440_43","questie_creature_228142_440_45","questie_creature_228142_440_46","questie_creature_228142_440_47","questie_creature_228142_440_48","questie_creature_228142_440_49","questie_creature_228142_440_50","questie_creature_228142_440_52","questie_creature_228142_440_54","questie_creature_228142_440_55","questie_creature_228142_440_57"}}
 LogicalTargets.classes = {
 {"npc","spirit_healer",6491,"Spirit Healer","Geistheiler"},
 {"creature","npc_or_mob",5419,"Glasshide Basilisk","Glashautbasilisk",a="possible_spawn"},
@@ -3045,8 +3045,10 @@ LogicalTargets.targets = {
 {"questie_creature_238415_440_2",210,-7172.2,-3986.15,8.694,p=true},
 {"questie_creature_260405_440_0",211,-6937.6,-4881.08,l={0.2,5.566},p=true},
 {"questie_creature_260419_440_0",212,-6945.88,-4870.04,l={0.729,5.563},p=true},
+{"questie_creature_260419_440_1",212,-6938.06,-4938.35,0.2,p=true},
 {"questie_creature_260857_440_0",213,-6976.7,-4869.35,5.4,p=true},
 {"questie_creature_260857_440_1",213,-6968.42,-4875.56,l={0.284,5.4},p=true},
+{"questie_creature_260857_440_2",213,-6938.06,-4938.35,0.2,p=true},
 {"questie_creature_265576_440_0",214,-7139.54,-3756.38,9.405,p=true},
 {"questie_creature_265576_440_1",214,-7178.18,-3781.22,8.6,p=true},
 {"questie_creature_265576_440_2",214,-7198.42,-3783.29,8.6,p=true},

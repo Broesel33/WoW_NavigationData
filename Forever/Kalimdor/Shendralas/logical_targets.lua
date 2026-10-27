@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=2652,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="0C7FA274A54408E55EAD83E6748C11FEE26B27AE53970231A6A44E653930AF7C",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="66AE46C6F809ABF998F4EB285BFFF0DA4A319779D65AFFD426799A7473968656",dropped={"creature_27141","creature_27203","creature_27204","creature_27205","creature_27206","questie_creature_272203_215_0","questie_creature_276109_215_0","questie_creature_276109_215_1","questie_creature_276109_215_2","questie_creature_276109_215_3"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=2652,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="555B20B8BFCB2AB8A19721F6B37472D9381B5F3EAB4100755C253F2E4A45EC56",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="0D90D912572629C40026C25AB9A03D01CEE0B140D23C5B7C62B2B31A3716C30A",dropped={"creature_27141","creature_27203","creature_27204","creature_27205","creature_27206"}}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",11559,"Outcast Necromancer","Ausgestoßener Totenbeschwörer"},
 {"mob","npc_or_mob",11559,"Outcast Necromancer","Ausgestoßener Totenbeschwörer",a="possible_spawn"},
@@ -63,7 +63,7 @@ LogicalTargets.targets = {
 {"gameobject_6267",4,-2255,1459.23,71.1},
 {"gameobject_6549",4,-2283,1579.92,87.37},
 {"questie_creature_251343_16651_0",5,-2873.75,1138.58,150.939},
-{"questie_creature_252691_16651_0",6,-2863.23,1147.8,149.131},
+{"questie_creature_252691_16651_0",6,-2863.23,1147.8,l={97.349,149.131},p=true},
 {"questie_creature_252691_16651_1",6,-2888.92,1123,l={137.064,151.016}},
 {"questie_creature_252695_16651_0",7,-2982.4,1053.3,147.202},
 {"questie_creature_252695_16651_1",7,-2957.8,1032.8,146.081},
@@ -84,7 +84,7 @@ LogicalTargets.targets = {
 {"questie_creature_253275_16651_1",13,-3035.7,1030.55,150},
 {"questie_creature_253275_16651_2",13,-3036.93,1030.13,150},
 {"questie_creature_253275_16651_3",13,-3030.23,1017.84,150},
-{"questie_creature_253275_16651_4",13,-3010.01,989.34,149.867},
+{"questie_creature_253275_16651_4",13,-3010.01,989.34,l={122.004,149.867},p=true},
 {"questie_creature_253394_16651_0",14,-2345.53,1077.9,111.477},
 {"questie_creature_253394_16651_1",14,-2361.93,1061.5,120.828},
 {"questie_creature_253431_16651_0",15,-2266.27,778.6,146.028},
@@ -105,9 +105,9 @@ LogicalTargets.targets = {
 {"questie_creature_255704_16651_0",26,-2897.67,971.3,149.6},
 {"questie_creature_255705_16651_0",27,-2916.8,963.1,149.667},
 {"questie_creature_255721_16651_0",28,-2952.33,1151.7,150.365},
-{"questie_creature_255759_16651_0",29,-2815.94,1059.65,132.8},
-{"questie_creature_255759_16651_1",29,-2849.56,1057.2,138.384},
-{"questie_creature_255759_16651_2",29,-2859.26,1056.58,143.415},
+{"questie_creature_255759_16651_0",29,-2815.94,1059.65,l={130.284,132.8},p=true},
+{"questie_creature_255759_16651_1",29,-2849.56,1057.2,l={130.645,138.384},p=true},
+{"questie_creature_255759_16651_2",29,-2859.26,1056.58,l={131.738,143.415},p=true},
 {"questie_creature_255759_16651_3",29,-3035.7,1030.55,150},
 {"questie_creature_255759_16651_4",29,-3036.93,1030.13,150},
 {"questie_creature_255759_16651_5",29,-2901.36,1015.99,149.848},
