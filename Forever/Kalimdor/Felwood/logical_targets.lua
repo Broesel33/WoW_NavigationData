@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1448,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="9C4551D82C569F060F3126E40A8DD35A5BE2265C3076AAF1F546806A28917153",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="8B3DE5B69507EA4A08AA5C119DE14C2426EE6B8A8664027C34536F37BD850C77",dropped={"gameobject_157008"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1448,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="C438C638C001CBAF83D4F4FAB720F35E21424A44F632CF40F6284F9132F72AD1",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="DFDB5419BDF8474EF99397345756099D28FAE6C7AFD900A8557AD917A8E13FB4",dropped={"gameobject_157008"}}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",14344,"Mongress",a="possible_spawn"},
 {"npc",{"quest_giver","vendor"},11555,"Gorn One Eye","Gorn Einauge"},
@@ -221,6 +221,8 @@ LogicalTargets.classes = {
 {"gameobject","interaction_object",174610,"Cleansed Songflower","Gesäuberte Liedblume"},
 {"gameobject","interaction_object",171943,"Cleansed Songflower","Gesäuberte Liedblume"},
 {"gameobject","quest_item",174712,"Corrupted Songflower","Verderbte Liedblume"},
+{"npc","npc_or_mob",228595,"Vengeful Wisp","Rachsüchtiger Irrwisch"},
+{"npc","trainer",259585,"Master Mycologist Shurome (Emerald Circle)","Meistermykologe Shurome (Smaragdkreis)"},
 }
 LogicalTargets.targets = {
 {"creature_140773",1,3914.9,-1063.66,243.252},
@@ -1310,7 +1312,7 @@ LogicalTargets.targets = {
 {"gameobject_48816",140,3905.77,-1264.39,223.469},
 {"gameobject_48823",141,4925.45,-741.677,306.536},
 {"gameobject_48826",142,4925.6,-741.705,305.747},
-{"gameobject_48827",143,5103.54,-360.519,357.04,p=true},
+{"gameobject_48827",143,5103.54,-360.519,357.04},
 {"gameobject_48828",144,4925.57,-741.689,306.577},
 {"gameobject_48831",145,5244.1,-657.293,258.79},
 {"gameobject_48832",146,5437.06,-445.052,274.28},
@@ -1434,6 +1436,10 @@ LogicalTargets.targets = {
 {"gameobject_720014",218,6266.68,-2000.01,573.423},
 {"gameobject_720013",219,4233.32,-1133.32,322.629},
 {"gameobject_720009",220,4966.66,-666.679,295.082},
+{"questie_creature_228595_361_0",221,6420.33,-968.83,423.586,p=true},
+{"questie_creature_228595_361_1",221,6412.67,-980.33,423.443,p=true},
+{"questie_creature_259585_361_0",222,3985.02,-1308.66,252.288,p=true},
+{"questie_creature_259585_361_1",222,3989.23,-1317.86,253.371,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1448] = LogicalTargets

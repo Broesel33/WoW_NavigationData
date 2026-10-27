@@ -58,11 +58,11 @@ and takes the vehicle personally. Flight paths are not modelled at all.
 At a glance (snapshot of the data in this repository):
 
   51 zones in 4 continent groups   EasternKingdoms 26, Kalimdor 23, DeeprunTram 1, ZephrasIsle 1
-  about 1.05 million waypoints     about 1.41 million links, about 1.03 million attachment cells
-  about 99,300 logical targets     232 dynamic targets
-  2,782 seams between zones        63 neighbouring zone pairs
-  about 54 MB of Lua files         the largest zone file (The Barrens, navdata.lua) is about 2.6 MB;
-                                   the logical target catalogues of all zones take about 6 MB of it
+  about 0.86 million waypoints     about 2.13 million links, about 0.92 million attachment cells
+  about 140,700 logical targets    233 dynamic targets
+  3,305 seams between zones        63 neighbouring zone pairs
+  about 55 MB of Lua files         the largest zone file (The Barrens, navdata.lua) is about 2.6 MB;
+                                   the logical target catalogues of all zones take about 9 MB of it
 
 Supported game version
   WoW Forever (client series 1.60.1; the demo addon declares interface 16001).
@@ -243,7 +243,7 @@ What a seam is
 
   id        The seam ID: 1000 * (zone ID of the zone that owns the GATEWAY end) + a running number.
             All IDs are unique in the data set.
-  cost      Length in yards of the checked connection (median about 2 yd on land and about 7 yd
+  cost      Length in yards of the checked connection (median about 1.4 yd on land and about 6 yd
             across water).
   water     true when the seam is a swimming connection. Treat it with the swimming cost factor.
   a, b      Global waypoint ID of that end, when the end is a waypoint.
@@ -521,7 +521,7 @@ A worked example: decoding the first waypoints and the first cell of the Deeprun
 The file defines a catalogue of the targets of one zone. It comes in a compact form (format 2) that
 keeps the constants of the file once in the header and what targets of one kind share once per
 "class", so that a target itself is one short line. The catalogues of all zones together take about
-6 MB; the same catalogues with every field written out in every row took 46.7 MB.
+9 MB for about 140,700 targets.
 
   -- Logical target catalogue, compact format 2. No graph bindings, no provenance.
   local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=84,coordinateSpace="world",
@@ -582,7 +582,7 @@ classes: what the targets of one population share
                       fold them into one line.
     [4] nameEn        The English name.
     [5] nameDe        The German name; absent when it is the same as nameEn (the name is the same
-                      in both languages, or no German name is known: about 4 percent).
+                      in both languages, or no German name is known: about 7 percent).
     a                 The availability when it is not the default of the header: "possible_spawn"
                       for a placement that need not be occupied at any moment (random or pooled
                       spawns, a single unconfirmed observation). "static" is the default.
@@ -629,16 +629,16 @@ Attaching a target to the network
 The dyn catalogue is a list of rows (a header table with layer = "dyn" and no format field, then
 one table with all fields per target, then WVN7Dyn[zoneId] = DynTargets) with the
 common fields id, kind, type, category, nameEn, nameDe, searchAliases, nativeMapId,
-coordinateSpace, x, y, z, zStatus, availability, source and entry. It contains 232 targets of two
+coordinateSpace, x, y, z, zStatus, availability, source and entry. It contains 233 targets of two
 kinds:
 
-  kind "transit_facility" (92 targets), with a facilityKind:
+  kind "transit_facility" (93 targets), with a facilityKind:
     dungeon   20   An instance entrance (15 different dungeons). Role "entrance". The position is
                    where a player appears when leaving the instance (positionBasis
                    "teleport_exit_arrival").
-    boat      16   A boat dock. Role "waiting".
+    boat      15   A boat dock. Role "waiting".
     zeppelin  10   A zeppelin or skyboat dock. Role "waiting".
-    lift      32   An elevator platform. Role "waiting" (the upper and the lower station are
+    lift      34   An elevator platform. Role "waiting" (the upper and the lower station are
                    separate targets).
     tram       8   The Deeprun Tram: the entrances in Stormwind and Ironforge ("entrance"), the two
                    exits inside the tunnel ("exit"), and the four waiting areas of the tram
@@ -722,10 +722,10 @@ Burning Steppes and Riverglades, for example, meet at a cliff step without a foo
 between them leads through Redridge Mountains.
 
   On-foot seams     The large majority. A border is crossed by many seams, spread along its length,
-                    so a route can cross wherever the border is walkable (for example 452 seams
+                    so a route can cross wherever the border is walkable (for example 446 seams
                     between Durotar and The Barrens).
   Water seams       Where a border crosses a lake or the sea, the seam is a swimming connection
-                    (water = true on the record). They are 1,263 of the 2,782 seams. A search
+                    (water = true on the record). They are 1,533 of the 3,305 seams. A search
                     multiplies their cost by the swimming factor.
   Passages          Cities and tunnels are zones of their own, joined to their surroundings by
                     seams: Stormwind City with Elwynn Forest, Undercity with Tirisfal Glades,
@@ -760,7 +760,7 @@ is a good model for other implementations.
 
  1. LOAD  Load all files at start-up (the demo lists them in its .toc). Keep the raw tables, and read
     the continent indexes into a table of zones and a table of seams. A logical catalogue is kept
-    in its compact form (small arrays; about 6 MB of file for all zones). The demo checks the
+    in its compact form (small arrays; about 9 MB of file for all zones). The demo checks the
     catalogues of the active continent when the continent becomes active and reads the compact
     rows as they are; it builds one table per target only for the targets it needs (the hits of
     a search, a single target by ID): for each row the class gives kind, categories, entry,
@@ -797,11 +797,13 @@ is a good model for other implementations.
 
  6. ROUTE  One A* search over the union of all decoded zones, from the start attachment to the
     target attachment. The edges are:
-      * links, in their allowed direction; cost = length * a factor. The reference implementation
+      * links, in their allowed direction; cost = (length + 15 yd) * a factor. The 15 yd are a
+        hop cost: they count the waypoint the player has to steer to (partial links to seam
+        points, to seams and to actions carry none). The reference implementation
         uses 1 for plain links, 1.5 for FINE links and 1.5 * (1 + p/100) for swimming links, where
-        p is a comfort setting of the player (default 50). Road links get a reduced factor in a
-        second pass, and the result of that pass is used when its length is at most (1 + p/100)
-        times that of the plain pass.
+        p is a comfort setting of the player (default 60). Road links get a reduced factor in a
+        second pass (the hop cost is included in both passes), and the result of that pass is used
+        when its geometric length is at most (1 + p/100) times that of the plain pass.
       * seams, as described in section 5, with their cost (times the swimming factor for water
         seams), in both directions;
       * actions (transit links), if the consumer allows them. The reference implementation allows
@@ -850,8 +852,10 @@ Installation, as given in DemoAddon/readme.txt:
   * Copy the navigation data you want to test into its "maps" folder, keeping the layout of this
     repository: Forever/<Continent> becomes WowVisionNavigation/maps/<Continent>. The .toc lists
     every file under maps/.
-  * Necessary partner addons: WowVision and Questie. (The .toc declares Questie as an optional
-    dependency.)
+  * Optional partner addons: WowVision (accessible target list window and turning with the I key;
+    without it the addon uses its own fallback list window and turns the character with the
+    camera) and Questie (quest objectives for /vn q when the game's own quest data has none).
+    (The .toc declares Questie as an optional dependency.)
 
 The .toc declares interface 16001 (WoW Forever 1.60.1) and also 50504 (MoP Classic 5.5.4); the data
 of this repository describes WoW Forever only.
@@ -865,11 +869,19 @@ Every zone was checked when it was generated. In general terms:
   * Coverage. For each zone, positions on walkable ground were sampled and tested for whether they
     can be attached to the network with a route. In every zone at least about 95 percent of the
     sampled positions can; the values lie between about 95 and 99 percent, depending on the zone.
-  * Target reachability. In 49 of the 51 zones at least 95 percent of the target groups are
-    reachable through the network (many zones reach 100 percent). Two zones are documented
-    exceptions: Darkshore (about 92 percent; the Ruins of Blackfathom can be reached only by
-    diving) and Alterac Mountains (about 89 percent; Ravenholdt, and Dalaran behind a magical
-    barrier). Targets that cannot be reached are not in the catalogues ("dropped").
+  * Target reachability. In 48 of the 51 zones at least 95 percent of the target groups are
+    reachable through the network (many zones reach 100 percent). Three zones are documented
+    exceptions: Darkshore (about 93.3 percent; the Ruins of Blackfathom can be reached only by
+    diving), Alterac Mountains (about 94.6 percent; Ravenholdt, and Dalaran behind a magical
+    barrier) and Shendralas (about 93.9 percent; two creatures, Perith Stormhoof and Snarlsnout,
+    cannot be attached to the network). The tightest of the other zones are Undercity (95.0 percent) and Zephras Isle
+    (95.1 percent). Targets that cannot be reached are not in the catalogues ("dropped").
+    A target group is all the spawns of one creature or object (for example all the boars of a
+    zone); one reachable member is enough.
+  * Target sources. The catalogues are built from the QuestieDB of WoW Forever (version 1.0.6)
+    and Thottbot4ever. An entry that the old base data does not know counts only when it is
+    confirmed to exist in WoW Forever, by the Thottbot4ever name list or by Wowhead Forever
+    (the second confirmation source). German names come from Wowhead.
   * Link checks. Every link and every attachment was verified offline on the walkable geometry of
     the game.
   * Seams. All seam ends point to existing waypoints or links, and every GATEWAY end lists its seam

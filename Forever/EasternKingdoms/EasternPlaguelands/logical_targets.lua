@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1423,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="BFEC23A992EB857B9C43CB24C4C2C19211649146A385436C738BF3C792D8324B",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="11CBC64A027B7EEB5E80774E6E5BC57C2F569EE4FFF508C34EE9C62BB9E339FA",dropped={"creature_52960","creature_53038","creature_53742","creature_53743","creature_54594","creature_56696","creature_69692","creature_69710","creature_84786","creature_86295","creature_86299","creature_91884","creature_91920","creature_91926","creature_91964","creature_91965","creature_92485","creature_92730","gameobject_199336","gameobject_45739","gameobject_57184"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1423,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="C2DE650B87B26251AB6444DD21408F373F43023845C74B02E2100FDBD4C7D502",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="02B27356088636FB8F790271EB7F7553DE75F9D146B5EBF7C4A1B6147550BC5B",dropped={"creature_52960","creature_53038","creature_53742","creature_53743","creature_54594","creature_56696","creature_69692","creature_69710","creature_84786","creature_86295","creature_86299","creature_91884","creature_91920","creature_91926","creature_91964","creature_91965","creature_92485","creature_92730","gameobject_199336","gameobject_45739","gameobject_57184"}}
 LogicalTargets.classes = {
 {"npc","spirit_healer",6491,"Spirit Healer","Geistheiler"},
 {"creature","npc_or_mob",10821,"Hed'mush the Rotting","Hed'mush der Faulende",a="possible_spawn"},
@@ -279,6 +279,7 @@ LogicalTargets.classes = {
 {"gameobject","herb_or_ore",1734,"Gold Vein","Goldvorkommen",a="possible_spawn"},
 {"gameobject","chest",2040,"Mithril Deposit","Mithrilablagerung",a="possible_spawn"},
 {"gameobject","interaction_object",178229,"Aurora's Book","Auroras Buch"},
+{"mob","npc_or_mob",228620,"Slack-Jawed Ghoul","Dusseliger Ghul (Zwergengroßer Ghul)"},
 }
 LogicalTargets.targets = {
 {"creature_9386",1,1989.31,-3650.44,120.369},
@@ -2207,19 +2208,19 @@ LogicalTargets.targets = {
 {"gameobject_45588",208,2046.29,-4509.09,73.71},
 {"gameobject_45589",209,2046.41,-4509.19,72.37},
 {"gameobject_45598",210,2046.28,-4509.09,72.377},
-{"gameobject_45603",211,2289.56,-5318.35,88.64,p=true},
-{"gameobject_45606",212,2261.36,-5322.45,81.843,p=true},
-{"gameobject_45607",213,2264.12,-5316.56,81.928,p=true},
+{"gameobject_45603",211,2289.56,-5318.35,88.64},
+{"gameobject_45606",212,2261.36,-5322.45,81.843},
+{"gameobject_45607",213,2264.12,-5316.56,81.928},
 {"gameobject_45615",214,1751.66,-3623.41,119.835},
 {"gameobject_45620",215,1751.66,-3623.24,119.84},
 {"gameobject_45623",216,3447.17,-3369.94,140.925},
 {"gameobject_45624",217,3446.54,-3370.09,140.956},
 {"gameobject_45664",218,1754.45,-5418.32,118.324},
-{"gameobject_45688",219,1548.43,-5393.59,80.032,p=true},
-{"gameobject_45689",220,1548.7,-5387.11,78.225,p=true},
-{"gameobject_45690",221,1543.17,-5381.19,80.032,p=true},
-{"gameobject_45691",222,1548.99,-5380.5,80.032,p=true},
-{"gameobject_45692",223,1555.23,-5386.18,80.032,p=true},
+{"gameobject_45688",219,1548.43,-5393.59,80.032},
+{"gameobject_45689",220,1548.7,-5387.11,78.225},
+{"gameobject_45690",221,1543.17,-5381.19,80.032},
+{"gameobject_45691",222,1548.99,-5380.5,80.032},
+{"gameobject_45692",223,1555.23,-5386.18,80.032},
 {"gameobject_45693",224,2539.61,-4801.55,115.766},
 {"gameobject_45694",224,2569.6,-4772.93,115.399},
 {"gameobject_45695",224,3148.17,-4365.51,145.029},
@@ -2824,6 +2825,8 @@ LogicalTargets.targets = {
 {"gameobject_89666",243,2780.84,-5550.98,160.7},
 {"gameobject_300047",243,1608.74,-5415.46,76.399},
 {"gameobject_300400",243,1555.62,-5595.14,111.171},
+{"questie_creature_228620_139_0",279,1709.08,-3261.22,88.945,p=true},
+{"questie_creature_228620_139_1",279,1706.5,-3319.73,100.012,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1423] = LogicalTargets

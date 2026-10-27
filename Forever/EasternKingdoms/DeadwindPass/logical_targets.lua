@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1430,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="3E87D903F58C5B65D86CD6FC77087151B2EF769AEB54BAA4BC4006A2666B85ED",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="61357B6D95CDC16C95EEFBC8AEA254D8B42C551E3741D504C801E4DE1B7EAB28",dropped={"creature_3961","creature_3965","creature_3966","creature_3967","creature_3968"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1430,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="25B99F7098264CE4535EE9A5B8BAC56138D3C2510ABB13D1F5B17DE1FDED2C27",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="D9117342C1347E795290EE8CFEFDDDAAD5AF4D239381D12A092D8B90E93E0F7E",dropped={"creature_3961","creature_3965","creature_3966","creature_3967","creature_3968"}}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",7376,"Sky Shadow","Himmelsschatten",a="possible_spawn"},
 {"creature","npc_or_mob",7369,"Deadwind Brute","Schläger der Totenwindoger",a="possible_spawn"},
@@ -23,7 +23,13 @@ LogicalTargets.classes = {
 {"gameobject","object",177186,"Turn Back!"},
 {"gameobject","object",177185,"Abandon hope, all ye who enter here."},
 {"gameobject","chest",181963,"Charred Bone Fragment"},
+{"mob","npc_or_mob",218931,"Dark Rider","Dunkler Reiter"},
+{"npc","npc_or_mob",237818,"Harrison Jones"},
+{"npc","npc_or_mob",240352,"Mana Elemental","Manaelementar"},
+{"mob","npc_or_mob",257743,"Hastings (The Caretaker)","Hastings (Der Hauswart)"},
+{"mob","npc_or_mob",257750,"Calliard (The Nightman)","Calliard (Der Nachtwächter)"},
 {"mob","npc_or_mob",276246,"Mistmantle Prowler","Mistmantle-Streuner"},
+{"gameobject","object",694054,"Recipe: Raw Plated Armorfish"},
 }
 LogicalTargets.targets = {
 {"creature_3945",1,-10744.3,-1833.58,114.789},
@@ -143,7 +149,30 @@ LogicalTargets.targets = {
 {"gameobject_13985",20,-10451.5,-1721.78,87.889},
 {"gameobject_13986",21,-10451.6,-1721.82,86.445},
 {"gameobject_14048",22,-11182.6,-1958.32,55.733},
-{"questie_creature_276246_41_0",23,-10462.17,-1720.83,84.42,p=true},
+{"questie_creature_218931_41_0",23,-10323.33,-1893.33,44.8,p=true},
+{"questie_creature_218931_41_1",23,-10330,-1893.33,44.188,p=true},
+{"questie_creature_218931_41_2",23,-10323.33,-1898.33,44.8,p=true},
+{"questie_creature_218931_41_3",23,-10326.67,-1898.33,44.8,p=true},
+{"questie_creature_218931_41_4",23,-10343.33,-1903.33,43.527,p=true},
+{"questie_creature_218931_41_5",23,-10303.33,-1913.33,48.808,p=true},
+{"questie_creature_218931_41_6",23,-10353.33,-1943.33,87.769,p=true},
+{"questie_creature_218931_41_7",23,-10376.67,-1943.33,93.829,p=true},
+{"questie_creature_218931_41_8",23,-10360,-1948.33,87.858,p=true},
+{"questie_creature_218931_41_9",23,-10356.67,-1953.33,85.707,p=true},
+{"questie_creature_237818_41_0",24,-10436.67,-2138.33,90.985,p=true},
+{"questie_creature_237818_41_1",24,-10443.33,-2138.33,90.943,p=true},
+{"questie_creature_240352_41_0",25,-10473.33,-2133.33,91.299,p=true},
+{"questie_creature_240352_41_1",25,-10476.67,-2133.33,91.602,p=true},
+{"questie_creature_240352_41_2",25,-10440,-2143.33,90.831,p=true},
+{"questie_creature_240352_41_3",25,-10443.33,-2143.33,90.853,p=true},
+{"questie_creature_240352_41_4",25,-10440,-2148.33,92.751,p=true},
+{"questie_creature_240352_41_5",25,-10446.67,-2148.33,90.902,p=true},
+{"questie_creature_257743_41_0",26,-11116.67,-2013.33,l={13.727,47.401},p=true},
+{"questie_creature_257750_41_0",27,-11000,-2038.33,l={40.816,68.472},p=true},
+{"questie_creature_276246_41_0",28,-10462.17,-1720.83,84.42},
+{"questie_gameobject_694054_41_0",29,-10441.67,-2143.33,90.85,p=true},
+{"questie_gameobject_694054_41_1",29,-10438.33,-2145.83,92.656,p=true},
+{"questie_gameobject_694054_41_2",29,-10441.67,-2145.83,93.395,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1430] = LogicalTargets

@@ -28,10 +28,16 @@ N.AREAS = { [0] = "OPEN", [1] = "FINE", [2] = "WATER" }
 -- Link flags (K6): road 1, water exit 2, fine 4, swimming 8
 -- Costs (chapter 4.4)
 N.FINE_FACTOR = 1.5
+-- 4.56 (user decision 2026-10-25, variant "neutral"): every land link that the route walks costs (length + HOP_COST) x LinkFactor, in both passes: the
+-- hop cost counts the waypoint the player has to steer to, and the factors of the pass (the road factor 1/r in pass (b), the fine factor) scale it like
+-- the length. So the comfort level stays the one knob between roads and cross-country (comfort 0: no road preference, the hop cost is the same on every
+-- link). Partial links to seam points, seams and actions carry none. The pass choice (b against a) still compares geometric lengths. Value 15 yd
+-- (measured on the Elwynn - Westfall routes: chapter 14).
+N.HOP_COST = 15
 N.SWIM_FACTOR = 1.5     -- the build; at run time a swimming link costs SWIM_FACTOR x (1 + p/100) x length (4.49, comfort p)
--- Comfort level (4.34, /vn comfort <p>): p percent, 0 to 300, default 50. r = 1 + p/100; the road factor of pass (b) is
--- 1/r and (b) wins when its length is at most r times that of (a). p = 0: no pass (b).
-N.COMFORT_DEFAULT, N.COMFORT_MAX = 50, 300
+-- Comfort level (4.34, /vn comfort <p>): p percent, 0 to 300, default 60 (user decision 2026-10-25; 50 before). r = 1 + p/100; the road factor of
+-- pass (b) is 1/r and (b) wins when its length is at most r times that of (a). p = 0: no pass (b).
+N.COMFORT_DEFAULT, N.COMFORT_MAX = 60, 300
 function N.SetComfort(percent)
     if type(percent) ~= "number" or percent ~= percent or percent < 0 or percent > N.COMFORT_MAX then return false end
     local r = 1 + percent / 100
@@ -1368,7 +1374,7 @@ local function Pass(startBinding, targetBinding, road, penalties, footOnly, avoi
                 local adj = zone.adj[localId + 1]
                 for j = 1, #adj, 2 do
                     local v, k = adj[j], adj[j + 1]
-                    local new = cost + zone.llen[k] * LinkFactor(zone.lflag[k], road)
+                    local new = cost + (zone.llen[k] + N.HOP_COST) * LinkFactor(zone.lflag[k], road)
                     local vid = zone.base + v
                     if penalties then
                         local row = penalties[id]

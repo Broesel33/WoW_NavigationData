@@ -4299,6 +4299,21 @@ function WowVisionNavigationZoneLoader:FindZoneForMap(mapID)
     return nil
 end
 
+-- The registered zone under the player on a map that no zone registers. Areas without a zone map of their own (the tunnel
+-- to the Deadmines, "Defias Hideout" in Westfall) give the continent as best map: its child map at the player's position
+-- is the zone the area lies in. nil when the client lacks the APIs or the position is not on that map.
+function WowVisionNavigationZoneLoader:FindZoneAtPlayer(mapID)
+    local map = _G.C_Map
+    if type(map.GetPlayerMapPosition) ~= "function" or type(map.GetMapInfoAtPosition) ~= "function" then return nil end
+    local posOk, pos = pcall(map.GetPlayerMapPosition, mapID, "player")
+    if not posOk or not pos or type(pos.GetXY) ~= "function" then return nil end
+    local xyOk, x, y = pcall(pos.GetXY, pos)
+    if not xyOk or type(x) ~= "number" or type(y) ~= "number" or x < 0 or x > 1 or y < 0 or y > 1 then return nil end
+    local infoOk, info = pcall(map.GetMapInfoAtPosition, mapID, x, y)
+    if not infoOk or type(info) ~= "table" or type(info.mapID) ~= "number" or info.mapID == mapID then return nil end
+    return self:FindZoneForMap(info.mapID)
+end
+
 function WowVisionNavigationZoneLoader:FindZoneForNativeMap(mapID)
     local found = nil
     for _, zoneInfo in pairs(self.zones) do
@@ -4359,7 +4374,7 @@ function WowVisionNavigationZoneLoader:DetermineZone()
     for _ = 1, 16 do
         if seen[mapID] then return nil, false, nativeMapID end
         seen[mapID] = true
-        local zoneInfo = self:FindZoneForMap(mapID)
+        local zoneInfo = self:FindZoneForMap(mapID) or self:FindZoneAtPlayer(mapID)
         if zoneInfo then
             if nativeMapID ~= nil and zoneInfo.coordinateMapId ~= nativeMapID then
                 return nil, true, nativeMapID

@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1451,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="52AC9FB58A70F56CDEE8CA9D34518913F05D9649C3A3391F9CB47A88FFE2B59F",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="A450CD9345D0BA69F9F2872D62953BA3F861A6953DF706BC2CDCED1E52CEEC74",dropped={"creature_42899","creature_42900","creature_42901","creature_42902","creature_42903","creature_44406","creature_46100"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1451,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="913A58A9A94EDA961C8186AE44090F42A3A15C6BEDF4B19D98E7506A3DE345BF",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="9F51FFFCBDC415FE78847C0C9A3D143087850365D2662005A585A2EC0C2F8B5D",dropped={"creature_42899","creature_42900","creature_42901","creature_42902","creature_42903","creature_44406","creature_46100"}}
 LogicalTargets.classes = {
 {"npc","spirit_healer",6491,"Spirit Healer","Geistheiler"},
 {"creature","npc_or_mob",11880,"Twilight Avenger (Twilight's Hammer)","Rächer der Twilight (Twilight-Hammer)",a="possible_spawn"},
@@ -2064,8 +2064,8 @@ LogicalTargets.targets = {
 {"gameobject_49380",162,-6792.99,816.434,55.747},
 {"gameobject_49389",163,-8028.91,1538.62,2.609},
 {"gameobject_49391",164,-8140.18,1525.19,17.455},
-{"gameobject_49393",165,-6865.66,754.037,42.657,p=true},
-{"gameobject_49394",166,-6859.37,749.026,42.526,p=true},
+{"gameobject_49393",165,-6865.66,754.037,42.657},
+{"gameobject_49394",166,-6859.37,749.026,42.526},
 {"gameobject_141343-176583",142,-7090.5,1250.5,4.693},
 {"gameobject_141342-176583",142,-6891.56,1183.88,3.198},
 {"gameobject_141341-176583",142,-6957.03,1437.78,4.48},
@@ -2089,7 +2089,7 @@ LogicalTargets.targets = {
 {"gameobject_49419",168,-6151.03,1747.77,28.916},
 {"gameobject_49420",168,-6471.72,1850.61,3.599},
 {"gameobject_49428",169,-6847.41,748.786,42.538},
-{"gameobject_49429",170,-6840.3,734.942,42.189,p=true},
+{"gameobject_49429",170,-6840.3,734.942,42.189},
 {"gameobject_49431",171,-6579.91,765.67,-49.391},
 {"gameobject_49432",172,-7410.13,1239.35,-80.21},
 {"gameobject_49433",173,-7959.77,1824.89,3.535},

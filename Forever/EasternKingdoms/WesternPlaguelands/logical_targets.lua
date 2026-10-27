@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1422,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="3FC2335407C0588346BA10E93CF99ABEBD071E3C9110F3C12C0D58AF58FCD970",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="9AF769F8CD4AE101954F18E72264BFBDFEC28D45DD1C678400FFC25A7DC5BD32",dropped={"creature_47439","creature_48617","creature_49992","creature_98624","creature_98625","creature_98626","gameobject_45312","gameobject_45318","gameobject_45319","gameobject_45324"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1422,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="6E8E976299444616B0C94AF987A28C53EBF34B4EB50B4022BEA0CFCBA1BFCE0A",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="5AB5D7D35D2114851EEBDEA47F14484A8BF0F850EBFFAEB6399730C3BE65852C",dropped={"creature_47439","creature_48617","creature_49992","creature_98624","creature_98625","creature_98626","gameobject_45312","gameobject_45318","gameobject_45319","gameobject_45324"}}
 LogicalTargets.classes = {
 {"npc","quest_giver",11286,"Magistrate Marduke","Magistrat Marduke"},
 {"creature","npc_or_mob",1806,"Vile Slime","Böser Brühschleimer",a="possible_spawn"},
@@ -178,6 +178,14 @@ LogicalTargets.classes = {
 {"gameobject","chest",2040,"Mithril Deposit","Mithrilablagerung",a="possible_spawn"},
 {"gameobject","herb_or_ore",175404,"Rich Thorium Vein","Reiches Thoriumvorkommen",a="possible_spawn"},
 {"gameobject","chest",153471,"Food Crate","Nahrungsmittelkiste",a="possible_spawn"},
+{"npc","npc_or_mob",226799,"Pixi Pilfershard (Soul Broker)","Pixi Splitterdieb (Seelenhändlerin)"},
+{"npc","npc_or_mob",227519,"Fallen Knight","Gefallener Ritter"},
+{"npc","npc_or_mob",232912,"Ada Darkhardt","Ada Dunkelhardt"},
+{"npc","npc_or_mob",232920,"Uther (The Lightbringer)","Uther (Der Lichtbringer)"},
+{"mob","npc_or_mob",262033,"Suspicious Adventurer"},
+{"gameobject","object",410847,"Rusty Safe","Rostiger Tresor"},
+{"gameobject","object",457387,"Dwarven Heirloom","Erbstückkasten"},
+{"gameobject","object",612090,"Fishing Rack","Angelständer"},
 }
 LogicalTargets.targets = {
 {"creature_18037",1,1245.52,-2616.74,90.442},
@@ -1475,11 +1483,11 @@ LogicalTargets.targets = {
 {"gameobject_45325",146,1754.59,-1735.33,60.532},
 {"gameobject_45327",147,1943.25,-1652.02,59.456},
 {"gameobject_45332",148,1166.31,-1720.26,60.62},
-{"gameobject_45333",149,2974.16,-1495.55,147.04,p=true},
-{"gameobject_45334",150,2979.04,-1491.28,145.232,p=true},
-{"gameobject_45335",151,2979.53,-1483.19,147.04,p=true},
-{"gameobject_45336",152,2984.04,-1486.94,147.04,p=true},
-{"gameobject_45337",153,2984.21,-1495.39,147.04,p=true},
+{"gameobject_45333",149,2974.16,-1495.55,147.04},
+{"gameobject_45334",150,2979.04,-1491.28,145.232},
+{"gameobject_45335",151,2979.53,-1483.19,147.04},
+{"gameobject_45336",152,2984.04,-1486.94,147.04},
+{"gameobject_45337",153,2984.21,-1495.39,147.04},
 {"gameobject_190806",134,3012.15,-1509.73,146.374},
 {"gameobject_190805",134,2983.68,-1485.88,147.043},
 {"gameobject_190804",134,2960.97,-1485.12,146.582},
@@ -1885,6 +1893,17 @@ LogicalTargets.targets = {
 {"gameobject_55574",162,1425.59,-1697.22,69.079},
 {"gameobject_55575",162,1808.6,-1214.38,60.343},
 {"gameobject_55577",162,1459.34,-1589.07,67.836},
+{"questie_creature_226799_28_0",178,958.67,-1440.93,63.242,p=true},
+{"questie_creature_226799_28_1",178,958.67,-1458.13,62.923,p=true},
+{"questie_creature_227519_28_0",179,2030.8,-1492.53,81.178,p=true},
+{"questie_creature_232912_28_0",180,1090.53,-2567.53,59.722,p=true},
+{"questie_creature_232912_28_1",180,1084.8,-2567.53,l={60.2,68.221},p=true},
+{"questie_creature_232920_28_0",181,1365.73,-1604.33,57.833,p=true},
+{"questie_creature_262033_28_0",182,1168.51,-2400.69,60.4,p=true},
+{"questie_gameobject_410847_28_0",183,941.47,-2137.53,37.4,p=true},
+{"questie_gameobject_410847_28_1",183,944.33,-2141.83,37.4,p=true},
+{"questie_gameobject_457387_28_0",184,1038.93,-1939.73,l={39.285,84.67},p=true},
+{"questie_gameobject_612090_28_0",185,1124.93,-1359.23,69.835,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1422] = LogicalTargets

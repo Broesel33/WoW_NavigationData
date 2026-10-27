@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1428,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="8F64B6EB67CE94A79DCE761007C3F2C441E985379AE997BF1BE9F74BD9E67B3C",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="78311AC68E0BF437161B742A525318AFFDEE245B6EDF5B33FD306AE75ABD7EC3",dropped={"creature_151164-8889","creature_151164-8890","creature_151165-8889","creature_151165-8890","creature_151182-8889","creature_151182-8890","creature_151183-8889","creature_151183-8890","creature_3268","creature_3344","creature_3747","creature_3749","creature_3752","creature_3755","creature_4603","creature_4620","creature_5221","creature_5224","creature_5225","creature_5283-7025","creature_5283-7027","creature_5322","creature_5364-7025","creature_5364-7027","creature_53999","gameobject_19714","gameobject_2","gameobject_6837","gameobject_85790","questie_gameobject_702301_46_0","questie_gameobject_702301_46_1"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1428,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="031A61D4882F5503305FB05DCE1FDA9ADAA28D31213E54CB543668A45D8AAC66",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="5CF5325BFCA9C31F8657D762B4A4007374F3BE5BC4EA70033051CD67C3433BCB",dropped={"creature_151164-8889","creature_151164-8890","creature_151165-8889","creature_151165-8890","creature_151182-8889","creature_151182-8890","creature_151183-8889","creature_151183-8890","creature_3268","creature_3344","creature_3747","creature_3749","creature_3752","creature_3755","creature_4603","creature_4620","creature_5221","creature_5224","creature_5225","creature_5283-7025","creature_5283-7027","creature_5322","creature_5364-7025","creature_5364-7027","creature_53999","gameobject_19714","gameobject_2","gameobject_6837","gameobject_85790","questie_gameobject_702301_46_0","questie_gameobject_702301_46_1"}}
 LogicalTargets.classes = {
 {"npc","quest_giver",9459,"Cyrus Therepentous"},
 {"npc","quest_giver",9520,"Grark Lorkrub"},
@@ -119,6 +119,12 @@ LogicalTargets.classes = {
 {"gameobject","chest",2040,"Mithril Deposit","Mithrilablagerung",a="possible_spawn"},
 {"gameobject","herb_or_ore",175404,"Rich Thorium Vein","Reiches Thoriumvorkommen",a="possible_spawn"},
 {"gameobject","chest",142142,"Sungrass","Sonnengras"},
+{"npc","npc_or_mob",218236,"Red Bag","Rote Tasche"},
+{"npc","npc_or_mob",238415,"Grok'lo Mok'lo (The Argent Dawn)","Grok'lo Mok'lo (Die Argentumdämmerung)"},
+{"mob","npc_or_mob",257673,"Ugkragg (Humiliated Blackrock Soldier)"},
+{"mob","npc_or_mob",259901,"Igthar Forgefury (Shadowforge Blacksmith)"},
+{"mob","npc_or_mob",260466,"Grubbub"},
+{"mob","npc_or_mob",260481,"Om'kug (Blackrock Leatherworker)"},
 }
 LogicalTargets.targets = {
 {"creature_9",1,-7647.31,-3051.95,131.25},
@@ -695,12 +701,12 @@ LogicalTargets.targets = {
 {"creature_151177-8890",89,-7401.2,-1000.73,177.313},
 {"creature_151175-8889",88,-7453.1,-1015.92,171.704},
 {"creature_151175-8890",89,-7453.1,-1015.92,171.704},
-{"gameobject_81",90,-8096.96,-1508.86,133.073,p=true},
-{"gameobject_82",91,-8100.39,-1507.24,132.934,p=true},
+{"gameobject_81",90,-8096.96,-1508.86,133.073},
+{"gameobject_82",91,-8100.39,-1507.24,132.934},
 {"gameobject_410",92,-7649.36,-629.479,201.412},
-{"gameobject_435",93,-8099.92,-1524.54,131.873,p=true},
-{"gameobject_436",94,-8093.27,-1528.69,134.047,p=true},
-{"gameobject_437",95,-8106.03,-1523.98,133.778,p=true},
+{"gameobject_435",93,-8099.92,-1524.54,131.873},
+{"gameobject_436",94,-8093.27,-1528.69,134.047},
+{"gameobject_437",95,-8106.03,-1523.98,133.778},
 {"gameobject_4510",96,-7662.91,-1218.73,287.788},
 {"gameobject_4511",97,-7716.94,-2033.14,133.439},
 {"gameobject_4512",97,-7766.91,-2013.52,135.337},
@@ -1286,6 +1292,13 @@ LogicalTargets.targets = {
 {"gameobject_4532",108,-7520.03,-2165.39,131.775},
 {"gameobject_55751",108,-7674.57,-2648.14,138.421},
 {"gameobject_55752",108,-7864.38,-1483.95,144.794},
+{"questie_creature_218236_46_0",119,-7507.56,-1819.12,228.32,p=true},
+{"questie_creature_238415_46_0",120,-8108.8,-2182.34,196.854,p=true},
+{"questie_creature_238415_46_1",120,-8108.8,-2188.2,195.644,p=true},
+{"questie_creature_257673_46_0",121,-7726.19,-1385.61,131.935,p=true},
+{"questie_creature_259901_46_0",122,-7487.06,-1048.17,177.917,p=true},
+{"questie_creature_260466_46_0",123,-8085.37,-1895.28,l={134.2,142.245},p=true},
+{"questie_creature_260481_46_0",124,-7573.93,-1314.14,245.676,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1428] = LogicalTargets

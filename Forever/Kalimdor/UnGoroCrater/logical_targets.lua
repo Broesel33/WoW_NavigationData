@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1449,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="E41AC7E8B3D34C1FEE25D1C74592658071F5F7438347FFE05F54CADEB7E08359",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="447C78171F67FE7E69A13B5784EA1B85C621A030BC2D71DE45BC5206FE6B8B60",dropped={"creature_23898","creature_24428","creature_24431","creature_24432","gameobject_17500","gameobject_19725","gameobject_19762"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1449,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="9E9699E85934EAE0C4948BC496AF7233BD86E30BAB7EAC301C221F72A22CEBAC",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="3493ED54131D1C22A0B1869F39E8510A9DF60057FED5AE8D25EC32CF3B876F0D",dropped={"creature_23898","creature_24428","creature_24431","creature_24432","gameobject_17500","gameobject_19725","gameobject_19762"}}
 LogicalTargets.classes = {
 {"npc","spirit_healer",6491,"Spirit Healer","Geistheiler"},
 {"mob","npc_or_mob",9165,"Fledgling Pterrordax","Pterrordaxjunges",a="possible_spawn"},
@@ -114,6 +114,7 @@ LogicalTargets.classes = {
 {"gameobject","chest",2040,"Mithril Deposit","Mithrilablagerung",a="possible_spawn"},
 {"gameobject","object",174683,"J.D.'s Manual"},
 {"gameobject","object",164927,"JD Yellow Crystal 1"},
+{"gameobject","object",672518,"Damaged Blue Crystal"},
 }
 LogicalTargets.targets = {
 {"creature_5749",1,-7348.79,-1316.54,-260.86},
@@ -1776,6 +1777,7 @@ LogicalTargets.targets = {
 {"gameobject_17659",93,-6346.3,-1380.36,-268.766},
 {"gameobject_88925",93,-6334.02,-1441.27,-268.131},
 {"gameobject_17661",93,-6316.03,-1242.89,-267.157},
+{"questie_gameobject_672518_490_0",114,-7821.6,-1919.77,-272.63,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1449] = LogicalTargets
