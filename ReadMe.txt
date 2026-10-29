@@ -981,10 +981,14 @@ Every zone was checked when it was generated. In general terms:
     and in the Deeprun Tram the groups whose spawns lie outside the mapped tunnel (5) are not
     counted. The catalogues hold only the reachable spawns, so the percentage cannot be recomputed
     from the shipped files alone.
-  * Target sources. The catalogues are built from the QuestieDB of WoW Forever (version 1.0.9)
-    and Thottbot4ever. An entry that the old base data does not know counts only when it is
-    confirmed to exist in WoW Forever, by the Thottbot4ever name list or by Wowhead Forever
-    (the second confirmation source). German names come from Wowhead.
+  * Target sources. The catalogues are built from the cMaNGOS world database (the base data of
+    the classic world), the QuestieDB of WoW Forever (version 1.0.9), Thottbot4ever and, for
+    herbs and ore, the GatherMate2 data package "GatherMate2 Data Wowhead Classic" (its Forever
+    folder). An entry that the old base data does not know counts only when it is confirmed to
+    exist in WoW Forever, by the Thottbot4ever name list or by Wowhead Forever (the second
+    confirmation source). Herbs and ore are recognised by the lock of the game object (the skill
+    it requires), for WoW Forever objects by the lock Wowhead Forever names. German names come
+    from Wowhead.
   * Link checks. Every link and every attachment was verified offline on the walkable geometry of
     the game.
   * Seams. All seam ends point to existing waypoints or links, and every GATEWAY end lists its seam
