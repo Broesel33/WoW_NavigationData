@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1435,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="CD4DCF54CBC729CC912C88A6211399B5D5E8143A5AE16CACD9969C3C51076F63",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="C52E2FFEE15291B9E1B8CEDE9BCE14A40F662E6F88B8E68F4A3E977170D681EA",dropped={"creature_134243","creature_160355","creature_160356","creature_160357","creature_160358","creature_31844-5261","creature_31844-5269","creature_34164","creature_35251","creature_37376","creature_37601","creature_38679-5243","creature_38679-5269","creature_38680-5243","creature_38680-5269","creature_38683-5261","creature_38683-5269","creature_38705","creature_38706","creature_38707","creature_38708","creature_38709","creature_38710","creature_38714","creature_38790","creature_38882","creature_38884","creature_38922","creature_38924","creature_38925-5269","creature_38926","creature_38930","creature_38933","creature_38947-5263","creature_38947-5269","creature_38948-5263","creature_38948-5269","creature_38949-5263","creature_38949-5269","creature_38950-5263","creature_38950-5269","creature_38952","creature_38954-5269","creature_38956-5269","creature_38957-5261","creature_38957-5269","creature_38960-5269","creature_38964-5263","creature_38964-5269","creature_39549","creature_40157","creature_40158","creature_40159","creature_40183","creature_40186","creature_40187","creature_40199","creature_40213","creature_88130","creature_88144","gameobject_142080-1734","gameobject_142080-2040","gameobject_142080-2047","gameobject_30342","gameobject_30344","gameobject_30351","gameobject_30374-30854","gameobject_30374-30855","gameobject_30374-30856","gameobject_30378-30854","gameobject_30378-30855","gameobject_30378-30856","gameobject_30380-30854","gameobject_30380-30855","gameobject_30380-30856","gameobject_30383-30854","gameobject_30383-30855","gameobject_30383-30856","gameobject_30561-30854","gameobject_30561-30855","gameobject_30561-30856","gameobject_30582","gameobject_63398","gameobject_8222","gameobject_8670","gameobject_8671","gameobject_88510-30854","gameobject_88510-30855","gameobject_88510-30856","gameobject_88515-30854","gameobject_88515-30855","gameobject_88515-30856","gameobject_88516-30854","gameobject_88516-30855","gameobject_88516-30856","gameobject_88572"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1435,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="73B1CFE531DE58B2F59B8536E469356F6E8537CA31E75E64B539F19AA1A7CEF9",converterSha256="41E9150EAD0BA72553B3D763731450F6F3081FFFADCE6B9655BB29C3545D4414",payloadSha256="9C541C8719C451E0877D6ECF838F7F284F79964198FBE73E838644A81B486D01"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",769,"Deathstrike Tarantula","Todesstoßtarantel",a="possible_spawn"},
 {"mob","npc_or_mob",1082,"Sawtooth Crocolisk","Sägezahnkrokilisk",a="possible_spawn"},
@@ -147,7 +147,7 @@ LogicalTargets.classes = {
 {"mob","npc_or_mob",262306,"Mukomonji"},
 {"mob","npc_or_mob",271636,"Weevil K. Neevil","Rudi Rüssler"},
 {"mob","npc_or_mob",275088,"Enraged Stonard Grunt"},
-{"gameobject","object",423901,"Book","Buch"},
+{"gameobject","quest_giver",423901,"Book","Buch"},
 }
 LogicalTargets.targets = {
 {"creature_2689",1,-10674.4,-3613.39,45.504},
@@ -1627,9 +1627,7 @@ LogicalTargets.targets = {
 {"gameobject_300385",110,-11101.2,-3831.97,3.009},
 {"questie_creature_165189_8_0",138,-10586.35,-3028.71,28.777},
 {"questie_creature_165189_8_1",138,-9997.77,-3579.67,22},
-{"questie_creature_217412_8_0",139,-10448.27,-2796.12,23.127,p=true},
-{"questie_creature_217412_8_1",139,-10449.18,-2800.25,23.134,p=true},
-{"questie_creature_217412_8_2",139,-10452.55,-2803.24,22.931,p=true},
+{"questie_creature_217412_8_0",139,-10449.79,-2798.65,22.952,p=true},
 {"questie_creature_218931_8_0",140,-10073.47,-3759.73,20.82,p=true},
 {"questie_creature_218931_8_1",140,-10070.41,-3764.32,19.601,p=true},
 {"questie_creature_218931_8_2",140,-10039.82,-3787.25,23.412,p=true},
@@ -1653,16 +1651,12 @@ LogicalTargets.targets = {
 {"questie_creature_238415_8_3",142,-10620.91,-3016.55,29.339,p=true},
 {"questie_creature_238415_8_4",142,-10627.02,-3016.55,29.924,p=true},
 {"questie_creature_238415_8_5",142,-10587.27,-3021.14,29.274,p=true},
-{"questie_creature_255597_8_0",143,-10388.93,-2731.21,22.708,p=true},
+{"questie_creature_255597_8_0",143,-10388.93,-2732.59,22.553,p=true},
 {"questie_creature_262306_8_0",144,-10417.53,-3610.64,22.767,p=true},
 {"questie_creature_271636_8_0",145,-10106.96,-3169.78,22.162,p=true},
-{"questie_creature_275088_8_0",146,-10533.59,-3294.1,l={22.709,57.309},p=true},
-{"questie_creature_275088_8_1",146,-10540.17,-3299.83,24.905,p=true},
-{"questie_creature_275088_8_2",146,-10533.9,-3328.5,22.68,p=true},
-{"questie_gameobject_423901_8_0",147,-9963.37,-3631.28,23.025},
-{"questie_gameobject_423901_8_1",147,-9964.9,-3631.28,23.058},
-{"questie_gameobject_423901_8_2",147,-9966.42,-3633.57,23.079},
-{"questie_gameobject_423901_8_3",147,-9963.37,-3635.87,23.007},
+{"questie_creature_275088_8_0",146,-10536.96,-3297.08,23.797,p=true},
+{"questie_creature_275088_8_1",146,-10533.9,-3328.5,22.68,p=true},
+{"questie_gameobject_423901_8_0",147,-9964.9,-3633.57,23.05,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1435] = LogicalTargets

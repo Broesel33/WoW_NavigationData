@@ -36,11 +36,30 @@ end
 local KIND_TEXT = {
     dive = { approach = "action_approach_prepoint.dive", waiting = "action_waiting.dive", activating = "action_activating.dive" },
     surface = { approach = "action_approach_prepoint.surface", waiting = "action_waiting.surface", activating = "action_activating.surface" },
+    -- a timed wind bridge: the player waits for the sound of the bridge and steps into the wind current himself
+    wind_bridge = { approach = "action_approach_prepoint.wind_bridge", waiting = "action_waiting.wind_bridge", activating = "action_activating.wind_bridge" },
 }
 
+-- The same by activation mode, for a kind without texts of its own: "click" = the player presses his interact key at a game object (a portal
+-- that is no trigger). Nothing here is in the data: the activation mode of an action record names the way the player activates it.
+local MODE_TEXT = {
+    click = { approach = "action_approach_prepoint.click", waiting = "action_waiting.click", activating = "action_activating.click" },
+}
+
+-- A transition whose positions are estimates (the record says approximate) tells the player so where he is guided to it.
+local function approximateSuffix(action, phase)
+    if type(action) == "table" and action.approximate == true and (phase == "approach" or phase == "waiting" or phase == "arrival") then
+        return " " .. WowVisionNavigationText("approximate_position")
+    end
+    return ""
+end
+
 local function phaseText(action, phase, generic, ...)
-    local specific = type(action) == "table" and KIND_TEXT[action.kind] or nil
-    return WowVisionNavigationText(specific and specific[phase] or generic, ...)
+    local specific
+    if type(action) == "table" then
+        specific = KIND_TEXT[action.kind] or (type(action.activation) == "table" and MODE_TEXT[action.activation.mode]) or nil
+    end
+    return WowVisionNavigationText(specific and specific[phase] or generic, ...) .. approximateSuffix(action, phase)
 end
 
 local function speak(self, message)
@@ -174,7 +193,7 @@ function Actions:Observe(observation)
     else
         if observation.mapChanged ~= true or observation.zReliable ~= true then return false end
     end
-    if enter(self, "disembarking", WowVisionNavigationText("action_arrival_proven")) then
+    if enter(self, "disembarking", WowVisionNavigationText("action_arrival_proven") .. approximateSuffix(action, "arrival")) then
         return true
     end
     return false
@@ -193,7 +212,10 @@ end
 function Actions:Tick()
     local current = self.current
     if not current then return false end
-    local timeout = current.action.timing and current.action.timing.timeout_seconds
+    local timing = current.action.timing
+    -- an action that waits for a signal (a timed transport) names no time limit: the player waits as long as it takes
+    if type(timing) == "table" and timing.no_time_limit == true then return true end
+    local timeout = timing and timing.timeout_seconds
     if not finite(timeout) or timeout <= 0 or now() - current.enteredAt > timeout then
         self:Cancel(WowVisionNavigationText("action_timeout"))
         return false

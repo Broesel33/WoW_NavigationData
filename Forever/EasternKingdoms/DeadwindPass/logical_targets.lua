@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1430,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="5CFD7FA28E2D45481BED0D04EF846DC58281746C45FB63725F2A0C5DA4E9A119",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="D2719A393EEFD1952495150924A16A29105E4003339FB0635CBB8CF58263F90B",dropped={"creature_3961","creature_3965","creature_3966","creature_3967","creature_3968"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1430,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="7EA06013757CBF695F0CF6B147480EF4433100B744805194257FF07C174AFDEE",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="1B9363257242EC0815AD14939618B5F24384EAA98C71C7394F26DDD2E54646EC"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",7376,"Sky Shadow","Himmelsschatten",a="possible_spawn"},
 {"creature","npc_or_mob",7372,"Deadwind Warlock","Hexenmeister der Totenwindoger",a="possible_spawn"},
@@ -174,7 +174,7 @@ LogicalTargets.targets = {
 {"questie_creature_240352_41_4",25,-10440,-2148.33,92.751,p=true},
 {"questie_creature_240352_41_5",25,-10446.67,-2148.33,90.902,p=true},
 {"questie_creature_257743_41_0",26,-11116.67,-2013.33,l={13.727,47.401},p=true},
-{"questie_creature_257750_41_0",27,-11000,-2038.33,l={40.816,68.472},p=true},
+{"questie_creature_257750_41_0",27,-11009.17,-2039.83,l={40.8,65.95,80.079,93.2},p=true},
 {"questie_creature_276246_41_0",28,-10462.17,-1720.83,84.42},
 {"questie_gameobject_694054_41_0",29,-10441.67,-2143.33,90.85,p=true},
 {"questie_gameobject_694054_41_1",29,-10438.33,-2145.83,92.656,p=true},

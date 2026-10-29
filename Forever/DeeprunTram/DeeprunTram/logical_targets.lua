@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=499,coordinateSpace="world",nativeMapId=369,availability="static",sourceSha256="3956C06803DD495D319886C01336463FD360C9D059A423CC317B70EA928E14B7",converterSha256="3986801B36094D4E393D073B479533C9EE73D989C5FF054BFEB457A255EE3C56",payloadSha256="81BF55F89EED10D42C47F2918E8F79DBC0723B7E1D6D9DA99595B840CF777A26",dropped={"creature_34119","creature_34120","creature_34121","creature_34122","creature_48268","creature_48296","creature_53789","creature_53790","creature_53791","gameobject_18512"}}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=499,coordinateSpace="world",nativeMapId=369,availability="static",sourceSha256="3956C06803DD495D319886C01336463FD360C9D059A423CC317B70EA928E14B7",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="6383418F1248AD44EBC4B577CB5E62FAA2F379108A5E19EF8C2B02C0ED5469C3"}
 LogicalTargets.classes = {
 {"npc","quest_giver",12997,"Monty (Rat Extermination Specialist)","Monty (Rattenvernichtungsspezialist)"},
 {"npc",{"quest_giver","vendor"},13018,"Nipsy"},

@@ -1387,7 +1387,40 @@ local function StartNavigationToNode(targetNodeId, targetName, targetStatus, foo
     -- 4.38 S1b: a target from a target update has no ZIEL waypoint; the guidance ends at the attachment cell, then the final
     -- approach goes to the coordinate (the logical end point), which the map does not prove
     if logicalSource and logicalSource.approx == true then WowVisionNavigationSay("approx_target") end
+    if logicalSource and logicalSource.approximate == true then WowVisionNavigationSay("approximate_position") end
     return true
+end
+
+-- Text of the guidance to a transit entrance: "<base>_<kind>" for the facility kind (dive, wind_bridge), else for the activation mode of its
+-- action (click), else the generic portal text; a transition whose positions are estimates (approximate) says so.
+-- The text keys are listed statically (generic = the text of a transition without kind or mode of its own), so that every key is a literal of the code.
+-- The table is an upvalue of the function (a block, not a file local: Lua 5.1 limit), so that the reset of Navigation does not wipe it.
+do
+local ACTIVATION_TEXT_KEYS = {
+    prepoint_reached = {
+        generic = "prepoint_reached_go_through",
+        kinds = { dive = "prepoint_reached_dive", click = "prepoint_reached_click", wind_bridge = "prepoint_reached_wind_bridge" },
+    },
+    activation_area = {
+        generic = "activation_area_entered",
+        kinds = { dive = "activation_area_dive", click = "activation_area_click", wind_bridge = "activation_area_wind_bridge" },
+    },
+}
+
+function Navigation.ActivationText(target, base)
+    local keys = ACTIVATION_TEXT_KEYS[base]
+    local key = keys.generic
+    for _, kind in ipairs({ target.facilityKind, target.actionMode }) do
+        local candidate = type(kind) == "string" and keys.kinds[kind] or nil
+        if candidate and WowVisionNavigationLocalization.Lookup(candidate) then
+            key = candidate
+            break
+        end
+    end
+    local text = WowVisionNavigationText(key)
+    if target.approximate == true then text = text .. " " .. WowVisionNavigationText("approximate_position") end
+    return text
+end
 end
 
 -- An unchecked finish stays outside of graph, funnel and height proofs.
@@ -1746,10 +1779,8 @@ frame:SetScript("OnUpdate", function(_, elapsed)
         Navigation.activationPrepointAnnounced = true
         if activationTarget.actionSemanticStatus == "unresolved" then
             WowVisionNavigationSay("prepoint_reached_unresolved")
-        elseif activationTarget.facilityKind == "dive" then
-            WowVisionNavigationSay("prepoint_reached_dive")
         else
-            WowVisionNavigationSay("prepoint_reached_go_through")
+            WowVisionNavigationPrint(Navigation.ActivationText(activationTarget, "prepoint_reached"))
         end
     end
     local lastActivation = activationTarget and Navigation.pathIndex >= #Navigation.path
@@ -1770,10 +1801,8 @@ frame:SetScript("OnUpdate", function(_, elapsed)
             if activationTarget.actionSemanticStatus == "unresolved" then
                 WowVisionNavigationSay("activation_position_reached",
                     activationObservationMode == "xy_only" and WowVisionNavigationText("height_not_confirmed") or "")
-            elseif activationTarget.facilityKind == "dive" then
-                WowVisionNavigationSay("activation_area_dive")
             else
-                WowVisionNavigationSay("activation_area_entered")
+                WowVisionNavigationPrint(Navigation.ActivationText(activationTarget, "activation_area"))
             end
         end
         return
@@ -2155,6 +2184,7 @@ local function AnnounceSelection()
         local layerText = entry.layerNumber and WowVisionNavigationText("entry_layer", entry.layerNumber) or ""
         local zoneName = TargetZoneName(entry)
         local zoneText = zoneName and WowVisionNavigationText("row_in_zone", zoneName) or ""
+        if entry.approximate == true then zoneText = zoneText .. ". " .. WowVisionNavigationText("approximate_position") end
         WowVisionNavigationSay("selected_entry_speech",
             selectionIndex, #filteredList, TargetName(entry),
             WowVisionNavigationCategories(entry.category), layerText, distanceText, zoneText)
@@ -4242,7 +4272,9 @@ function WowVisionNavigationClearZoneState(reason, transitRetained)
     local searchTargets = Navigation.SearchTargets
     local listNodes = Navigation.ListNodes
     local appendLogicalTarget = Navigation.AppendLogicalTarget
+    local activationText = Navigation.ActivationText
     wipe(Navigation)
+    Navigation.ActivationText = activationText
     Navigation.ReadQuestlogQuests = readQuestlogQuests
     Navigation.SetQuestSelection = setQuestSelection
     Navigation.FindQuestieTargetPoints = findQuestieTargetPoints

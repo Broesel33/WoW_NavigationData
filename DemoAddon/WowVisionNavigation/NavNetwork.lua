@@ -105,6 +105,15 @@ function N.WalkingAction(action)
     return mode ~= "board" or action.kind == "lift"
 end
 
+-- An action bound to a faction (a portal whose destination depends on the faction of the player; the record has `faction` = "horde" |
+-- "alliance", the keys of the factions block) is part of a route only for the player of that faction. Without a known faction of the
+-- player, a faction-bound action is not used. An action without `faction` is for everybody.
+function N.FactionAction(action)
+    if action.faction == nil then return true end
+    local faction = type(action.faction) == "string" and action.faction:lower() or nil
+    return faction ~= nil and faction == N.PlayerFaction()
+end
+
 local function Memory() return collectgarbage("count") end
 
 function N.Reset()
@@ -1389,7 +1398,7 @@ local function Pass(startBinding, targetBinding, road, penalties, footOnly, avoi
                 local actions = (not footOnly) and zone.actionsFrom[localId] or nil
                 if actions then
                     for _, action in ipairs(actions) do
-                        local allowed = N.WalkingAction(action) and (not N.ActionAllowed or N.ActionAllowed(action))
+                        local allowed = N.WalkingAction(action) and N.FactionAction(action) and (not N.ActionAllowed or N.ActionAllowed(action))
                         local otherZone = floor(action.toNode / ZONE_BASE)
                         if allowed and not N.zones[otherZone] then N.LoadZone(otherZone) end
                         if allowed and N.zones[otherZone] and not (avoid and Blocked(avoid, action.toNode)) then
