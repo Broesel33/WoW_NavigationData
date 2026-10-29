@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1430,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="7EA06013757CBF695F0CF6B147480EF4433100B744805194257FF07C174AFDEE",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="1B9363257242EC0815AD14939618B5F24384EAA98C71C7394F26DDD2E54646EC"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1430,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="7EA06013757CBF695F0CF6B147480EF4433100B744805194257FF07C174AFDEE",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="FD8EF0E8CB21CF2025833882608ECFA79F316DA318DC1D15C1E471D9D58AD788"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",7376,"Sky Shadow","Himmelsschatten",a="possible_spawn"},
 {"creature","npc_or_mob",7372,"Deadwind Warlock","Hexenmeister der Totenwindoger",a="possible_spawn"},

@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1448,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="1FBFB6B1E503E63896B8413C26975F76F02110AFA7A4C21B00E90B9083ACE3E6",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="75D2D822FD88ABD3AFB0436780E2DFE84BF8BC042C39D4BB2624BE687469E863"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1448,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="1FBFB6B1E503E63896B8413C26975F76F02110AFA7A4C21B00E90B9083ACE3E6",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="BE07521304A501BDBC9D0700ED5711390DFCCEB25EDD27F48570DDE310135577"}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",14344,"Mongress",a="possible_spawn"},
 {"npc",{"quest_giver","vendor"},11555,"Gorn One Eye","Gorn Einauge"},

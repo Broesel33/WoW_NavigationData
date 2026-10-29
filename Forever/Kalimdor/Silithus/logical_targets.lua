@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1451,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="59D6FCE301CAF8F253045EDE03CA11137743ED24D975B7BFE6410BA0B4446811",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="83C56DA170BA09C559C9722F95AFF644E7549B7288643BF3A4DBF13865036988"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1451,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="59D6FCE301CAF8F253045EDE03CA11137743ED24D975B7BFE6410BA0B4446811",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="1276CC6695D9F1B19C68005B6AA7CCA314C773B43D3706D3310F341765AFA1D4"}
 LogicalTargets.classes = {
 {"npc","spirit_healer",6491,"Spirit Healer","Geistheiler"},
 {"creature","npc_or_mob",11880,"Twilight Avenger (Twilight's Hammer)","Rächer der Twilight (Twilight-Hammer)",a="possible_spawn"},

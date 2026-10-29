@@ -710,8 +710,11 @@ local function RectDistance(zone, i, x, y)
     return sqrt(dx * dx + dy * dy)
 end
 
+-- A water cell holds the surface height and everything below it is under water (the rule of TargetResolver.lua, FitsWater): for a water
+-- cell (class 2) only the upper bound counts, so a point on the lake floor binds to the water cell above it. A land cell keeps the band +- 3 yd.
 local function FitsHeight(zone, i, z)
     if z == nil then return true end
+    if zone.cellKind and zone.cellKind[i] == 2 then return z <= zone.cellZMax[i] + N.HEIGHT_TOLERANCE end
     return zone.cellZMin[i] - N.HEIGHT_TOLERANCE <= z and z <= zone.cellZMax[i] + N.HEIGHT_TOLERANCE
 end
 

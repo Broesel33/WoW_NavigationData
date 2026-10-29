@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=499,coordinateSpace="world",nativeMapId=369,availability="static",sourceSha256="3956C06803DD495D319886C01336463FD360C9D059A423CC317B70EA928E14B7",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="6383418F1248AD44EBC4B577CB5E62FAA2F379108A5E19EF8C2B02C0ED5469C3"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=499,coordinateSpace="world",nativeMapId=369,availability="static",sourceSha256="3956C06803DD495D319886C01336463FD360C9D059A423CC317B70EA928E14B7",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="42EC12A0E7B2B908F57B59EAA2A71C709F3C85212A8A653BD8F61F1FBC7517F0"}
 LogicalTargets.classes = {
 {"npc","quest_giver",12997,"Monty (Rat Extermination Specialist)","Monty (Rattenvernichtungsspezialist)"},
 {"npc",{"quest_giver","vendor"},13018,"Nipsy"},

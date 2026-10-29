@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1428,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="C136B3011B9BF442EF232517C166B248B2786B11A80C486E5D56207EFA18481B",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="CE18E4BAAD97E2A010776863500553003CBA96DF735A69B1AD4668B7DC9EC1C5"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1428,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="C136B3011B9BF442EF232517C166B248B2786B11A80C486E5D56207EFA18481B",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="5753A49300F3256ABBB88904E15F24EC5F2109476B885CF4E3639B9842D271A7"}
 LogicalTargets.classes = {
 {"npc","quest_giver",9459,"Cyrus Therepentous"},
 {"npc","quest_giver",9520,"Grark Lorkrub"},

@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=49,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="4107A3C9182B03E718D9342B6727F13B0B6A1F521ECA82173DBFA42FEEE7089E",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="C74AFDD75C2353ABA3877343DDFD941BDFB0FC37942AE089292CFA58E7A9CB9D"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=49,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="4107A3C9182B03E718D9342B6727F13B0B6A1F521ECA82173DBFA42FEEE7089E",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="96FAC70FB6AEE16912B99F0ABE548DE7E3A06A2E5F23F32D02017A1A9BDB7244"}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",433,"Shadowhide Gnoll","Gnoll der Schattenfelle",a="possible_spawn"},
 {"mob","npc_or_mob",434,"Rabid Shadowhide Gnoll","Tollwütiger Gnoll der Schattenfelle",a="possible_spawn"},

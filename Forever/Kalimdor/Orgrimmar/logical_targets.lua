@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1454,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="0A881E3461C3FCE50713A53144B11DF50631EBA22A5DB2164680CB211DAB5CF6",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="90561F8B15CEEFA9FC1C78BFD86FA5187EB98938CB5AFE039202296478638BD0"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1454,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="0A881E3461C3FCE50713A53144B11DF50631EBA22A5DB2164680CB211DAB5CF6",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="8563DB26F3A0BBD67BACAC7E7270DE2EAC9211E20AA73D0DB5FA5F85CB8AF28F"}
 LogicalTargets.classes = {
 {"npc","quest_giver",5875,"Gan'rul Bloodeye"},
 {"npc","quest_giver",8659,"Jes'rimon"},

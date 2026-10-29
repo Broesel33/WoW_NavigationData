@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1423,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="2B56ACA1D878582348CBE256C18DDCD8F4A402F00FD48D31F1B9C005DBD88BEA",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="94D31C67396D3A8EC07758A0E8504519AA2844E867F24980260A60C7A45996D9"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1423,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="DF63F86DD4BE144C01F12F2DE6A37C255EDB19C6CA85C83BBA1B3233C3A24FB7",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="8FCC442AC34139DE08FCC187024EDE8242811357317EA5EE8626AD99F2B7F2B1"}
 LogicalTargets.classes = {
 {"npc","spirit_healer",6491,"Spirit Healer","Geistheiler"},
 {"creature","npc_or_mob",10821,"Hed'mush the Rotting","Hed'mush der Faulende",a="possible_spawn"},
@@ -2951,7 +2951,7 @@ LogicalTargets.targets = {
 {"gathermate2_herb_1423_4340534000",284,2160.87,-4123.35,76.923,p=true},
 {"gathermate2_herb_1423_4340535000",284,2158,-4123.35,76.928,p=true},
 {"gathermate2_herb_1423_4390373000",285,2622.4,-4144.86,79.837,p=true},
-{"gathermate2_herb_1423_4430406000",288,2527.8,-4162.07,66,p=true},
+{"gathermate2_herb_1423_4430406000",288,2527.8,-4162.07,l={49.77,66},p=true},
 {"gathermate2_herb_1423_4500386000",283,2585.13,-4192.19,70.233,p=true},
 {"gathermate2_herb_1423_4500438000",284,2436.07,-4192.19,75.372,p=true},
 {"gathermate2_herb_1423_4500671000",283,1768.13,-4192.19,86.667,p=true},
@@ -3205,13 +3205,13 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1423_5490275000",293,2903.33,-4618.09,86.351,p=true},
 {"gathermate2_mining_1423_5490641000",291,1854.13,-4618.09,79.616,p=true},
 {"gathermate2_mining_1423_5490641001",293,1854.13,-4618.09,79.616,p=true},
-{"gathermate2_mining_1423_5510713000",291,1647.73,-4626.7,71.26,p=true},
-{"gathermate2_mining_1423_5520713000",293,1647.73,-4631,71.229,p=true},
+{"gathermate2_mining_1423_5510713000",291,1647.73,-4626.7,l={57.201,71.26},p=true},
+{"gathermate2_mining_1423_5520713000",293,1647.73,-4631,l={56.644,71.229},p=true},
 {"gathermate2_mining_1423_5570774000",292,1472.87,-4652.51,119.529,p=true},
 {"gathermate2_mining_1423_5570775000",291,1470,-4652.51,121.376,p=true},
 {"gathermate2_mining_1423_5570775001",292,1470,-4652.51,121.376,p=true},
-{"gathermate2_mining_1423_5690691000",291,1710.8,-4704.14,71.2,p=true},
-{"gathermate2_mining_1423_5690691001",293,1710.8,-4704.14,71.2,p=true},
+{"gathermate2_mining_1423_5690691000",291,1710.8,-4704.14,l={50.359,71.2},p=true},
+{"gathermate2_mining_1423_5690691001",293,1710.8,-4704.14,l={50.359,71.2},p=true},
 {"gathermate2_mining_1423_5720648000",291,1834.07,-4717.04,92.004,p=true},
 {"gathermate2_mining_1423_5720648001",293,1834.07,-4717.04,92.004,p=true},
 {"gathermate2_mining_1423_5760671000",293,1768.13,-4734.25,77.547,p=true},

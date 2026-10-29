@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=2482,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="A2D9F9B3717E303AB6CC45E3DCC13616E055C3D00675C5D4D1B8024DAAB8BD07",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="7045FAC34808AA96DB0D295A1C7206F5DBD22C246E21B039001D46BCB00F073B"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=2482,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="A2D9F9B3717E303AB6CC45E3DCC13616E055C3D00675C5D4D1B8024DAAB8BD07",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="7707D79A7927EB2C75801AB8E18804059AB3C77F71FD3E03E1DABD1987878D8B"}
 LogicalTargets.classes = {
 {"npc","npc_or_mob",40833,"Tiala Whitemane","Tiala Weißmähne"},
 {"npc","npc_or_mob",41861,"Fayran Elthas (Flight Master)","Fayran Elthas (Flugmeister)"},

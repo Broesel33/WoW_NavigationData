@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=2548,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="ACEC4A6520D809588676DFD65884678333985563F6FB2FE8A27E62127D4EB720",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="491467E18900C1407D96D196BB9EB11A859594C844E6952075A16489C01533E5"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=2548,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="19EC2C8EEFB70469F70A5C0E5A4262D7CC58ED6C97E8505E79A41A0A3445DF83",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="21BC29221EB3646DBE5E57B0FA896B7432517AEC11A65C1DD24BBC5B12AD2DC4"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",5434,"Coral Shark","Korallenhai",a="possible_spawn"},
 {"mob","npc_or_mob",165189,"Cat"},
@@ -213,7 +213,7 @@ LogicalTargets.classes = {
 }
 LogicalTargets.targets = {
 {"creature_170053",1,-9540.26,-4662.27,-48.318},
-{"questie_creature_165189_16591_0",2,-7675.61,-5543.72,56.4,p=true},
+{"questie_creature_165189_16591_0",2,-7675.61,-5543.72,l={34.348,56.4},p=true},
 {"questie_creature_165189_16591_1",2,-7772.29,-5685.34,63.11,p=true},
 {"questie_creature_255769_16591_1",3,-8673.09,-2728.78,187.6},
 {"questie_creature_255769_16591_2",3,-8657.9,-2753.51,191.434,p=true},
@@ -359,7 +359,7 @@ LogicalTargets.targets = {
 {"questie_creature_257910_16591_12",57,-7587.34,-6195.56,l={-2.855,0.2},p=true},
 {"questie_creature_257910_16591_13",57,-7647.16,-6211.56,-3.959,p=true},
 {"questie_creature_257915_16591_0",58,-7470.94,-5566.51,60.045,p=true},
-{"questie_creature_257915_16591_1",58,-7564.38,-5607.25,56.472,p=true},
+{"questie_creature_257915_16591_1",58,-7564.38,-5607.25,l={46.638,56.472},p=true},
 {"questie_creature_257915_16591_2",58,-7451.22,-5621.32,58.874,p=true},
 {"questie_creature_257915_16591_3",58,-7744.48,-6216.9,1.199,p=true},
 {"questie_creature_258023_16591_0",59,-8051,-3366.07,167.308,p=true},
@@ -371,7 +371,7 @@ LogicalTargets.targets = {
 {"questie_creature_258331_16591_3",62,-8816.65,-5056.29,7.002,p=true},
 {"questie_creature_258331_16591_4",62,-8852.87,-5077.63,0.919,p=true},
 {"questie_creature_258331_16591_5",62,-7726.7,-5610.16,56.713,p=true},
-{"questie_creature_258588_16591_0",63,-8115.67,-3967.47,10.4,p=true},
+{"questie_creature_258588_16591_0",63,-8115.67,-3967.47,l={3.329,10.4},p=true},
 {"questie_creature_258588_16591_1",63,-8678.27,-4481.57,10.6,p=true},
 {"questie_creature_258686_16591_0",64,-8123.1,-3251.12,156.273,p=true},
 {"questie_creature_258686_16591_1",64,-8018.02,-3316.11,162.8,p=true},
@@ -449,7 +449,7 @@ LogicalTargets.targets = {
 {"questie_creature_260080_16591_0",102,-9039.43,-5099.46,40.153,p=true},
 {"questie_creature_260211_16591_0",103,-7489.05,-5530.62,58.809,p=true},
 {"questie_creature_260211_16591_1",103,-7567.94,-5532.56,59,p=true},
-{"questie_creature_260211_16591_2",103,-7639.72,-5533.05,56.4,p=true},
+{"questie_creature_260211_16591_2",103,-7639.72,-5533.05,l={40,56.4},p=true},
 {"questie_creature_260231_16591_0",104,-8162.87,-5749.36,3.424,p=true},
 {"questie_creature_260235_16591_0",105,-8191.65,-5742.08,3.287,p=true},
 {"questie_creature_260235_16591_1",105,-8215.9,-5775.06,l={-8.165,0.2,5.935},p=true},

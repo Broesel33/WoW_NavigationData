@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1442,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="07909C05C762DFC3066FE87E74DD39C6F74339C6AD9683D978A0BCFE5D333260",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="2A1E9D151FE2E44B17D411EF31150550033610029BCB6CECDAF80ECA4AF5E410"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1442,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="819E1DEF996727FB2380E2E69EE7639798190F8255CCFA4B3EACF445E6E7F97E",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="FFACCF1AA10C292BF58F8D350BEB5D47042D8D7DC046687BB833D75B1F213DE9"}
 LogicalTargets.classes = {
 {"npc","spirit_healer",6491,"Spirit Healer","Geistheiler"},
 {"npc",{"quest_giver","vendor"},12043,"Kulwia (Trade Supplies)","Kulwia (Handwerksbedarf)"},
@@ -2212,14 +2212,14 @@ LogicalTargets.targets = {
 {"questie_gameobject_667362_406_3",242,1669.52,931.13,122.255,p=true},
 {"questie_gameobject_667362_406_4",242,1610.91,931.13,122.2,p=true},
 {"questie_gameobject_667362_406_5",242,1666.27,926.25,122.298,p=true},
-{"questie_gameobject_667362_406_6",242,1581.6,926.25,122.2,p=true},
-{"questie_gameobject_667362_406_7",242,1604.4,921.37,122.2,p=true},
-{"questie_gameobject_667362_406_8",242,1536.02,911.6,122.214,p=true},
-{"questie_gameobject_667362_406_9",242,1532.76,892.07,122.2,p=true},
+{"questie_gameobject_667362_406_6",242,1581.6,926.25,l={111.851,122.2},p=true},
+{"questie_gameobject_667362_406_7",242,1604.4,921.37,l={113.215,122.2},p=true},
+{"questie_gameobject_667362_406_8",242,1536.02,911.6,l={116.877,122.214},p=true},
+{"questie_gameobject_667362_406_9",242,1532.76,892.07,l={116.135,122.2},p=true},
 {"questie_gameobject_667362_406_10",242,1695.57,862.77,122.2,p=true},
 {"questie_gameobject_667362_406_11",242,1539.27,862.77,122.334,p=true},
 {"questie_gameobject_667362_406_13",242,1526.25,853,122.2,p=true},
-{"questie_gameobject_667362_406_14",242,1610.91,823.7,122.325,p=true},
+{"questie_gameobject_667362_406_14",242,1610.91,823.7,l={114.991,122.325},p=true},
 {"questie_gameobject_667362_406_15",242,1578.35,818.82,122.2,p=true},
 {"questie_gameobject_667364_406_0",243,1607.65,945.78,122.871,p=true},
 {"questie_gameobject_667364_406_1",243,1702.09,862.77,122.24,p=true},

@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1450,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="196EBBEB64F5C10345271FE5E0F576BA569D48F5E2DE3A2AC8313EC9119DC884",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="F72DEE6F2FD5AC34FA0C2F599412702C6532ECFA1B83FA7519C53BBECA3330E0"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1450,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="731D698E065253BAE109D69A71D670D8B3B140EE9E72A070B749DA361B9BBCC0",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="388C7FE617B4093C77CE98DC5B568A92EEA2A608ADA7DF730A2A99EF7127C8E0"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",11822,"Moonglade Warden","Moonglade-Aufseher",a="possible_spawn"},
 {"creature","npc_or_mob",11553,"Timbermaw Woodbender","Holzbieger der Holzschlundfeste",a="possible_spawn"},
@@ -156,6 +156,7 @@ LogicalTargets.targets = {
 {"questie_creature_216289_493_3",48,7821.49,-2344.29,454.065,p=true},
 {"questie_creature_216289_493_4",48,7831.03,-2360.21,455.846,p=true},
 {"questie_creature_216289_493_5",48,7872.91,-2379.6,483.567,p=true},
+{"questie_creature_216289_493_6",48,7813.48,-2400.38,467.727,p=true},
 {"questie_creature_216289_493_7",48,7796.24,-2401.07,489.509,p=true},
 {"questie_creature_216289_493_8",48,7824.56,-2430.39,487.962,p=true},
 {"questie_creature_216289_493_9",48,7816.71,-2445.85,488.007,p=true},

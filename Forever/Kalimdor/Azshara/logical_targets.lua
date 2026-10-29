@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1447,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="1FC192739B4D50EF31F1A5F408A188C2D1DF5F4C3BA5BEFFB256B8639C8C7F99",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="5D0D2BB30981552C21254BEC4A707590ABFAA50C57359CDB9CE433C14BCF5995"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1447,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="7203C51B1CA0B3DA3B5BD6AA403C1031D37CD04274C3E0C5718F45CE7024B315",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="315BCC46C56D67CAA854444DB80AD8190521707759C6004FB14C748765F2682A"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",6118,"Varo'then's Ghost","Varo'thens Geist",a="possible_spawn"},
 {"creature","npc_or_mob",6652,"Master Feardred","Meister Gräuelbart",a="possible_spawn"},
@@ -2459,6 +2459,7 @@ LogicalTargets.targets = {
 {"gameobject_170058",158,4258.23,-6276.52,90.324},
 {"gameobject_170059",185,4036.03,-6188.35,-9.224,p=true},
 {"gameobject_170061",182,4117.75,-5711.8,127.303,p=true},
+{"gameobject_170063",160,3779.31,-5682.83,-6.049,p=true},
 {"gameobject_170064",182,3628.94,-5387.71,115.502,p=true},
 {"gameobject_48257",157,3166.76,-5281.95,91.946},
 {"gameobject_170073",157,3412.84,-5028.02,88.594},

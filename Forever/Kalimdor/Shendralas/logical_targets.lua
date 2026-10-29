@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=2652,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="244E6EC7B4D54A4C42A4E74322B0392EA08F73B9925ECE9A0554F964A7B2C6F1",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="FB828FC685CDF41D077B8F16662A4DEAC44FE254CA4BD99D9C9599E6D6628276"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=2652,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="244E6EC7B4D54A4C42A4E74322B0392EA08F73B9925ECE9A0554F964A7B2C6F1",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="1ECA3C279203824E856B57105C7683E9F96D288C5EACFCB16B5E7A59D8266CB6"}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",11559,"Outcast Necromancer","Ausgestoßener Totenbeschwörer"},
 {"mob","npc_or_mob",11559,"Outcast Necromancer","Ausgestoßener Totenbeschwörer",a="possible_spawn"},

@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=7,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="FC34504C1B1044AD08C4FDC8C6100021379BF7BDF19CBA361CCFEC95367678C7",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="40BCD87AE38C95878409BB3A2A0A9C2DAEB3F4B7DF15264A2786840DD4155BFC"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=7,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="857E21B4DA1ABC924F6E98C8DB0AB323D0EC3EDDA5FA46977182FA1ED2A252A9",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="B0C56C2A78789E182D4FCE71F6FB3C4601B25AF99FE1F92338223A366B3EFA00"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",5890,"Redrock Earth Spirit","Rotfelserdgeist",a="possible_spawn"},
 {"npc","quest_giver",5891,"Minor Manifestation of Earth","Schwache Erdmanifestation"},
@@ -2695,7 +2695,7 @@ LogicalTargets.targets = {
 {"questie_creature_264083_215_21",201,-202.61,388.6,174.108,p=true},
 {"questie_creature_264083_215_22",201,-82.01,368.29,203.326,p=true},
 {"questie_creature_264083_215_23",201,-228.87,367.06,167.74,p=true},
-{"questie_creature_264083_215_24",201,-296.14,351.06,159.2,p=true},
+{"questie_creature_264083_215_24",201,-296.14,351.06,l={139.574,159.2},p=true},
 {"questie_creature_264083_215_25",201,-262.09,350.44,160.102,p=true},
 {"questie_creature_264083_215_26",201,-139.85,346.13,183.803,p=true},
 {"questie_creature_264083_215_27",201,-177.59,344.29,181,p=true},
@@ -2872,7 +2872,7 @@ LogicalTargets.targets = {
 {"gathermate2_herb_1412_4340473000",234,-1673.62,-191.74,-10.158,p=true},
 {"gathermate2_herb_1412_4350473000",234,-1673.62,-197.9,-10.412,p=true},
 {"gathermate2_herb_1412_4380693000",233,-2576.08,-216.36,-6.742,p=true},
-{"gathermate2_herb_1412_4420674000",233,-2498.14,-240.97,-15.2,p=true},
+{"gathermate2_herb_1412_4420674000",233,-2498.14,-240.97,l={-34.655,-15.2},p=true},
 {"gathermate2_herb_1412_4430542000",233,-1956.66,-247.13,-4.957,p=true},
 {"gathermate2_herb_1412_4460491000",233,-1747.46,-265.59,-9.2,p=true},
 {"gathermate2_herb_1412_4500702000",233,-2613,-290.21,-9.304,p=true},

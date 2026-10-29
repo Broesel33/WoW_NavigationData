@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1456,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="800E1CCA2F579CAA72ECB3CE3433B61E7FD8C419849DFD7E14DA4E384D2EED95",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="949C986FD35D4AD32E3D4865A94BF017A8F25D97D84E51811F04904410E21CA8"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1456,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="800E1CCA2F579CAA72ECB3CE3433B61E7FD8C419849DFD7E14DA4E384D2EED95",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="7C0A06D5F7E55521F1C29C640DD9C1F021C52AC7436301277756E6D12AA8C79A"}
 LogicalTargets.classes = {
 {"npc","npc_or_mob",7427,"Taim Ragetotem (Alterac Valley Battlemaster)","Taim Ragetotem (Kampfmeister des Alteractals)"},
 {"npc","quest_giver",6410,"Orm Stonehoof"},

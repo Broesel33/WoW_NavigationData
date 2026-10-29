@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1422,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="944BF0F3AE3F6D0C4DA37749237E00F6316B5833CB004BF1B91F7B9B450F21C6",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="5361B2790176BBACD519A065C49D1B76A8142AD3AB43690ECCF105AB86C137FD"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1422,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="CD6C75761D38191205E13A8BB42921E4D74AE747749488325D3E3FD7823C1E11",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="C895AC7438FA6986E23E731DDEF02B4CE47000937FB61B636598C1A0D5E3B3C3"}
 LogicalTargets.classes = {
 {"npc","quest_giver",11286,"Magistrate Marduke","Magistrat Marduke"},
 {"creature","npc_or_mob",1806,"Vile Slime","Böser Brühschleimer",a="possible_spawn"},
@@ -1907,8 +1907,8 @@ LogicalTargets.targets = {
 {"questie_creature_232920_28_0",181,1365.73,-1604.33,57.833,p=true},
 {"questie_creature_262033_28_0",182,1192.3,-2399.4,60.639,p=true},
 {"questie_creature_262033_28_1",182,1168.51,-2400.69,60.4,p=true},
-{"questie_gameobject_410847_28_0",183,941.47,-2137.53,37.4,p=true},
-{"questie_gameobject_410847_28_1",183,944.33,-2141.83,37.4,p=true},
+{"questie_gameobject_410847_28_0",183,941.47,-2137.53,l={30.67,37.4},p=true},
+{"questie_gameobject_410847_28_1",183,944.33,-2141.83,l={32.601,37.4},p=true},
 {"questie_gameobject_457387_28_0",184,1038.93,-1939.73,l={39.285,84.67},p=true},
 {"questie_gameobject_463211_28_0",185,1278.59,-2567.96,110.554,p=true},
 {"questie_gameobject_463213_28_0",186,1801.47,-1225.93,l={60.573,65.365},p=true},

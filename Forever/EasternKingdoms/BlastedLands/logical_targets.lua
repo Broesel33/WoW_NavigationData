@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1419,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="155C2BFB42D343D41943E55F0B897EF755F4C3379C3C3C4C24D1756553B838F6",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="49D437A237D55E0B1E1CB99026B9DA7213D1A665629576062AEA205E70F10AC7"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1419,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="155C2BFB42D343D41943E55F0B897EF755F4C3379C3C3C4C24D1756553B838F6",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="4106CDC372D472616786DEA326407371351D7A56731208A955F2852169980B1D"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",6007,"Shadowsworn Enforcer","Vollstrecker der Schattenanbeter",a="possible_spawn"},
 {"creature","npc_or_mob",6008,"Shadowsworn Warlock","Hexenmeister der Schattenanbeter",a="possible_spawn"},

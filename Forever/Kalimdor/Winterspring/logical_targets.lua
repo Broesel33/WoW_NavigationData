@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1452,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="02BA57227DCDEDFD2370EBF50FEF6B31ABE9537F0E252FF42D36C455BB90033C",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="5B3EFE73DD1B8F918BA8135A91C48B56C1775C48891587D211209AAFAA1CFE4C"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1452,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="02BA57227DCDEDFD2370EBF50FEF6B31ABE9537F0E252FF42D36C455BB90033C",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="B68EAC50CEADC5E616C52BCB4F18BFC926052FE26705848BB37E3A0852F676A8"}
 LogicalTargets.classes = {
 {"npc","spirit_healer",6491,"Spirit Healer","Geistheiler"},
 {"mob","npc_or_mob",7428,"Frostmaul Giant","Frosthagelriese",a="possible_spawn"},

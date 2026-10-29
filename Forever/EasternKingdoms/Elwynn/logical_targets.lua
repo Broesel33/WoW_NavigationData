@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=37,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="62CA8C8688D3D48A1B23D01EAA5CCC6BB7453E1A25382F7C86B0907B7F3047DB",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="5B613E2B06F8EBD82E48975FE9636672EA040F9CA65331EA5CBCF5779BEEA64A"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=37,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="F6D70ADE5BE4ED0783B97A8D9B13F50A2546B14F2ED86B00F8F6B322B38B32D3",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="16A638C994FF321801CF3EE0D68428EED6A6DB899771FA39AC83480B43C24772"}
 LogicalTargets.classes = {
 {"npc",{"quest_giver","trainer"},1215,"Alchemist Mallory (Journeyman Alchemist)","Alchimist Mallory (Alchimiegeselle)"},
 {"npc","trainer",1218,"Herbalist Pomeroy (Herbalism Trainer)","Kräuterkundige Pomeroy (Kräuterkundelehrerin)"},
@@ -2281,12 +2281,14 @@ LogicalTargets.targets = {
 {"gameobject_74867",234,-9115.54,240.614,106.374,p=true},
 {"gameobject_74868",234,-9074.68,25.989,97.504,p=true},
 {"gameobject_74869",234,-9153.33,110.741,76.717,p=true},
+{"gameobject_74870",234,-9401.4,422.391,37.785,p=true},
 {"gameobject_74871",234,-9333.82,494.622,65.809,p=true},
 {"gameobject_74872",234,-9576.02,430.352,40.888,p=true},
 {"gameobject_74873",234,-9617.02,344.501,48.306,p=true},
 {"gameobject_74874",234,-9481.64,649.059,66.816,p=true},
 {"gameobject_74875",234,-9072.23,-580.832,63.211,p=true},
 {"gameobject_74876",234,-9035.68,-577.905,57.175,p=true},
+{"gameobject_74877",234,-9501.33,-246.828,46.483,p=true},
 {"gameobject_74878",234,-9572.22,-789.044,46.548,p=true},
 {"gameobject_74879",234,-9090.22,-594.915,59.184,p=true},
 {"gameobject_74880",234,-9154.89,-982.684,79.224,p=true},
@@ -3047,8 +3049,8 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1429_2810597000",296,-9321.39,560.11,84.055,p=true},
 {"gathermate2_mining_1429_3820819000",296,-9835.23,209.56,14.49,p=true},
 {"gathermate2_mining_1429_3850867000",296,-9946.33,199.15,30.644,p=true},
-{"gathermate2_mining_1429_5150674000",296,-9499.61,-252.06,57.8,p=true},
-{"gathermate2_mining_1429_5150675000",296,-9501.93,-252.06,57.8,p=true},
+{"gathermate2_mining_1429_5150674000",296,-9499.61,-252.06,l={47.582,57.8},p=true},
+{"gathermate2_mining_1429_5150675000",296,-9501.93,-252.06,l={46.362,57.8},p=true},
 {"gathermate2_mining_1429_5240854000",296,-9916.24,-283.3,36.321,p=true},
 {"gathermate2_mining_1429_5250854000",296,-9916.24,-286.77,34.756,p=true},
 {"gathermate2_mining_1429_5760784000",296,-9754.22,-463.78,49.924,p=true},

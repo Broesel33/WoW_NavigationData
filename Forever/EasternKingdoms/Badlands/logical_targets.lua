@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1418,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="2140AA98B19A9ADCAF0C05DC33E36B2FA492195D84A4747ACD2A573FE73D3F46",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="23B19A4ED9E0848B5C3EBA93100822A966F0BD4DA250BCD8F08EDE834533B9B5"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1418,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="2140AA98B19A9ADCAF0C05DC33E36B2FA492195D84A4747ACD2A573FE73D3F46",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="61C4C09AC704193BDB4D63F7621ED12F9D6D55897B5A00EC65131659B956F817"}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",2719,"Dustbelcher Lord","Lord der Staubspeier",a="possible_spawn"},
 {"npc","quest_giver",2785,"Theldurin the Lost","Theldurin der Verirrte"},

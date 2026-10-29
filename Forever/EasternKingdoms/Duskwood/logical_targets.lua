@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1431,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="37DE83C616ECECD10BD7BB3BBE27BB9EA3404B9510FE1576E57C5FA676F668E3",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="5D70BDF8364C92B52CE814998B6DC5C0120FFCF724EECEF616676E93B8C2AAF2"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1431,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="B8AA177CA7BA180CB4B0E625A070F533A05FD713ADE5DA1D55BD3BEABB4BE09F",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="0D5CF17FD1403FCE0BC4294B8CAF8E0C9FA7862E76A8B0BF0D8C835809B49079"}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",210,"Bone Chewer","Knochenkauer",a="possible_spawn"},
 {"npc","npc_or_mob",269,"Role Dreuger (Deputy Mayor of Darkshire)","Role Dreuger (Vizebürgermeister von Dunkelhain)"},
@@ -2376,7 +2376,7 @@ LogicalTargets.targets = {
 {"questie_creature_165189_10_232",190,-10001.97,-1699,30.857,p=true},
 {"questie_creature_205153_10_0",191,-10246.59,740.99,21.43},
 {"questie_creature_205153_10_2",191,-10307.25,734.78,l={10.764,21.4}},
-{"questie_creature_205153_10_5",191,-10255.77,688.07,21.4,p=true},
+{"questie_creature_205153_10_5",191,-10255.77,688.07,l={11.228,21.4},p=true},
 {"questie_creature_205153_10_6",191,-10294.29,671.06,24.275,p=true},
 {"questie_creature_218931_10_0",192,-10508.67,304.13,31.2,p=true},
 {"questie_creature_218931_10_1",192,-10627.47,293.33,34.51,p=true},

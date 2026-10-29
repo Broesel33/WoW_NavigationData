@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1427,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="B751393974190451936D9A49E4E9EC6911973EAE22345E91CDAB6DA568FD427B",converterSha256="C2181613F2FCA0A7B5FE1B11CCFCCD860A9410094B720C6599B93C6AE81F5D3F",payloadSha256="36763BE7306D511BE50B138D02A03B79A267EF42452E8939B828B5E42B05CCF6"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1427,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="B751393974190451936D9A49E4E9EC6911973EAE22345E91CDAB6DA568FD427B",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="A4338E3D86672C061E9383CC891D755CBC36395BBB53D781D5CF0DD8F61D2C44"}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",5855,"Magma Elemental","Magmaelementar",a="possible_spawn"},
 {"npc","quest_giver",8436,"Zamael Lunthistle"},
