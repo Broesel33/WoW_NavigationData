@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1427,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="B751393974190451936D9A49E4E9EC6911973EAE22345E91CDAB6DA568FD427B",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="A4338E3D86672C061E9383CC891D755CBC36395BBB53D781D5CF0DD8F61D2C44"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1427,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="D79E596D938D15129961709BD7D6B57345A034B934D47F489FF440F83B075D2E",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="717EAE288AB63E2BD3053E23F28945F22E4E3364B6048E67B33E0B952E532D5E"}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",5855,"Magma Elemental","Magmaelementar",a="possible_spawn"},
 {"npc","quest_giver",8436,"Zamael Lunthistle"},
@@ -941,6 +941,10 @@ LogicalTargets.targets = {
 {"gameobject_76470",110,-6860,-835,270.358,p=true},
 {"gameobject_76471",111,-6860,-835,270.358,p=true},
 {"gameobject_76472",112,-6860,-835,270.358,p=true},
+{"gameobject_76473",109,-7181,-825,325.222,p=true},
+{"gameobject_76475",110,-7181,-825,325.222,p=true},
+{"gameobject_76476",111,-7181,-825,325.222,p=true},
+{"gameobject_76477",112,-7181,-825,325.222,p=true},
 {"gameobject_76478",109,-6671,-934,269.562,p=true},
 {"gameobject_76480",110,-6671,-934,269.562,p=true},
 {"gameobject_76481",111,-6671,-934,269.562,p=true},

@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="A1358CBB5F428B88BD343F8257C80D5E59A99C432850777633FFCF9C5A8B969F",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="7E94F78A05617E96E34E2B3B8130164162283E87E739BFDF519B0A1386426E8E"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="2D7D56E71EE82D2CB3348B3248BDFDA6C09FCCC6211A3BFC8C9B9550DB476CD0",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="A5291CE801B4548A3A7DAB0F278608C4362596331306C49662F46F8E70A777A3"}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",5893,"Minor Manifestation of Fire","Schwache Feuermanifestation"},
 {"npc","quest_giver",3294,"Ophek"},
@@ -437,6 +437,7 @@ LogicalTargets.targets = {
 {"creature_4750",50,809.335,-5074.06,2.624},
 {"creature_4752",50,-1463.44,-5314.72,-5.682},
 {"creature_4754",50,-1477.05,-5301.59,-1.261},
+{"creature_4755",50,-885.142,-5507.15,0.2,p=true},
 {"creature_4756",50,-1059.25,-5285.51,-5.735},
 {"creature_4757",50,-873.053,-5278.66,-9.994},
 {"creature_4759",51,-624.024,-4214.41,38.217},
@@ -575,6 +576,7 @@ LogicalTargets.targets = {
 {"creature_6508",116,1123.9,-4393.71,24.977},
 {"creature_6509",46,1170.5,-4253.13,22.695},
 {"creature_6510",46,1260.82,-4387.59,28.528},
+{"creature_6511",46,1237.44,-4337.45,30.022,p=true},
 {"creature_6523",9,-320.966,-4127.11,51.773},
 {"creature_6524",9,-635.911,-4477.31,46.422},
 {"creature_6525",9,-758.539,-4324.67,45.597},
@@ -1095,6 +1097,7 @@ LogicalTargets.targets = {
 {"creature_8675",46,1343.24,-4949.2,6.453},
 {"creature_8677",46,1219.03,-4178.16,24.125},
 {"creature_8678",46,1138.53,-3930.24,20.097},
+{"creature_8679",116,1250.48,-4515.17,21.916,p=true},
 {"creature_8680",47,767.878,-4998.12,13.125},
 {"creature_8703",47,941.952,-4984.88,8.672},
 {"creature_8708",47,160.705,-4375.37,39.745},
@@ -1170,6 +1173,7 @@ LogicalTargets.targets = {
 {"creature_10383",43,-607.076,-4113.04,74.953},
 {"creature_10384",46,350.821,-3925.56,32.091},
 {"creature_10385",46,1079.04,-4529.97,17.898},
+{"creature_10386",116,617.739,-4084.65,13.264,p=true},
 {"creature_10387",46,1148.27,-4053.48,15.61},
 {"creature_10388",46,817.242,-4879.1,36.543},
 {"creature_10389",46,63.938,-4054.78,53.671},
@@ -1719,6 +1723,7 @@ LogicalTargets.targets = {
 {"creature_21020",46,1185.55,-4339,24.634},
 {"creature_21022",46,1197.92,-4297,22.003},
 {"creature_21024",46,1211.61,-4246,24.763},
+{"creature_21026",46,1218.72,-4353.9,27.464,p=true},
 {"creature_21034",46,1253.35,-4381,28.47},
 {"creature_21036",46,1260.31,-4279,24.933},
 {"creature_22181",48,1160.42,-4286,20.983},
@@ -3228,6 +3233,7 @@ LogicalTargets.targets = {
 {"questie_gameobject_673476_14_30",279,-334.87,-4373.6,52.429,p=true},
 {"questie_gameobject_673476_14_31",279,-405.37,-4373.6,40.167,p=true},
 {"questie_gameobject_673476_14_32",279,-475.87,-4378.89,47.96,p=true},
+{"questie_gameobject_673476_14_33",279,-363.07,-4384.17,47.227,p=true},
 {"questie_gameobject_673476_14_34",279,-366.59,-4452.91,51.601,p=true},
 {"questie_gameobject_693669_14_0",280,229.13,-5140.82,2.183,p=true},
 {"questie_gameobject_693670_14_0",281,311.97,-5139.23,3.791,p=true},

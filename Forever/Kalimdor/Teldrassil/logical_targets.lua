@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=57,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="F04EAD22FCD6465242278819C5AFF9801093F1438653BB7A2F9391A52C315E22",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="C978687BA33C150F142A0C731DC8CAD2909376045ABBE94BA9A9A5A8072F5452"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=57,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="30B6B02EF492F35F39F4698E053D5F375A3638F5FD20DF4061754C0741350FC6",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="5095F9AD0F6346F09D66B87EE70E27E490773F6622FA04BEF02B8B17523EC143"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",6909,"Sethir the Ancient","Sethir der Uralte",a="possible_spawn"},
 {"creature","npc_or_mob",14429,"Grimmaw","Grimmtatze",a="possible_spawn"},
@@ -1722,16 +1722,21 @@ LogicalTargets.targets = {
 {"questie_creature_165189_141_82",208,9665.02,1031.48,1284.4,p=true},
 {"questie_creature_165189_141_83",208,9849.64,1015.69,1305.8,p=true},
 {"questie_creature_165189_141_84",208,9437.98,974.96,1263.804,p=true},
-{"questie_creature_165189_141_85",208,9828.6,961.21,l={1305.948,1328.677},p=true},
+{"questie_creature_165189_141_85",208,9828.6,961.21,l={1308.923,1328.677},p=true},
+{"questie_creature_165189_141_86",208,8751.42,954.09,25.97,p=true},
 {"questie_creature_165189_141_87",208,9868.64,951.03,1307.154,p=true},
 {"questie_creature_165189_141_88",208,9584.25,936.26,l={1260.82,1266.208},p=true},
+{"questie_creature_165189_141_89",208,8712.39,932.19,15.388,p=true},
 {"questie_creature_165189_141_90",208,9808.24,920.48,1306.882,p=true},
 {"questie_creature_165189_141_91",208,9850.32,917.43,1306.075,p=true},
+{"questie_creature_165189_141_92",208,8687.28,902.15,l={7.349,22.069,52.585},p=true},
 {"questie_creature_165189_141_93",208,9419.31,900.11,1263.123,p=true},
 {"questie_creature_165189_141_94",208,9756.99,876.18,1297.787,p=true},
+{"questie_creature_165189_141_95",208,8655.38,869.56,l={11.301,22.875},p=true},
 {"questie_creature_165189_141_96",208,9589.34,866,1254.587,p=true},
 {"questie_creature_165189_141_97",208,10468.32,858.36,l={1318.067,1331.173,1340.648},p=true},
 {"questie_creature_165189_141_98",208,9788.55,846.14,1300.694,p=true},
+{"questie_creature_165189_141_99",208,8642.14,840.54,l={14.269,23.6},p=true},
 {"questie_creature_165189_141_100",208,9740.7,803.37,1296.173,p=true},
 {"questie_creature_165189_141_101",208,9809.59,789.12,1301.042,p=true},
 {"questie_creature_165189_141_102",208,9820.45,764.68,1305.116,p=true},

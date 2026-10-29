@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1451,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="59D6FCE301CAF8F253045EDE03CA11137743ED24D975B7BFE6410BA0B4446811",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="1276CC6695D9F1B19C68005B6AA7CCA314C773B43D3706D3310F341765AFA1D4"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1451,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="0AC322C4ACFA8D9A1E33E96DF5546B2A3B1B4AC5EEFF7BB058FBFA8945B37EA3",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="8AB42E7D0C0AC9D6DE67C6C6B283EC7B436CB35DE5968E08FFD2485B947761BC"}
 LogicalTargets.classes = {
 {"npc","spirit_healer",6491,"Spirit Healer","Geistheiler"},
 {"creature","npc_or_mob",11880,"Twilight Avenger (Twilight's Hammer)","Rächer der Twilight (Twilight-Hammer)",a="possible_spawn"},
@@ -1673,6 +1673,7 @@ LogicalTargets.targets = {
 {"creature_46097",114,-6614.34,1743.93,3.222},
 {"creature_46098",114,-6594.01,1851.97,3.321},
 {"creature_46099",114,-6549.77,1890.73,2.695},
+{"creature_46100",114,-6740.08,718.924,26.633,p=true},
 {"creature_46101",114,-6684.59,352.244,0.258},
 {"creature_46102",114,-6504.36,584.742,0.717},
 {"creature_46103",114,-6589.11,1713.7,4.641},
@@ -2189,6 +2190,8 @@ LogicalTargets.targets = {
 {"gathermate2_herb_1451_3160735000",145,-7665.68,1436.77,2.33,p=true},
 {"gathermate2_herb_1451_3370135000",145,-6271.93,1363.62,13.971,p=true},
 {"gathermate2_herb_1451_3430642000",184,-7449.65,1342.72,l={-80.677,5.735},p=true},
+{"gathermate2_herb_1451_3440914000",145,-8081.48,1339.23,6.758,p=true},
+{"gathermate2_herb_1451_3450914000",145,-8081.48,1335.75,8.141,p=true},
 {"gathermate2_herb_1451_3600873000",184,-7986.24,1283.5,-3.437,p=true},
 {"gathermate2_herb_1451_3600875000",184,-7990.89,1283.5,-2.368,p=true},
 {"gathermate2_herb_1451_3850608000",145,-7370.67,1196.42,0.782,p=true},

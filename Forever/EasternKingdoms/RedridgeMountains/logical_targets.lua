@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=49,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="4107A3C9182B03E718D9342B6727F13B0B6A1F521ECA82173DBFA42FEEE7089E",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="96FAC70FB6AEE16912B99F0ABE548DE7E3A06A2E5F23F32D02017A1A9BDB7244"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=49,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="09C8A5E3B726BF28BAAE0824AA874F13EDD1347ED258A8ACCF132B1F8152BD77",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="F6CC12F59BBE1E6B8A4B8B7F57FC3EEF3B266D82B1908B9975F25246663BE842"}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",433,"Shadowhide Gnoll","Gnoll der Schattenfelle",a="possible_spawn"},
 {"mob","npc_or_mob",434,"Rabid Shadowhide Gnoll","Tollwütiger Gnoll der Schattenfelle",a="possible_spawn"},
@@ -1742,6 +1742,9 @@ LogicalTargets.targets = {
 {"gameobject_76098",179,-8723.21,-2522.05,143.106,p=true},
 {"gameobject_76099",180,-8723.21,-2522.05,143.106,p=true},
 {"gameobject_76100",181,-8723.21,-2522.05,143.106,p=true},
+{"gameobject_76101",179,-8967,-2650,151.636,p=true},
+{"gameobject_76102",180,-8967,-2650,151.636,p=true},
+{"gameobject_76103",181,-8967,-2650,151.636,p=true},
 {"gameobject_76104",179,-9239.7,-3262.89,106.295,p=true},
 {"gameobject_76105",180,-9239.7,-3262.89,106.295,p=true},
 {"gameobject_76106",181,-9239.7,-3262.89,106.295,p=true},
@@ -2162,7 +2165,7 @@ LogicalTargets.targets = {
 {"questie_creature_165189_44_159",189,-8802.47,-2463.84,137.158,p=true},
 {"questie_creature_165189_44_160",189,-9156.19,-2464.49,116.2,p=true},
 {"questie_creature_165189_44_161",189,-9450.99,-2471.87,l={39.389,56.239},p=true},
-{"questie_creature_165189_44_162",189,-9385.4,-2477.51,l={17.555,56.2},p=true},
+{"questie_creature_165189_44_162",189,-9385.4,-2477.51,l={13.793,17.555,56.2},p=true},
 {"questie_creature_165189_44_163",189,-8851.99,-2514.85,133.26,p=true},
 {"questie_creature_165189_44_164",189,-9098.28,-2522.01,117.65,p=true},
 {"questie_creature_165189_44_165",189,-9086.69,-2563.04,126.119,p=true},
@@ -2703,6 +2706,7 @@ LogicalTargets.targets = {
 {"gathermate2_herb_1433_6950793000",228,-9723.2,-3189.98,58.807,p=true},
 {"gathermate2_herb_1433_7030712000",228,-9605.92,-3207.35,50.866,p=true},
 {"gathermate2_herb_1433_7110529000",226,-9340.95,-3224.71,96.259,p=true},
+{"gathermate2_herb_1433_7150588000",227,-9426.37,-3233.4,60.544,p=true},
 {"gathermate2_herb_1433_7220737000",225,-9642.11,-3248.59,49.149,p=true},
 {"gathermate2_herb_1433_7250738000",225,-9643.56,-3255.1,49.25,p=true},
 {"gathermate2_herb_1433_7300845000",228,-9798.49,-3265.96,72.333,p=true},

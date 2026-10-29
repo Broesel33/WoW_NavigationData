@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1452,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="02BA57227DCDEDFD2370EBF50FEF6B31ABE9537F0E252FF42D36C455BB90033C",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="B68EAC50CEADC5E616C52BCB4F18BFC926052FE26705848BB37E3A0852F676A8"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1452,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="778B2BAD7C30F847FEC251EC0B8AE61A8BAAD284B36EC14E2B4018ACC8CE945B",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="4C61DFDA1F1196B300BC4786DCA795999523D288F066E0D0D54BEAB7EC09977F"}
 LogicalTargets.classes = {
 {"npc","spirit_healer",6491,"Spirit Healer","Geistheiler"},
 {"mob","npc_or_mob",7428,"Frostmaul Giant","Frosthagelriese",a="possible_spawn"},
@@ -357,6 +357,7 @@ LogicalTargets.targets = {
 {"creature_40982",11,6077.67,-4340.06,723.865},
 {"creature_40983",11,6048.05,-4376.12,713.257},
 {"creature_40984",11,6175.98,-4317.57,737.832},
+{"creature_40985",11,6085.44,-4341.59,725.41,p=true},
 {"creature_40986",11,5980.69,-4517.89,710.198},
 {"creature_40987",11,6088.32,-4490.82,677.535},
 {"creature_40988",11,6191.48,-4264.78,658.283},

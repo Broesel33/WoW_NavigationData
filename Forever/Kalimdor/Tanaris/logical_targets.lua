@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1446,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="30507F9ED8806724CF9B08572BCA881686C17ACAA4117275F9D502C0F03F83FA",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="5BDCBA7C11C5D740F9D45101A49C430FF6E4C0F63B30A5A9E6E2A02F9102B79D"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1446,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="130EAD71BF4123AE6B676FAC883E871A8F69B525317D83AEA60C0BC2B24EEA63",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="10020A7083C55BE856F5091DFBDDA432D57AB47C37D3E2058F5FB42BFF3EC8FD"}
 LogicalTargets.classes = {
 {"npc","spirit_healer",6491,"Spirit Healer","Geistheiler"},
 {"creature","npc_or_mob",5419,"Glasshide Basilisk","Glashautbasilisk",a="possible_spawn"},
@@ -2385,6 +2385,7 @@ LogicalTargets.targets = {
 {"gameobject_5917",157,-7525,-4619,16.432,p=true},
 {"gameobject_5926",157,-9392,-3281,30.997,p=true},
 {"gameobject_5937",157,-9089,-2095,24.669,p=true},
+{"gameobject_5946",157,-9217,-4279,49.294,p=true},
 {"gameobject_5950",157,-9528,-3750,37.954,p=true},
 {"gameobject_5957",157,-8370,-2129,1.091,p=true},
 {"gameobject_5958",157,-7102,-2834,15.217,p=true},
@@ -2420,6 +2421,9 @@ LogicalTargets.targets = {
 {"gameobject_140180-1733",158,-7255.52,-4241.1,18.261,p=true},
 {"gameobject_140180-1734",157,-7255.52,-4241.1,18.261,p=true},
 {"gameobject_140180-1735",159,-7255.52,-4241.1,18.261,p=true},
+{"gameobject_140174-1733",158,-7825.65,-4809.04,12.014,p=true},
+{"gameobject_140174-1734",157,-7825.65,-4809.04,12.014,p=true},
+{"gameobject_140174-1735",159,-7825.65,-4809.04,12.014,p=true},
 {"gameobject_140173-1733",158,-7591.08,-4094.75,11.661,p=true},
 {"gameobject_140173-1734",157,-7591.08,-4094.75,11.661,p=true},
 {"gameobject_140173-1735",159,-7591.08,-4094.75,11.661,p=true},
@@ -2716,6 +2720,7 @@ LogicalTargets.targets = {
 {"gameobject_17477",160,-9456.27,-2599.35,19.136,p=true},
 {"gameobject_17478",160,-6967.48,-3572.2,29.089,p=true},
 {"gameobject_17479",160,-8544.6,-3072.37,10.598,p=true},
+{"gameobject_17480",160,-8785.42,-4360.96,23.305,p=true},
 {"gameobject_17481",160,-9091.49,-4049.85,-17.43,p=true},
 {"gameobject_17482",160,-8792.83,-2351.11,12.769,p=true},
 {"gameobject_17483",160,-7786.79,-2523.76,-37.06,p=true},
@@ -2853,6 +2858,7 @@ LogicalTargets.targets = {
 {"gameobject_1080355-180750",199,-8460.64,-5041.87,0},
 {"gameobject_1080355-180751",200,-8460.64,-5041.87,0},
 {"gameobject_1080355-180752",201,-8460.64,-5041.87,0},
+{"gameobject_64862",161,-8655.95,-4414.97,11.821,p=true},
 {"gameobject_64889",162,-9632.66,-2808.55,11.347,p=true},
 {"gameobject_64890",162,-6986.26,-4400.95,9.799,p=true},
 {"gameobject_64891",162,-6986.9,-4349.21,9.6,p=true},
@@ -3058,7 +3064,7 @@ LogicalTargets.targets = {
 {"questie_creature_265576_440_1",215,-7193.36,-3785.36,8.656,p=true},
 {"questie_creature_267963_440_0",216,-7174.04,-3959.24,9.407,p=true},
 {"questie_creature_267963_440_1",216,-7201.64,-4020.65,11.412,p=true},
-{"questie_creature_267963_440_2",216,-9364.1,-4516.76,-7.504,p=true},
+{"questie_creature_267963_440_2",216,-9364.1,-4516.76,l={-7.504,0.2},p=true},
 {"questie_gameobject_441248_440_0",217,-8073.8,-5228.15,10.6,p=true},
 {"gathermate2_herb_1446_2940552000",218,-8414.2,-2247.35,21.034,p=true},
 {"gathermate2_herb_1446_2950552000",218,-8414.2,-2254.25,21.973,p=true},

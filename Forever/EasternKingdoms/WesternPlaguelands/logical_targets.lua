@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1422,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="CD6C75761D38191205E13A8BB42921E4D74AE747749488325D3E3FD7823C1E11",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="C895AC7438FA6986E23E731DDEF02B4CE47000937FB61B636598C1A0D5E3B3C3"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1422,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="7C58DE4D503FAB6CB7EA448DF6B85BD7393885D6D7B7790B0101FF76FDD8AA09",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="F66B59CF5C986B18310A50008B1A2468B50979E09DFCF5F5B823F23F403423F5"}
 LogicalTargets.classes = {
 {"npc","quest_giver",11286,"Magistrate Marduke","Magistrat Marduke"},
 {"creature","npc_or_mob",1806,"Vile Slime","Böser Brühschleimer",a="possible_spawn"},
@@ -1447,6 +1447,7 @@ LogicalTargets.targets = {
 {"gameobject_19418",135,1991.27,-2462,63.457,p=true},
 {"gameobject_19446",135,1717.19,-1606,65.003,p=true},
 {"gameobject_19489",135,2012.83,-1544,67.45,p=true},
+{"gameobject_19490",135,2007.51,-1545,65.193,p=true},
 {"gameobject_19529",135,1714.25,-1610,65.621,p=true},
 {"gameobject_19530",135,1707.02,-1606,68.021,p=true},
 {"gameobject_19544",135,1682.83,-1494,65.969,p=true},
@@ -1461,6 +1462,9 @@ LogicalTargets.targets = {
 {"gameobject_140095-176586",136,1963.57,-2147.67,83.238,p=true},
 {"gameobject_140094-176586",136,1862.28,-1242.78,73.623,p=true},
 {"gameobject_140093-176586",136,1613.99,-2440.6,89.556,p=true},
+{"gameobject_140092-176586",136,1861.67,-1889.43,99.053,p=true},
+{"gameobject_140091-176586",136,2225.33,-2463.55,90.51,p=true},
+{"gameobject_140090-176586",136,1690.23,-2477.8,99.817,p=true},
 {"gameobject_140074-176587",137,2479.99,-1630.05,105.924,p=true},
 {"gameobject_140073-176587",137,2345.16,-1587.58,109.385,p=true},
 {"gameobject_140072-176587",137,2237.28,-1541.57,78.802,p=true},
@@ -1776,6 +1780,8 @@ LogicalTargets.targets = {
 {"gameobject_78627-1734",174,1429.4,-1221.99,67.688,p=true},
 {"gameobject_78627-2040",175,1429.4,-1221.99,67.688,p=true},
 {"gameobject_78627-2047",173,1429.4,-1221.99,67.688,p=true},
+{"gameobject_78753-324",172,2266.57,-1614.03,97.526,p=true},
+{"gameobject_78753-2047",173,2266.57,-1614.03,97.526,p=true},
 {"gameobject_78624-1734",174,1402.24,-1103.01,71.519,p=true},
 {"gameobject_78624-2040",175,1402.24,-1103.01,71.519,p=true},
 {"gameobject_78624-2047",173,1402.24,-1103.01,71.519,p=true},
@@ -1902,6 +1908,7 @@ LogicalTargets.targets = {
 {"questie_creature_226799_28_0",178,958.67,-1440.93,63.242,p=true},
 {"questie_creature_226799_28_1",178,958.67,-1458.13,62.923,p=true},
 {"questie_creature_227519_28_0",179,2030.8,-1492.53,81.178,p=true},
+{"questie_creature_227519_28_1",179,2030.8,-1501.13,80.102,p=true},
 {"questie_creature_232912_28_0",180,1090.53,-2567.53,59.722,p=true},
 {"questie_creature_232912_28_1",180,1084.8,-2567.53,l={60.2,68.221},p=true},
 {"questie_creature_232920_28_0",181,1365.73,-1604.33,57.833,p=true},

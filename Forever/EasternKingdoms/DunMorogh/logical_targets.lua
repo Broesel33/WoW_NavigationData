@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=27,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="1505963376322810BAA377BB52D792A0D5C25E09299453B1C9B016861862342C",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="83E55DD37544A92F8B44BD54786E05BB13C58BD06B6A0E8E4FBB3E7E936C1A21"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=27,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="3C68BA34FA357676B9CB9E50BC47B33E70D3009897B2B87323EAA460D59E4F22",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="9D382FA8162C69E7BF11760DA626FF6B2D339A32CC46A6B8DE533BC8C6BDCFB9"}
 LogicalTargets.classes = {
 {"npc","npc_or_mob",5595,"Ironforge Guard","Wache von Ironforge"},
 {"npc","quest_giver",6181,"Jordan Stilwell"},
@@ -545,6 +545,7 @@ LogicalTargets.targets = {
 {"creature_453",67,-6263.55,516.573,386.236},
 {"creature_454",67,-6238.18,492.689,386.519},
 {"creature_455",67,-6261.88,471.167,386.079},
+{"creature_456",64,-6128.48,492.554,400.602,p=true},
 {"creature_458",64,-6183.05,550.864,384.771},
 {"creature_459",67,-6256.19,538.589,386.236},
 {"creature_460",67,-6277.2,552.383,387.197},

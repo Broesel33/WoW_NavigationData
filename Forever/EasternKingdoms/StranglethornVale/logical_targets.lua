@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1434,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="1849DE548EBC96FC1AC736EFE85F4979BA6AC7933D017C41BC0BD2FFFE664BA0",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="3C1CE2F60F4CBB492E794C4170791E46FB1677CA9B92F67E028A17842CBA4383"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1434,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="B3B279D7121C6BE19534CEDF65A564CB8F6891D07E8C4BD3EBD0CF0C2FF546B4",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="9B4E91C3A7790907DB2203FD6B47CF846B97810F68DEACCC80B5B26B178A2744"}
 LogicalTargets.classes = {
 {"npc","vendor",2843,"Jutak (Blade Trader)","Jutak (Klingentrödlerin)"},
 {"npc","quest_giver",7853,"Scooty (Chief Engineer)","Scooty (Chefingenieur)"},
@@ -3603,6 +3603,7 @@ LogicalTargets.targets = {
 {"gameobject_8799",320,-11663,-567,33.301,p=true},
 {"gameobject_8800",320,-11600,-571,29.188,p=true},
 {"gameobject_8801",320,-11747,-485,18.451,p=true},
+{"gameobject_8802",320,-11667,-573,32.561,p=true},
 {"gameobject_8810",320,-12102,182.104,20.303,p=true},
 {"gameobject_8811",320,-12054,328.296,4.122,p=true},
 {"gameobject_8812",320,-12051,319.214,4.255,p=true},
@@ -3797,6 +3798,7 @@ LogicalTargets.targets = {
 {"gameobject_11643",317,-14242.5,-8.001,12.194,p=true},
 {"gameobject_11644",312,-14566.9,-383.13,6.866,p=true},
 {"gameobject_1080061",372,-12304.6,351.361,0},
+{"gameobject_11646",319,-11732.6,1332.68,l={-4.11,1.078},p=true},
 {"gameobject_11647",317,-13549,433.35,76.818,p=true},
 {"gameobject_11648",311,-11545.9,-934.642,93.851,p=true},
 {"gameobject_11649",312,-11692.4,-818.605,35.921,p=true},

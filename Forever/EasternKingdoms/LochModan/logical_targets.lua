@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1432,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="42959B3AD002FC8859E629C1930DA2441CD6687E4195688EFE731F458B9F53D5",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="F50F051B1B018E3E373059D8FC1CDAF58E189642FE4EB14B6B558B07FBCD7FEC"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1432,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="84DC4E5292821382F2450DEEC7E3C96832E6CC787E33E8DE40B67AFBFB8309B7",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="ACC448397196C21443FA0A9BE8A87166656BABB740B3861843E8153489FA47AC"}
 LogicalTargets.classes = {
 {"npc","quest_giver",1280,"Mountaineer Droken","Gebirgsjäger Droken",a="possible_spawn"},
 {"npc","quest_giver",1283,"Mountaineer Kalmir","Gebirgsjägerin Kalmir",a="possible_spawn"},
@@ -254,7 +254,7 @@ LogicalTargets.targets = {
 {"creature_8205",12,-4808.29,-3347.25,286.873},
 {"creature_8206",12,-4806.88,-3217.98,281.485},
 {"creature_8207",12,-4798.76,-3318.09,288.85},
-{"creature_8208",13,-4748.58,-3484.42,283.419},
+{"creature_8208",13,-4748.58,-3484.42,l={293.772,297.8},p=true},
 {"creature_8209",12,-4814.6,-3411.13,289.629},
 {"creature_8210",12,-4760.76,-3194.68,275.976},
 {"creature_8211",13,-4749.81,-3416.72,284.223},
@@ -326,8 +326,8 @@ LogicalTargets.targets = {
 {"creature_8281",12,-4853.26,-3481.02,292.204},
 {"creature_8282",12,-4750.45,-3479.55,291.801},
 {"creature_8283",12,-4798.74,-3383.09,290.05},
-{"creature_8284",13,-4750.65,-3449.61,280.813},
-{"creature_8285",13,-4983.18,-3251.37,284.121},
+{"creature_8284",13,-4750.65,-3449.61,l={290.125,297.8},p=true},
+{"creature_8285",13,-4983.18,-3251.37,l={287.455,297.8},p=true},
 {"creature_8286",12,-4784.14,-3219.27,276.369},
 {"creature_8287",14,-5494.19,-3609.26,288.356},
 {"creature_8288",14,-5350.9,-3619.04,276.314},
@@ -354,8 +354,8 @@ LogicalTargets.targets = {
 {"creature_8325",59,-5201.9,-3784.95,318.127},
 {"creature_8326",60,-5141.29,-4012.85,329.362},
 {"creature_8327",58,-5581.64,-3647.15,308.569},
-{"creature_8328",13,-4884.76,-3215.82,277.521},
-{"creature_8329",13,-4780.41,-3485.11,289.505},
+{"creature_8328",13,-4884.76,-3215.82,l={283.357,297.844},p=true},
+{"creature_8329",13,-4780.41,-3485.11,297.8,p=true},
 {"creature_8330",12,-4929.92,-3179.79,279.322},
 {"creature_8331",12,-4811.91,-3286.37,288.512},
 {"creature_8332",14,-5415.41,-3391.13,262.328},

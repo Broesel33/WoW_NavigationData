@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=84,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="9140100C84039C835418162926163FA99AC7020CB4B9167077B861E53588A5F1",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="33E5D18B7CC895A58204ED87D831A8B0D84AF340F76B5FBDE548CB4D0A984AAF"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=84,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="52123D1720FD4ACD00057A233492502FE4B438BD1CED9BEC6318FF00F0B265EF",converterSha256="FEB3054D6400AA706B5B91E72DA1CF248EB540EABC1978F5247B31CE737BADEA",payloadSha256="E9EC9AFC0612B686EF44705DA4CD2464C1029FAF4096462CE23A9055D86819C8"}
 LogicalTargets.classes = {
 {"npc",{"quest_giver","trainer"},376,"High Priestess Laurena (Priest Trainer)","Hohepriesterin Laurena (Priesterlehrerin)"},
 {"npc","quest_giver",656,"Wilder Thistlenettle"},
@@ -1143,7 +1143,7 @@ LogicalTargets.targets = {
 {"questie_creature_165189_1519_10",438,-8500.63,962.24,l={23.456,96.21},p=true},
 {"questie_creature_165189_1519_11",438,-8712.84,919.67,l={59.6,101.378},p=true},
 {"questie_creature_165189_1519_12",438,-8977.18,887.53,106.435,p=true},
-{"questie_creature_165189_1519_13",438,-9010.77,868.42,l={129.95,147.377},p=true},
+{"questie_creature_165189_1519_13",438,-9010.77,868.42,l={29.967,129.95,147.377},p=true},
 {"questie_creature_165189_1519_14",438,-8771.22,840.96,l={59.6,91.223,98},p=true},
 {"questie_creature_165189_1519_15",438,-8560.87,824.46,l={59.706,106.8},p=true},
 {"questie_creature_165189_1519_16",438,-8906.52,785.19,l={59.6,88.506,103},p=true},
@@ -1245,7 +1245,7 @@ LogicalTargets.targets = {
 {"questie_creature_185317_1519_9",439,-8756.4,380,l={64.168,101.244},p=true},
 {"questie_creature_185317_1519_10",439,-8609.52,361.59,l={59.778,92.2,99.838},p=true},
 {"questie_creature_185335_1519_0",440,-8976.25,1044.6,l={53.118,102.704},p=true},
-{"questie_creature_211033_1519_0",441,-8998.26,872.59,l={108.582,148.95},p=true},
+{"questie_creature_211033_1519_0",441,-8998.26,872.59,l={29.868,108.582,148.95},p=true},
 {"questie_creature_238374_1519_0",442,-8313.33,1238.33,l={1.8,5.603},p=true},
 {"questie_creature_238374_1519_1",442,-8404.84,1232.25,l={1.962,5.6},p=true},
 {"questie_creature_238374_1519_2",442,-8438.78,1134.25,19.2,p=true},
@@ -1260,7 +1260,7 @@ LogicalTargets.targets = {
 {"questie_creature_259842_1519_1",445,-8923.31,628.64,l={75.316,99.79},p=true},
 {"questie_creature_263349_1519_0",446,-8443.3,316.06,l={59.62,121.097},p=true},
 {"questie_creature_264850_1519_0",447,-8404.84,467.57,l={59.669,124.093},p=true},
-{"questie_creature_265675_1519_0",448,-9003.24,861.29,l={106.2,149},p=true},
+{"questie_creature_265675_1519_0",448,-9003.24,861.29,l={29.802,106.2,149},p=true},
 {"questie_creature_266025_1519_0",449,-8791.73,820.81,l={59.6,97.896},p=true},
 {"questie_creature_266025_1519_1",449,-9080.38,819.24,l={59.686,109.8,115.948},p=true},
 {"questie_creature_266735_1519_0",450,-8785.24,598.41,l={59.688,97.843},p=true},
@@ -1355,7 +1355,7 @@ LogicalTargets.targets = {
 {"questie_gameobject_696267_1519_0",478,-8742.15,405.89,98.54,p=true},
 {"questie_gameobject_696268_1519_0",479,-8427.2,600.32,l={59.633,94.951},p=true},
 {"questie_gameobject_696270_1519_0",480,-8660.95,772.16,l={59.6,97.119},p=true},
-{"questie_gameobject_696271_1519_0",481,-9002.77,859.21,l={106.2,149.354},p=true},
+{"questie_gameobject_696271_1519_0",481,-9002.77,859.21,l={29.828,106.2,149.354},p=true},
 {"questie_gameobject_696272_1519_0",482,-8716.2,1010.72,l={59.6,96.341},p=true},
 {"questie_gameobject_696273_1519_0",483,-8622.61,931.49,l={59.6,99.8},p=true},
 {"questie_gameobject_696275_1519_0",484,-8813.85,837.31,l={59.6,99.351},p=true},
