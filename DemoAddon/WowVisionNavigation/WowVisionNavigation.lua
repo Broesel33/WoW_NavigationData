@@ -97,7 +97,46 @@ local function BuildZoneBoxes()
     end
 end
 
-local function NormalizedToWorld(mapID, nx, ny)
+-- Client conversion state. A single local table (the main chunk is close to Lua's limit of local variables).
+-- notes[mapID] holds the first comparison of the client conversion with the embedded box per map, for /vn log.
+local MapConversion = { notes = {} }
+
+-- Converts a normalized map position with the CLIENT's own map data (C_Map.GetWorldPosFromMapPos, available in the
+-- Classic Era / TBC / Forever clients). The embedded boxes come from the Forever client's UiMapAssignment, whose UiMap
+-- frame differs from the Era/TBC client in some zones (Redridge Mountains, Mulgore, Eastern Plaguelands, Stormwind
+-- City); only the running client's own conversion matches the player position that client reports.
+-- Axis convention (verified against warcraft.wiki.gg API_C_Map.GetWorldPosFromMapPos, Elwynn Forest example, and the
+-- embedded Elwynn box xmin=-10254.17 xmax=-7939.58 ymin=-1935.42 ymax=1535.42): the returned vector holds
+-- (x, y) = (north axis, west axis) = the first and second value of UnitPosition("player") = our worldX / worldY.
+-- Map (0,0) -> (-7939.58, 1535.42) = (xmax, ymax); map (1,1) -> (-10254.2, -1935.42) = (xmin, ymin). No swap.
+-- expectedContinent (optional): a result for a different continent/instance id is not used.
+-- Returns nil, nil when the API is missing, fails or returns nothing usable.
+function MapConversion.Client(mapID, nx, ny, expectedContinent)
+    local map = _G.C_Map
+    if type(map) ~= "table" or type(map.GetWorldPosFromMapPos) ~= "function"
+        or type(_G.CreateVector2D) ~= "function" then
+        return nil, nil
+    end
+    local ok, continentID, vec = pcall(function()
+        return map.GetWorldPosFromMapPos(mapID, _G.CreateVector2D(nx, ny))
+    end)
+    if not ok or type(vec) ~= "table" then return nil, nil end
+    if expectedContinent ~= nil and type(continentID) == "number" and continentID ~= expectedContinent then
+        return nil, nil
+    end
+    local wx, wy
+    if type(vec.GetXY) == "function" then
+        local okXY, x, y = pcall(vec.GetXY, vec)
+        if okXY then wx, wy = x, y end
+    else
+        wx, wy = vec.x, vec.y
+    end
+    if type(wx) ~= "number" or type(wy) ~= "number" or wx ~= wx or wy ~= wy then return nil, nil end
+    return wx, wy
+end
+
+-- Embedded-box conversion (fallback and comparison value).
+function MapConversion.Embedded(mapID, nx, ny)
     if next(ZONE_BOXES) == nil then BuildZoneBoxes() end
     local box = ZONE_BOXES[mapID]
     if not box then return nil, nil end
@@ -110,6 +149,27 @@ local function NormalizedToWorld(mapID, nx, ny)
     local worldY = box.ymax - nx * (box.ymax - box.ymin)
     local worldX = box.xmax - ny * (box.xmax - box.xmin)
     return worldX, worldY
+end
+
+local function NormalizedToWorld(mapID, nx, ny, expectedContinent)
+    local embeddedX, embeddedY = MapConversion.Embedded(mapID, nx, ny)
+    -- Only maps the addon knows (embedded box present) are converted, as before.
+    if not embeddedX then return nil, nil end
+    local clientX, clientY = MapConversion.Client(mapID, nx, ny, expectedContinent)
+    if not clientX then
+        if MapConversion.notes[mapID] == nil then
+            MapConversion.notes[mapID] = { source = "embedded" }
+        end
+        return embeddedX, embeddedY
+    end
+    -- The client result always wins. The difference is only recorded (first observation per map, shown by /vn log).
+    if MapConversion.notes[mapID] == nil or MapConversion.notes[mapID].source ~= "client" then
+        local dx, dy = clientX - embeddedX, clientY - embeddedY
+        MapConversion.notes[mapID] = {
+            source = "client", diffX = dx, diffY = dy, diffYards = math.sqrt(dx * dx + dy * dy),
+        }
+    end
+    return clientX, clientY
 end
 
 -- NOTE (verified with /vn log, 2026-06-26): in the open world of this client UnitPosition("player") returns 0 as the
@@ -149,7 +209,7 @@ local function GetPlayerWorldPosition()
             local pos = C_Map.GetPlayerMapPosition(mapID, "player")
             if pos then
                 local nx, ny = pos:GetXY()
-                local wx, wy = NormalizedToWorld(mapID, nx, ny)
+                local wx, wy = NormalizedToWorld(mapID, nx, ny, activeZone.nativeMapId)
                 if wx then return wx, wy, mapID end
             end
         end
@@ -2659,7 +2719,10 @@ local function CreateLogEntry(comment)
         local pos = C_Map.GetPlayerMapPosition(mapID, "player")
         if pos then nx, ny = pos:GetXY() end
     end
-    local wx, wy = GetPlayerWorldPosition()
+    local wx, wy, positionMapID = GetPlayerWorldPosition()
+    -- Source of the position conversion of this map (client API or embedded box) and, once per map, the difference
+    -- between both in yards (only known when the client conversion worked).
+    local conversionNote = positionMapID and MapConversion.notes[positionMapID] or nil
     -- Fix 2026-07-04: GetPlayerZ() ALWAYS returns 0 in the open world (10.6b) - as a result distanceToWaypoint3D and
     -- heightDifferenceToWaypoint were wrong in EVERY log entry (kzp - 0 = kzp). For the 3D diagnostic fields the height
     -- anchor estimate (konzept.md 5.1) is now used; the raw API value is additionally logged as worldZRaw.
@@ -2673,6 +2736,11 @@ local function CreateLogEntry(comment)
         mapID = mapID,
         normalizedX = nx, normalizedY = ny,
         worldX = wx, worldY = wy, worldZ = wz, worldZRaw = wzRoh,
+        positionMapID = positionMapID,
+        positionSource = conversionNote and conversionNote.source or nil,
+        clientFrameDiffX = conversionNote and conversionNote.diffX or nil,
+        clientFrameDiffY = conversionNote and conversionNote.diffY or nil,
+        clientFrameDiffYards = conversionNote and conversionNote.diffYards or nil,
         viewDirection = viewDirection,
         zone = GetZoneText and GetZoneText() or nil,
         subzone = GetSubZoneText and GetSubZoneText() or nil,
