@@ -83,94 +83,14 @@ local SOUND_CHANNEL = "Master"
 -- World rectangles (from UiMapAssignment.db2, see machbarkeit.md) per UiMapID. They come from the same generated
 -- runtime register as the LoadOnDemand assignment. A new zone therefore needs no second, easily forgotten control
 -- flow change in this file.
-local ZONE_BOXES = {}
--- The world rectangles per UiMap come from the continent index (maps/<continent>/index.lua). They are built at
--- addon start because the data files come after the core in the TOC.
-local function BuildZoneBoxes()
-    wipe(ZONE_BOXES)
-    local network = _G.WowVisionNavigationNavNetwork
-    if not network then return end
-    for _, zone in pairs(network.index) do
-        for mapID, box in pairs(zone.worldBoxes or {}) do
-            ZONE_BOXES[mapID] = box
-        end
-    end
-end
-
--- Client conversion state. A single local table (the main chunk is close to Lua's limit of local variables).
+-- The conversion itself (client first, embedded boxes as fallback) lives in NavNetwork.lua, the ONE implementation that the
+-- live target providers use as well (TargetProviders:MapTarget). The core only aliases it.
+-- ZONE_BOXES (shared table, rebuilt in place by NavNetwork.BuildZoneBoxes) = world rectangles per UiMap from the continent
+-- index; they are built at addon start because the data files come after the core in the TOC.
+local ZONE_BOXES = _G.WowVisionNavigationNavNetwork.zoneBoxes
 -- notes[mapID] holds the first comparison of the client conversion with the embedded box per map, for /vn log.
-local MapConversion = { notes = {} }
-
--- Converts a normalized map position with the CLIENT's own map data (C_Map.GetWorldPosFromMapPos, available in the
--- Classic Era / TBC / Forever clients). The embedded boxes come from the Forever client's UiMapAssignment, whose UiMap
--- frame differs from the Era/TBC client in some zones (Redridge Mountains, Mulgore, Eastern Plaguelands, Stormwind
--- City); only the running client's own conversion matches the player position that client reports.
--- Axis convention (verified against warcraft.wiki.gg API_C_Map.GetWorldPosFromMapPos, Elwynn Forest example, and the
--- embedded Elwynn box xmin=-10254.17 xmax=-7939.58 ymin=-1935.42 ymax=1535.42): the returned vector holds
--- (x, y) = (north axis, west axis) = the first and second value of UnitPosition("player") = our worldX / worldY.
--- Map (0,0) -> (-7939.58, 1535.42) = (xmax, ymax); map (1,1) -> (-10254.2, -1935.42) = (xmin, ymin). No swap.
--- expectedContinent (optional): a result for a different continent/instance id is not used.
--- Returns nil, nil when the API is missing, fails or returns nothing usable.
-function MapConversion.Client(mapID, nx, ny, expectedContinent)
-    local map = _G.C_Map
-    if type(map) ~= "table" or type(map.GetWorldPosFromMapPos) ~= "function"
-        or type(_G.CreateVector2D) ~= "function" then
-        return nil, nil
-    end
-    local ok, continentID, vec = pcall(function()
-        return map.GetWorldPosFromMapPos(mapID, _G.CreateVector2D(nx, ny))
-    end)
-    if not ok or type(vec) ~= "table" then return nil, nil end
-    if expectedContinent ~= nil and type(continentID) == "number" and continentID ~= expectedContinent then
-        return nil, nil
-    end
-    local wx, wy
-    if type(vec.GetXY) == "function" then
-        local okXY, x, y = pcall(vec.GetXY, vec)
-        if okXY then wx, wy = x, y end
-    else
-        wx, wy = vec.x, vec.y
-    end
-    if type(wx) ~= "number" or type(wy) ~= "number" or wx ~= wx or wy ~= wy then return nil, nil end
-    return wx, wy
-end
-
--- Embedded-box conversion (fallback and comparison value).
-function MapConversion.Embedded(mapID, nx, ny)
-    if next(ZONE_BOXES) == nil then BuildZoneBoxes() end
-    local box = ZONE_BOXES[mapID]
-    if not box then return nil, nil end
-    -- The normalized X axis (map left->right) corresponds to world Y (west axis), the normalized Y axis (map
-    -- top->bottom) corresponds to world X (north axis) - standard formula from UiMapAssignment.db2 (region0 = value at
-    -- normalized 0/0, region1 = value at normalized 1/1).
-    -- It used to be mirrored on the world Y axis (see TechnischeDoku.md section 10.6) - the player position was
-    -- therefore calculated systematically wrong, and the distance sorting in the target list produced arbitrary
-    -- "nearest" hits from other zones.
-    local worldY = box.ymax - nx * (box.ymax - box.ymin)
-    local worldX = box.xmax - ny * (box.xmax - box.xmin)
-    return worldX, worldY
-end
-
-local function NormalizedToWorld(mapID, nx, ny, expectedContinent)
-    local embeddedX, embeddedY = MapConversion.Embedded(mapID, nx, ny)
-    -- Only maps the addon knows (embedded box present) are converted, as before.
-    if not embeddedX then return nil, nil end
-    local clientX, clientY = MapConversion.Client(mapID, nx, ny, expectedContinent)
-    if not clientX then
-        if MapConversion.notes[mapID] == nil then
-            MapConversion.notes[mapID] = { source = "embedded" }
-        end
-        return embeddedX, embeddedY
-    end
-    -- The client result always wins. The difference is only recorded (first observation per map, shown by /vn log).
-    if MapConversion.notes[mapID] == nil or MapConversion.notes[mapID].source ~= "client" then
-        local dx, dy = clientX - embeddedX, clientY - embeddedY
-        MapConversion.notes[mapID] = {
-            source = "client", diffX = dx, diffY = dy, diffYards = math.sqrt(dx * dx + dy * dy),
-        }
-    end
-    return clientX, clientY
-end
+local MapConversion = _G.WowVisionNavigationNavNetwork.MapConversion
+local NormalizedToWorld = _G.WowVisionNavigationNavNetwork.NormalizedToWorld
 
 -- NOTE (verified with /vn log, 2026-06-26): in the open world of this client UnitPosition("player") returns 0 as the
 -- third return value (height) throughout, never a real value - so the function is currently NOT usable for our
@@ -4752,7 +4672,7 @@ eventFrame:SetScript("OnEvent", function(_, event, addonName)
             local actions = _G.WowVisionNavigationActionNavigation
             return actions ~= nil and actions:CanTraverse(action, nil) == true
         end
-        BuildZoneBoxes()
+        NavNetwork.BuildZoneBoxes()
         if WowVisionNavigationDB.showauto == nil then WowVisionNavigationDB.showauto = false end
         WowVisionNavigationDB.log = WowVisionNavigationDB.log or {}
         WowVisionNavigationDB.questProbes = WowVisionNavigationDB.questProbes or {}

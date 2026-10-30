@@ -175,6 +175,97 @@ function N.LoadIndex(source)
     return true
 end
 
+-- ---------------------------------------------------------------------------
+-- Map position -> world coordinates (ONE implementation for the core, the quest/Questie paths and the live providers)
+-- ---------------------------------------------------------------------------
+-- N.zoneBoxes[uiMapID] = world rectangle of the map from the continent index. It is rebuilt in place (other modules hold
+-- the table) at addon start and lazily whenever the index table was replaced.
+N.zoneBoxes = {}
+local boxesIndex = nil
+
+function N.BuildZoneBoxes()
+    local boxes = N.zoneBoxes
+    for mapID in pairs(boxes) do boxes[mapID] = nil end
+    boxesIndex = N.index
+    for _, zone in pairs(N.index) do
+        for mapID, box in pairs(zone.worldBoxes or {}) do
+            boxes[mapID] = box
+        end
+    end
+end
+
+-- notes[mapID] holds the first comparison of the client conversion with the embedded box per map, for /vn log.
+local MapConversion = { notes = {} }
+N.MapConversion = MapConversion
+
+-- Converts a normalized map position with the CLIENT's own map data (C_Map.GetWorldPosFromMapPos, available in the
+-- Classic Era / TBC / Forever clients). The embedded boxes come from the Forever client's UiMapAssignment, whose UiMap
+-- frame differs from the Era/TBC client in some zones (Redridge Mountains, Mulgore, Eastern Plaguelands, Stormwind
+-- City); only the running client's own conversion matches the player position that client reports.
+-- Axis convention (verified against warcraft.wiki.gg API_C_Map.GetWorldPosFromMapPos, Elwynn Forest example, and the
+-- embedded Elwynn box xmin=-10254.17 xmax=-7939.58 ymin=-1935.42 ymax=1535.42): the returned vector holds
+-- (x, y) = (north axis, west axis) = the first and second value of UnitPosition("player") = our worldX / worldY.
+-- Map (0,0) -> (-7939.58, 1535.42) = (xmax, ymax); map (1,1) -> (-10254.2, -1935.42) = (xmin, ymin). No swap.
+-- expectedContinent (optional): a result for a different continent/instance id is not used.
+-- Returns nil, nil when the API is missing, fails or returns nothing usable.
+function MapConversion.Client(mapID, nx, ny, expectedContinent)
+    local map = _G.C_Map
+    if type(map) ~= "table" or type(map.GetWorldPosFromMapPos) ~= "function"
+        or type(_G.CreateVector2D) ~= "function" then
+        return nil, nil
+    end
+    local ok, continentID, vec = pcall(function()
+        return map.GetWorldPosFromMapPos(mapID, _G.CreateVector2D(nx, ny))
+    end)
+    if not ok or type(vec) ~= "table" then return nil, nil end
+    if expectedContinent ~= nil and type(continentID) == "number" and continentID ~= expectedContinent then
+        return nil, nil
+    end
+    local wx, wy
+    if type(vec.GetXY) == "function" then
+        local okXY, x, y = pcall(vec.GetXY, vec)
+        if okXY then wx, wy = x, y end
+    else
+        wx, wy = vec.x, vec.y
+    end
+    if type(wx) ~= "number" or type(wy) ~= "number" or wx ~= wx or wy ~= wy then return nil, nil end
+    return wx, wy
+end
+
+-- Embedded-box conversion (fallback and comparison value).
+function MapConversion.Embedded(mapID, nx, ny)
+    if next(N.zoneBoxes) == nil or boxesIndex ~= N.index then N.BuildZoneBoxes() end
+    local box = N.zoneBoxes[mapID]
+    if not box then return nil, nil end
+    -- The normalized X axis (map left->right) corresponds to world Y (west axis), the normalized Y axis (map
+    -- top->bottom) corresponds to world X (north axis) - standard formula from UiMapAssignment.db2 (region0 = value at
+    -- normalized 0/0, region1 = value at normalized 1/1).
+    local worldY = box.ymax - nx * (box.ymax - box.ymin)
+    local worldX = box.xmax - ny * (box.xmax - box.xmin)
+    return worldX, worldY
+end
+
+function N.NormalizedToWorld(mapID, nx, ny, expectedContinent)
+    local embeddedX, embeddedY = MapConversion.Embedded(mapID, nx, ny)
+    -- Only maps the addon knows (embedded box present) are converted.
+    if not embeddedX then return nil, nil end
+    local clientX, clientY = MapConversion.Client(mapID, nx, ny, expectedContinent)
+    if not clientX then
+        if MapConversion.notes[mapID] == nil then
+            MapConversion.notes[mapID] = { source = "embedded" }
+        end
+        return embeddedX, embeddedY
+    end
+    -- The client result always wins. The difference is only recorded (first observation per map, shown by /vn log).
+    if MapConversion.notes[mapID] == nil or MapConversion.notes[mapID].source ~= "client" then
+        local dx, dy = clientX - embeddedX, clientY - embeddedY
+        MapConversion.notes[mapID] = {
+            source = "client", diffX = dx, diffY = dy, diffYards = sqrt(dx * dx + dy * dy),
+        }
+    end
+    return clientX, clientY
+end
+
 function N.ZoneAvailable(zoneId)
     return type(_G.WVN7) == "table" and type(_G.WVN7[zoneId]) == "table"
 end

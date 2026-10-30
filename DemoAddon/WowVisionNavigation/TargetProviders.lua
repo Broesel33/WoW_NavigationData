@@ -14,19 +14,21 @@ end
 
 function P:MapTarget(id,name,map,nx,ny,provider)
     if not finite(nx) or not finite(ny) or nx<0 or nx>1 or ny<0 or ny>1 then return nil end
-    local area,box
+    local area
     for _,candidate in pairs(WowVisionNavigationNavNetwork.index) do
         if candidate.worldBoxes and candidate.worldBoxes[map] then
             if area then return nil end
-            area,box=candidate,candidate.worldBoxes[map]
+            area=candidate
         end
     end
     if not area then return nil end
     local nativeMap = area.nativeMapId
     if nativeMap == nil then return nil end
-    -- Existing UiMap convention: normalized X runs opposite world Y, Y opposite world X.
-    local target=self:WorldTarget(id,name,box.xmax-ny*(box.xmax-box.xmin),
-        box.ymax-nx*(box.ymax-box.ymin),nil,nativeMap,provider)
+    -- The client's own map data first (C_Map.GetWorldPosFromMapPos), the embedded box only as fallback: the one shared
+    -- conversion of NavNetwork.lua, the same as for the player position (the UiMap frame of some zones differs between clients).
+    local x,y=WowVisionNavigationNavNetwork.NormalizedToWorld(map,nx,ny,nativeMap)
+    if not x then return nil end
+    local target=self:WorldTarget(id,name,x,y,nil,nativeMap,provider)
     if target then target.zoneId=area.zoneId end
     return target
 end
