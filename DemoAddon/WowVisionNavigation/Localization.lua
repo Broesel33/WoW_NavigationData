@@ -34,9 +34,22 @@ local function NameSuffix(target)
     return template
 end
 
+-- Dungeon entrances of a dungeon with several entrances carry their wing (nameWing English, nameWingDe German, both from the data): the
+-- spoken name is "<dungeon>, <wing>" (template dyn.<key>_wing); without a wing or a template the name is the plain one.
+local function DynWingName(target, key)
+    local wing = target.nameWing
+    if L.IsGerman() and type(target.nameWingDe) == "string" and target.nameWingDe ~= "" then wing = target.nameWingDe end
+    if type(wing) ~= "string" or wing == "" then return nil end
+    local template = L.Lookup("dyn." .. key .. "_wing")
+    if template == nil then return nil end
+    return string.format(template, DynPlaceName(target) or L.Lookup("dyn.unknown_destination") or "?", wing) .. NameSuffix(target)
+end
+
 local function DynName(target)
     local key = target.nameKey
     if type(key) ~= "string" or key == "" then return nil end
+    local spokenWithWing = DynWingName(target, key)
+    if spokenWithWing then return spokenWithWing end
     local template = L.Lookup("dyn." .. key)
     if template == nil then return nil end
     if not template:find("%s", 1, true) then return template .. NameSuffix(target) end
@@ -524,6 +537,7 @@ L.en = {
     ["desc_water"] = " (water surface, diving depth %.1f yards)",
     ["band_prompt"] = "Target height unknown. /vn level <number> chooses a height band:",
     ["dyn.dungeon_entrance"] = "Dungeon entrance: %s",
+    ["dyn.dungeon_entrance_wing"] = "Dungeon entrance: %s, %s",
     ["dyn.portal"] = "Portal to %s",
     ["dyn.dock_ship"] = "Ship dock to %s",
     ["dyn.dock_zeppelin"] = "Zeppelin dock to %s",
@@ -936,6 +950,7 @@ L.de = {
     ["desc_water"] = " (Wasseroberfläche, Tauchtiefe %.1f Yards)",
     ["band_prompt"] = "Zielhöhe unbekannt. /vn ebene <Nummer> wählt einen Höhenbereich:",
     ["dyn.dungeon_entrance"] = "Dungeon-Eingang: %s",
+    ["dyn.dungeon_entrance_wing"] = "Dungeon-Eingang: %s, %s",
     ["dyn.portal"] = "Portal nach %s",
     ["dyn.dock_ship"] = "Anleger Schiff nach %s",
     ["dyn.dock_zeppelin"] = "Anleger Zeppelin nach %s",
