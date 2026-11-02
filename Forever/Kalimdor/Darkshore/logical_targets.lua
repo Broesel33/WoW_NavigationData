@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1439,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="572C5C8742B7B0BA07098425E4A31E74BB99C874A91D08F8D499D6BC810BD6A0",converterSha256="F2B15B8C1D8AA3178FB0E8E11C0C20666ECF3DDA0AD7512C654964BDFE97A2E6",payloadSha256="A9032AAD697EC56723E4574AB29ABD439948B0446110AE0F87AB115189BD354E"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1439,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="68EC8415F2A231BF194562712EDB3CC6CCD872908C367E90FB33CC65D2FDD888",payloadSha256="1DA8A02FEB8340C03CC97C36C9FAA8CD9B9B33D2DA0B526175C7E489AC46BE24"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",2186,"Carnivous the Breaker","Carnivous der Zerstörer",a="possible_spawn"},
 {"creature","npc_or_mob",2180,"Stormscale Siren","Sirene der Sturmschuppen",a="possible_spawn"},

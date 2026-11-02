@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1444,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="582D0B48D4B2C42EBF7EE97D52BFE6D2B69D5F06FD503C85D26CE38312D24C00",converterSha256="F2B15B8C1D8AA3178FB0E8E11C0C20666ECF3DDA0AD7512C654964BDFE97A2E6",payloadSha256="C7EC1CC3F7A18B02BB117315CB456B4502B56493A5A885BD0E1F2372001F8072"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1444,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="4DAA40C5E16D36BAD24289876B306E3D40F519B3CBB50D7D6A5406E11054A34B",payloadSha256="A9F25033FD897AA59E01F02CB4F47ECD43C3E0D08E2E57AE5CE69AC8E933E980"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",12418,"Gordok Hyena","Hyäne der Gordok"},
 {"npc",{"quest_giver","vendor"},6576,"Brienna Starglow (Tailoring Supplies)","Brienna Starglow (Schneiderbedarf)"},
