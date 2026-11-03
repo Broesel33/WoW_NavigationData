@@ -20,6 +20,7 @@ Guidance.lua
 WowVisionNavigation.lua
 ActionNavigation.lua
 DockNavigation.lua
+FishingNavigation.lua
 TransitActivation.lua
 maps/DeeprunTram/index.lua
 maps/DeeprunTram/DeeprunTram/navdata.lua

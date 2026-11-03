@@ -457,6 +457,16 @@ local function Decode(raw)
         end
     end
     if a ~= #references then error("attachment count does not match the references") end
+    -- Floor of the cells (F10, optional field cm): 16-bit mask per cell, bit 4 * row + column of the 4 x 4 fields. Data without the field
+    -- (older exports) leave zone.cellFloor nil: every cell then covers its whole square.
+    if raw.cm ~= nil then
+        local floors = Chars(raw.cm)
+        if #floors ~= 3 * m then error("cell floor field has the wrong length") end
+        zone.cellFloor = {}
+        for i = 1, m do
+            zone.cellFloor[i] = (floors[3 * i - 2] * BASE + floors[3 * i - 1]) * BASE + floors[3 * i]
+        end
+    end
     return zone
 end
 
@@ -809,17 +819,108 @@ local function FitsHeight(zone, i, z)
     return zone.cellZMin[i] - N.HEIGHT_TOLERANCE <= z and z <= zone.cellZMax[i] + N.HEIGHT_TOLERANCE
 end
 
+-- F10: the area of a cell is its floor, not its square. The field mask of the floor (zone.cellFloor, field cm) has the bit 4 * row + column of
+-- every 4 x 4 field under which the floor of the cell lies; a point over any other field of the square is not in the cell. Data without the field
+-- (older exports) have no mask: the whole square counts.
+local function FieldBit(zone, i, x, y)
+    local field = zone.cellSize[i] / FIELDS
+    local fx = min(FIELDS - 1, max(0, floor((x - zone.cellX[i]) / field)))
+    local fy = min(FIELDS - 1, max(0, floor((y - zone.cellY[i]) / field)))
+    return FIELDS * fy + fx
+end
+
+local function OverFloor(zone, i, x, y)
+    local mask = zone.cellFloor and zone.cellFloor[i]
+    return mask == nil or BitSet(mask, FieldBit(zone, i, x, y))
+end
+
+-- Distance in the plane from (x, y) to the floor of a cell (the nearest field of its mask; RectDistance without a mask).
+local function FloorDistance(zone, i, x, y)
+    local mask = zone.cellFloor and zone.cellFloor[i]
+    if mask == nil then return RectDistance(zone, i, x, y) end
+    local field, best = zone.cellSize[i] / FIELDS, nil
+    for bit = 0, FIELDS * FIELDS - 1 do
+        if BitSet(mask, bit) then
+            local x0 = zone.cellX[i] + (bit % FIELDS) * field
+            local y0 = zone.cellY[i] + floor(bit / FIELDS) * field
+            local dx = max(x0 - x, 0, x - (x0 + field))
+            local dy = max(y0 - y, 0, y - (y0 + field))
+            local distance = sqrt(dx * dx + dy * dy)
+            if not best or distance < best then best = distance end
+        end
+    end
+    return best or math.huge
+end
+
+-- The cells of one class whose floor lies under (x, y) and whose band fits z (nil: any height).
 local function CellCandidates(zone, kind, x, y, z)
     local size = CELL_SIZES[kind]
     local list = zone.cellMap[kind + 1][CellKey(floor(x / size), floor(y / size))]
     local result = {}
     for _, i in ipairs(list or {}) do
-        if FitsHeight(zone, i, z) then result[#result + 1] = i end
+        if FitsHeight(zone, i, z) and OverFloor(zone, i, x, y) then result[#result + 1] = i end
     end
     return result
 end
 
+-- Bands at most 2 yd apart belong to the same layer (chapter 4.1).
+local SAME_LAYER_GAP = 2.0
+
+local function MiddleOf(hit)
+    return (hit.zone.cellZMin[hit.cell] + hit.zone.cellZMax[hit.cell]) / 2
+end
+
+-- True when the height bands of two hits are at most 2 yd apart (same level).
+local function SameLevel(p, q)
+    local pLo, pHi = p.zone.cellZMin[p.cell], p.zone.cellZMax[p.cell]
+    local qLo, qHi = q.zone.cellZMin[q.cell], q.zone.cellZMax[q.cell]
+    return qLo - pHi <= SAME_LAYER_GAP and pLo - qHi <= SAME_LAYER_GAP
+end
+
+-- The best hit by a "better(p, q)" order (the first of equals wins).
+local function BestHit(hits, better)
+    local best
+    for _, hit in ipairs(hits) do
+        if not best or better(hit, best) then best = hit end
+    end
+    return best
+end
+
+-- Cells of different classes (8 yd fine, 16 yd open) are candidates together. On the level of the best hit the finest cell
+-- wins (then the better of equals); a fine cell on another level never hides the cell of the level that fits.
+local function FinestOnLevel(hits, best, better)
+    local pick = best
+    for _, hit in ipairs(hits) do
+        if SameLevel(hit, best) then
+            local size, pickSize = hit.zone.cellSize[hit.cell], pick.zone.cellSize[pick.cell]
+            if size < pickSize or (size == pickSize and better(hit, pick)) then pick = hit end
+        end
+    end
+    return pick
+end
+
+-- Orders by the distance of the band middle to a known height.
+local function NearestMiddle(z)
+    return function(p, q) return abs(MiddleOf(p) - z) < abs(MiddleOf(q) - z) end
+end
+
+-- Orders by the gap between the band and a last known height, then by the distance of the middle.
+local function NearestBand(h)
+    local function gap(hit)
+        return max(hit.zone.cellZMin[hit.cell] - h, 0, h - hit.zone.cellZMax[hit.cell])
+    end
+    return function(p, q)
+        local pGap, qGap = gap(p), gap(q)
+        if pGap ~= qGap then return pGap < qGap end
+        return abs(MiddleOf(p) - h) < abs(MiddleOf(q) - h)
+    end
+end
+
 -- Looks up the cell for (x, y, z). z == nil means height unknown. Swimming: 32-yd water cells only.
+-- Both land classes (fine, then open) are looked at together, so a fine cell of another level cannot hide the open cell of the
+-- right one. Height known (or last known): the nearest band decides, on its level the finest cell. Height unknown: candidates on
+-- different levels are ambiguous, on one level the finest cell wins. A cell counts only over the fields of its floor (F10, CellCandidates);
+-- a point over no cell takes the cell whose floor is nearest within the radius.
 --   opts.swimming, opts.radius (default START_RADIUS), opts.preferred (set of node IDs of the route state),
 --   opts.candidates (output on "ambiguous")
 -- Returns { zone, cell, distance, kind } | nil, reason ("ambiguous" | "no_attachment")
@@ -844,18 +945,13 @@ function N.FindCell(x, y, z, opts)
                 hits[#hits + 1] = { zone = zone, cell = i, distance = 0, kind = kind }
             end
         end
-        if #hits > 0 then break end
     end
     if #hits > 0 then
         if #hits == 1 then return hits[1] end
-        -- height known: nearest middle. Height unknown: the route state decides, otherwise ambiguous.
+        -- height known: nearest middle, on its level the finest cell. Height unknown: the route state decides, otherwise ambiguous.
         if z ~= nil then
-            local best, bestDistance
-            for _, hit in ipairs(hits) do
-                local middle = (hit.zone.cellZMin[hit.cell] + hit.zone.cellZMax[hit.cell]) / 2
-                if not best or abs(middle - z) < bestDistance then best, bestDistance = hit, abs(middle - z) end
-            end
-            return best
+            local better = NearestMiddle(z)
+            return FinestOnLevel(hits, BestHit(hits, better), better)
         end
         -- Route state: a cell attached to a waypoint of the running route wins.
         if opts.preferred then
@@ -869,28 +965,20 @@ function N.FindCell(x, y, z, opts)
         end
         -- Last known height (since 4.41): without any current height the band nearest to it decides, before the player is asked.
         if opts.lastHeight then
-            local best, bestGap, bestMiddle
-            for _, hit in ipairs(hits) do
-                local lo, hi = hit.zone.cellZMin[hit.cell], hit.zone.cellZMax[hit.cell]
-                local gap = max(lo - opts.lastHeight, 0, opts.lastHeight - hi)
-                local middle = abs((lo + hi) / 2 - opts.lastHeight)
-                if not best or gap < bestGap or (gap == bestGap and middle < bestMiddle) then
-                    best, bestGap, bestMiddle = hit, gap, middle
-                end
-            end
-            return best
+            local better = NearestBand(opts.lastHeight)
+            return FinestOnLevel(hits, BestHit(hits, better), better)
         end
-        -- Bands that are at most 2 yd apart belong to the same layer (chapter 4.1): not ambiguous
-        table.sort(hits, function(p, q)
-            return (p.zone.cellZMin[p.cell] + p.zone.cellZMax[p.cell]) < (q.zone.cellZMin[q.cell] + q.zone.cellZMax[q.cell])
-        end)
+        -- Bands that are at most 2 yd apart belong to the same layer (chapter 4.1): not ambiguous, the finest cell wins.
+        table.sort(hits, function(p, q) return MiddleOf(p) < MiddleOf(q) end)
         local first = hits[1]
         local ambiguous = false
         for i = 2, #hits do
             local hit = hits[i]
-            if hit.zone.cellZMin[hit.cell] - first.zone.cellZMax[first.cell] > 2.0 then ambiguous = true; break end
+            if hit.zone.cellZMin[hit.cell] - first.zone.cellZMax[first.cell] > SAME_LAYER_GAP then ambiguous = true; break end
         end
-        if not ambiguous then return first end
+        if not ambiguous then
+            return FinestOnLevel(hits, first, function() return false end)
+        end
         opts.candidates = hits
         return nil, "ambiguous"
     end
@@ -906,7 +994,7 @@ function N.FindCell(x, y, z, opts)
                 for dy = -reach, reach do
                     for _, i in ipairs(zone.cellMap[kind + 1][CellKey(gx + dx, gy + dy)] or {}) do
                         if FitsHeight(zone, i, z) then
-                            local distance = RectDistance(zone, i, x, y)
+                            local distance = FloorDistance(zone, i, x, y)
                             if distance <= radius and (not best or distance < best.distance) then
                                 best = { zone = zone, cell = i, distance = distance, kind = kind }
                             end
@@ -1194,7 +1282,6 @@ function N.HeightBands(x, y, opts)
                     bands[#bands + 1] = { zone = zone, cell = i, zMin = zone.cellZMin[i], zMax = zone.cellZMax[i],
                         layer = zone.cellLayer[i] }
                 end
-                if #bands > 0 then break end
             end
         end
     end

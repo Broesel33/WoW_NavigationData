@@ -5,7 +5,7 @@ local forbidden = { nodeId=true, node_id=true, endNodeId=true, reachable=true,
     attachment_edge=true, targetDistance=true, node_distance=true,
     route_attachment_point=true, attachment_corridor=true }
 local kinds = {npc=true,mob=true,creature=true,gameobject=true,herb=true,mining=true,
-    mailbox=true,search_area=true,transit_facility=true,zone_transition=true,live=true}
+    mailbox=true,search_area=true,transit_facility=true,zone_transition=true,live=true,fishing_spot=true}
 
 local function denseArray(value)
     if type(value) ~= "table" then return false end

@@ -991,6 +991,8 @@ working addon with these parts:
   ActionNavigation.lua, DockNavigation.lua, TransitActivation.lua
                         Transit: actions (walk-in, clicked portals, the Wind Bridge, dive points),
                         docks and walk-in triggers.
+  FishingNavigation.lua The fishing spots: the water point in front of the standing point (orientation
+                        only, never a walking target) and the direction tone after the arrival.
   Localization.lua      All player-facing texts, in German and English.
   WowVisionNavigation.lua
                         The game integration: zone detection, the /vn commands, events, sounds.

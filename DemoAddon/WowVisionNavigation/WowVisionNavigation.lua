@@ -415,6 +415,7 @@ local Navigation = {
     directTarget = nil,             -- free single-target orientation mode without A*/funnel/route
     pathIndex = nil,
     targetName = nil,
+    targetId = nil,                 -- ID of the chosen target (logical or dyn row); the arrival at a fishing spot looks the row up
     targetStatus = nil,
     lastBeepTime = 0,
     lastClickTime = 0,
@@ -1140,6 +1141,10 @@ local function StopNavigation(reason, transitRetained, waitContextRetained)
     if _G.WowVisionNavigationDockNavigation and not waitContextRetained then
         _G.WowVisionNavigationDockNavigation:Reset(false)
     end
+    -- The fishing spot context (direction tone, key I) ends with every stop and every new target.
+    if _G.WowVisionNavigationFishingNavigation then
+        _G.WowVisionNavigationFishingNavigation:Reset()
+    end
     if _G.WowVisionNavigationAlignStatus then
         _G.WowVisionNavigationAlignStatus.wowVisionGeneration = nil
         WowVisionNavigationAlignFineCancel()
@@ -1148,6 +1153,7 @@ local function StopNavigation(reason, transitRetained, waitContextRetained)
         _G.WowVisionNavigationActionNavigation:Cancel(nil)
     end
     Navigation.pendingAction = nil
+    Navigation.targetId = nil
     if not transitRetained then Navigation.actionContinuation = nil end
     Navigation.active = false
     Navigation.path = nil
@@ -1320,6 +1326,9 @@ local function StartNavigationToNode(targetNodeId, targetName, targetStatus, foo
     if _G.WowVisionNavigationDockNavigation then
         _G.WowVisionNavigationDockNavigation:Reset(false)
     end
+    if _G.WowVisionNavigationFishingNavigation then
+        _G.WowVisionNavigationFishingNavigation:Reset()
+    end
     Navigation.rawPathLength = rawLength
     Navigation.searchNodes = routeResult and routeResult.expansions or nil
     Navigation.courseChanges = CountCourseChanges(path)
@@ -1336,6 +1345,8 @@ local function StartNavigationToNode(targetNodeId, targetName, targetStatus, foo
     -- The first waypoint is the attachment of the start cell; Arrival advances along the same path.
     Navigation.pathIndex = 1
     Navigation.targetName = targetName
+    -- The ID of the target travels with the route (the arrival at a fishing spot needs its row, not only its name).
+    Navigation.targetId = logicalSource and logicalSource.id or nil
     Navigation.targetStatus = targetStatus or "directly_reachable"
     Navigation.footOnly = footOnly and true or false
     Navigation.waitTargetId = waitTargetId
@@ -1625,7 +1636,9 @@ frame:SetScript("OnUpdate", function(_, elapsed)
         end
     end
     local waitModule = not Navigation.active and _G.WowVisionNavigationDockNavigation
-    if not Navigation.active and not (waitModule and waitModule.reached) then return end
+    local fishingModule = not Navigation.active and _G.WowVisionNavigationFishingNavigation
+    local waitReached, fishingReached = waitModule and waitModule.reached, fishingModule and fishingModule.reached
+    if not Navigation.active and not waitReached and not fishingReached then return end
     updateAccumulator = updateAccumulator + elapsed
     if updateAccumulator < NavigationCaptureInterval() then return end
     updateAccumulator = 0
@@ -1634,14 +1647,17 @@ frame:SetScript("OnUpdate", function(_, elapsed)
     if not x then
         if Navigation.directTarget then
             StopNavigation(WowVisionNavigationText("stop_position_unavailable"))
-        elseif waitModule then
-            waitModule:Reset(false)
+        else
+            if waitModule then waitModule:Reset(false) end
+            if fishingModule then fishingModule:Reset() end
         end
         return
     end
 
     if not Navigation.active then
-        local _, beaconX, beaconY, reachedName = waitModule:BeaconTarget(x, y, NavData)
+        -- The passive beacon of the dock that was reached or of the fishing spot that was reached (never both at once).
+        local beaconModule = waitReached and waitModule or fishingModule
+        local _, beaconX, beaconY, reachedName = beaconModule:BeaconTarget(x, y, NavData)
         if not beaconX then return end
         if reachedName then
             PlayEventSound("target_reached")
@@ -1724,7 +1740,21 @@ frame:SetScript("OnUpdate", function(_, elapsed)
     if waypointId == Navigation.logicalTarget then
         if distance <= Guidance.EffectiveRadius(ARRIVAL_TARGET_RADIUS) then
             PlayEventSound("target_reached")
-            StopNavigation(WowVisionNavigationText("stop_target_position_reached", Navigation.targetName))
+            -- A fishing spot says where the water lies and starts the direction tone (FishingNavigation); the row comes from the
+            -- ID the route carried. Any other target, or a row that is not a valid fishing spot, ends with the normal text.
+            local fishing = _G.WowVisionNavigationFishingNavigation
+            local spot = fishing and fishing:Find(NavData, Navigation.targetId)
+            local reachedText = WowVisionNavigationText("stop_target_position_reached", Navigation.targetName)
+            if spot then
+                StopNavigation(nil)
+                if fishing:Arrival(spot, NavData, x, y, Guidance.EffectiveRadius(ARRIVAL_TARGET_RADIUS)) then
+                    Navigation.lastBeepTime = GetTime()
+                else
+                    WowVisionNavigationPrint(reachedText)
+                end
+                return
+            end
+            StopNavigation(reachedText)
             return
         end
         local angle=((math.atan2(dy,dx)-(GetPlayerFacing() or 0)+math.pi)%(2*math.pi))-math.pi
@@ -2191,6 +2221,9 @@ function WowVisionNavigationSelectListEntry(entry,travelOrder,startOverride)
         if _G.WowVisionNavigationDockNavigation then
             _G.WowVisionNavigationDockNavigation:Reset(false)
         end
+        if _G.WowVisionNavigationFishingNavigation then
+            _G.WowVisionNavigationFishingNavigation:Reset()
+        end
         Navigation.manualStartNode = entry.nodeId
         Navigation.manualStartName = TargetName(entry)
         -- /vn hier delivers an exactly known height as a real anchor.
@@ -2560,7 +2593,8 @@ local function BuildWowVisionIntegration()
             if (Navigation.active and (Navigation.path or Navigation.directTarget))
                 or (_G.WowVisionNavigationDockNavigation
                     and (_G.WowVisionNavigationDockNavigation.reached
-                         or _G.WowVisionNavigationDockNavigation.passive)) then
+                         or _G.WowVisionNavigationDockNavigation.passive))
+                or (_G.WowVisionNavigationFishingNavigation and _G.WowVisionNavigationFishingNavigation.reached) then
                 local ok, failure = pcall(WowVisionNavigationAlignToActiveWaypoint)
                 if not ok then
                     WowVisionNavigationSay("i_alignment_failed", tostring(failure))
@@ -4012,10 +4046,16 @@ end
 function WowVisionNavigationAlignmentTarget()
     if not Navigation.active or (not Navigation.directTarget
         and (not Navigation.path or not Navigation.pathIndex)) then
+        -- Without a route: the boarding point of the dock that was reached, else the water point of the fishing spot that was reached.
         local featureModule = _G.WowVisionNavigationDockNavigation
+        local fishing = _G.WowVisionNavigationFishingNavigation
         local x, y = GetPlayerWorldPosition()
-        if featureModule and x then return featureModule:AlignmentTarget(x, y, NavData) end
-        return nil
+        if not x then return nil end
+        local id, targetX, targetY
+        if featureModule then id, targetX, targetY = featureModule:AlignmentTarget(x, y, NavData) end
+        if not id and fishing then id, targetX, targetY = fishing:AlignmentTarget(x, y, NavData) end
+        if not id then return nil end
+        return id, targetX, targetY
     end
     local direct = Navigation.directTarget
     if direct and direct.boardingTargetId then
@@ -4205,8 +4245,9 @@ _G["WowVisionNavigationAlignButton"]:Show()
 -- retained. The wrapper installed in BuildWowVisionIntegration delegates to the original saved there in this case.
 function WowVisionNavigationExecuteKeyI()
     local dock = _G.WowVisionNavigationDockNavigation
+    local fishing = _G.WowVisionNavigationFishingNavigation
     if (Navigation.active and (Navigation.path or Navigation.directTarget))
-        or (dock and (dock.reached or dock.passive)) then
+        or (dock and (dock.reached or dock.passive)) or (fishing and fishing.reached) then
         return WowVisionNavigationAlignToActiveWaypoint()
     end
     local maps = _G.WowVision and _G.WowVision.base and _G.WowVision.base.navigation
@@ -4245,6 +4286,9 @@ function WowVisionNavigationClearZoneState(reason, transitRetained)
     StopNavigation(Navigation.active and reason or nil, transitRetained, true)
     if _G.WowVisionNavigationDockNavigation then
         _G.WowVisionNavigationDockNavigation:ZoneLoaded(nil)
+    end
+    if _G.WowVisionNavigationFishingNavigation then
+        _G.WowVisionNavigationFishingNavigation:ZoneLoaded()
     end
     if _G.WowVisionNavigationActionNavigation then
         _G.WowVisionNavigationActionNavigation:Reset(transitRetained)
@@ -4531,6 +4575,9 @@ function WowVisionNavigationZoneLoader:ActivatePackage(zoneInfo)
         end
         if _G.WowVisionNavigationDockNavigation then
             _G.WowVisionNavigationDockNavigation:ZoneLoaded(nav)
+        end
+        if _G.WowVisionNavigationFishingNavigation then
+            _G.WowVisionNavigationFishingNavigation:ZoneLoaded()
         end
     else
         nav.zoneId, nav.zone_base, nav.exportFingerprint = zoneInfo.zoneId, zoneInfo.base, zoneInfo.fingerprint
