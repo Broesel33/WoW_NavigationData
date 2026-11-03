@@ -17,7 +17,7 @@ CONTENTS
    5. index.lua - the continent index and the seams
    6. navdata.lua - the waypoint network
    7. logical_targets.lua - NPCs, mobs and objects
-   8. dyn_targets.lua - transit and zone transitions
+   8. dyn_targets.lua - transit, zone transitions and fishing spots
    9. Zone transitions in general
   10. Using the data: load, bind, route, guide
   11. The demo addon
@@ -49,7 +49,8 @@ Every zone comes with three kinds of data:
   * Dynamic targets (dyn_targets.lua). Targets that are about getting somewhere else: dungeon
     entrances, portals, elevators, boat and zeppelin docks, the stops of the Deeprun Tram, the dive
     points of the Ruins of Blackfathom, the portals and the Wind Bridge of Zephras Isle, and the
-    crossings between neighbouring zones.
+    crossings between neighbouring zones. They also hold fishing spots: places to stand and fish
+    at the waters of 45 zones.
 
 Routes are always on foot. Walking into a portal or into a trigger such as the entrance of the Deeprun
 Tram, riding an elevator, clicking a portal on Zephras Isle and waiting for and stepping into its Wind
@@ -61,7 +62,7 @@ At a glance (snapshot of the data in this repository):
 
   51 zones in 4 continent groups   EasternKingdoms 26, Kalimdor 23, DeeprunTram 1, ZephrasIsle 1
   about 0.86 million waypoints     about 2.25 million links, about 0.92 million attachment cells
-  about 111,300 logical targets    242 dynamic targets
+  about 111,300 logical targets    242 dynamic targets and 788 fishing spots
   3,318 seams between zones        63 neighbouring zone pairs
   about 54 MB of Lua files         the largest zone file (The Barrens, navdata.lua) is about 2.6 MB;
                                    the logical target catalogues of all zones take about 7 MB of it
@@ -95,7 +96,7 @@ Every zone folder, for example Forever/Kalimdor/Teldrassil/, holds the same thre
 
   navdata.lua           the waypoint network
   logical_targets.lua   NPCs, creatures and objects
-  dyn_targets.lua       transit facilities and zone transitions
+  dyn_targets.lua       transit facilities, zone transitions and fishing spots
 
 A "continent" here is one folder with one index.lua. EasternKingdoms is native map 0 and Kalimdor is
 native map 1. DeeprunTram (native map 369) and ZephrasIsle (native map 2991) have maps of their own
@@ -105,7 +106,7 @@ Zone folders are named after the English zone name without spaces or punctuation
 UnGoroCrater, Shendralas). The name is not always identical to the display name: Stormwind City is
 the folder Stormwind, Elwynn Forest is Elwynn. The authoritative link between folder and zone is the
 field "dir" in the continent index. All three zone files are always present; a zone without transit
-points has a dyn_targets.lua with an empty target list.
+points and fishing spots has a dyn_targets.lua with an empty target list.
 
 The zone ID (the number used by the data) and the folder of every zone:
 
@@ -664,14 +665,16 @@ Attaching a target to the network
   position of the start.
 
 
-8. dyn_targets.lua - TRANSIT AND ZONE TRANSITIONS
--------------------------------------------------
+8. dyn_targets.lua - TRANSIT, ZONE TRANSITIONS AND FISHING SPOTS
+----------------------------------------------------------------
 
 The dyn catalogue is a list of rows (a header table with layer = "dyn" and no format field, then
 one table with all fields per target, then WVN7Dyn[zoneId] = DynTargets) with the
 common fields id, kind, type, category, nameEn, nameDe, searchAliases, nativeMapId,
-coordinateSpace, x, y, z, zStatus, availability, source, positionBasis and entry. It contains 242
-targets of two kinds (the dyn_targets.lua of Moonglade and Mount Hyjal have none):
+coordinateSpace, x, y, z, zStatus, availability, source, positionBasis and entry (the rows of
+fishing spots have no positionBasis and no entry). It contains 242 transit and crossing targets of
+two kinds (the dyn_targets.lua of Moonglade and Mount Hyjal have none of them) and 788 fishing
+spots, a third kind (see below):
 
   kind "transit_facility" (102 targets), with a facilityKind:
     dungeon   20   An instance entrance (15 different dungeons). Role "entrance". The position is
@@ -697,6 +700,7 @@ targets of two kinds (the dyn_targets.lua of Moonglade and Mount Hyjal have none
                    "entrance") and "Surface here" (role "exit"), with actionKind "dive" or
                    "surface" and positionBasis "project_dive_transition".
   kind "zone_transition" (140 targets). A crossing to a neighbouring zone (see below).
+  kind "fishing_spot" (788 targets). A place to stand and fish (see below).
 
 Common transit fields
   facilityKind, facilityRole   As above. role is "entrance", "exit" or "waiting".
@@ -769,6 +773,11 @@ Localised names (nameKey)
     wind_bridge_wait, wind_bridge_landing
                       Wind Bridge waiting point, and its landing
     zone_transition   Crossing to a neighbouring zone (parameter: the neighbour)
+    fishing_spot_shore
+                      Fishing spot on the shore (parameter: the area of the cast point)
+    fishing_spot_structure
+                      Fishing spot on a pier, quay or bridge over deep water (parameter: the
+                      area of the cast point)
 
   nameAreaId (an AreaTable ID) or nameMapId (a map ID) gives the place; nameParam is the English name
   as a fallback. nameSuffix = {key, value} is added when two targets of a zone would be spoken alike:
@@ -787,6 +796,55 @@ Zone transitions (kind "zone_transition")
   targets). The extra fields (gateways, gatewayCount,
   reachableGateways, roadShare, seamPairs, seamRoutes, seamTied, chosenGateway, gatewayDistance)
   document how the place was chosen; a consumer does not need them.
+
+Fishing spots (kind "fishing_spot")
+  A fishing spot is a place to stand and fish. The data holds 788 spots in 45 zones; the Deeprun
+  Tram, Ironforge, Undercity, Badlands, Blasted Lands and Felwood have none. Every body of water
+  that can be fished has two to four spots, at least 40 yd apart, so that two spots never cast into
+  the same water. The position (x, y, z) is the standing point: solid ground on the shore, or on a
+  pier, jetty, quay or bridge. Wading in shallow water is allowed, swimming is not. In the direction
+  of the water, the whole stretch from fishingCastMin to fishingCastMax yards from the standing
+  point (10 and 20 yd, the casting range) is water. A spot has no waypoint ID and no capture record;
+  a consumer binds the standing point by position like any other target.
+
+  The row does not hold the water point. A consumer computes it as the standing point plus
+  (fishingDirX, fishingDirY) times fishingPreviewDistance (15 yd, the middle of the casting range).
+  The water point is only for orientation and never a walking target: WowVision turns the player
+  towards it with key I, and after the arrival a direction tone sounds from the water.
+
+  id            "fishing_spot:<x>:<y>": the standing point rounded to whole yards.
+  kind, type, category
+                "fishing_spot", "fishing_spot" and {"fishing_spot"}.
+  fishingDirX, fishingDirY
+                A unit vector in the world plane from the standing point towards the water (four
+                decimals).
+  fishingPreviewDistance
+                The distance from the standing point to the water point, 15 yd.
+  fishingCastMin, fishingCastMax
+                The casting range, 10 and 20 yd.
+  nameKey, nameAreaId, nameParam
+                "fishing_spot_shore" or "fishing_spot_structure" (a standing point on a pier, quay
+                or bridge over deep water); the area of the cast point as an AreaTable ID, so that
+                the consumer speaks its name in the player's language; the English area name as a
+                fallback (the zone name if the area has none).
+  nameSuffix    {key = "number", value = n} when several spots of a zone would be spoken alike. The
+                numbers run from north to south.
+  nameEn, nameDe
+                Ready-made texts without the number: "Fishing spot on the shore: <area>" or
+                "Fishing spot on pier or quay: <area>", in German "Angelplatz am Ufer: <area>" or
+                "Angelplatz auf Steg oder Kai: <area>".
+  searchAliases "Angelplatz", "Angeln", "fishing", "fishing spot".
+
+  A fishing spot (shortened; the source record is left out):
+
+    {["availability"]="static",["category"]={"fishing_spot"},["coordinateSpace"]="world",
+     ["fishingCastMax"]=20.0,["fishingCastMin"]=10.0,["fishingDirX"]=0.9397,["fishingDirY"]=0.342,
+     ["fishingPreviewDistance"]=15.0,["id"]="fishing_spot:10424:1635",["kind"]="fishing_spot",
+     ["nameAreaId"]=266,["nameDe"]="Angelplatz am Ufer: Wellspring Lake",
+     ["nameEn"]="Fishing spot on the shore: Wellspring Lake",["nameKey"]="fishing_spot_shore",
+     ["nameParam"]="Wellspring Lake",["nameSuffix"]={["key"]="number",["value"]=3},["nativeMapId"]=1,
+     ["searchAliases"]={"Angelplatz","Angeln","fishing","fishing spot"},["type"]="fishing_spot",
+     ["x"]=10424.05,["y"]=1634.75,["z"]=1285.13,["zStatus"]="known"}
 
 
 9. ZONE TRANSITIONS IN GENERAL
@@ -1046,7 +1104,9 @@ continent together with the files of every zone that changed.
     included only where a source gave their position; entrances of some dungeons, in particular of
     dungeons that are new in WoW Forever, are missing.
   * The Ruins of Gilneas are not included: the client does not ship terrain or a map for them.
-  * Some places cannot be reached: Dalaran in Alterac Mountains (a magical barrier).
+  * Some places cannot be reached: three people in Dalaran in Alterac Mountains (Conjurer
+    Weinhaus, Fuzz and Archmage Ansirem Runeweaver) are not in the catalogue. The city itself is
+    reachable.
   * Estimated transitions. The positions of the portals and the Wind Bridge of Zephras Isle
     (section 9) are estimates (approximate = true). The player has to act at them: click the
     portal, or wait at the Wind Bridge for its signal.
