@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=57,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="BD66778BD747883B1323BBEF7B4B16E9F879DD7AE88C61CFADB1A0FE6A26D903",payloadSha256="9F91AA166EDEB5D7A9143EDA0FBBE59456A9785ED03C2CAF8A97DF357B870491"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=57,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="62E86835091D8BDDB62C936478290FB594D6BD46E16382A810A0E1107ACCD6A0",payloadSha256="1875963EA13F5C4B4023FF01FFAD1809D0AF6ED2B8020F5B8FE6D8CD4758E9F5"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",6909,"Sethir the Ancient","Sethir der Uralte",a="possible_spawn"},
 {"creature","npc_or_mob",14429,"Grimmaw","Grimmtatze",a="possible_spawn"},
