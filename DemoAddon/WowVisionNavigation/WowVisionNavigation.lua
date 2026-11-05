@@ -292,8 +292,8 @@ end
 
 -- A* search on the network. startId/targetId are real waypoints, link points or bindings from NavNetwork.Bind.
 -- Returns the waypoint sequence (including link-point attachments), the edge list and the result object.
-local function AStar(startId, targetId, footOnly)
-    local result, reason = NavNetwork.RouteIds(startId, targetId, EdgePenalties, footOnly)
+local function AStar(startId, targetId, footOnly, startPool, targetPool)
+    local result, reason = NavNetwork.RouteIds(startId, targetId, EdgePenalties, footOnly, startPool, targetPool)
     if not result then return nil, reason end
     return result.path, result.edges, result
 end
@@ -516,15 +516,32 @@ end
 
 -- Route from a start attachment; finds it no way, the other start attachments of the cell and of the cells next to it are
 -- tried before "no network path" (chapter 7, since 4.41). Returns path, edges, result, usedStartId | nil, reason.
-local function RouteFromStart(startId, endId, footOnly, x, y)
-    local path, edges, result = AStar(startId, endId, footOnly)
-    if path or not x then return path, edges, result, startId end
+-- Cost comparison (K): with a position, a start that is a checked attachment of the start cell is compared with the other checked
+-- attachments of that cell; endPool (optional) does the same for the target side. The pair with the lowest approach + network +
+-- approach cost wins; usedStartId and result.targetBinding name it. Unchecked attachments and those of neighbouring cells only
+-- serve as alternatives when no route exists (as before).
+local function RouteFromStart(startId, endId, footOnly, x, y, endPool)
+    local options, startPool
+    if x then
+        options = { swimming = PlayerIsSwimming(), preferred = HeightAnchor.preferred, lastHeight = HeightAnchor.last }
+        if not options.swimming then
+            local primary = NavNetwork.Bind(x, y, EstimatedHeightForSearch(x, y), options)
+            if primary then
+                local pool = NavNetwork.CertifiedBindings(primary.zone, primary.cell, x, y, primary.cellDistance)
+                for _, member in ipairs(pool) do
+                    if member.id == startId then startPool = pool; break end
+                end
+            end
+        end
+    end
+    local path, edges, result = AStar(startId, endId, footOnly, startPool, endPool)
+    if path then return path, edges, result, result and result.startBinding and result.startBinding.id or startId end
+    if not x then return path, edges, result, startId end
     local reason = edges
-    local options = { swimming = PlayerIsSwimming(), preferred = HeightAnchor.preferred, lastHeight = HeightAnchor.last }
     local list = NavNetwork.StartBindings(x, y, EstimatedHeightForSearch(x, y), options)
     for _, binding in ipairs(list or {}) do
         if binding.id ~= startId then
-            local alternative, alternativeEdges, alternativeResult = AStar(binding.id, endId, footOnly)
+            local alternative, alternativeEdges, alternativeResult = AStar(binding.id, endId, footOnly, nil, endPool)
             if alternative then return alternative, alternativeEdges, alternativeResult, binding.id end
         end
     end
@@ -1467,11 +1484,12 @@ function WowVisionNavigationLayerTargetContext(footOnly,startOverride)
     end
     if not startId then return nil end
     local context = {footOnly=footOnly,startNodeId=startId}
-    context.route = function(endId)
-        local path,_,result,used = RouteFromStart(context.startNodeId,endId,footOnly,px,py)
+    -- endPool (optional): the checked attachments of the target cell; the third result is the target attachment of the cheapest pair
+    context.route = function(endId,endPool)
+        local path,_,result,used = RouteFromStart(context.startNodeId,endId,footOnly,px,py,endPool)
         if not path then return nil end
         context.startNodeId = used        -- the start attachment that found the way stays the start of this selection
-        return path,result.cost
+        return path,result.cost,result.targetBinding
     end
     return context
 end

@@ -941,10 +941,18 @@ is a good model for other implementations.
 
  5. BIND THE TARGET  As described in section 7: the cell above (or nearest to) the target, then an
     attachment of the cell. Other attachments of the cell are tried in order when no route reaches
-    the first.
+    the first. A target point that lies inside its cell has the checked attachments of the cell
+    (those whose field mask has the bit of its field set); step 6 chooses among them.
 
  6. ROUTE  One A* search over the union of all decoded zones, from the start attachment to the
-    target attachment. The edges are:
+    target attachment. When the start point or the target point (inside its cell) has several
+    checked attachments, the search starts from all start attachments at once, with the walk from
+    the player to each attachment as its initial cost, and ends at the cheapest target attachment,
+    with the walk from it to the target point added; the result is the cheapest pair. Attachments
+    of neighbouring cells and attachments without the field bit are never part of this comparison
+    (the walk to them is not proven); they only serve as alternatives when no route exists. If the
+    start and the target are points on the same link, the route is the piece of that link between
+    them (when the direction of the link allows it), not a detour over a link end. The edges are:
       * links, in their allowed direction; cost = (length + 15 yd) * a factor. The 15 yd are a
         hop cost: they count the waypoint the player has to steer to (partial links to seam
         points, to seams and to actions carry none). The reference implementation
