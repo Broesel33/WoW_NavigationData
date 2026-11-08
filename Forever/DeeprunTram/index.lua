@@ -1,4 +1,4 @@
 -- WVN7 continent index (written by export_schema7_zone.py / export_schema7_index.py)
 WVN7Index = WVN7Index or {}
 WVN7Index["DeeprunTram"] = {mapId=369,zones={
-[499]={name="Deeprun Tram",dir="DeeprunTram",zoneId=499,base=4990000000,nativeMapId=369,instance=true,uiMaps={[499]=true,[500]=true},worldBoxes={[499]={xmin=-112.5,xmax=95.5,ymin=2311.5,ymax=2623.5},[500]={xmin=-172.9580078125,xmax=-49.62467956543,ymin=2408.5,ymax=2593.5}},nativeWorldBox={xmin=-101.0,xmax=111.6,ymin=-60.3,ymax=2561.1},files={"navdata.lua","logical_targets.lua","dyn_targets.lua"},fingerprint="E2911D7A754851F086336102CEEB57D26D4D29D125DED27577313FFE7AC8D7CA",seams={}}}}
+[499]={name="Deeprun Tram",dir="DeeprunTram",zoneId=499,base=4990000000,nativeMapId=369,instance=true,uiMaps={[499]=true,[500]=true},worldBoxes={[499]={xmin=-112.5,xmax=95.5,ymin=2311.5,ymax=2623.5},[500]={xmin=-172.9580078125,xmax=-49.62467956543,ymin=2408.5,ymax=2593.5}},nativeWorldBox={xmin=-101.0,xmax=111.6,ymin=-60.3,ymax=2561.1},files={"navdata.lua","logical_targets.lua","dyn_targets.lua"},fingerprint="8989C57B787F4AC18188D057AD3A690BD875D60F7E80667A98F14D8200706992",seams={}}}}
