@@ -65,10 +65,16 @@ end
 -- has no network path from the current start.
 function R:ResolveLevels(nav, target, context)
     local levels = target.levels
-    local function atLevel(h)
+    local function atLevel(h, index)
         local copy = {}
         for key, value in pairs(target) do copy[key] = value end
         copy.levels, copy.z, copy.zStatus = nil, h, "known"
+        -- Weg B: the node of this level (a list as long as the levels; false: the level has none)
+        if type(target.targetNode) == "table" then
+            copy.targetNode = target.targetNode[index] or nil
+        else
+            copy.targetNode = nil
+        end
         local plain = {}
         for key, value in pairs(context) do plain[key] = value end
         plain.heightBand = nil
@@ -77,7 +83,7 @@ function R:ResolveLevels(nav, target, context)
     if context.heightBand then
         local h = levels[context.heightBand]
         if not h then return { quality = "unroutable", reason = WowVisionNavigationText("res_band_invalid") } end
-        local result = atLevel(h)
+        local result = atLevel(h, context.heightBand)
         result.level = context.heightBand
         return result
     end
@@ -85,7 +91,7 @@ function R:ResolveLevels(nav, target, context)
     for i, h in ipairs(levels) do
         local band = { zMin = h, zMax = h, candidates = {}, nearest = 0, level = i }
         if context.route then
-            local result = atLevel(h)
+            local result = atLevel(h, i)
             if result.binding then
                 band.candidates[1] = result.binding
                 band.nearest = result.cellDistance or 0
@@ -95,6 +101,139 @@ function R:ResolveLevels(nav, target, context)
     end
     return { quality = "ambiguous", bands = bands, levelUnknown = true, queryZ = nil, zConflict = false,
         reason = WowVisionNavigationText("res_level_unknown") }
+end
+
+-- Weg B (user decision 10.11.2026): every logical target of a zone built with it has a fixed node (NavNetwork.lua, "The node of a
+-- logical target"). A catalog of such a zone carries navFingerprint. The resolver then binds the target to its node:
+--   1. n of the row (targetNode) when the loaded zone has the catalog's fingerprint (a partial deploy cannot mislead it);
+--   2. else the node at the target's coordinates (N.TargetNodeAt);
+--   3. else, only in a zone of the catalog's fingerprint (a target that came with a target update after the build, "p"): the nearest
+--      physical node within the target radius at the target's height, the last straight unchecked ("approximate");
+--   4. a node without a route from the start (a source, a one-way end): the nearest nodes of 3. one by one.
+-- A target of any other catalog (an older zone, live and dynamic targets) is bound over the cells as before.
+R.fingerprintWarned = {}
+
+local function CatalogZone(target)
+    local net = WowVisionNavigationNavNetwork
+    local own
+    if target.zoneId then own = net.zones[target.zoneId] or net.LoadZone(target.zoneId) end
+    if own and own.fingerprint == target.navFingerprint then return own, true end
+    for _, id in ipairs(net.ZonesForPoint(target.x, target.y)) do
+        local zone = net.LoadZone(id)
+        if zone and zone.fingerprint == target.navFingerprint then return zone, true end
+    end
+    if own and not R.fingerprintWarned[own.id] then
+        -- noted once per zone (the saved variables keep it for a bug report; nothing is said to the player)
+        R.fingerprintWarned[own.id] = true
+        if type(WowVisionNavigationDB) == "table" then
+            WowVisionNavigationDB.targetNodeNote = "the catalog of zone " .. tostring(own.id) .. " belongs to another navdata; its node numbers are not used"
+        end
+    end
+    return own, false
+end
+
+local function NodeResult(nav, target, binding, path, cost, radius, tolerance, how)
+    local z = target.z
+    local zone, i = binding.zone, binding.node
+    local water = zone.area[i] == 2
+    local underWater = water and z ~= nil and z < binding.z
+    local deltaZ = (z ~= nil and not water) and math.abs(binding.z - z) or nil
+    local deltaXY = binding.airDistance
+    local exact = how ~= "nearest_node"
+    return {
+        endNodeId = binding.id, quality = exact and "exact" or "approximate", binding = binding, targetNode = how,
+        cellDistance = 0, approach = not exact, deltaXY = deltaXY, deltaZ = deltaZ,
+        delta3D = deltaZ and math.sqrt(deltaXY * deltaXY + deltaZ * deltaZ) or nil,
+        zUnknown = z == nil, zOutOfTolerance = false, normalizedWater = underWater, queryZ = z,
+        divingDepth = underWater and (binding.z - z) or nil,
+        endpointSurface = water and "water" or "land", targetSurface = target.surface,
+        path = path, cost = cost, graphRevision = nav.exportFingerprint, targetRevision = target.providerRevision,
+        radius = radius, tolerance = tolerance,
+    }
+end
+
+-- -> result, or nil when the target has no node (the cells decide, as before)
+function R:ResolveTargetNode(nav, target, context, radius, tolerance)
+    if type(target.navFingerprint) ~= "string" then return nil end
+    local net = WowVisionNavigationNavNetwork
+    local zone, matched = CatalogZone(target)
+    local candidates = {}
+    if not target.approx then
+        local direct
+        if matched and type(target.targetNode) == "number" and target.targetNode >= 0 and target.targetNode < zone.n then
+            direct = net.NodeTargetBinding(zone, target.targetNode + 1, target.x, target.y, "target_node_id")
+        else
+            local zones = zone and { zone } or {}
+            if not zone then
+                for _, id in ipairs(net.ZonesForPoint(target.x, target.y)) do
+                    local loaded = net.LoadZone(id)
+                    if loaded then zones[#zones + 1] = loaded end
+                end
+            end
+            for _, candidate in ipairs(zones) do
+                local i = net.TargetNodeAt(candidate, target.x, target.y, target.z, tolerance)
+                if i then direct = net.NodeTargetBinding(candidate, i, target.x, target.y, "target_node"); break end
+            end
+        end
+        if direct then candidates[1] = direct end
+    end
+    if matched then
+        for _, binding in ipairs(net.NearestNodeBindings(zone, target.x, target.y, target.z, radius, tolerance)) do
+            if not candidates[1] or binding.id ~= candidates[1].id then candidates[#candidates + 1] = binding end
+        end
+    end
+    if #candidates == 0 then
+        if matched then
+            return { quality = "unroutable", reason = WowVisionNavigationText("res_no_point"), targetNode = "none" }
+        end
+        return nil
+    end
+    for _, binding in ipairs(candidates) do
+        local how = binding.choice == "nearest_node" and "nearest_node" or binding.choice
+        if not context.route then return NodeResult(nav, target, binding, nil, nil, radius, tolerance, how) end
+        local path, cost = context.route(binding.id)
+        if path then return NodeResult(nav, target, binding, path, cost, radius, tolerance, how) end
+    end
+    if matched then
+        return { quality = "unroutable", noRouteFromStart = true, reason = WowVisionNavigationText("res_no_route_from_start"), targetNode = "none" }
+    end
+    return nil          -- the node at the coordinates of a target of another navdata has no route: the cells decide
+end
+
+-- The circle in which the route to a certified interaction has to END (taken from the row, no threshold of the resolver): the waiting
+-- circle of a waiting point (manual_wait, waitingRadius), the capture circle of an activation area (walk_into_trigger,
+-- activationCaptureRadius). nil: an ordinary target. Such a target is not resolved over the checked attachments of its cell (the
+-- cheapest pair of start and target attachment): the waiting point lies exactly on a node, the arrival (Dock:WaitAreaReached, the capture
+-- of the activation area) asks for the circle, and the activation proof asks for the node the target resolved to (target.nodeId).
+-- A route that ended on another attachment of the cell, however much cheaper, would end beside the circle.
+-- This function is the one place that says which targets end on their own node: a dyn target that carries a fixed physical node instead of a
+-- circle (the planned dock model) is added here, and EndBindings then takes that node as the end.
+function R.EndRadius(target)
+    local C = WowVisionNavigationTargetCatalog
+    if target.interactionMode == "manual_wait" and C.Finite(target.waitingRadius) and target.waitingRadius > 0 then
+        return target.waitingRadius
+    end
+    if target.activationMode == "walk_into_trigger" and C.Finite(target.activationCaptureRadius) and target.activationCaptureRadius > 0 then
+        return target.activationCaptureRadius
+    end
+    return nil
+end
+
+-- The end attachments of such a target: the field-mask choice first (the node target.nodeId names), then the others of the cell by
+-- distance, but only those inside the circle of the row (the circle is measured from the target in the plane). Where the choice itself
+-- lies outside (a navdata whose waiting point is not on its node) it stays the one end, as in the resolution without a route.
+local function EndBindings(bindings, target, endRadius)
+    local function inside(binding)
+        return (binding.x - target.x) ^ 2 + (binding.y - target.y) ^ 2 <= endRadius ^ 2
+    end
+    local choice = bindings[1]
+    if not choice then return {} end
+    local list = { choice }
+    if not inside(choice) then return list end
+    for index = 2, #bindings do
+        if inside(bindings[index]) then list[#list + 1] = bindings[index] end
+    end
+    return list
 end
 
 function R:Resolve(nav, target, context)
@@ -111,6 +250,9 @@ function R:Resolve(nav, target, context)
     if nav.nativeMapId ~= target.nativeMapId then return { quality = "unroutable", reason = WowVisionNavigationText("res_other_map") } end
     local net = WowVisionNavigationNavNetwork
     local radius, tolerance = self:Settings()
+    local byNode = self:ResolveTargetNode(nav, target, context, radius, tolerance)       -- Weg B: the fixed node of the target
+    if byNode then return byNode end
+    local endRadius = R.EndRadius(target)       -- a certified interaction ends in its own circle, not on the cheapest attachment of its cell
     local z = target.z
     local surface = target.surface
     local kinds = surface == "water" and { 2 } or (surface == "land" and { 1, 0 } or { 1, 0, 2 })
@@ -165,7 +307,11 @@ function R:Resolve(nav, target, context)
                     local bindings, pool
                     if context.route then
                         bindings = net.CellBindings(candidate.zone, candidate.cell, target.x, target.y, candidate.distance)
-                        pool = net.CertifiedBindings(candidate.zone, candidate.cell, target.x, target.y, candidate.distance)
+                        if endRadius then
+                            bindings = EndBindings(bindings, target, endRadius)         -- no pool: the route ends in the circle of the row
+                        else
+                            pool = net.CertifiedBindings(candidate.zone, candidate.cell, target.x, target.y, candidate.distance)
+                        end
                     else
                         bindings = { net.BindCell(candidate.zone, candidate.cell, target.x, target.y, candidate.distance) }
                     end
@@ -176,10 +322,10 @@ function R:Resolve(nav, target, context)
                         local path, cost, chosen
                         if context.route then
                             tested = true
-                            path, cost, chosen = context.route(binding.id, index == 1 and #pool > 1 and pool or nil)
+                            path, cost, chosen = context.route(binding.id, index == 1 and pool and #pool > 1 and pool or nil)
                         end
                         if not context.route or path then
-                            if chosen and chosen.id ~= binding.id then
+                            if pool and chosen and chosen.id ~= binding.id then
                                 for _, member in ipairs(pool) do
                                     if member.id == chosen.id then binding = member; break end
                                 end
