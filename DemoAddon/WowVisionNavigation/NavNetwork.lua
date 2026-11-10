@@ -865,6 +865,7 @@ end
 
 -- Bands at most 2 yd apart belong to the same layer (chapter 4.1).
 local SAME_LAYER_GAP = 2.0
+N.SAME_LAYER_GAP = SAME_LAYER_GAP   -- read by Guidance.ArrivalFloor (level grouping)
 
 local function MiddleOf(hit)
     return (hit.zone.cellZMin[hit.cell] + hit.zone.cellZMax[hit.cell]) / 2

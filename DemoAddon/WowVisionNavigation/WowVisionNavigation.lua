@@ -473,6 +473,50 @@ local function SetRouteState(previousId, waypointId)
     if next(set) ~= nil then HeightAnchor.preferred = set end
 end
 
+-- Height-aware arrival (/vn floor, default off): nil when the feature is off or the target has no second level;
+-- otherwise { floor = "lower"|"middle"|"upper", wrongLevel = bool } (see Guidance.ArrivalFloor). Globals, not Navigation fields: wipe(Navigation) clears the table on a zone change.
+function WowVisionNavigationArrivalFloor(targetX, targetY, targetZ)
+    return Guidance.ArrivalFloor(targetX, targetY, targetZ, HeightAnchor.height)
+end
+
+-- Height hint (Guidance.HeightHint): target height = source height, else the level chosen by the resolver (queryZ); the route
+-- end = last network point (before a logical end point). Nothing for water targets or without any height. Returns the text or nil.
+local function HeightHintText(hint)
+    return hint and WowVisionNavigationText("height_hint_" .. hint.direction, hint.yards) or nil
+end
+
+function WowVisionNavigationComputeHeightHint(source, result)
+    Navigation.heightHint = nil
+    if not source or not Navigation.path or #Navigation.path == 0 then return nil end
+    if Navigation.pendingAction then return nil end   -- the route ends at a transit entrance, not at the target
+    if result and result.endpointSurface == "water" then return nil end
+    local targetZ = type(source.z) == "number" and source.z or (result and result.queryZ)
+    local endId = Navigation.logicalPrepoint or Navigation.path[#Navigation.path]
+    if not endId or not NodeExists(endId) then return nil end
+    local _, _, endZ = NodePosition(endId)
+    Navigation.heightHint = Guidance.HeightHint(targetZ, endZ)
+    return HeightHintText(Navigation.heightHint)
+end
+
+-- Arrival text plus the height hint of the route (none: text unchanged).
+function WowVisionNavigationWithHeightHint(text)
+    local hint = HeightHintText(Navigation.heightHint)
+    return hint and (text .. " " .. hint) or text
+end
+
+-- Arrival is not counted: says once per route on which level the target lies.
+function WowVisionNavigationAnnounceWrongLevel(info)
+    if Navigation.floorWrongAnnounced then return end
+    Navigation.floorWrongAnnounced = true
+    WowVisionNavigationSay("arrival_floor_wrong", Navigation.targetName, WowVisionNavigationText("floor_" .. info.floor))
+end
+
+-- Arrival text plus the floor of the target (info nil: text unchanged).
+function WowVisionNavigationWithFloor(text, info)
+    if not info then return text end
+    return text .. " " .. WowVisionNavigationText("arrival_floor_suffix", WowVisionNavigationText("floor_" .. info.floor))
+end
+
 local function EstimatedHeightForSearch(x, y)
     if PlayerIsSwimming() then return nil end
     return HeightAnchor.height
@@ -1183,6 +1227,8 @@ local function StopNavigation(reason, transitRetained, waitContextRetained)
     Navigation.activationTarget = nil
     Navigation.activationPrepointAnnounced = nil
     Navigation.activationCaptureAnnounced = nil
+    Navigation.floorWrongAnnounced = nil
+    Navigation.heightHint = nil
     Navigation.footOnly = nil
     Navigation.targetBindingId = nil
     HeightAnchor.height = nil
@@ -1396,6 +1442,8 @@ local function StartNavigationToNode(targetNodeId, targetName, targetStatus, foo
     -- approach goes to the coordinate (the logical end point), which the map does not prove
     if logicalSource and logicalSource.approx == true then WowVisionNavigationSay("approx_target") end
     if logicalSource and logicalSource.approximate == true then WowVisionNavigationSay("approximate_position") end
+    local heightHint = WowVisionNavigationComputeHeightHint(logicalSource, logicalResult)
+    if heightHint then WowVisionNavigationPrint(heightHint) end
     return true
 end
 
@@ -1756,13 +1804,17 @@ frame:SetScript("OnUpdate", function(_, elapsed)
     -- recalculation loop.
     local distance = math.sqrt(dx * dx + dy * dy)
     if waypointId == Navigation.logicalTarget then
-        if distance <= Guidance.EffectiveRadius(ARRIVAL_TARGET_RADIUS) then
+        local floorInfo = distance <= Guidance.EffectiveRadius(ARRIVAL_TARGET_RADIUS)
+            and WowVisionNavigationArrivalFloor(waypointX, waypointY, waypointZ) or nil
+        if floorInfo and floorInfo.wrongLevel then WowVisionNavigationAnnounceWrongLevel(floorInfo) end
+        if distance <= Guidance.EffectiveRadius(ARRIVAL_TARGET_RADIUS) and not (floorInfo and floorInfo.wrongLevel) then
             PlayEventSound("target_reached")
             -- A fishing spot says where the water lies and starts the direction tone (FishingNavigation); the row comes from the
             -- ID the route carried. Any other target, or a row that is not a valid fishing spot, ends with the normal text.
             local fishing = _G.WowVisionNavigationFishingNavigation
             local spot = fishing and fishing:Find(NavData, Navigation.targetId)
-            local reachedText = WowVisionNavigationText("stop_target_position_reached", Navigation.targetName)
+            local reachedText = WowVisionNavigationWithHeightHint(WowVisionNavigationWithFloor(
+                WowVisionNavigationText("stop_target_position_reached", Navigation.targetName), floorInfo))
             if spot then
                 StopNavigation(nil)
                 if fishing:Arrival(spot, NavData, x, y, Guidance.EffectiveRadius(ARRIVAL_TARGET_RADIUS)) then
@@ -1886,12 +1938,18 @@ frame:SetScript("OnUpdate", function(_, elapsed)
                 end
                 return
             end
+            local floorInfo = WowVisionNavigationArrivalFloor(waypointX, waypointY, waypointZ)
+            if floorInfo and floorInfo.wrongLevel then
+                WowVisionNavigationAnnounceWrongLevel(floorInfo)
+                return
+            end
             PlayEventSound("target_reached")
             if Navigation.targetStatus == "approach_only" then
-                StopNavigation(WowVisionNavigationText("stop_safe_approach_reached",
-                    Navigation.targetName))
+                StopNavigation(WowVisionNavigationWithHeightHint(WowVisionNavigationWithFloor(
+                    WowVisionNavigationText("stop_safe_approach_reached", Navigation.targetName), floorInfo)))
             else
-                StopNavigation(WowVisionNavigationText("stop_target_reached", Navigation.targetName))
+                StopNavigation(WowVisionNavigationWithHeightHint(
+                    WowVisionNavigationWithFloor(WowVisionNavigationText("stop_target_reached", Navigation.targetName), floorInfo)))
             end
             return
         else
@@ -3751,6 +3809,8 @@ local function ExecuteSlashCommand(msg)
             WowVisionNavigationText(FinalApproachOn() and "state_on" or "state_off"))
         WowVisionNavigationSay("status_choke_fallback",
             WowVisionNavigationText(ChokeFallbackOn() and "state_on" or "state_off"))
+        WowVisionNavigationSay("status_floor",
+            WowVisionNavigationText(Guidance.ArrivalFloorOn() and "state_on" or "state_off"))
         WowVisionNavigationSay("status_sku_tone", SKU_NAV_STANDARD)
     elseif msgLower == "here" then
         -- Manual start point: opens the same searchable list, but a selection only sets "I am standing here right now" (e.g.
@@ -3851,6 +3911,23 @@ local function ExecuteSlashCommand(msg)
         else
             WowVisionNavigationSay("fallback_off")
         end
+    elseif msgLower == "floor" or msgLower:match("^floor%s") then
+        -- Height-aware arrival: names the floor of a target with a second level above/below and does not count the arrival
+        -- while the estimated height clearly points to the other level. Default OFF (the estimate can be stale).
+        local arg = msgLower:match("^floor%s+(%S+)$")
+        local newValue
+        if arg == nil then
+            newValue = not Guidance.ArrivalFloorOn()
+        elseif arg == "an" or arg == "ein" or arg == "on" or arg == "1" then
+            newValue = true
+        elseif arg == "aus" or arg == "off" or arg == "0" then
+            newValue = false
+        else
+            WowVisionNavigationSay("floor_usage")
+            return
+        end
+        WowVisionNavigationDB.heightAwareArrival = newValue
+        WowVisionNavigationSay(newValue and "floor_on" or "floor_off")
     elseif msgLower == "new" then
         -- Manual recalculation - the replacement for the disabled automatism.
         RecalculateRunningRoute(true)

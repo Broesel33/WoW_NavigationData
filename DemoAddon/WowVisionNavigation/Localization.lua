@@ -144,7 +144,7 @@ function WowVisionNavigationNodeTypeName(key) return L.Text("nodetype." .. tostr
 L.commandAliases = {
     sprache = "lang", komfort = "comfort", ankunft = "arrival", posten = "outposts",
     hier = "here", neu = "new", direkt = "direct", ebene = "level", fein = "fine", endanflug = "finalapproach",
-    rueckfall = "fallback", ["rückfall"] = "fallback", aktion = "action", weiter = "continue",
+    rueckfall = "fallback", stockwerk = "floor", ["rückfall"] = "fallback", aktion = "action", weiter = "continue",
     toleranz = "tolerance", leiche = "corpse", gruppe = "group", stopp = "stop", hilfe = "help",
 }
 
@@ -155,7 +155,7 @@ function WowVisionNavigationNormalizeCommand(message)
     return canonical and (canonical .. rest) or message
 end
 
-L.helpKeys = { "help_title", "help_open", "help_direct", "help_here", "help_status", "help_stop", "help_prevnext", "help_new", "help_level", "help_radius", "help_finalapproach", "help_fallback", "help_showauto", "help_action", "help_live", "help_quest", "help_log", "help_lang", "help_comfort", "help_arrival", "help_outposts", "help_key" }
+L.helpKeys = { "help_title", "help_open", "help_direct", "help_here", "help_status", "help_stop", "help_prevnext", "help_new", "help_level", "help_radius", "help_finalapproach", "help_fallback", "help_floor", "help_showauto", "help_action", "help_live", "help_quest", "help_log", "help_lang", "help_comfort", "help_arrival", "help_outposts", "help_key" }
 
 -- /vn help: the command words of the client language.
 function WowVisionNavigationHelp()
@@ -289,6 +289,7 @@ L.en = {
     ["help_radius"] = "/vn radius <yards>, /vn tolerance <yards> - attachment radius and height tolerance",
     ["help_finalapproach"] = "/vn finalapproach [on|off] - forced guidance shortly before choke points",
     ["help_fallback"] = "/vn fallback [on|off] - one waypoint back when drifting sideways in front of choke points",
+    ["help_floor"] = "/vn floor [on|off] - height-aware arrival: names the floor of targets with a second level and waits for the right level (default off)",
     ["help_showauto"] = "/vn showauto On|Off - show automatic waypoints in the lists",
     ["help_action"] = "/vn action, /vn continue - instructions and confirmation at portals and vehicles",
     ["help_live"] = "/vn corpse, /vn group <unit> - the target is your own corpse or a group member",
@@ -426,6 +427,17 @@ L.en = {
     ["status_en_route"] = "On the way to '%s', waypoint %d of %d.",
     ["no_active_navigation"] = "No active navigation.",
     ["status_final_approach"] = "Final-approach guidance (only left/right/away on the last %.1f yards before a choke point): %s (/vn finalapproach to toggle).",
+    ["status_floor"] = "Height-aware arrival (names the floor of the target and waits for the right level): %s (/vn floor to toggle).",
+    ["floor_usage"] = "Unknown value. Use /vn floor on or /vn floor off (without a value it is toggled).",
+    ["floor_on"] = "Height-aware arrival ON. At targets with a second level directly above or below, the arrival names the floor of the target and is not counted while your estimated height clearly points to the other level. The estimate can be stale after lifts and jumps.",
+    ["floor_off"] = "Height-aware arrival OFF (default). The arrival is counted by position alone, as before.",
+    ["height_hint_above"] = "Target is above, about %d yards.",
+    ["height_hint_below"] = "Target is below, about %d yards.",
+    ["floor_lower"] = "downstairs",
+    ["floor_upper"] = "upstairs",
+    ["floor_middle"] = "on a middle level",
+    ["arrival_floor_suffix"] = "The target is %s.",
+    ["arrival_floor_wrong"] = "'%s' lies %s, but your estimated height points to the other level. The arrival is not counted yet.",
     ["status_choke_fallback"] = "Choke-point fallback (when drifting sideways in front of a choke point, go back one waypoint): %s (/vn fallback to toggle).",
     ["status_sku_tone"] = "SKU navigation tone: nav%s (fixed default tone).",
     ["direct_list_position_unavailable"] = "Player position currently unavailable; direct target list not opened.",
@@ -718,6 +730,7 @@ L.de = {
     ["help_radius"] = "/vn radius <Yards>, /vn toleranz <Yards> - Anschlussradius und Hoehentoleranz",
     ["help_finalapproach"] = "/vn endanflug [an|aus] - Zwangsfuehrung kurz vor Engstellen",
     ["help_fallback"] = "/vn rueckfall [an|aus] - einen Wegpunkt zurueck bei seitlichem Abdriften vor Engstellen",
+    ["help_floor"] = "/vn stockwerk [an|aus] - hoehenbewusste Ankunft: nennt das Stockwerk von Zielen mit zweiter Ebene und wartet auf die richtige Ebene (Standard aus)",
     ["help_showauto"] = "/vn showauto On|Off - automatische Wegpunkte in den Listen anzeigen",
     ["help_action"] = "/vn aktion, /vn weiter - Anleitung und Bestaetigung bei Portalen und Transportmitteln",
     ["help_live"] = "/vn leiche, /vn gruppe <Einheit> - Ziel ist die eigene Leiche bzw. ein Gruppenmitglied",
@@ -855,6 +868,17 @@ L.de = {
     ["status_en_route"] = "Unterwegs zu '%s', Wegpunkt %d von %d.",
     ["no_active_navigation"] = "Keine aktive Navigation.",
     ["status_final_approach"] = "Endanflug-Fuehrung (nur links/rechts/weg auf den letzten %.1f Yards vor einer Engstelle): %s (/vn endanflug zum Umschalten).",
+    ["status_floor"] = "Hoehenbewusste Ankunft (nennt das Stockwerk des Ziels und wartet auf die richtige Ebene): %s (/vn stockwerk zum Umschalten).",
+    ["floor_usage"] = "Unbekannte Angabe. Benutze /vn stockwerk an oder /vn stockwerk aus (ohne Angabe wird umgeschaltet).",
+    ["floor_on"] = "Hoehenbewusste Ankunft EINGESCHALTET. Bei Zielen mit einer zweiten Ebene direkt darueber oder darunter nennt die Ankunft das Stockwerk des Ziels und zaehlt nicht, solange deine geschaetzte Hoehe eindeutig auf die andere Ebene zeigt. Die Schaetzung kann nach Aufzuegen und Spruengen veraltet sein.",
+    ["floor_off"] = "Hoehenbewusste Ankunft AUSGESCHALTET (Voreinstellung). Die Ankunft zaehlt wie bisher allein nach der Position.",
+    ["height_hint_above"] = "Ziel liegt erhöht, etwa %d Yards.",
+    ["height_hint_below"] = "Ziel liegt tiefer, etwa %d Yards.",
+    ["floor_lower"] = "unten",
+    ["floor_upper"] = "oben",
+    ["floor_middle"] = "auf einer mittleren Ebene",
+    ["arrival_floor_suffix"] = "Das Ziel liegt %s.",
+    ["arrival_floor_wrong"] = "'%s' liegt %s, aber deine geschaetzte Hoehe zeigt auf die andere Ebene. Die Ankunft zaehlt noch nicht.",
     ["status_choke_fallback"] = "Engpass-Rueckfall (bei seitlichem Abdriften vor einer Engstelle einen Wegpunkt zurueck): %s (/vn rueckfall zum Umschalten).",
     ["status_sku_tone"] = "SKU-Navigationston: nav%s (fester Standardton).",
     ["direct_list_position_unavailable"] = "Spielerposition gerade nicht verfuegbar; direkte Zielliste nicht geoeffnet.",
