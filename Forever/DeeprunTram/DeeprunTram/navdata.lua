@@ -1,5 +1,5 @@
 -- WVN7 schema 7, zone DeeprunTram (id 499); written by export_schema7_zone.py
-local W = {version=7,zoneId=499,mapId=369,prototype=0,nodeCount=32,linkCount=31,cellCount=4245,fingerprint="8989C57B787F4AC18188D057AD3A690BD875D60F7E80667A98F14D8200706992",codes={
+local W = {version=7,zoneId=499,mapId=369,prototype=0,nodeCount=32,linkCount=31,cellCount=4245,fingerprint="46710D7332CD735550DB987F6514204CE22E95A4C258C34D3B04D6591BBC08CB",codes={
 1025,5376,5121,1280,1,5248,1152,5408,5632,4097,256,1026,1312,4608,5153,5280,5377,8320,8448
 },radii={
 5,10,20
@@ -9,10 +9,10 @@ WVN7[499] = W
 -- WVN7 factions: hostile outposts as waypoint ranges, per faction {gap, length - 1, ...}; written by zone_factions.py
 W.factions = {alliance={0,31}}
 ;(function() W.x = {
-39,309,-296,-3.022,102.022,206,335,-643,-3,-3,288,-277,-2,-2,3,-6,5,-2,0,1,-2,0,3,261,-276.082,-7.918,319,-298.368,102.368,526,-640,2
+39,309,-296,-3,102,206,335,-643,-3,-3,288,-277,-2,-2,3,-6,5,-2,0,1,-2,0,3,261,-276,-8,319,-298,102,526,-640,2
 } end)()
 ;(function() W.y = {
--262,14,228,101.909,0.091,8,14,107,102,89,10,1632,1336,2404,1333,2406,1352,3267.001,1335.999,2399.001,1368.999,2413.001,1302,1655.999,5.527,164.473,116,1.655,2.345,3,108,196.001
+-262,14,228,102,0,8,14,107,102,89,10,1632,1336,2404,1333,2406,1352,3267,1336,2399,1369,2413,1302,1656,6,164,116,2,2,3,108,196
 } end)()
 ;(function() W.z = {
 -40,-2,-96,100,-2,0,-2,0,5,-99,96,0,-406,17,-519,-1,-309,0,406,0,406,0,410,-3,-1,-1,14,-14,0,1,-95,-2
@@ -24,7 +24,7 @@ W.factions = {alliance={0,31}}
 2,4,5,1,1,1,5,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,2,1,3,1,5,2,3,1,1
 } end)()
 ;(function() W.lf = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" end)()
-;(function() W.e = {gates={},branches={},captures={},actions={{["activation"]={["mode"]="walk_into_volume",["proof"]="client AreaTrigger 2166",["verified"]=true},["arrival"]={["mode"]="native_map_volume",["proof"]="areatrigger_teleport:2166 target map 0"},["arrivalVolume"]={["radius"]=10.0,["type"]="sphere",["x"]=-4838.95,["y"]=-1318.46,["z"]=501.868},["conditions"]={["proof"]="areatrigger_teleport:2166",["status"]="unconditional"},["cost"]=4.5,["from"]=6,["id"]="tram:areatrigger:2166",["kind"]="tram",["sourceVolume"]={["half_x"]=4.708499908445,["half_y"]=9.5,["half_z"]=10.319999694825,["type"]="oriented_box",["x"]=76.02700042725,["y"]=10.50430011749,["yaw_radians"]=0.0,["z"]=-4.29658985138},["timing"]={["timeout_seconds"]=30.0},["to"]=870000556,["toMapId"]=0,["toZone"]=87},{["activation"]={["mode"]="walk_into_volume",["proof"]="client AreaTrigger 2171",["verified"]=true},["arrival"]={["mode"]="native_map_volume",["proof"]="areatrigger_teleport:2171 target map 0"},["arrivalVolume"]={["radius"]=10.0,["type"]="sphere",["x"]=-8364.57,["y"]=535.981,["z"]=91.7969},["conditions"]={["proof"]="areatrigger_teleport:2171",["status"]="unconditional"},["cost"]=14.2,["from"]=29,["id"]="tram:areatrigger:2171",["kind"]="tram",["sourceVolume"]={["radius"]=10.0,["type"]="sphere",["x"]=80.16329956055,["y"]=2490.8798828125,["z"]=-1.85693001747},["timing"]={["timeout_seconds"]=30.0},["to"]=840006662,["toMapId"]=0,["toZone"]=84}}} end)()
+;(function() W.e = {gates={},branches={},actions={{["activation"]={["mode"]="walk_into_volume",["proof"]="client AreaTrigger 2166",["verified"]=true},["arrival"]={["mode"]="native_map_volume",["proof"]="areatrigger_teleport:2166 target map 0"},["arrivalVolume"]={["radius"]=10.0,["type"]="sphere",["x"]=-4838.95,["y"]=-1318.46,["z"]=501.868},["conditions"]={["proof"]="areatrigger_teleport:2166",["status"]="unconditional"},["cost"]=18.2,["from"]=6,["id"]="tram:areatrigger:2166",["kind"]="tram",["sourceVolume"]={["half_x"]=4.708499908445,["half_y"]=9.5,["half_z"]=10.319999694825,["type"]="oriented_box",["x"]=76.02700042725,["y"]=10.50430011749,["yaw_radians"]=0.0,["z"]=-4.29658985138},["timing"]={["timeout_seconds"]=30.0},["to"]=870000556,["toMapId"]=0,["toZone"]=87},{["activation"]={["mode"]="walk_into_volume",["proof"]="client AreaTrigger 2171",["verified"]=true},["arrival"]={["mode"]="native_map_volume",["proof"]="areatrigger_teleport:2171 target map 0"},["arrivalVolume"]={["radius"]=10.0,["type"]="sphere",["x"]=-8364.57,["y"]=535.981,["z"]=91.7969},["conditions"]={["proof"]="areatrigger_teleport:2171",["status"]="unconditional"},["cost"]=27.8,["from"]=29,["id"]="tram:areatrigger:2171",["kind"]="tram",["sourceVolume"]={["radius"]=10.0,["type"]="sphere",["x"]=80.16329956055,["y"]=2490.8798828125,["z"]=-1.85693001747},["timing"]={["timeout_seconds"]=30.0},["to"]=840006662,["toMapId"]=0,["toZone"]=84}}} end)()
 ;(function() W.cx = {
 -2,1,-5,1,1,1,1,0,1,0,-5,1,1,1,1,0,1,-5,1,1,1,1,0,1,-5,1,1,1,1,0,1,-9,1,1,1,1,1,1,1,1,0,1,-9,1,1,1,1,1,1,1,1,0,1,-5,1,1,1,1,0,1,-5,1,1,1,1,0,1,-5,1,1,1,1,0,1,-5,1,1,1,1,0,1,-1,0,1,-1,0,1,-1,
 0,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,1,-1,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,

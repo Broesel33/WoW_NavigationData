@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1430,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="A64AC1DC4C4FD7788717727335AF47347A3E67B23C83DCA28A48483436037128",converterSha256="F2B15B8C1D8AA3178FB0E8E11C0C20666ECF3DDA0AD7512C654964BDFE97A2E6",payloadSha256="034375E4025E406F25E9212256436A15CD4F9F924B8F1278EE9CAC71F9A57F89"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1430,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="3C6D6A99982F865E870D07095B7E83E2A842A072E15C0C684ABADE4B9B0A705F",payloadSha256="87C835C87BA9A26C526C2354B7DD05AF038AA76556485FCCBCD264BDBEE5B49D"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",7376,"Sky Shadow","Himmelsschatten",a="possible_spawn"},
 {"creature","npc_or_mob",7372,"Deadwind Warlock","Hexenmeister der Totenwindoger",a="possible_spawn"},
@@ -28,6 +28,7 @@ LogicalTargets.classes = {
 {"npc","npc_or_mob",240352,"Mana Elemental","Manaelementar"},
 {"mob","npc_or_mob",257743,"Hastings (The Caretaker)","Hastings (Der Hauswart)"},
 {"mob","npc_or_mob",257750,"Calliard (The Nightman)","Calliard (Der Nachtwächter)"},
+{"mob","npc_or_mob",257754,"Spectral Charger","Spektrales Streitross"},
 {"mob","npc_or_mob",276246,"Mistmantle Prowler","Mistmantle-Streuner"},
 {"gameobject","object",694054,"Recipe: Raw Plated Armorfish"},
 }
@@ -165,24 +166,22 @@ LogicalTargets.targets = {
 {"questie_creature_218931_41_3",23,-10326.67,-1898.33,44.8},
 {"questie_creature_218931_41_4",23,-10343.33,-1903.33,43.527},
 {"questie_creature_218931_41_5",23,-10303.33,-1913.33,48.808},
-{"questie_creature_218931_41_6",23,-10353.33,-1943.33,87.701},
+{"questie_creature_218931_41_6",23,-10353.33,-1943.33,87.686},
 {"questie_creature_218931_41_7",23,-10376.67,-1943.33,93.829},
 {"questie_creature_218931_41_8",23,-10360,-1948.33,87.842},
 {"questie_creature_218931_41_9",23,-10356.67,-1953.33,85.715},
-{"questie_creature_237818_41_0",24,-10436.67,-2138.33,90.952},
-{"questie_creature_237818_41_1",24,-10443.33,-2138.33,90.981},
-{"questie_creature_240352_41_0",25,-10473.33,-2133.33,91.16},
-{"questie_creature_240352_41_1",25,-10476.67,-2133.33,91.61},
-{"questie_creature_240352_41_2",25,-10440,-2143.33,90.821},
-{"questie_creature_240352_41_3",25,-10443.33,-2143.33,90.853},
-{"questie_creature_240352_41_4",25,-10440,-2148.33,93.015},
-{"questie_creature_240352_41_5",25,-10446.67,-2148.33,91},
-{"questie_creature_257743_41_0",26,-11116.67,-2013.33,l={13.708,47.401}},
-{"questie_creature_257750_41_0",27,-11009.17,-2039.83,l={40.8,65.667,80.18,93.2}},
-{"questie_creature_276246_41_0",28,-10462.17,-1720.83,84.42},
-{"questie_gameobject_694054_41_0",29,-10441.67,-2143.33,90.861},
-{"questie_gameobject_694054_41_1",29,-10438.33,-2145.83,92.952},
-{"questie_gameobject_694054_41_2",29,-10441.67,-2145.83,93.383},
+{"questie_creature_237818_41_0",24,-10436.67,-2138.33,90.8},
+{"questie_creature_237818_41_1",24,-10443.33,-2138.33,90.943},
+{"questie_creature_240352_41_0",25,-10473.33,-2133.33,91.299},
+{"questie_creature_240352_41_1",25,-10476.67,-2133.33,91.602},
+{"questie_creature_240352_41_2",25,-10440,-2143.33,90.8},
+{"questie_creature_240352_41_3",25,-10443.33,-2143.33,90.872},
+{"questie_creature_240352_41_5",25,-10446.67,-2148.33,91.044},
+{"questie_creature_257743_41_0",26,-11116.67,-2013.33,l={13.744,47.401}},
+{"questie_creature_257750_41_0",27,-11009.17,-2039.83,l={40.8,65.921,80.18,93.2}},
+{"questie_creature_257754_41_0",28,-11007.17,-2043.33,l={40.8,66.137,80.265,93.2}},
+{"questie_creature_276246_41_0",29,-10462.17,-1720.83,84.453},
+{"questie_gameobject_694054_41_0",30,-10441.67,-2143.33,90.835},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1430] = LogicalTargets
