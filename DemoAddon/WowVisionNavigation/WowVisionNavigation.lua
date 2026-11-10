@@ -1223,6 +1223,8 @@ local function StopNavigation(reason, transitRetained, waitContextRetained)
     Navigation.logicalPrepoint = nil
     Navigation.logicalWarned = nil
     Navigation.waitTargetId = nil
+    Navigation.dockArrivalId = nil
+    Navigation.boardingArrivalId = nil
     Navigation.activationTargetId = nil
     Navigation.activationTarget = nil
     Navigation.activationPrepointAnnounced = nil
@@ -1368,10 +1370,13 @@ local function StartNavigationToNode(targetNodeId, targetName, targetStatus, foo
                 WowVisionNavigationSay("action_route_invalid")
                 return false
             end
-            -- the waiting context (dock, tram stop) and the foot-only route travel with the route after the action
+            -- the waiting context (dock, tram stop), the foot-only route and the activation of a trigger target travel with the route after
+            -- the action: this leg ends at the pre-point of the action, the trigger's own activation belongs to the leg after it
             pendingAction = { actionId = action.id, targetId = targetNodeId,
                               targetName = targetName, targetStatus = targetStatus,
-                              waitTargetId = waitTargetId, footOnly = footOnly }
+                              waitTargetId = waitTargetId, footOnly = footOnly,
+                              activationTargetId = activationTargetId }
+            activationTargetId, activationTarget = nil, nil
             local truncated = {}
             for _, id in ipairs(path) do
                 truncated[#truncated + 1] = id
@@ -1487,6 +1492,11 @@ function Navigation.AppendLogicalTarget(source,result)
     if result.quality == "exact" and (source.interactionMode == "manual_wait" or source.activationMode == "walk_into_trigger") then
         return
     end
+    -- Weg B for the dyn layer (a dock, its point on board, a dungeon entrance with its node): the route ends exactly on the fixed node of the row, the
+    -- arrival is the normal one there; no unchecked end point behind it (it stood on the node anyway, or beside it where the node is n)
+    if source.dynNode and (result.targetNode == "target_node" or result.targetNode == "target_node_id") then
+        return
+    end
     if type(source.x) ~= "number" or type(source.y) ~= "number" then return end
     local physical=Navigation.path[#Navigation.path]
     local _,_,z=NodePosition(physical)
@@ -1494,6 +1504,33 @@ function Navigation.AppendLogicalTarget(source,result)
     Navigation.path[#Navigation.path+1]=id
     Navigation.logicalTarget=id
     Navigation.logicalPrepoint=physical
+end
+
+-- The dock model (user decision 10.11.2026), after the NORMAL arrival (StopNavigation has run, the ids and the physical end node were
+-- taken before it):
+--   at a dock: the context "reached" and the text of the dock (Dock:Arrival); the point on board becomes the next target and the route
+--     to it starts on the end node of the route that just ended;
+--   at the point on board: the context of its dock is "reached" again (the new route started with a Reset), so that the passive mode works.
+function Navigation.AfterVesselArrival(dockId, boardingId, endNode, x, y)
+    local dock = _G.WowVisionNavigationDockNavigation
+    if not dock or not NavData then return end
+    local function find(id)
+        for _, candidate in ipairs(WowVisionNavigationTargetList(NavData, function(t) return t.id == id end, true)) do
+            if candidate.id == id then return candidate end
+        end
+    end
+    if dockId then
+        local target = find(dockId)
+        if not target or not dock:IsVesselDock(target, NavData) then return end
+        local arrived, ship = dock:Arrival(target, NavData, x, y)
+        if arrived and ship then
+            Navigation.lastBeepTime = GetTime()
+            WowVisionNavigationLayerTargetStart(ship, false, endNode, nil, true)
+        end
+    elseif boardingId then
+        local ship = find(boardingId)
+        if ship and dock:IsBoardingPoint(ship, NavData) then dock:BoardingArrival(ship, NavData, x, y) end
+    end
 end
 
 function WowVisionNavigationActionArrival(action)
@@ -1512,8 +1549,9 @@ function WowVisionNavigationActionArrival(action)
     Navigation.manualStartNode = action.toNode
     Navigation.manualStartName = WowVisionNavigationText("confirmed_exit")
     local started = StartNavigationToNode(pending.targetId, pending.targetName,
-                                  pending.targetStatus,pending.footOnly,pending.waitTargetId,nil,pending.layerTargetSource,pending.layerTargetResult)
+                                  pending.targetStatus,pending.footOnly,pending.waitTargetId,pending.activationTargetId,pending.layerTargetSource,pending.layerTargetResult)
     if started then
+        Navigation.dockArrivalId, Navigation.boardingArrivalId = pending.dockArrivalId, pending.boardingArrivalId
         Navigation.layerTargetResult = pending.layerTargetResult
         Navigation.layerTargetSource = pending.layerTargetSource
         Navigation.AppendLogicalTarget(pending.layerTargetSource,pending.layerTargetResult)
@@ -1545,8 +1583,15 @@ end
 function WowVisionNavigationLayerTargetStart(target,asStart,startOverride,onResolved,forceRouteTarget,travelOrder)
     local selection = _G.WowVisionNavigationTargetSelection
     if not selection or not NavData then return false end
-    local context = asStart and {} or WowVisionNavigationLayerTargetContext(
-        target.interactionMode == "manual_wait" or target.activationMode == "walk_into_trigger",startOverride)
+    -- a dock of the dock model and its point on board are walked on foot, like a waiting point. A trigger (walk_into_trigger) is not:
+    -- portals and lifts are parts of a route (chapter 02 rule 11), and the pre-point of a trigger may lie in a part of the network that
+    -- only another action reaches (the room of portal 702 in Stormwind is reached through portal 704 only). The route then ends at the
+    -- pre-point of that action and the trigger's own activation follows after it (StartNavigationToNode, WowVisionNavigationActionArrival);
+    -- the same as the route of a list entry (WowVisionNavigationSelectListEntry), which never asked a trigger for foot only.
+    local dockModule = _G.WowVisionNavigationDockNavigation
+    local footOnly = target.interactionMode == "manual_wait"
+        or (dockModule and (dockModule:IsVesselDock(target,NavData) or dockModule:IsBoardingPoint(target,NavData))) or false
+    local context = asStart and {} or WowVisionNavigationLayerTargetContext(footOnly,startOverride)
     if not context then
         WowVisionNavigationSay("no_unique_start")
         return false
@@ -1689,13 +1734,25 @@ frame:SetScript("OnUpdate", function(_, elapsed)
         actionModule:Tick()
         if actionModule.current and type(_G.UnitPosition) == "function" then
             local ok, x, y, z, nativeMap = pcall(_G.UnitPosition, "player")
-            if ok and type(x) == "number" and type(y) == "number"
-                and type(z) == "number" and type(nativeMap) == "number" then
+            -- The height may be missing altogether (nil) or be a constant 0: the action module then proves a teleport in the plane (x/y).
+            if ok and type(x) == "number" and type(y) == "number" and type(nativeMap) == "number" then
                 local action = actionModule.current.action
+                -- An action record without an arrival volume: the position of its exit node (the start of the next leg) within the arrival
+                -- radius of that node stands in for it, as soon as the zone of the exit is the active one.
+                local arrivalPoint
+                if type(action.arrivalVolume) ~= "table" and type(action.toNode) == "number" and NavData
+                    and action.toZoneId == NavData.zoneId and NodeExists(action.toNode) then
+                    local nodeX, nodeY = NodePosition(action.toNode)
+                    if type(nodeX) == "number" and type(nodeY) == "number" then
+                        arrivalPoint = { x = nodeX, y = nodeY,
+                                         radius = Guidance.ArrivalRadius(action.toNode) or ARRIVAL_TARGET_RADIUS }
+                    end
+                end
                 actionModule:Observe({ nativeMapId = nativeMap,
-                    position = { x = x, y = y, z = z },
+                    position = { x = x, y = y, z = type(z) == "number" and z or nil },
                     mapChanged = action.fromNativeMap ~= action.toNativeMap
                         and nativeMap == action.toNativeMap,
+                    arrivalPoint = arrivalPoint,
                     -- UnitPosition Z is not live-verified in this client. A mere map change must therefore not prove the exit level.
                     zReliable = false, transportStopped = false })
             end
@@ -1824,7 +1881,11 @@ frame:SetScript("OnUpdate", function(_, elapsed)
                 end
                 return
             end
+            -- the dock model: the physical end node of the route is the one before the virtual end point
+            local dockId, boardingId = Navigation.dockArrivalId, Navigation.boardingArrivalId
+            local endNode = Navigation.logicalPrepoint or Navigation.path[#Navigation.path]
             StopNavigation(reachedText)
+            if dockId or boardingId then Navigation.AfterVesselArrival(dockId, boardingId, endNode, x, y) end
             return
         end
         local angle=((math.atan2(dy,dx)-(GetPlayerFacing() or 0)+math.pi)%(2*math.pi))-math.pi
@@ -1944,6 +2005,9 @@ frame:SetScript("OnUpdate", function(_, elapsed)
                 return
             end
             PlayEventSound("target_reached")
+            -- the dock model: ids and the physical end node (the logical end point is virtual) are taken before the stop
+            local dockId, boardingId = Navigation.dockArrivalId, Navigation.boardingArrivalId
+            local endNode = Navigation.logicalPrepoint or Navigation.path[#Navigation.path]
             if Navigation.targetStatus == "approach_only" then
                 StopNavigation(WowVisionNavigationWithHeightHint(WowVisionNavigationWithFloor(
                     WowVisionNavigationText("stop_safe_approach_reached", Navigation.targetName), floorInfo)))
@@ -1951,6 +2015,7 @@ frame:SetScript("OnUpdate", function(_, elapsed)
                 StopNavigation(WowVisionNavigationWithHeightHint(
                     WowVisionNavigationWithFloor(WowVisionNavigationText("stop_target_reached", Navigation.targetName), floorInfo)))
             end
+            if dockId or boardingId then Navigation.AfterVesselArrival(dockId, boardingId, endNode, x, y) end
             return
         else
             PlayEventSound("waypoint_reached")
@@ -2312,7 +2377,9 @@ function WowVisionNavigationSelectListEntry(entry,travelOrder,startOverride)
         return WowVisionNavigationStartDirect(entry)
     end
     local dock = _G.WowVisionNavigationDockNavigation
-    if entry.interactionMode == "manual_wait" and dock then
+    local vesselDock = dock and dock:IsVesselDock(entry, NavData)
+    local boardingPoint = dock and dock:IsBoardingPoint(entry, NavData)
+    if (entry.interactionMode == "manual_wait" or vesselDock) and dock then
         local targetZone = NavNetwork.index[entry.zoneId or (NavData and NavData.zoneId)]
         local fingerprint = targetZone and targetZone.fingerprint
         if dock:ChoosePassive(entry, NavData, fingerprint) then
@@ -2329,9 +2396,20 @@ function WowVisionNavigationSelectListEntry(entry,travelOrder,startOverride)
     -- Resolver and actual route must use the same safe start. After a delayed level selection it comes from the
     -- re-checked context.
     if startOverride ~= nil then Navigation.manualStartNode = startOverride end
-    return StartNavigationToNode(entry.nodeId, TargetName(entry),
-        entry.attachmentStatus, waitpoint, waitpoint and entry.id or nil,
+    local started = StartNavigationToNode(entry.nodeId, TargetName(entry),
+        entry.attachmentStatus, waitpoint or vesselDock or boardingPoint or false, waitpoint and entry.id or nil,
         entry.activationMode == "walk_into_trigger" and entry.id or nil,entry,entry.layerResolution)
+    if started and (vesselDock or boardingPoint) then
+        -- The dock model: the normal arrival at the dock continues to its point on board, the normal arrival at the point on board
+        -- sets the context of the dock again (Navigation.AfterVesselArrival). The ids travel with an action route.
+        Navigation.dockArrivalId = vesselDock and entry.id or nil
+        Navigation.boardingArrivalId = boardingPoint and entry.id or nil
+        if Navigation.pendingAction then
+            Navigation.pendingAction.dockArrivalId = Navigation.dockArrivalId
+            Navigation.pendingAction.boardingArrivalId = Navigation.boardingArrivalId
+        end
+    end
+    return started
 end
 
 -- Live commands are processed independently of the most recently opened list mode. The mode is switched only for the
@@ -4400,8 +4478,10 @@ function WowVisionNavigationClearZoneState(reason, transitRetained)
     local listNodes = Navigation.ListNodes
     local appendLogicalTarget = Navigation.AppendLogicalTarget
     local activationText = Navigation.ActivationText
+    local afterVesselArrival = Navigation.AfterVesselArrival
     wipe(Navigation)
     Navigation.ActivationText = activationText
+    Navigation.AfterVesselArrival = afterVesselArrival
     Navigation.ReadQuestlogQuests = readQuestlogQuests
     Navigation.SetQuestSelection = setQuestSelection
     Navigation.FindQuestieTargetPoints = findQuestieTargetPoints
@@ -4802,6 +4882,12 @@ eventFrame:SetScript("OnEvent", function(_, event, addonName)
             if actions and #zone.actions > 0 then actions:AddActions(zone.actions) end
         end
         if _G.WowVisionNavigationActionNavigation then
+            -- A teleport recognised without a height completes by itself as soon as the next leg can start: the zone of the exit is the active
+            -- one (after a teleport into another zone the loader switches a moment after the position) and holds the exit node.
+            _G.WowVisionNavigationActionNavigation.exitReady = function(action)
+                return NavData ~= nil and action.toZoneId == NavData.zoneId
+                    and type(action.toNode) == "number" and NodeExists(action.toNode)
+            end
             _G.WowVisionNavigationActionNavigation:Initialize({}, function(message)
                 WowVisionNavigationPrint(message)
             end, function(action)

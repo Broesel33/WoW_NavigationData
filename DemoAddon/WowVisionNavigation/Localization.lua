@@ -530,6 +530,7 @@ L.en = {
     -- docks
     ["dock_reached"] = "Dock '%s' reached. Wait here for %s. Board when you hear the arrival.",
     ["dock_boarding_hint"] = " A direction tone shows the boarding direction; with I you can also align yourself.",
+    ["dock_boarding_next"] = " Next point: %s.",
     ["dock_passive_set"] = "Counterpart dock '%s' noted. Wait for the vehicle, board by ear and get off at the destination stop. Afterwards choose the dock again for a local route.",
     -- fishing spots: the water is orientation only (key I and a direction tone), never a walking target
     ["fishing_arrival"] = "%s reached. The water is %s. Cast range about %d to %d yards. Press I to turn to the water.",
@@ -567,6 +568,7 @@ L.en = {
     ["dyn.dock_ship"] = "Ship dock to %s",
     ["dyn.dock_zeppelin"] = "Zeppelin dock to %s",
     ["dyn.on_ship"] = "On the ship to %s",
+    ["dyn.on_zeppelin"] = "On the zeppelin to %s",
     ["dyn.dive_entry"] = "Dive here",
     ["dyn.dive_exit"] = "Surface here",
     ["dyn.rohashi_portal"] = "Portal to Rohashi Spires",
@@ -971,6 +973,7 @@ L.de = {
     -- docks
     ["dock_reached"] = "Anleger '%s' erreicht. Hier auf %s warten. Steige ein, wenn du die Ankunft hoerst.",
     ["dock_boarding_hint"] = " Ein Richtungston zeigt die Einsteigrichtung; mit I kannst du dich zusaetzlich ausrichten.",
+    ["dock_boarding_next"] = " Naechster Punkt: %s.",
     ["dock_passive_set"] = "Gegenanleger '%s' vorgemerkt. Warte auf das Transportmittel, steige nach Gehoer ein und am Zielhalt aus. Waehle danach den Anleger erneut fuer eine lokale Route.",
     -- Angelplaetze: das Wasser ist nur Orientierung (Taste I und ein Richtungston), nie ein Laufziel
     ["fishing_arrival"] = "%s erreicht. Das Wasser liegt %s. Wurfweite etwa %d bis %d Yards. Mit I drehst du dich zum Wasser.",
@@ -1008,6 +1011,7 @@ L.de = {
     ["dyn.dock_ship"] = "Anleger Schiff nach %s",
     ["dyn.dock_zeppelin"] = "Anleger Zeppelin nach %s",
     ["dyn.on_ship"] = "Am Schiff nach %s",
+    ["dyn.on_zeppelin"] = "Am Zeppelin nach %s",
     ["dyn.dive_entry"] = "Hier tauchen",
     ["dyn.dive_exit"] = "Hier auftauchen",
     ["dyn.rohashi_portal"] = "Portal zu Rohashi Spires",

@@ -31,6 +31,35 @@ local function inVolume(volume, position)
     return false
 end
 
+-- The same volume in the plane, the height left out (UnitPosition delivers no usable height in this client): true or false, nil when the volume
+-- has no usable shape. Same shapes and sizes as inVolume; only the height test is dropped.
+local function inFootprint(volume, position)
+    if type(volume) ~= "table" or type(position) ~= "table" or not finite(position.x) or not finite(position.y)
+        or not finite(volume.x) or not finite(volume.y) then return nil end
+    local dx, dy = position.x - volume.x, position.y - volume.y
+    if volume.type == "sphere" then
+        if not (finite(volume.radius) and volume.radius > 0) then return nil end
+        return dx * dx + dy * dy <= volume.radius * volume.radius
+    end
+    if volume.type == "oriented_box" and finite(volume.half_x) and finite(volume.half_y)
+        and finite(volume.yaw_radians) then
+        local c, s = math.cos(volume.yaw_radians), math.sin(volume.yaw_radians)
+        local lx, ly = c * dx + s * dy, -s * dx + c * dy
+        return math.abs(lx) <= volume.half_x and math.abs(ly) <= volume.half_y
+    end
+    return nil
+end
+
+-- A teleport takes the player from one place to another at once: a trigger volume that is walked into (areatrigger) or a portal object that is
+-- clicked, or any action that ends on another native map. A ride (transport_stop_volume) and the transitions the player swims or steps through
+-- himself (dive, surface, wind bridge: other activation modes) are none. Only the data decide: the modes of the action record.
+local function isTeleport(action)
+    local arrival = type(action.arrival) == "table" and action.arrival.mode or nil
+    local activation = type(action.activation) == "table" and action.activation.mode or nil
+    if arrival == "transport_stop_volume" then return false end
+    return arrival == "native_map_volume" or activation == "walk_into_volume" or activation == "click"
+end
+
 -- Kind-specific phase texts (Localization keys): a dive transition is dived into and surfaced from by the player himself, so the portal
 -- texts do not fit it. An action kind without an entry uses the generic text of the phase.
 local KIND_TEXT = {
@@ -73,6 +102,15 @@ local function enter(self, phase, message)
     current.enteredAt = now()
     if message then speak(self, message) end
     return true
+end
+
+-- After a teleport that was recognised without a height the route goes on by itself (nothing to disembark from): the action completes as soon as
+-- the core can take the route over (exitReady, set by the core: the zone of the arrival is the active one and holds the node of the exit).
+local function completeWhenReady(self)
+    local current = self.current
+    if not current or current.phase ~= "disembarking" or current.autoComplete ~= true then return false end
+    if type(self.exitReady) == "function" and self.exitReady(current.action) ~= true then return false end
+    return self:ReachedExit()
 end
 
 function Actions:Reset(preserveCurrent)
@@ -174,11 +212,35 @@ function Actions:Observe(observation)
         return false
     end
     local position = observation.position
+    -- taken before this observation: the player was seen in the plane of the source volume at an EARLIER one (without a height the source volume
+    -- cannot be "left": at a portal inside one building the plane of the exit lies in that of the entrance)
+    local seenAtSource = current.sourceFlat == true
     if position and observation.nativeMapId == action.fromNativeMap then
         if inVolume(action.sourceVolume, position) then
             current.sourceEntered = true
         elseif current.activated and current.sourceEntered then
             current.sourceLeft = true
+        end
+        if inFootprint(action.sourceVolume, position) == true then current.sourceFlat = true end
+    end
+    -- A teleport without a reliable height (UnitPosition has none in this client): the arrival is proven in the plane. The player stands on the
+    -- native map of the target in the arrival volume of the record (no volume in the record: the position of the exit node within the arrival
+    -- radius, observation.arrivalPoint), and the teleport is certain: the map changed, or the player was seen in the source volume before.
+    -- Neither the confirmation (/vn continue) nor a phase is needed; with a reliable height the rules below stay as they were.
+    if observation.zReliable ~= true and position and isTeleport(action)
+        and (current.phase == "waiting" or current.phase == "activating" or current.phase == "travelling")
+        and observation.nativeMapId == action.toNativeMap
+        and (action.fromNativeMap ~= action.toNativeMap or seenAtSource) then
+        local inside = inFootprint(action.arrivalVolume, position)
+        local point = observation.arrivalPoint
+        if inside == nil and type(point) == "table" then
+            inside = inFootprint({ type = "sphere", x = point.x, y = point.y, radius = point.radius }, position)
+        end
+        if inside == true then
+            current.activated, current.autoComplete = true, true
+            enter(self, "disembarking", WowVisionNavigationText("action_arrival_proven") .. approximateSuffix(action, "arrival"))
+            completeWhenReady(self)
+            return true
         end
     end
     if current.phase ~= "travelling" then return false end
@@ -210,6 +272,7 @@ function Actions:ReachedExit()
 end
 
 function Actions:Tick()
+    if completeWhenReady(self) then return false end
     local current = self.current
     if not current then return false end
     local timing = current.action.timing

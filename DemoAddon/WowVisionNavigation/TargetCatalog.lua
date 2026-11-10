@@ -543,7 +543,22 @@ function C:ActivateZones(nav, zones)
                 ok, reason = staged:ReplaceCompact(id, catalog.payloadSha256, catalog)
                 if ok then expanded[catalog] = true end
             else
+                -- Dock model (user decision 10.11.2026): the head of a dyn catalog may carry navFingerprint (the fingerprint of the
+                -- navdata of the same export) and a row may carry n (the node number of the zone, as in the logical catalogue).
+                local fingerprint = catalog.navFingerprint
+                if fingerprint ~= nil and (type(fingerprint) ~= "string" or fingerprint == "") then
+                    return false, "invalid navFingerprint"
+                end
+                for _, row in ipairs(catalog.targets) do
+                    if type(row) == "table" and row.n ~= nil and not nodeNumber(row.n) then return false, "invalid node number" end
+                end
                 ok, reason = staged:ReplaceSnapshot(id, catalog.payloadSha256, catalog.targets)
+                if ok and fingerprint then
+                    -- the snapshot is a clone: the stored rows carry the fixed node (n, or the node at the coordinates)
+                    for _, stored in ipairs(staged.providers[id].targets) do
+                        stored.navFingerprint, stored.targetNode, stored.dynNode = fingerprint, stored.n, true
+                    end
+                end
             end
             if not ok then return false, reason end
             staged.providers[id].zoneId = zone.zoneId       -- the lists show the zone name behind every entry

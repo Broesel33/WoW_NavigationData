@@ -177,12 +177,14 @@ function R:ResolveTargetNode(nav, target, context, radius, tolerance)
         end
         if direct then candidates[1] = direct end
     end
-    if matched then
+    -- a dyn row (the dock model) has its own node or none: no "nearest node, roughly" for it; without a node the cells decide
+    if matched and not target.dynNode then
         for _, binding in ipairs(net.NearestNodeBindings(zone, target.x, target.y, target.z, radius, tolerance)) do
             if not candidates[1] or binding.id ~= candidates[1].id then candidates[#candidates + 1] = binding end
         end
     end
     if #candidates == 0 then
+        if target.dynNode then return nil end
         if matched then
             return { quality = "unroutable", reason = WowVisionNavigationText("res_no_point"), targetNode = "none" }
         end
