@@ -110,6 +110,9 @@ end
 --   3. else, only in a zone of the catalog's fingerprint (a target that came with a target update after the build, "p"): the nearest
 --      physical node within the target radius at the target's height, the last straight unchecked ("approximate");
 --   4. a node without a route from the start (a source, a one-way end): the nearest nodes of 3. one by one.
+-- A row without a node of its own (no n, none at its coordinates; user rule 11.11.2026: "logical targets without a node id are routed by the addon to the
+-- nearest physical point, the rest is an unchecked straight"): the nearest nodes of 3. when one of them has a route, else the cells decide as for every other
+-- target (the attachments of the cell above the target or of the nearest cell within the radius, of the own zone or of a neighbour where the row stands there).
 -- A target of any other catalog (an older zone, live and dynamic targets) is bound over the cells as before.
 R.fingerprintWarned = {}
 
@@ -158,6 +161,7 @@ function R:ResolveTargetNode(nav, target, context, radius, tolerance)
     local net = WowVisionNavigationNavNetwork
     local zone, matched = CatalogZone(target)
     local candidates = {}
+    local own = false           -- the row has a node of its own (n or the node at its coordinates)
     if not target.approx then
         local direct
         if matched and type(target.targetNode) == "number" and target.targetNode >= 0 and target.targetNode < zone.n then
@@ -175,7 +179,7 @@ function R:ResolveTargetNode(nav, target, context, radius, tolerance)
                 if i then direct = net.NodeTargetBinding(candidate, i, target.x, target.y, "target_node"); break end
             end
         end
-        if direct then candidates[1] = direct end
+        if direct then candidates[1] = direct; own = true end
     end
     -- a dyn row (the dock model) has its own node or none: no "nearest node, roughly" for it; without a node the cells decide
     if matched and not target.dynNode then
@@ -183,23 +187,18 @@ function R:ResolveTargetNode(nav, target, context, radius, tolerance)
             if not candidates[1] or binding.id ~= candidates[1].id then candidates[#candidates + 1] = binding end
         end
     end
-    if #candidates == 0 then
-        if target.dynNode then return nil end
-        if matched then
-            return { quality = "unroutable", reason = WowVisionNavigationText("res_no_point"), targetNode = "none" }
-        end
-        return nil
-    end
+    -- no node of its own and none at its height within the radius: the cells decide (user rule 11.11.2026), never "no target in the network"
+    if #candidates == 0 then return nil end
     for _, binding in ipairs(candidates) do
         local how = binding.choice == "nearest_node" and "nearest_node" or binding.choice
         if not context.route then return NodeResult(nav, target, binding, nil, nil, radius, tolerance, how) end
         local path, cost = context.route(binding.id)
         if path then return NodeResult(nav, target, binding, path, cost, radius, tolerance, how) end
     end
-    if matched then
+    if matched and own then
         return { quality = "unroutable", noRouteFromStart = true, reason = WowVisionNavigationText("res_no_route_from_start"), targetNode = "none" }
     end
-    return nil          -- the node at the coordinates of a target of another navdata has no route: the cells decide
+    return nil          -- no route to a node that is not the row's own (or of another navdata): the cells decide
 end
 
 -- The circle in which the route to a certified interaction has to END (taken from the row, no threshold of the resolver): the waiting

@@ -81,6 +81,33 @@ def world(fingerprint=FP, nav_fingerprint=FP, rows=ROWS, cells=None):
     return L
 
 
+def neighbour_world():
+    """Zone 37 (a catalog of Weg B, nodes at x 0 and 20) and its neighbour 38 (nodes at x 210, 230 and 250, one 16 yd cell each); the rows of the catalog of 37:
+    "beyond" in the cell of node 0 of 38, "beside" 24 yd from the cell of node 1 of 38 (no node of 37 within the radius of either), "own" on node 1 of 37."""
+    box38 = (150.0, 300.0, -50.0, 50.0)
+    zone37, zone38 = C.elwynn_zone(C.ZONE, box=BOX, maps=(37,)), C.elwynn_zone(38, name="Beta", box=box38, maps=(37,))
+    rows = [row("beyond", 211.0, 1.0, 5.2), row("beside", 231.0, 40.0, 5.0), row("own", 20.0, 0.0, 5.0)]
+    sources = C.World([C.index_for([zone37, zone38]),
+                       F.zone_text(C.ZONE, [F.node(0.0, 0.0, 5.0), F.node(20.0, 0.0, 5.0)], [(0, 1)], fingerprint=FP),
+                       F.zone_text(38, [F.node(210.0, 0.0, 5.0), F.node(230.0, 0.0, 5.0), F.node(250.0, 0.0, 5.0)], [(0, 1), (1, 2)], fingerprint="CD" * 32),
+                       LC.render(LC.encode(C.ZONE, rows, 0, "0" * 64, None, nav_fingerprint=FP)), F.catalog_text(C.ZONE, "dyn", []),
+                       F.catalog_text(38, "logical", []), F.catalog_text(38, "dyn", [])])
+    sources.box, sources.maps = BOX, (37,)
+    L = start_runtime(sources, player=(0.0, 0.0))
+    L.execute("""
+        R, N = WowVisionNavigationTargetResolver, WowVisionNavigationNavNetwork
+        ROWS = {}
+        for _, t in ipairs(WowVisionNavigationTargetCatalog.ExpandCatalog(WVN7Logical[37])) do t.zoneId = 37; ROWS[t.id] = t end
+        function Bound(id)
+            local r = R:Resolve(NavData, ROWS[id], {route = function(node) return {node}, 1 end})
+            if not r.endNodeId then return "nil " .. tostring(r.quality) .. " " .. tostring(r.targetNode) end
+            local zone = math.floor(r.endNodeId / N.ZONE_BASE)
+            return zone .. " " .. (r.endNodeId - zone * N.ZONE_BASE) .. " " .. tostring(r.quality) .. " " .. tostring(r.targetNode)
+        end
+    """)
+    return L
+
+
 def bind(L, target, band=None, refuse=None):
     lua = L.eval("function(id, band, refuse) return Bind(id, band, refuse) end")
     return str(lua(target, band, L.table_from({nid(i): True for i in refuse}) if refuse else None))
@@ -104,13 +131,27 @@ def main():
     check("levels with n: false = the coordinates, a number = n", (bind(L, "deck", 1), bind(L, "deck", 2)) == ("4 exact target_node", "5 exact target_node_id"))
     check("a water node holds the fish under its surface", bind(L, "fish") == "7 exact target_node_id", bind(L, "fish"))
     check("p (a target of an update): the nearest node at its height, approximate", bind(L, "later") == "6 approximate nearest_node", bind(L, "later"))
-    check("no node within the radius: no target in the network", bind(L, "far").startswith("nil unroutable"), bind(L, "far"))
+    # user rule 11.11.2026: a row without a node of its own goes to the cells when no node at its height is near ("no target in the network" is gone)
+    check("no node and no cell within the radius: the cells say so, not the node rule", bind(L, "far") == "nil unroutable nil", bind(L, "far"))
     check("no route to the node: the nearest nodes one by one", bind(L, "plain", refuse=[1]) == "2 approximate nearest_node", bind(L, "plain", refuse=[1]))
+    check("a row with its own node: no route to it nor to the nearest nodes stays 'no route from the start' (unchanged)",
+          bind(L, "plain", refuse=[0, 1, 2, 3]) == "nil unroutable none", bind(L, "plain", refuse=[0, 1, 2, 3]))
+    check("a row without its own node: no route to the nearest nodes, the cells decide (no 'no route' of the node rule)",
+          bind(L, "later", refuse=[4, 6]).split()[2] == "nil", bind(L, "later", refuse=[4, 6]))
     r = L.eval("R:Resolve(NavData, ROWS['later'], {})")
     plain = str(L.eval("WowVisionNavigationTargetSelection:Describe(ROWS['later'], nil)"))
     described = str(L.eval("WowVisionNavigationTargetSelection:Describe(ROWS['later'], R:Resolve(NavData, ROWS['later'], {}))"))
     check("the fallback says how far the node is (the description of the list)", r.deltaXY is not None and abs(r.deltaXY - 2.828) < 0.01
           and len(described) > len(plain), f"{r.deltaXY} {described!r}")
+
+    print("A row without a node of its own on the ground of a neighbour (user rule 11.11.2026; Undercity uc480a: Peacebloom, Dark Enforcer):")
+    N = neighbour_world()
+    resolved = str(N.eval("Bound('beyond')"))
+    check("bound over the cell of the neighbour, its attachment the end of the route", resolved == "38 0 exact nil", resolved)
+    resolved = str(N.eval("Bound('beside')"))
+    check("outside every cell: the nearest cell within the radius, approximate", resolved == "38 1 approximate nil", resolved)
+    resolved = str(N.eval("Bound('own')"))
+    check("a row with its own node in the same catalog is bound to it as before", resolved == "37 1 exact target_node", resolved)
 
     print("Another navdata (a partial deploy):")
     L = world(fingerprint="CD" * 32)
