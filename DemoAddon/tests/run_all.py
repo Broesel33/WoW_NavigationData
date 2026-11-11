@@ -11,7 +11,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 FAST = ["test_floor_arrival.py", "test_height_hint.py", "test_target_nodes.py", "test_wait_target_end.py", "test_dock_model.py",
-        "test_trigger_after_action.py", "test_teleport_arrival.py"]
+        "test_trigger_after_action.py", "test_teleport_arrival.py", "test_dock_portal_route.py"]
 DATA = ["test_wait_targets_real_data.py"]
 
 

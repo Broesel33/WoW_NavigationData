@@ -1583,14 +1583,16 @@ end
 function WowVisionNavigationLayerTargetStart(target,asStart,startOverride,onResolved,forceRouteTarget,travelOrder)
     local selection = _G.WowVisionNavigationTargetSelection
     if not selection or not NavData then return false end
-    -- a dock of the dock model and its point on board are walked on foot, like a waiting point. A trigger (walk_into_trigger) is not:
+    -- the point on board of the dock model is walked on foot (the one checked link from its dock), like a waiting point. A dock of the
+    -- dock model is an ordinary target: portals, lifts and teleports are parts of the route to it (the vehicle ride never is, see
+    -- NavNetwork.WalkingAction). A trigger (walk_into_trigger) is not foot only either:
     -- portals and lifts are parts of a route (chapter 02 rule 11), and the pre-point of a trigger may lie in a part of the network that
     -- only another action reaches (the room of portal 702 in Stormwind is reached through portal 704 only). The route then ends at the
     -- pre-point of that action and the trigger's own activation follows after it (StartNavigationToNode, WowVisionNavigationActionArrival);
     -- the same as the route of a list entry (WowVisionNavigationSelectListEntry), which never asked a trigger for foot only.
     local dockModule = _G.WowVisionNavigationDockNavigation
     local footOnly = target.interactionMode == "manual_wait"
-        or (dockModule and (dockModule:IsVesselDock(target,NavData) or dockModule:IsBoardingPoint(target,NavData))) or false
+        or (dockModule and dockModule:IsBoardingPoint(target,NavData)) or false
     local context = asStart and {} or WowVisionNavigationLayerTargetContext(footOnly,startOverride)
     if not context then
         WowVisionNavigationSay("no_unique_start")
@@ -2397,7 +2399,7 @@ function WowVisionNavigationSelectListEntry(entry,travelOrder,startOverride)
     -- re-checked context.
     if startOverride ~= nil then Navigation.manualStartNode = startOverride end
     local started = StartNavigationToNode(entry.nodeId, TargetName(entry),
-        entry.attachmentStatus, waitpoint or vesselDock or boardingPoint or false, waitpoint and entry.id or nil,
+        entry.attachmentStatus, waitpoint or boardingPoint or false, waitpoint and entry.id or nil,
         entry.activationMode == "walk_into_trigger" and entry.id or nil,entry,entry.layerResolution)
     if started and (vesselDock or boardingPoint) then
         -- The dock model: the normal arrival at the dock continues to its point on board, the normal arrival at the point on board
