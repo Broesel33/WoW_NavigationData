@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1431,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="BAF8927F087D4AC9EA21F1369A05D2E77064E68A8BEF00A8CE2A457C56E24148",navFingerprint="A000E5A427D93A9EC889D1A4BA0F1E89EBB8E5790360875B2E2BB9AD26D71543",payloadSha256="697055595A96BDE204BA4A6E00114B75BE0FBD65EF8EFF8A8BA2CED82E9816A9"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1431,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="24945946F5A3F66CDCC3A6C272BFC5105959738EB44A361CB44F0CB5FEE3532D",navFingerprint="A000E5A427D93A9EC889D1A4BA0F1E89EBB8E5790360875B2E2BB9AD26D71543",payloadSha256="05C6C44D3EBDF32676C088FEE6BA90557ADF8A8907E206C4CC70096B143B76AB"}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",210,"Bone Chewer","Knochenkauer",a="possible_spawn"},
 {"npc","npc_or_mob",269,"Role Dreuger (Deputy Mayor of Darkshire)","Role Dreuger (Vizebürgermeister von Dunkelhain)"},
@@ -3333,7 +3333,8 @@ LogicalTargets.targets = {
 {"questie_gameobject_642320_10_0",235,-10370.07,125.93,l={1.8,31.626}},
 {"questie_gameobject_673515_10_0",236,-10717.47,263.63,44.175},
 {"gathermate2_herb_1431_2320739000",237,-11046.87,206.93,27.386},
-{"gathermate2_herb_1431_2370650000",238,-10886.67,193.43,40.023},
+{"gathermate2_herb_1431_2370651000",238,-10888.47,193.43,39.884,p=true},
+{"gathermate2_herb_1431_2440374000",239,-10389.87,174.53,35.163,p=true},
 {"gathermate2_herb_1431_2440378000",239,-10397.07,174.53,35.394},
 {"gathermate2_herb_1431_2530686000",238,-10951.47,150.23,40.768},
 {"gathermate2_herb_1431_2530788000",238,-11135.07,150.23,29.685},
@@ -3343,7 +3344,7 @@ LogicalTargets.targets = {
 {"gathermate2_herb_1431_3260392000",240,-10422.27,-46.87,46.993},
 {"gathermate2_herb_1431_3340319000",240,-10290.87,-68.47,45.757},
 {"gathermate2_herb_1431_3350320000",240,-10292.67,-71.17,45.451},
-{"gathermate2_herb_1431_3440731000",240,-11032.47,-95.47,16.4},
+{"gathermate2_herb_1431_3440730000",240,-11030.67,-95.47,16.499,p=true},
 {"gathermate2_herb_1431_3450732000",240,-11034.27,-98.17,16.37},
 {"gathermate2_herb_1431_3520446000",237,-10519.47,-117.07,61.248},
 {"gathermate2_herb_1431_3570394000",241,-10425.87,-130.57,76.962},
@@ -3357,7 +3358,7 @@ LogicalTargets.targets = {
 {"gathermate2_herb_1431_6070469000",238,-10560.87,-805.57,54.387},
 {"gathermate2_herb_1431_6270714000",240,-11001.87,-859.57,63.585},
 {"gathermate2_herb_1431_6270718000",240,-11009.07,-859.57,62.822},
-{"gathermate2_herb_1431_6280402000",240,-10440.27,-862.27,47.084},
+{"gathermate2_herb_1431_6300402000",240,-10440.27,-867.67,46.36,p=true},
 {"gathermate2_herb_1431_6590700000",237,-10976.67,-945.97,70.6},
 {"gathermate2_herb_1431_6750536000",238,-10681.47,-989.17,71.23},
 {"gathermate2_herb_1431_7650782000",241,-11124.27,-1232.17,102.659},
@@ -3425,6 +3426,9 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1431_8720492000",246,-10602.27,-1521.07,91.044},
 {"gathermate2_mining_1431_8720492001",247,-10602.27,-1521.07,91.044},
 {"gathermate2_mining_1431_8810518000",246,-10649.07,-1545.37,103.085},
+{"gathermate2_herb_1431_2370650000",238,-10886.67,193.43,40.023},
+{"gathermate2_herb_1431_3440731000",240,-11032.47,-95.47,16.4},
+{"gathermate2_herb_1431_6280402000",240,-10440.27,-862.27,47.084},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1431] = LogicalTargets

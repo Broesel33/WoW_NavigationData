@@ -1673,7 +1673,8 @@ function WowVisionNavigationLayerTargetNew()
         WowVisionNavigationSay("target_source_gone")
         return false
     end
-    -- Unknown height remains a fresh numbered selection, never an auto-choice.
+    -- Unknown height remains a fresh numbered selection, never an auto-choice among bands the start can reach (the resolver asks
+    -- only when at least two of them can be reached).
     return WowVisionNavigationLayerTargetStart(target)
 end
 

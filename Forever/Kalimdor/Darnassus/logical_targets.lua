@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1457,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="983B6911013EFD484A956768FF9F13651DB9113AEF94D88ABDEA343DC1B9347F",navFingerprint="DF88A23FC5C3AEB68B44EABAC730FE3BA419F0BEC17B5B5D187348ADB64DF5E5",payloadSha256="D5B5F534426D410F7FA44223A76175D60CC7093051062EC35505B578A2783A49"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1457,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="7D846FE0FDA2B3F78C12B8F65B354F38F20C2AD1DEE62C1BEFE62BCD4801606F",navFingerprint="DF88A23FC5C3AEB68B44EABAC730FE3BA419F0BEC17B5B5D187348ADB64DF5E5",payloadSha256="EE929B9F8359161B8E541212026CEBE0043E58EE15FD36F1050D58F4E7B7F0FB"}
 LogicalTargets.classes = {
 {"npc","quest_giver",15351,"Alliance Brigadier General","Brigadegeneral der Allianz"},
 {"creature","npc_or_mob",14602,"Swift Stormsaber","Schneller Sturmsäbler"},

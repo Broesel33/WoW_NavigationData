@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1458,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="BF06F7DD52E850319EA5EF23077EA1B32474C3195FA13EFF56CE36E9E7389BD4",navFingerprint="5519DD5FF661707707DF00A64A25940EC67E75FFD29D00FAD383E27762659AEF",payloadSha256="996B416361BE2C16BBCBA26018BA160690300204EB50F94D77F152C01C5CD065"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1458,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="C64B7F4203FEF10872C775B8B8D3778F2C940C1A0EF8A17F5D5B5ED393C53FFC",navFingerprint="5519DD5FF661707707DF00A64A25940EC67E75FFD29D00FAD383E27762659AEF",payloadSha256="154AF5A90CEC8D9A59876F1D11A884B4CFC1916A3359BF59345B73803BC9AB34"}
 LogicalTargets.classes = {
 {"npc","spirit_healer",6491,"Spirit Healer","Geistheiler"},
 {"npc","quest_giver",11750,"Ganoosh"},

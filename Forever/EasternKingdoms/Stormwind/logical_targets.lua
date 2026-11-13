@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=84,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="8ABCE57D7F1D6F2E0D5C3288DEE9C80B9C4CF2DB1C685A0087814D7F86231DD0",navFingerprint="6FDD137FB068B542E7B0FDBE1C3A54080DAFB672B2D16CAB4C4AFDB6F1A674FD",payloadSha256="D8F47AC86A52E0B39F3964773C33DB206AB6DD64B1A397E40D35CCC31C58C019"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=84,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="4F2F33F0A4F1AE973EB409B1E90006B7DC0821A098E985180A585AF430E2630C",navFingerprint="6FDD137FB068B542E7B0FDBE1C3A54080DAFB672B2D16CAB4C4AFDB6F1A674FD",payloadSha256="8D0BD4BD06904373AE3042FAC57022DF8DFCDDE5F905B2F7FE0B1D5B50CBF7FF"}
 LogicalTargets.classes = {
 {"npc",{"quest_giver","trainer"},376,"High Priestess Laurena (Priest Trainer)","Hohepriesterin Laurena (Priesterlehrerin)"},
 {"npc","quest_giver",656,"Wilder Thistlenettle"},
@@ -1670,9 +1670,9 @@ LogicalTargets.targets = {
 {"gathermate2_herb_1453_5570857000",499,-8988.53,755.13,l={59.759,98.787}},
 {"gathermate2_herb_1453_6120705000",499,-8812.46,659.57,59.718},
 {"gathermate2_herb_1453_6140705000",501,-8812.46,656.09,59.718},
-{"gathermate2_herb_1453_6160707000",500,-8814.78,652.62,l={59.723,95.442}},
 {"gathermate2_herb_1453_6180757000",499,-8872.69,649.14,96.263},
 {"gathermate2_herb_1453_6180759000",500,-8875.01,649.14,96.306},
+{"gathermate2_herb_1453_6190713000",500,-8821.73,647.41,l={59.737,94.697},p=true},
 {"gathermate2_herb_1453_6200704000",499,-8811.3,645.67,l={59.716,94.627}},
 {"gathermate2_herb_1453_6270724000",501,-8834.47,633.51,l={59.773,94.6}},
 {"gathermate2_herb_1453_6330811000",500,-8935.24,623.08,l={75.468,99.8}},
@@ -1690,6 +1690,7 @@ LogicalTargets.targets = {
 {"gathermate2_herb_1453_6670652000",501,-8751.07,564,l={59.6,97.965}},
 {"gathermate2_herb_1453_7020737000",501,-8849.53,503.19,l={75.436,109.785}},
 {"gathermate2_herb_1453_7830528000",500,-8607.43,362.45,l={59.774,92.232,100}},
+{"gathermate2_herb_1453_6160707000",500,-8814.78,652.62,l={59.723,95.442}},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[84] = LogicalTargets

@@ -22,16 +22,14 @@ function S:Prepare(nav,target,context,start)
     local result = WowVisionNavigationTargetResolver:Resolve(nav,target,context)
     if result.quality == "ambiguous" and result.bands then
         self.pending = {nav=nav,target=target,context=context,start=start,
-            catalogRevision=WowVisionNavigationTargetCatalog.revision,bandCount=#result.bands}
+            catalogRevision=WowVisionNavigationTargetCatalog.revision,bandCount=#result.bands,bands=result.bands}
         -- unknown target height: "height unknown"; known height that fits no band: the conflict text (since 4.41)
         WowVisionNavigationSay(result.levelUnknown and "level_prompt"
             or (result.zConflict and "band_prompt_conflict" or "band_prompt"))
         for i,band in ipairs(result.bands) do
-            local reachable = false
-            for _,candidate in ipairs(band.candidates) do
-                if not context.route or context.route(candidate.id) then reachable=true;break end
-            end
-            local noPath = reachable and "" or WowVisionNavigationText("band_no_path")
+            -- the resolver marks a band the start cannot reach (it asks only when at least two can be reached); the candidates of a
+            -- band of cells are cells, not nodes, so they cannot be routed here
+            local noPath = band.selectable == false and WowVisionNavigationText("band_no_path") or ""
             if band.level then
                 print(WowVisionNavigationText("level_line", i, band.zMin, noPath))
             else
@@ -83,7 +81,9 @@ function S:Command(msg)
                 end
                 pending.context = current
             end
+            -- the answer is evaluated over the band the question offered (not over the bands of another search stage)
             pending.context.heightBand = index
+            pending.context.band = pending.bands and pending.bands[index] or nil
             self:Prepare(pending.nav,pending.target,pending.context,pending.start)
         end
         return true

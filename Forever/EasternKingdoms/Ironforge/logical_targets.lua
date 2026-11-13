@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=87,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="20283B168E3083405866E1E9609C709B9AC6350023069F5F82356AC7CEDAE194",navFingerprint="7CF3ACFEC09A4494668280206A60CB266B110A4AD120DB6CA5DCEC65990A2168",payloadSha256="AA52D86C042C95AB7D043BD23EAE07A743E05828997B1A3D9BC9B6D6CDEA4A58"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=87,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="58CC3D760A366A6C35B01C1CE28D8A34E10BD852748607F361B018A086628E82",navFingerprint="7CF3ACFEC09A4494668280206A60CB266B110A4AD120DB6CA5DCEC65990A2168",payloadSha256="B4F99BC5FB3EB3A5F85EEFDB2E24B7DEE55F54982C7CA072F508202A75B51BA8"}
 LogicalTargets.classes = {
 {"npc","quest_giver",6569,"Gnoarn"},
 {"npc","vendor",5123,"Bretta Goldfury (Gun Merchant)","Bretta Goldfury (Schusswaffenhändlerin)"},

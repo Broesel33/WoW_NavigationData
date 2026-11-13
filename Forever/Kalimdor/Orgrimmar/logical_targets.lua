@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1454,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="1D499343FAD49DF8B9B2B0AD640653B3458913E6C7C998EDC42FD4526BB0B1A7",navFingerprint="AE645CDC19AA7E9860ABE763CAD6266432F9BFE1DE0A456A0FFC5CA45ED425F8",payloadSha256="535539AE9F7631065C3DC0240D430A46E8F92901ED5D3C56B7F078C4F5F69D28"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1454,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="D487992F76737F7F65CE175CC2C18C3DEBA1EB2E6EE1FBD14B8CDD3C48A8A972",navFingerprint="AE645CDC19AA7E9860ABE763CAD6266432F9BFE1DE0A456A0FFC5CA45ED425F8",payloadSha256="8A2B1CE6032D98E446549621007DD465186177A625348C3C87112604EAA1050A"}
 LogicalTargets.classes = {
 {"npc","quest_giver",5875,"Gan'rul Bloodeye"},
 {"npc","quest_giver",8659,"Jes'rimon"},
@@ -1272,7 +1272,7 @@ LogicalTargets.targets = {
 {"gathermate2_herb_1454_4810808000",347,1518.06,-4355.25,18.899},
 {"gathermate2_herb_1454_4910697000",347,1621.89,-4369.28,l={12.076,27.962}},
 {"gathermate2_herb_1454_4910697001",348,1621.89,-4369.28,l={12.076,27.962}},
-{"gathermate2_herb_1454_4950692000",348,1626.57,-4374.89,l={12.019,29.766}},
+{"gathermate2_herb_1454_4960693000",348,1625.63,-4376.29,l={12.082,29.257},p=true},
 {"gathermate2_herb_1454_5060706000",347,1613.47,-4390.32,10.487},
 {"gathermate2_herb_1454_5080703000",347,1616.28,-4393.12,l={10.408,24.043}},
 {"gathermate2_herb_1454_5330656000",348,1660.24,-4428.19,17.464},
@@ -1285,6 +1285,7 @@ LogicalTargets.targets = {
 {"gathermate2_herb_1454_5720532000",348,1776.24,-4482.89,45.733},
 {"gathermate2_herb_1454_6290495000",348,1810.85,-4562.84,22.8},
 {"gathermate2_herb_1454_7380291000",348,2001.67,-4715.72,26.362},
+{"gathermate2_herb_1454_4950692000",348,1626.57,-4374.89,l={12.019,29.766}},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1454] = LogicalTargets

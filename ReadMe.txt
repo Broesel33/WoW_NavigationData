@@ -50,7 +50,7 @@ Every zone comes with three kinds of data:
     entrances, portals, elevators, boat and zeppelin docks, the stops of the Deeprun Tram, the dive
     points of the Ruins of Blackfathom, the portals and the Wind Bridge of Zephras Isle, and the
     crossings between neighbouring zones. They also hold fishing spots: places to stand and fish
-    at the waters of 45 zones.
+    at the waters of 45 zones, and the central points of caves, mines and tunnels.
 
 Routes are always on foot. Walking into a portal or into a trigger such as the entrance of the Deeprun
 Tram, riding an elevator, clicking a portal on Zephras Isle and waiting for and stepping into its Wind
@@ -61,11 +61,13 @@ and takes the vehicle personally. Flight paths are not modelled at all.
 At a glance (snapshot of the data in this repository):
 
   51 zones in 4 continent groups   EasternKingdoms 26, Kalimdor 23, DeeprunTram 1, ZephrasIsle 1
-  about 0.86 million waypoints     about 2.25 million links, about 0.92 million attachment cells
-  about 111,300 logical targets    242 dynamic targets and 788 fishing spots
-  3,318 seams between zones        63 neighbouring zone pairs
-  about 54 MB of Lua files         the largest zone file (The Barrens, navdata.lua) is about 2.6 MB;
-                                   the logical target catalogues of all zones take about 7 MB of it
+  about 1.39 million waypoints     about 12.7 million links, about 0.90 million attachment cells
+  about 124,700 logical targets    274 transit and crossing targets, 793 fishing spots and 39 cave
+                                   centre points
+  about 3,100 seams between zones  63 neighbouring zone pairs
+  about 126 MB of Lua files        the largest zone file (The Barrens, navdata.lua) is about 7 MB;
+                                   the logical target catalogues of all zones take about 7.8 MB of it
+  (The data is being rebuilt zone by zone; the counts of this snapshot change with every rebuilt zone.)
 
 Supported game version
   WoW Forever (client series 1.60.1; the demo addon declares interface 16001).
@@ -273,7 +275,7 @@ Seams are symmetric in use
   A seam can be walked in both directions. The demo addon, for example, enters the seam from
   whichever of its two ends the route reaches first. To find every seam of a zone, a consumer
   therefore has to look at the seam lists of all zones of the continent, not just at the list of the
-  zone itself. Example: the 29 seams between Elwynn Forest (37) and Stormwind City (84) are all
+  zone itself. Example: all the seams between Elwynn Forest (37) and Stormwind City (84) are
   kept in the entry of zone 37; the entry of zone 84 holds none.
 
 A worked example (seam 18001, Tirisfal Glades -> Silverpine Forest):
@@ -290,8 +292,8 @@ How a consumer should treat seams
   The index is data to check, not to trust blindly. The demo addon verifies that the GATEWAY end has
   the GATEWAY code and lists the seam ID, that a node end lies within 0.06 yd of the stated position,
   and that a link end exists, has t in 1 to 255 and lies at the stated position. A seam that fails any
-  check is ignored ("fail closed"). In the data of this repository, all 3,318 seams (6,636 seam
-  ends) pass the checks for existing waypoints, links and seam IDs.
+  check is ignored ("fail closed"). The seams of this repository pass the checks for existing
+  waypoints, links and seam IDs when the index is exported.
 
 
 6. navdata.lua - THE WAYPOINT NETWORK
@@ -544,7 +546,7 @@ A worked example: decoding the first waypoints and the first cell of the Deeprun
 The file defines a catalogue of the targets of one zone. It comes in a compact form (format 2) that
 keeps the constants of the file once in the header and what targets of one kind share once per
 "class", so that a target itself is one short line. The catalogues of all zones together take about
-7 MB for about 111,300 targets.
+7.8 MB for about 124,700 targets.
 
   -- Logical target catalogue, compact format 2. No graph bindings, no provenance.
   local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=84,coordinateSpace="world",
@@ -590,23 +592,34 @@ Header fields
   availability      The default availability of a class ("static"), see below.
   converterSha256, payloadSha256, sourceSha256
                     Hashes that identify the export. payloadSha256 is the SHA-256 of the canonical
-                    JSON of the header constants and of the rows as expanded below.
+                    JSON of the header constants and of the rows as expanded below. Newer files
+                    carry no converterSha256.
+  navFingerprint    Present when rows carry node numbers (field n below): the fingerprint of the
+                    navdata.lua that the numbers belong to (the value of the fingerprint in its
+                    header). A consumer uses n only when the loaded zone has this fingerprint.
 
 classes: what the targets of one population share
   A class is a list; the position says what a value is.
-    [1] kind          "npc", "mob", "creature", "gameobject", "herb", "mining" or "mailbox" (the
-                      kinds in the shipped files; a consumer should also accept "search_area" and
-                      "live", which do not occur). npc, mob and creature are spawns of a creature
+    [1] kind          "npc", "mob", "creature", "gameobject", "herb", "mining", "mailbox",
+                      "search_area" or "transit_facility" (the kinds in the shipped files; a
+                      consumer should also accept "live", which does not occur).
+                      "search_area" is the position of a quest objective that has no creature or
+                      object (category quest_explore; the name is the text of the objective;
+                      the position is the centre of the area, no radius r is given).
+                      "transit_facility" is a dungeon entrance that has only an approximate
+                      position (category dungeon; the exact entrances are in dyn_targets.lua,
+                      section 8); its class carries nk, nm and np, the spoken name as in section 8.
+                      npc, mob and creature are spawns of a creature
                       (an NPC, a mob, a creature without a known role); gameobject, herb, mining
                       and mailbox are spawns of a game object (herb: a herb node, mining: an ore
                       vein). Two targets with the same kind group and the same entry are the same
-                      population. In the shipped files, the 111,254 targets are 40,022 mob, 18,391
-                      creature, 9,085 npc, 11,988 gameobject, 17,698 herb, 14,014 mining and 56
-                      mailbox targets.
+                      population. In the shipped files, the 124,699 targets are 45,649 mob, 18,539
+                      creature, 14,615 npc, 12,061 gameobject, 19,015 herb, 14,610 mining, 56
+                      mailbox, 147 search_area and 7 transit_facility targets.
     [2] category      One English category key, or a list of keys. The ones in use: quest_giver,
                       trainer, vendor, flight_master, innkeeper, stable_master, auctioneer, banker,
                       spirit_healer, npc_or_mob, chest, herb, ore, object, quest_item,
-                      interaction_object, mailbox, anvil, forge, and a few generic ones of the
+                      interaction_object, mailbox, anvil, forge, quest_explore, dungeon, and a few generic ones of the
                       form object_type_N (herb is the category of the kind "herb", ore that of the
                       kind "mining"). Localise them in the consumer. mailbox, anvil and forge
                       are recognised from the type of the game object in the source database (a
@@ -637,14 +650,39 @@ targets: one line per target
                     (never 0; 0 is a height). A consumer treats "no z" as height unknown.
   l                 Present instead of z when a target without a source height lies over several
                     walkable floors: a list of the floor heights, lowest first. The consumer has to
-                    find out which floor is meant (the demo addon asks the player).
-  r                 The radius in yards of an area target (kind "search_area"; it does not occur in
-                    the shipped files).
+                    find out which floor is meant. The demo addon asks the player (/vn ebene) only
+                    where the player has a choice: when at least two of the floors can be reached
+                    from the start. With one reachable floor the route goes there without a
+                    question, with none the addon says there is no route from here; a known
+                    height inside one floor decides without a question. In a list (no start)
+                    every floor counts.
+  r                 The radius in yards of an area target (it does not occur in the shipped files;
+                    the "search_area" targets carry none).
   p                 true for an approximate target: its position was attached to the network
                     afterwards (see "Attaching a target to the network").
+  n                 The fixed node of the target (see "The fixed node of a target"): the number of
+                    a waypoint in navdata.lua of the zone (zone base + n is the global waypoint ID),
+                    for a target with levels (l) a list as long as l, with false for a level that
+                    has no node. Present only where the node cannot be found by the coordinates.
 
-A target carries no waypoint ID and no distance to the network. The data tells where the target
-is; where the player enters the network to reach it is decided when the addon binds it (section 10).
+A target carries no distance to the network. The data tells where the target is, and for the
+targets of a zone built with fixed nodes it holds the node (below); where the player enters the
+network otherwise is decided when the addon binds it (section 10).
+
+The fixed node of a target
+  In the zones built with fixed target nodes every target that has a position the player can reach
+  has a waypoint of its own on its access point (the reachable ground nearest to the target within
+  5 yd and the height tolerance), linked like any other waypoint. A consumer finds it by the
+  coordinates: the waypoint whose x and y each differ from the target's by at most 0.05 yd (half
+  the 0.1 yd resolution of the waypoint coordinates; compare with a tolerance, never for equality),
+  and of those the one with the smallest height difference within the height tolerance (a WATER
+  waypoint holds everything under its surface, so for it only the upper bound counts). Where the
+  coordinates do not find it (the access point is moved because the target stands in a wall or in
+  rock, or in the water), the row carries n, and the header carries navFingerprint. A target
+  without a node (p = true) is bound like an approximate target: the route leads to the nearest
+  waypoint within the search radius at the height of the target, the rest is an unchecked straight
+  line, and the addon says "approximate"; where no such waypoint has a route, the binding by
+  cells (below) is the fallback.
 
 Populations and the reachability rule
   A group of spawns of the same kind counts as reachable when at least one of its spawns can be
@@ -653,7 +691,9 @@ Populations and the reachability rule
   may still be approximate, see below).
 
 Attaching a target to the network
-  Targets are not waypoints. A consumer finds the attachment cell above the target's position whose
+  Where a target has a fixed node (above), the consumer routes to that node and the route ends on
+  it; the arrival is the normal arrival at a waypoint. For every other target:
+  targets are not waypoints. A consumer finds the attachment cell above the target's position whose
   height band fits the target's z (with a tolerance), takes one of its attachments (waypoint or link
   point) as the destination, and routes to it. A WATER cell holds the height of the surface and
   everything below it is under water, so for a water cell only the upper bound of the band (plus the
@@ -672,21 +712,30 @@ The dyn catalogue is a list of rows (a header table with layer = "dyn" and no fo
 one table with all fields per target, then WVN7Dyn[zoneId] = DynTargets) with the
 common fields id, kind, type, category, nameEn, nameDe, searchAliases, nativeMapId,
 coordinateSpace, x, y, z, zStatus, availability, source, positionBasis and entry (the rows of
-fishing spots have no positionBasis and no entry). It contains 242 transit and crossing targets of
-two kinds (the dyn_targets.lua of Moonglade and Mount Hyjal have none of them) and 788 fishing
-spots, a third kind (see below):
+fishing spots have no positionBasis and no entry). Its header may carry navFingerprint (the
+fingerprint of the navdata.lua of the same export), and a row may carry n, the number of its fixed
+node (below). It contains 274 transit and crossing targets of two kinds, 793 fishing spots, a third
+kind (see below), and 39 cave centre points, a fourth kind:
 
-  kind "transit_facility" (102 targets), with a facilityKind:
-    dungeon   20   An instance entrance (15 different dungeons). Role "entrance". The position is
-                   where a player appears when leaving the instance (positionBasis
-                   "teleport_exit_arrival").
-    boat      15   A boat dock. Role "waiting".
-    zeppelin  10   A zeppelin or skyboat dock. Role "waiting".
+  kind "transit_facility" (134 targets), with a facilityKind:
+    dungeon   23   An instance entrance (about 15 different dungeons, some with a wing in the name).
+                   Role "entrance". The position is where a player appears when leaving the
+                   instance (positionBasis "teleport_exit_arrival"); the rows come from the
+                   teleport table of the client, a dungeon without such a row has an approximate
+                   entrance in logical_targets.lua (section 7). A dungeon entrance belongs to the
+                   zone on whose ground it stands, not necessarily to the zone whose map chunk
+                   holds the point.
+    boat      31   A boat dock (15) and its point on board (15), and one dock of the former model
+                   (see "Docks").
+    zeppelin  20   A zeppelin or skyboat dock (10) and its point on board (10).
     lift      34   An elevator platform. Role "waiting" (the upper and the lower station are
                    separate targets).
-    tram       8   The Deeprun Tram: the entrances in Stormwind and Ironforge ("entrance"), the two
-                   exits inside the tunnel ("exit"), and the four waiting areas of the tram
-                   ("waiting").
+    tram       8   The Deeprun Tram, 8 named points of the tunnel (ids "sku:<guid>", no
+                   facilityKind; category transit and tram): the two passages to Stormwind City
+                   and to Ironforge, the two "rescue" points, the two piers and the two points
+                   "on" the tram at the ends. There are no waiting areas and no rides. In
+                   Stormwind and Ironforge two walk-in entrances (role "entrance") lead into the
+                   tunnel (facilityKind "tram").
     portal    11   A portal. Six are entered by walking into them (for example the portals of the
                    Stormwind mage tower or the one at Rut'theran Village). Role "entrance".
                    Five belong to the project transitions of Zephras Isle (see below): the portal
@@ -696,11 +745,13 @@ spots, a third kind (see below):
     wind_bridge 2  The Wind Bridge of Zephras Isle (see below): its waiting point (role "entrance",
                    actionKind "wind_bridge", actionMode "wait_for_signal") and its landing (role
                    "exit"). positionBasis "project_transition".
-    dive       2   The dive transition at the Ruins of Blackfathom in Darkshore: "Dive here" (role
+    dive       3   The dive transitions: at the Ruins of Blackfathom in Darkshore "Dive here" (role
                    "entrance") and "Surface here" (role "exit"), with actionKind "dive" or
-                   "surface" and positionBasis "project_dive_transition".
+                   "surface" and positionBasis "project_dive_transition"; at the Sunken Temple in
+                   Swamp of Sorrows a "Dive here" row.
   kind "zone_transition" (140 targets). A crossing to a neighbouring zone (see below).
-  kind "fishing_spot" (788 targets). A place to stand and fish (see below).
+  kind "fishing_spot" (793 targets). A place to stand and fish (see below).
+  kind "cave_center" (39 targets). The central point of a cave, mine or tunnel (see below).
 
 Common transit fields
   facilityKind, facilityRole   As above. role is "entrance", "exit" or "waiting".
@@ -709,8 +760,9 @@ Common transit fields
   haltAxis       The halt axis {x,y,z} of the vehicle in the source data; the waiting point was
                  derived from it.
   lift           Timing of an elevator: periodSeconds, dwellSeconds, stop, stops, ...
-  interactionMode "manual_wait" for docks: the player waits at a waiting point (waitingRadius,
-                 at most 2 yd) and boards the vehicle personally.
+  interactionMode "manual_wait" for the lifts and for docks of the former model (see "Docks"): the
+                 player waits at a waiting point (waitingRadius, at most 2 yd) and boards the
+                 vehicle personally. Docks of the current model carry no interactionMode.
   activationMode "walk_into_trigger" for entrances and exits: the player walks into a trigger
                  volume. activationPreX/Y/Z is a point from which to walk in, activationCapture-
                  Radius is the tolerance, volume describes the trigger (sphere or oriented box).
@@ -729,10 +781,16 @@ Common transit fields
                  estimates. The demo addon announces such a position as approximate.
   decision       A note naming the decision behind a project transition of Zephras Isle.
   boardingHintStatus, boardingDirX, boardingDirY, boardingPreviewDistance
-                 "certified" when a boarding orientation is known: (boardingDirX, boardingDirY) is a
-                 unit vector in the world plane, and the point that lies boardingPreviewDistance
-                 yards from the waiting point in that direction is the orientation point (the demo
-                 addon uses it as a boarding hint). "unavailable" otherwise.
+                 Docks of the former model only: "certified" when a boarding orientation is known:
+                 (boardingDirX, boardingDirY) is a unit vector in the world plane, and the point
+                 that lies boardingPreviewDistance yards from the waiting point in that direction
+                 is the orientation point (the demo addon uses it as a boarding hint).
+                 "unavailable" otherwise.
+  dockId, boardingPointId, boardingProof
+                 Docks of the current model: see "Docks".
+  n              The number of the fixed node of the row in navdata.lua of the zone (zone base + n
+                 is the global waypoint ID), only where the coordinates do not find the node; the
+                 header then carries navFingerprint (see "The fixed node of a row").
   destinationEn, destinationMapId   The place a vehicle goes to.
   positionBasis  How x, y, z was chosen (e.g. "halt_axis", "trigger_volume_centre",
                  "project_transition").
@@ -740,18 +798,45 @@ Common transit fields
                  capture record in navdata.lua (see below).
 
 How a dyn target is tied to the network
-  A dyn target itself holds no waypoint ID. The physical connection is in the navdata of the zone: the
-  facility is an ACTION waypoint, the capture record in the "captures" extra repeats the key values of
-  the target (position, proof IDs, mode, radii), and, where the destination is part of the data,
-  there is an action (the transit link) for portals, elevators, tram entrances, the dive points and
-  the Wind Bridge. A consumer binds
-  the target by position like any other target; the capture record is the certificate that the
-  position is a genuine waiting point or trigger. The
-  demo addon accepts a transit target as a certified interaction only when the capture record in the
-  navdata equals the target (position to 0.1 yd and all listed keys).
+  The physical connection is in the navdata of the zone: the facility is an ACTION waypoint, the
+  capture record in the "captures" extra repeats the key values of the target (position, proof IDs,
+  mode, radii), and, where the destination is part of the data, there is an action (the transit
+  link) for portals, elevators, tram entrances, the dive points and the Wind Bridge. The capture
+  record is the certificate that the position is a genuine waiting point or trigger. The demo addon
+  accepts a transit target as a certified interaction only when the capture record in the navdata
+  equals the target (position to 0.1 yd and all listed keys).
+
+The fixed node of a row
+  As for the logical targets (section 7), a row of the dyn catalogue has a fixed node of the network
+  where the zone was built with fixed target nodes: a dock, its point on board, an elevator
+  station, a cave centre point, a dungeon entrance at its teleport arrival and a fishing spot stand
+  exactly on a waypoint, which the consumer finds by the coordinates (x and y within 0.05 yd, the
+  smallest height difference within the height tolerance). A walk-in trigger stands on its capture
+  point inside the volume, its node is the ACTION waypoint at its pre-point (activationPre): the row
+  carries n. Where the node is not at the coordinates, the row carries n as well. The route to such a
+  row ends exactly on its node and the arrival is the normal arrival at a waypoint. A row without a
+  node (a zone transition that is no seam, for example) is bound by position like a target without a
+  node (section 7).
+
+Docks (boats and zeppelins; current model)
+  A dock is an ordinary dynamic point on its own node: facilityRole "waiting", no interactionMode,
+  no waitingRadius, no waitpointProofId and no boarding straight. transportRouteId and
+  transportStopId name the line and the stop. boardingPointId names the second row of the dock, the
+  point on board: facilityRole "onboard", dockId (the id of the dock), the same line, stop and
+  destination, positionBasis "vessel_deck", nameKey "on_ship" ("On the ship to <place>", "Am Schiff
+  nach <place>") or "on_zeppelin", and boardingProof (the id "vessel_link:<dock>", the length and
+  the step of the link and the checks it passed). The point on board stands on the deck of the
+  vessel model in its halt pose and is joined to the dock node by exactly one link (both
+  directions, FINE) that was checked against the geometry of the zone and the vessel: collision
+  both ways, floor under every sample, clearance to walls and to the deck rim, a step of at most
+  1.5 yd. The route leads to the dock on foot (portals, elevators and teleports may be parts of that
+  route); the consumer then guides the player to the point on board, and boarding the vehicle
+  itself is never part of a route. A dock of the former model (manual_wait, a waiting circle and
+  a boarding straight) remains where no point on board could be placed; the elevators keep the
+  waiting circle.
 
 Localised names (nameKey)
-  Every dyn target except two carries a "nameKey" and usually a parameter, so that the consumer can
+  Every dyn target except the eight named points of the Deeprun Tram carries a "nameKey" and usually a parameter, so that the consumer can
   speak the name in the player's language: the key picks a text template, and the place comes from
   the client:
 
@@ -760,9 +845,11 @@ Localised names (nameKey)
     portal            Portal (parameter: the destination)
     dock_ship         Boat dock (parameter: the destination)
     dock_zeppelin     Zeppelin or skyboat dock (parameter: the destination)
+    on_ship, on_zeppelin
+                      Point on board of a dock of the current model (parameter: the destination)
     elevator          Elevator
     tram_entrance     Tram entrance
-    tram_dock         Tram waiting area (parameter: the direction)
+    cave_center       Central point of a cave (the area name comes from the client)
     dive_entry        "Dive here"
     dive_exit         "Surface here"
     rohashi_portal, rohashi_arrival
@@ -798,7 +885,7 @@ Zone transitions (kind "zone_transition")
   document how the place was chosen; a consumer does not need them.
 
 Fishing spots (kind "fishing_spot")
-  A fishing spot is a place to stand and fish. The data holds 788 spots in 45 zones; the Deeprun
+  A fishing spot is a place to stand and fish. The data holds 793 spots in 45 zones; the Deeprun
   Tram, Ironforge, Undercity, Badlands, Blasted Lands and Felwood have none. Every body of water
   that can be fished has two to four spots, at least 40 yd apart, so that two spots never cast into
   the same water. The position (x, y, z) is the standing point: solid ground on the shore, or on a
@@ -846,6 +933,26 @@ Fishing spots (kind "fishing_spot")
      ["searchAliases"]={"Angelplatz","Angeln","fishing","fishing spot"},["type"]="fishing_spot",
      ["x"]=10424.05,["y"]=1634.75,["z"]=1285.13,["zStatus"]="known"}
 
+Cave centre points (kind "cave_center")
+  A cave centre point is a waypoint of the network in the middle of a named cave, mine or tunnel
+  (never of a building). The data holds 39 points in 16 zones; a cave with two or more large
+  chambers has one point per chamber. The point stands on the ground of the cave, away from walls
+  and edges, and is part of the main network. Like a fishing spot it is a row of the dyn catalogue
+  with no capture record; the consumer binds it by position (its node: "The fixed node of a row").
+  id            "cave_center:<area>", or "cave_center:<area>:<n>" for several points of one cave
+                (the numbers run from north to south); <area> is the AreaTable ID of the cave.
+  kind, type, category
+                "cave_center", "cave_center" and {"cave"}.
+  nameKey, nameAreaId, nameParam
+                "cave_center"; the AreaTable ID of the cave, so that the consumer speaks its name
+                in the player's language; the English area name as a fallback.
+  nameEn, nameDe
+                "Central point: <area>" and in German "Zentralpunkt: <area>" (the German text
+                holds the English area name; speak nameKey and nameAreaId instead).
+  nameSuffix    "lower" or "upper" for two floors, otherwise a running number, when several
+                points would be spoken alike.
+  searchAliases "Zentralpunkt", "Höhle", "central point", "cave".
+
 
 9. ZONE TRANSITIONS IN GENERAL
 ------------------------------
@@ -856,10 +963,10 @@ Burning Steppes and Riverglades, for example, meet at a cliff step without a foo
 between them leads through Redridge Mountains.
 
   On-foot seams     The large majority. A border is crossed by many seams, spread along its length,
-                    so a route can cross wherever the border is walkable (for example 446 seams
-                    between Durotar and The Barrens).
+                    so a route can cross wherever the border is walkable (for example hundreds of
+                    seams between Durotar and The Barrens).
   Water seams       Where a border crosses a lake or the sea, the seam is a swimming connection
-                    (water = true on the record). They are 1,533 of the 3,318 seams. A search
+                    (water = true on the record). They are about 1,500 of the about 3,100 seams. A search
                     multiplies their cost by the swimming factor.
   Passages          Cities and tunnels are zones of their own, joined to their surroundings by
                     seams: Stormwind City with Elwynn Forest, Undercity with Tirisfal Glades,
@@ -870,15 +977,14 @@ between them leads through Redridge Mountains.
                     Village in Teldrassil and Darnassus, is stored as an action with its destination
                     in the other zone (section 6), in addition to the seams between the zones.
   Deeprun Tram      The Deeprun Tram is an instance map of its own (native map 369) with a walkable
-                    tunnel of about 2,560 yd. It has no seams. It is joined to Stormwind and to
+                    tunnel of about 2,500 yd. It has no seams. It is joined to Stormwind and to
                     Ironforge by walk-in actions: the trigger in Stormwind (2173) or in Ironforge
                     (2175) leads into the tunnel, and the triggers at the two ends of the tunnel
                     (2171 at the Stormwind end, 2166 at the Ironforge end) lead out again. The tram
-                    itself has four ride actions ("board"), which are not part of a route in the
-                    reference implementation, and four waiting areas, which are targets. A route
-                    between Stormwind and Ironforge through the corridor therefore goes on foot
-                    through the tunnel. A player who prefers the tram chooses its waiting area as
-                    the destination.
+                    itself is not modelled: there are no ride actions and no waiting areas. A route
+                    between Stormwind and Ironforge through the corridor goes on foot through the
+                    tunnel. The network of the tunnel is small (32 waypoints, 31 links) and
+                    its 8 named points (section 8) are the targets.
   Dive transition   The Ruins of Blackfathom in Darkshore are joined to the coast by a pair of
                     actions ("dive" and "surface") between the points "Dive here" and "Surface here".
   Zephras Isle      Zephras Isle (native map 2991) has no seams and no walking connection to another
@@ -892,8 +998,8 @@ between them leads through Redridge Mountains.
                     Valanaar Sanctuary on the main island, with one arrival per faction
                     (portal:valanaar_portal:alliance and :horde, each used only by the players of
                     that faction). All four actions lead from the zone into the same zone.
-  Vehicles          Boats, zeppelins and skyboats are not part of routes. Their docks are targets
-                    (dyn_targets.lua). Zephras Isle has two docks (zeppelin or skyboat connections
+  Vehicles          Boats, zeppelins and skyboats are not part of routes. Their docks and the
+                    points on board are targets (dyn_targets.lua, "Docks" in section 8). Zephras Isle has two docks (zeppelin or skyboat connections
                     to Dalaran in Alterac Mountains and to Thunder Bluff). Flight paths do not
                     appear in the data.
 
@@ -906,7 +1012,7 @@ is a good model for other implementations.
 
  1. LOAD  Load all files at start-up (the demo lists them in its .toc). Keep the raw tables, and read
     the continent indexes into a table of zones and a table of seams. A logical catalogue is kept
-    in its compact form (small arrays; about 7 MB of file for all zones). The demo checks the
+    in its compact form (small arrays; about 8 MB of file for all zones). The demo checks the
     catalogues of the active continent when the continent becomes active and reads the compact
     rows as they are; it builds one table per target only for the targets it needs (the hits of
     a search, a single target by ID): for each row the class gives kind, categories, entry,
@@ -939,7 +1045,12 @@ is a good model for other implementations.
     the last known height, or asks the player. The demo addon found that the client does not report
     a usable player height in the open world, so a consumer should be ready for this case.
 
- 5. BIND THE TARGET  As described in section 7: the cell above (or nearest to) the target, then an
+ 5. BIND THE TARGET  First the fixed node (sections 7 and 8): the waypoint at the coordinates of the
+    target or, where the row carries n and the header's navFingerprint equals the fingerprint of the
+    loaded zone, the waypoint n. The route then ends exactly on that node. A target without a node:
+    the nearest waypoint within the search radius at the height of the target, the rest an
+    unchecked straight line (the addon says "approximate"). Where that finds no route, as
+    described in section 7: the cell above (or nearest to) the target, then an
     attachment of the cell. Other attachments of the cell are tried in order when no route reaches
     the first. A target point that lies inside its cell has the checked attachments of the cell
     (those whose field mask has the bit of its field set); step 6 chooses among them.
@@ -965,7 +1076,9 @@ is a good model for other implementations.
       * actions (transit links), if the consumer allows them. The reference implementation allows
         every action except boarding a vehicle: walk-in portals and triggers, clicked portals, the
         dive and surface actions, the Wind Bridge and elevators. An action with a faction is used
-        only for a player of that faction.
+        only for a player of that faction. Portals, elevators and teleports are parts of the route
+        to a dock as well (Teldrassil: Dolanaar, the portal to Darnassus, the dock at Rut'theran
+        Village); only the ride of the vehicle never is.
     A route is the list of waypoints that the search passes, with the temporary points at its ends.
     The demo addon skips a BRANCH waypoint that is merely walked through.
 
@@ -975,10 +1088,17 @@ is a good model for other implementations.
     to the incoming link, twice the half width long), or, in OPEN terrain, has crossed the angle
     bisector at the waypoint and stands in the attachment cell of the next one. A player who leaves
     the route and enters the attachment cell of a later waypoint can continue there.
+    The route to a fixed node ends exactly on it and the arrival is the normal one. At a dock of
+    the current model the demo addon then guides the player on to the point on board; at the
+    waypoint of a trigger the activation (walking into the trigger volume) begins on that node.
 
  8. NEW ZONES AND MAPS  A route that crosses a seam simply continues in the next zone. After a
     transit action to another map (the Deeprun Tram), the zones of the new map are decoded and
-    routing continues there.
+    routing continues there. The client reports no usable player height (UnitPosition), so the
+    arrival of a teleport is recognised in the plane: the player stands on the map of the
+    destination inside the arrival volume of the action (or within the arrival radius of the exit
+    waypoint) and was seen in the source volume before, or the map has changed; the action then
+    completes by itself and the route continues, without a confirmation and without a time limit.
 
 
 11. THE DEMO ADDON
@@ -987,18 +1107,21 @@ is a good model for other implementations.
 DemoAddon/WowVisionNavigation is the reference implementation of the procedure above. It is a
 working addon with these parts:
 
-  NavNetwork.lua        Decoder, graph over the zones, seams, attachment cells, A* search.
-  Guidance.lua          Arrival at a waypoint, gate line, angle bisector, height and re-entry.
+  NavNetwork.lua        Decoder, graph over the zones, seams, attachment cells, A* search, the
+                        fixed node of a target by its coordinates (TargetNodeAt).
+  Guidance.lua          Arrival at a waypoint, gate line, angle bisector, height hint and re-entry.
   TargetCatalog.lua     The catalogues of all zones of the active continent; it validates the compact
                         logical catalogues (section 7), turns rows into one table per target on
                         demand (functions Materialize and ExpandCatalog), scans the compact rows for
                         the target search and refuses any other format of a logical catalogue.
-  TargetResolver.lua    Binds targets to attachment cells (exact, approximate, ambiguous).
+  TargetResolver.lua    Binds targets to their fixed node or, without one, to attachment cells (exact,
+                        approximate, ambiguous); asks for a floor only where the player has a choice.
   TargetProviders.lua, TargetSelection.lua
                         Live targets (corpse, group member) and the choice of a target.
   ActionNavigation.lua, DockNavigation.lua, TransitActivation.lua
                         Transit: actions (walk-in, clicked portals, the Wind Bridge, dive points),
-                        docks and walk-in triggers.
+                        docks (the dock model without a waiting circle, the point on board) and
+                        walk-in triggers; the arrival of a teleport is recognised without a height.
   FishingNavigation.lua The fishing spots: the water point in front of the standing point (orientation
                         only, never a walking target) and the direction tone after the arrival.
   Localization.lua      All player-facing texts, in German and English.
@@ -1018,6 +1141,11 @@ Installation, as given in DemoAddon/readme.txt:
     camera) and Questie (quest objectives for /vn q when the game's own quest data has none).
     (The .toc declares Questie as an optional dependency.)
 
+Tests: DemoAddon/tests/ holds the tests of the addon (Lua 5.1 through the Python package lupa, with
+stubs of the game API, no game needed). They use the test harness of the build tools of this data
+(the WowNav repository, tools/core_schema7_harness.py, run with its Python environment);
+run_all.py runs them one after the other (--fast leaves out the test with real zone data).
+
 The .toc declares interface 16001 (WoW Forever 1.60.1) and also 50504 (MoP Classic 5.5.4); the data
 of this repository describes WoW Forever only.
 
@@ -1029,17 +1157,18 @@ Every zone was checked when it was generated. In general terms:
 
   * Coverage. For each zone, positions on walkable ground were sampled and tested for whether they
     can be attached to the network with a route. In every zone at least about 95 percent of the
-    sampled positions can; the values lie between 95.6 percent (Orgrimmar) and 99.4 percent
-    (Mulgore), depending on the zone.
+    sampled positions can; in the 47 zones rebuilt with the current method (November 2026) the
+    values lie between 97.9 percent (Darnassus) and 99.7 percent (Mulgore), depending on the zone.
   * Target reachability. In all 51 zones at least 95 percent of the target groups are
-    reachable through the network (5 zones reach 100 percent, 21 zones 99 percent or more). The
-    Ruins of Blackfathom in
+    reachable through the network. In the 47 zones rebuilt with the current method the values lie
+    between 98.8 percent (Darkshore) and 100 percent (32 zones reach 100 percent, 45 zones 99
+    percent or more). The Ruins of Blackfathom in
     Darkshore are reached by a dive transition point that announces "Dive here" at the entrance,
     and the targets on the ledge of the Rohashi Spires and on the ritual platform of Zephras Isle
     are reached through the project transitions (section 9).
     Seven groups of Shatterspear Vale remain unreachable (an isolated part of the water network).
-    The tightest zones are Swamp of Sorrows (95.1 percent), Zephras Isle (95.2 percent) and Burning
-    Steppes (95.9 percent). Targets that cannot be reached are not in the catalogues.
+    Targets that cannot be reached are not in the catalogues, except the targets of quest
+    objectives, which are never removed.
     A target group is all the spawns of one creature or object entry in a zone (type and entry,
     for example all the boars of a zone); one reachable member is enough. The percentage of a zone
     is the number of reachable groups divided by the number of counted groups. Counted are the
@@ -1050,7 +1179,7 @@ Every zone was checked when it was generated. In general terms:
     counted. The catalogues hold only the reachable spawns, so the percentage cannot be recomputed
     from the shipped files alone.
   * Target sources. The catalogues are built from the cMaNGOS world database (the base data of
-    the classic world), the QuestieDB of WoW Forever (version 1.0.9), Thottbot4ever and, for
+    the classic world), the QuestieDB of WoW Forever (version 1.0.13), Thottbot4ever and, for
     herbs and ore, the GatherMate2 data package "GatherMate2 Data Wowhead Classic" (its Forever
     folder). An entry that the old base data does not know counts only when it is confirmed to
     exist in WoW Forever, by the Thottbot4ever name list or by Wowhead Forever (the second
@@ -1061,7 +1190,8 @@ Every zone was checked when it was generated. In general terms:
     the game.
   * Seams. All seam ends point to existing waypoints or links, and every GATEWAY end lists its seam
     ID (section 5).
-  * Size. No navigation file of a zone exceeds 3 MB (the largest is about 2.6 MB).
+  * Size. No navigation file of a zone exceeds 7.5 MB (the largest are The Barrens, about 7 MB,
+    Ashenvale, about 6.2 MB, and Feralas, about 4.9 MB).
 
 These are measurements taken when the data was built. They are not a guarantee for every position
 in the game world.
