@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1424,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="181D40EB49326FC2023D3BC5EA7FC582D3F383BA67ABCBAB3FF63DB15D7139E1",navFingerprint="41DEC7AC3FEEC24F7A5934B5FCCA8F6A7A5AAB51C565D4EBAB07CF97D51990A2",payloadSha256="535052A15BD111768BF5D78FB4B4810C2E26F402575560E0E689E39E8A29AB9F"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1424,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="181D40EB49326FC2023D3BC5EA7FC582D3F383BA67ABCBAB3FF63DB15D7139E1",navFingerprint="8E3D99A78E5335CA03AC2625E56E13F0CFEBF03DDF04BE1D5931CE1113A27515",payloadSha256="896E714B7879DAE93DB0299B1819C4163ACBC38501D371D11D12B62F41D97EFE"}
 LogicalTargets.classes = {
 {"npc",{"quest_giver","vendor"},2698,"George Candarte (Leatherworking Supplies)","George Candarte (Lederverarbeitungsbedarf)"},
 {"mob","npc_or_mob",2356,"Elder Gray Bear","Alter Graubär",a="possible_spawn"},
@@ -2554,7 +2554,7 @@ LogicalTargets.targets = {
 {"questie_creature_255877_267_1",301,-1313.92,-665.81,4.255},
 {"questie_creature_255877_267_2",301,-1257.39,-685.01,-42.542},
 {"questie_creature_255877_267_3",301,-1346.99,-717.65,-24.693},
-{"questie_creature_259842_267_0",302,-1087.57,-555.73,5.843,n=1984},
+{"questie_creature_259842_267_0",302,-1087.57,-555.73,5.843},
 {"questie_creature_261928_267_0",303,-1033.17,-931.09,44.297},
 {"questie_creature_261928_267_1",303,-1110.83,-962.13,59.709},
 {"questie_creature_261932_267_0",304,-628.48,-1493.33,65.763},

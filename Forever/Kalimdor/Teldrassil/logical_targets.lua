@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=57,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="2620A3619D938C1F304E4FF5A7FB2A7AED94A1873E43036525FFB76B9A64C012",navFingerprint="667DFEAF4B85B1B8680455445FE43A0DDF3244D5E3A4E8EF9A4D0E6C3C62309F",payloadSha256="00CF82743FEF6DA88FC45E1E98CA8E26C4481D8FC387988D2CD56859ABD95CD7"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=57,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="2620A3619D938C1F304E4FF5A7FB2A7AED94A1873E43036525FFB76B9A64C012",navFingerprint="A37B77332262BD78B86B763CA922D6A75A952DBD6195F05C27345CC485DC6A9B",payloadSha256="A4D60DD9D2EDFD08E1572E8B8B9EAEEDDC4C898A7DD9913506F44BD451660BD4"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",6909,"Sethir the Ancient","Sethir der Uralte",a="possible_spawn"},
 {"creature","npc_or_mob",14429,"Grimmaw","Grimmtatze",a="possible_spawn"},
@@ -1842,7 +1842,7 @@ LogicalTargets.targets = {
 {"questie_creature_271929_141_51",219,10516.51,1028.42,1321.183},
 {"questie_creature_271929_141_52",219,9672.83,1028.42,1285.658},
 {"questie_creature_271929_141_53",219,10711.65,1026.39,1343.218},
-{"questie_creature_271929_141_54",219,8552.21,1021.8,5.834,n=348},
+{"questie_creature_271929_141_54",219,8552.21,1021.8,5.834},
 {"questie_creature_271929_141_55",219,9849.3,1014.17,1305.8},
 {"questie_creature_271929_141_56",219,10546.72,993.8,1318.041},
 {"questie_creature_271929_141_57",219,10713.35,992.27,1338.283},
