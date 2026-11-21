@@ -62,11 +62,11 @@ At a glance (snapshot of the data in this repository):
 
   51 zones in 4 continent groups   EasternKingdoms 26, Kalimdor 23, DeeprunTram 1, ZephrasIsle 1
   about 1.39 million waypoints     about 12.7 million links, about 0.90 million attachment cells
-  about 124,700 logical targets    277 transit and crossing targets, 793 fishing spots and 39 cave
+  about 146,600 logical targets    277 transit and crossing targets, 793 fishing spots and 39 cave
                                    centre points
   about 3,000 seams between zones  64 neighbouring zone pairs
-  about 126 MB of Lua files        the largest zone file (The Barrens, navdata.lua) is about 7 MB;
-                                   the logical target catalogues of all zones take about 7.8 MB of it
+  about 128 MB of Lua files        the largest zone file (The Barrens, navdata.lua) is about 7 MB;
+                                   the logical target catalogues of all zones take about 9.3 MB of it
   (The data is being rebuilt zone by zone; the counts of this snapshot change with every rebuilt zone.)
 
 Supported game version
@@ -546,7 +546,7 @@ A worked example: decoding the first waypoints and the first cell of the Deeprun
 The file defines a catalogue of the targets of one zone. It comes in a compact form (format 2) that
 keeps the constants of the file once in the header and what targets of one kind share once per
 "class", so that a target itself is one short line. The catalogues of all zones together take about
-7.8 MB for about 124,700 targets.
+9.3 MB for about 146,600 targets.
 
   -- Logical target catalogue, compact format 2. No graph bindings, no provenance.
   local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=84,coordinateSpace="world",

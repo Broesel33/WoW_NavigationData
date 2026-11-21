@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1430,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="E6F3387771B5840FE05225D2DCF012365DCB2F1DE5D5F522152C8F3DB42EECDC",navFingerprint="AD5FE2791EA440DBE266B5B0D562A63BE15822778CDD794DFC58C89206C07E88",payloadSha256="BF13B65B6A9C27C249A7C7735C52FF8AB7287830AD900567B0DD04EEC234BCF3"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1430,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="15569701EF1E747C0175ED60DACFCB0C8A7997B636E8D62A94432F9CD495077C",navFingerprint="AD5FE2791EA440DBE266B5B0D562A63BE15822778CDD794DFC58C89206C07E88",payloadSha256="579AE06E9F5B74466EB2BADEACCEC888E028FDDD85367CD9FAB5E358D1D8BED8"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",7376,"Sky Shadow","Himmelsschatten",a="possible_spawn"},
 {"creature","npc_or_mob",7372,"Deadwind Warlock","Hexenmeister der Totenwindoger",a="possible_spawn"},
@@ -31,6 +31,21 @@ LogicalTargets.classes = {
 {"mob","npc_or_mob",257754,"Spectral Charger","Spektrales Streitross"},
 {"mob","npc_or_mob",276246,"Mistmantle Prowler","Mistmantle-Streuner"},
 {"gameobject","object",694054,"Recipe: Raw Plated Armorfish"},
+{"npc","npc_or_mob",218920,"Agent Keanna (Violet Eye)","Agentin Keanna (Das Violette Auge)"},
+{"mob","npc_or_mob",228928,"Maethra Slagheart"},
+{"mob","npc_or_mob",228929,"Baj'ura"},
+{"mob","npc_or_mob",228930,"Syrnoya"},
+{"mob","npc_or_mob",228931,"Father Lazarus"},
+{"mob","npc_or_mob",228936,"Lingering Blessing"},
+{"mob","npc_or_mob",228976,"Altruist Ward","Altruistenschutz"},
+{"mob","npc_or_mob",229202,"Altruist Ward","Altruistenschutz"},
+{"npc","npc_or_mob",235396,"Fleuric (Master Demonologist)","Fleuric (Meister der Dämonologie)"},
+{"npc","npc_or_mob",237819,"Injured Adventurer","Verletzter Abenteurer"},
+{"npc","npc_or_mob",237820,"Deceased Adventurer","Verstorbene Abenteurerin"},
+{"mob","npc_or_mob",238430,"Floating Firebrand","Schwebendes Feuermal"},
+{"npc","vendor",240568,"Haunted Anvil","Verhexter Amboss"},
+{"gameobject","object",457088,"Advanced Swordplay","Fortgeschrittener Schwertkampf"},
+{"transit_facility","dungeon",2875,"Dungeon entrance: Karazhan Crypts","Dungeon-Eingang: Karazhan Crypts",s={"Karazhan Crypts"},nk="dungeon_entrance",nm=2875,np="Karazhan Crypts"},
 }
 LogicalTargets.targets = {
 {"creature_3945",1,-10744.3,-1833.58,114.789},
@@ -179,6 +194,32 @@ LogicalTargets.targets = {
 {"questie_creature_257754_41_0",28,-11007.17,-2043.33,l={40.8,66.137,80.265,93.2}},
 {"questie_creature_276246_41_0",29,-10462.17,-1720.83,84.453},
 {"questie_gameobject_694054_41_0",30,-10441.67,-2143.33,90.835},
+{"questie_creature_218920_41_0",31,-10436.67,-2133.33,p=true},
+{"questie_creature_218920_41_1",31,-10443.33,-2133.33,p=true},
+{"questie_creature_228928_41_0",32,-11173.33,-1853.33,p=true},
+{"questie_creature_228928_41_1",32,-11176.67,-1853.33,p=true},
+{"questie_creature_228929_41_0",33,-11173.33,-1848.33,p=true},
+{"questie_creature_228929_41_1",33,-11176.67,-1848.33,p=true},
+{"questie_creature_228930_41_0",34,-11173.33,-1853.33,p=true},
+{"questie_creature_228930_41_1",34,-11176.67,-1853.33,p=true},
+{"questie_creature_228931_41_0",35,-11173.33,-1853.33,p=true},
+{"questie_creature_228931_41_1",35,-11176.67,-1853.33,p=true},
+{"questie_creature_228936_41_0",36,-11173.33,-1853.33,p=true},
+{"questie_creature_228936_41_1",36,-11176.67,-1853.33,p=true},
+{"questie_creature_228976_41_0",37,-11186.67,-1858.33,p=true},
+{"questie_creature_229202_41_0",38,-11176.67,-1853.33,p=true},
+{"questie_creature_235396_41_0",39,-10990,-2053.33,p=true},
+{"questie_creature_235396_41_1",39,-10993.33,-2053.33,p=true},
+{"questie_creature_237819_41_0",40,-11173.33,-2463.33,p=true},
+{"questie_creature_237819_41_1",40,-11176.67,-2463.33,p=true},
+{"questie_creature_237820_41_0",41,-11103.33,-1833.33,p=true},
+{"questie_creature_237820_41_1",41,-11110,-1833.33,p=true},
+{"questie_creature_238430_41_0",42,-11103.33,-1838.33,p=true},
+{"questie_creature_240568_41_0",43,-11166.67,-2043.33,p=true},
+{"questie_creature_240568_41_1",43,-11166.67,-2048.33,p=true},
+{"questie_gameobject_457088_41_0",44,-11106.67,-1908.33,p=true},
+{"questie_gameobject_457088_41_1",44,-11110,-1910.83,p=true},
+{"dungeon_entrance:2875:1",45,-11102.67,-1833.08,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1430] = LogicalTargets

@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1432,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="24A9F3AB82E7292F28B8D1C302E41DD1DC9DEF92E971C65532534416F9B9F661",navFingerprint="797B5043B73F66027BACBF3D3A3F7C6122EB4B7F9AA6871BF02FD806E6E41A72",payloadSha256="EFBFE5C5FC2C4BC42708C063381783566187806623CE1AB13263F1944ACC9A75"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1432,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="C25969EA972437865A845C8AC4C50B63BEE41F87CDF643E06230403E52083AD6",navFingerprint="797B5043B73F66027BACBF3D3A3F7C6122EB4B7F9AA6871BF02FD806E6E41A72",payloadSha256="6A6F20E044313C37AE2F9EC09A595022C08D787FA1B540F26E661BA184AFEA88"}
 LogicalTargets.classes = {
 {"npc","quest_giver",1280,"Mountaineer Droken","Gebirgsjäger Droken",a="possible_spawn"},
 {"npc","quest_giver",1283,"Mountaineer Kalmir","Gebirgsjägerin Kalmir",a="possible_spawn"},
@@ -243,6 +243,14 @@ LogicalTargets.classes = {
 {"mining","ore",1731,"Copper Vein","Kupfervorkommen"},
 {"mining","ore",1733,"Silver Vein","Silbervorkommen"},
 {"mining","ore",1732,"Tin Vein","Zinnvorkommen"},
+{"mob","npc_or_mob",209954,"Demonic Remains","Dämonische Überreste"},
+{"gameobject","object",407731,"Stonemason's Toolbox","Werkzeugkasten des Steinmetzes"},
+{"gameobject","object",407844,"Libram of Blessings","Segensbuchband"},
+{"gameobject","object",407850,"Sunken Reliquary","Versunkener Reliquienschrein"},
+{"gameobject","object",407918,"Empty Trophy Display","Leerer Trophäenkasten"},
+{"gameobject","object",407983,"Pile of Stolen Books","Haufen gestohlener Bücher"},
+{"gameobject","object",408004,"Tangled Blight Pile","Umschlungener Verseuchungsstapel"},
+{"gameobject","object",602735,"Leyline","Leylinie"},
 }
 LogicalTargets.targets = {
 {"creature_8840",1,-5433.62,-2884.02,345.496},
@@ -2491,6 +2499,37 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1432_7870645000",240,-5674.03,-4164.56,404.451},
 {"gathermate2_mining_1432_7950145000",242,-4754.24,-4186.62,303},
 {"gathermate2_mining_1432_8410574000",240,-5543.42,-4313.51,397.646},
+{"questie_creature_209954_38_0",243,-5745.77,-3990.78,p=true},
+{"questie_creature_209954_38_1",243,-5749.45,-3990.78,p=true},
+{"questie_creature_209954_38_2",243,-5745.77,-3996.3,p=true},
+{"questie_creature_209954_38_3",243,-5753.13,-3996.3,p=true},
+{"questie_gameobject_407731_38_0",244,-4721.13,-3273.62,p=true},
+{"questie_gameobject_407731_38_1",244,-4721.13,-3276.37,p=true},
+{"questie_gameobject_407844_38_0",245,-5396.25,-2978.47,p=true},
+{"questie_gameobject_407844_38_1",245,-5398.09,-2981.23,p=true},
+{"questie_gameobject_407850_38_0",246,-6168.88,-3008.82,p=true},
+{"questie_gameobject_407850_38_1",246,-6170.72,-3008.82,p=true},
+{"questie_gameobject_407918_38_0",247,-5690.59,-4299.72,p=true},
+{"questie_gameobject_407918_38_1",247,-5692.43,-4299.72,p=true},
+{"questie_gameobject_407983_38_0",248,-4984.19,-3488.77,p=true},
+{"questie_gameobject_408004_38_0",249,-4881.17,-3971.47,p=true},
+{"questie_gameobject_408004_38_1",249,-4884.85,-3974.23,p=true},
+{"questie_gameobject_602735_38_0",250,-5263.8,-2777.12,p=true},
+{"questie_gameobject_602735_38_1",250,-4888.53,-2826.77,p=true},
+{"questie_gameobject_602735_38_2",250,-5414.65,-2983.99,p=true},
+{"questie_gameobject_602735_38_3",250,-4956.59,-3356.37,p=true},
+{"questie_gameobject_602735_38_4",250,-4895.89,-3582.55,p=true},
+{"questie_gameobject_602735_38_5",250,-5157.11,-3621.17,p=true},
+{"questie_gameobject_602735_38_6",250,-5685.07,-3839.07,p=true},
+{"questie_gameobject_602735_38_7",250,-5668.51,-4205.93,p=true},
+{"questie_gameobject_602735_38_8",250,-5650.12,-4277.65,p=true},
+{"gathermate2_herb_1432_5340553000",237,-5504.79,-3466.7,p=true},
+{"gathermate2_herb_1432_5350553000",237,-5504.79,-3469.46,p=true},
+{"gathermate2_herb_1432_5500533000",237,-5468,-3510.83,p=true},
+{"gathermate2_herb_1432_5510535000",237,-5471.68,-3513.59,p=true},
+{"gathermate2_mining_1432_4140191000",240,-4838.86,-3135.7,p=true},
+{"gathermate2_mining_1432_4150190000",240,-4837.02,-3138.46,p=true},
+{"gathermate2_mining_1432_4150479000",240,-5368.66,-3138.46,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1432] = LogicalTargets

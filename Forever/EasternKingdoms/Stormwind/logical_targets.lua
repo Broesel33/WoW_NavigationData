@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=84,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="9574456E61CB90C8B43FBC1ED1E1FB594A235200CBF017EB025C534DB3B39FDC",navFingerprint="CF38FAAF52B97C8FB28BEA433D8DAEE31E7C8F459D715F7C9754F937DE518CC8",payloadSha256="9825C7D080DE7339E060E037760452D70602FC2CA2C3EF6756AFCED734E6911B"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=84,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="D735EC3959F38E85F22773DEA161DFFD957D346929D7267C05DECF3600B1B57C",navFingerprint="CF38FAAF52B97C8FB28BEA433D8DAEE31E7C8F459D715F7C9754F937DE518CC8",payloadSha256="49CBE52BC59FD6C39F259F6104B43949FA7768D8BBFB204DFC50BBD30F8ADB9E"}
 LogicalTargets.classes = {
 {"npc",{"quest_giver","trainer"},376,"High Priestess Laurena (Priest Trainer)","Hohepriesterin Laurena (Priesterlehrerin)"},
 {"npc","quest_giver",656,"Wilder Thistlenettle"},
@@ -502,6 +502,18 @@ LogicalTargets.classes = {
 {"herb","herb",1617,"Silverleaf","Silberblatt"},
 {"herb","herb",1618,"Peacebloom","Friedensblume"},
 {"herb","herb",1620,"Mageroyal","Maguskönigskraut"},
+{"npc","quest_giver",218160,"Aeonas the Vindicated (Former Paladin of the Silver Hand)","Aeonas der Verteidigte (Ehemaliger Paladin der Silbernen Hand)"},
+{"mob","npc_or_mob",274903,"Stormwind Harbor Defender","Verteidiger des Hafens von Stormwind"},
+{"mob","npc_or_mob",274926,"Buddy"},
+{"mob","npc_or_mob",274940,"Annabella Junelight"},
+{"gameobject","object",696296,"General Turalyon"},
+{"gameobject","object",696297,"Ranger Captain Alleria Windrunner","Waldläufercaptain Alleria Windrunner"},
+{"gameobject","object",696298,"Danath Trollbane"},
+{"gameobject","object",696299,"Archmage Khadgar of the Kirin Tor","Erzmagier Khadgar von den Kirin Tor"},
+{"gameobject","object",696392,"Archbishop Alonsus Faol","Erzbischof Alonsus Faol"},
+{"gameobject","object",696503,"King Llane I of the House of Wrynn","König Llane I. aus dem Hause Wrynn"},
+{"gameobject","object",696504,"Grand Admiral Daelin Proudmoore","Großadmiral Daelin Proudmoore"},
+{"gameobject","object",696505,"Lady Mara Fordragon"},
 }
 LogicalTargets.targets = {
 {"creature_1079",1,-8512.4,862.364,109.927},
@@ -1690,6 +1702,21 @@ LogicalTargets.targets = {
 {"gathermate2_herb_1453_6670652000",501,-8751.07,564,l={59.6,97.965}},
 {"gathermate2_herb_1453_7020737000",501,-8849.53,503.19,l={75.436,109.785}},
 {"gathermate2_herb_1453_7830528000",500,-8607.43,362.45,l={59.774,92.232,100}},
+{"questie_creature_218160_1519_0",502,-8564.92,877.62,p=true},
+{"questie_creature_274903_1519_0",503,-8627.94,1297.23,p=true},
+{"questie_creature_274903_1519_1",503,-8399.51,1091.68,p=true},
+{"questie_creature_274903_1519_2",503,-8502.49,1000.47,p=true},
+{"questie_creature_274926_1519_0",504,-8732.53,1141.38,p=true},
+{"questie_creature_274926_1519_1",504,-8721.65,1118.79,p=true},
+{"questie_creature_274940_1519_0",505,-8551.6,885.79,p=true},
+{"questie_gameobject_696296_1519_0",506,-8951.58,521.09,p=true},
+{"questie_gameobject_696297_1519_0",507,-8971.27,499.54,p=true},
+{"questie_gameobject_696298_1519_0",508,-9000.81,477.3,p=true},
+{"questie_gameobject_696299_1519_0",509,-8976.6,509.79,p=true},
+{"questie_gameobject_696392_1519_0",510,-8643.92,758.26,p=true},
+{"questie_gameobject_696503_1519_0",511,-8338.7,524.04,p=true},
+{"questie_gameobject_696504_1519_0",512,-8341.13,507.88,p=true},
+{"questie_gameobject_696505_1519_0",513,-8348.78,521.61,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[84] = LogicalTargets

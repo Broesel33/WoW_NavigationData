@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=87,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="58CC3D760A366A6C35B01C1CE28D8A34E10BD852748607F361B018A086628E82",navFingerprint="7CF3ACFEC09A4494668280206A60CB266B110A4AD120DB6CA5DCEC65990A2168",payloadSha256="B4F99BC5FB3EB3A5F85EEFDB2E24B7DEE55F54982C7CA072F508202A75B51BA8"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=87,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="BC5D125F8370343501D04226E90254392CFB2043702B95E1655E12F45C269307",navFingerprint="7CF3ACFEC09A4494668280206A60CB266B110A4AD120DB6CA5DCEC65990A2168",payloadSha256="3DEC5E8FF0985F73FB7458024DE75AA2557B01541580EB6FAB787A8F8900DD04"}
 LogicalTargets.classes = {
 {"npc","quest_giver",6569,"Gnoarn"},
 {"npc","vendor",5123,"Bretta Goldfury (Gun Merchant)","Bretta Goldfury (Schusswaffenhändlerin)"},
@@ -279,6 +279,9 @@ LogicalTargets.classes = {
 {"transit_facility","dungeon",3065,"Dungeon entrance: The Hall of Thanes","Dungeon-Eingang: The Hall of Thanes",s={"The Hall of Thanes"},nk="dungeon_entrance",nm=3065,np="The Hall of Thanes"},
 {"herb","herb",1618,"Peacebloom","Friedensblume"},
 {"herb","herb",1617,"Silverleaf","Silberblatt"},
+{"npc","npc_or_mob",208876,"Cut-throat Mugger","Halsabschneider"},
+{"npc","vendor",214099,"Tamelyn Aldridge (Supply Officer)","Tamelyn Aldridge (Versorgungsoffizierin)"},
+{"gameobject","object",405946,"Dusty Chest","Verstaubte Kiste"},
 }
 LogicalTargets.targets = {
 {"creature_26",1,-4835.97,-1260.58,501.951},
@@ -967,6 +970,23 @@ LogicalTargets.targets = {
 {"gathermate2_herb_1455_6210886000",278,-5036.7,-1204.57,509},
 {"gathermate2_herb_1455_6650552000",278,-4860.48,-1239.36,501.8},
 {"gathermate2_herb_1455_6660550000",277,-4859.42,-1240.15,501.8},
+{"questie_creature_208876_1537_0",279,-4630.44,-1110.49,p=true},
+{"questie_creature_208876_1537_1",279,-4623.06,-1113.65,p=true},
+{"questie_creature_208876_1537_2",279,-4633.61,-1116.81,p=true},
+{"questie_creature_208876_1537_3",279,-4627.28,-1119.97,p=true},
+{"questie_creature_208876_1537_4",279,-4629.39,-1123.14,p=true},
+{"questie_creature_208876_1537_5",279,-4634.66,-1123.14,p=true},
+{"questie_creature_208876_1537_6",279,-4635.72,-1124.72,p=true},
+{"questie_creature_208876_1537_7",279,-4628.33,-1129.46,p=true},
+{"questie_creature_208876_1537_8",279,-4617.78,-1131.04,p=true},
+{"questie_creature_208876_1537_9",279,-4624.11,-1131.04,p=true},
+{"questie_creature_208876_1537_10",279,-4632.55,-1164.25,p=true},
+{"questie_creature_214099_1537_0",280,-4924.85,-906.5,p=true},
+{"questie_creature_214099_1537_1",280,-4925.9,-906.5,p=true},
+{"questie_creature_214099_1537_2",280,-4924.85,-908.09,p=true},
+{"questie_creature_214099_1537_3",280,-4925.9,-908.09,p=true},
+{"questie_gameobject_405946_1537_0",281,-4637.83,-1123.93,p=true},
+{"questie_gameobject_405946_1537_1",281,-4641,-1124.72,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[87] = LogicalTargets

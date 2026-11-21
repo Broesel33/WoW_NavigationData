@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1456,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="45B7DFF080B47796FE75C244DC587D0A6A1AC6E8988D8B8440B85AD5FA7A82C4",navFingerprint="4BB993549EB79DC69B772936F1F53A8C5DB9FDED1779D44C0E7824593A7A47E1",payloadSha256="5CFA9020173FDD243604DF9590A53E48455F7A8C1823CED1599A3F274F673EB6"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1456,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="A5E86D4A823DC2ADB6C7FAA5E146E19A66404638CA97E766458282110075906C",navFingerprint="4BB993549EB79DC69B772936F1F53A8C5DB9FDED1779D44C0E7824593A7A47E1",payloadSha256="485F10BE5D63D4577644CBD8E3BA43FA3276F55525A307E94743F88F348334CB"}
 LogicalTargets.classes = {
 {"npc","npc_or_mob",7427,"Taim Ragetotem (Alterac Valley Battlemaster)","Taim Ragetotem (Kampfmeister des Alteractals)"},
 {"npc","quest_giver",6410,"Orm Stonehoof"},
@@ -224,6 +224,12 @@ LogicalTargets.classes = {
 {"herb","herb",1617,"Silverleaf","Silberblatt"},
 {"herb","herb",1619,"Earthroot","Erdwurzel"},
 {"mining","ore",1731,"Copper Vein","Kupfervorkommen"},
+{"npc","vendor",207743,"Netali Proudwind (General Goods)","Netali Prachtwind (Gemischtwaren)"},
+{"npc","npc_or_mob",207754,"Mooart"},
+{"npc","vendor",214096,"Dokimi (Supply Officer)","Dokimi (Versorgungsoffizierin)"},
+{"mob","npc_or_mob",215369,"Bashana Runetotem"},
+{"mob","npc_or_mob",275033,"Bluffbruiser","Haudrauf von Thunder Bluff"},
+{"gameobject","object",616992,"Elemental Convergence","Elementarkonvergenz"},
 }
 LogicalTargets.targets = {
 {"creature_24670",1,-1382.42,-77.847,160.602},
@@ -684,6 +690,42 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1456_6740160000",223,-961.33,-186.82,24.997},
 {"gathermate2_mining_1456_6750159000",223,-960.64,-187.86,25.415},
 {"gathermate2_mining_1456_6760154000",223,-957.16,-188.91,25.566},
+{"questie_creature_207743_1638_0",224,-976.64,220.24,p=true},
+{"questie_creature_207743_1638_1",224,-983.6,220.24,p=true},
+{"questie_creature_207743_1638_2",224,-976.64,218.15,p=true},
+{"questie_creature_207743_1638_3",224,-979.42,218.15,p=true},
+{"questie_creature_207754_1638_0",225,-975.25,251.55,p=true},
+{"questie_creature_207754_1638_1",225,-978.03,241.12,p=true},
+{"questie_creature_207754_1638_2",225,-980.82,241.12,p=true},
+{"questie_creature_207754_1638_3",225,-987.77,241.12,p=true},
+{"questie_creature_207754_1638_4",225,-982.21,239.03,p=true},
+{"questie_creature_207754_1638_5",225,-987.77,239.03,p=true},
+{"questie_creature_207754_1638_6",225,-978.03,234.85,p=true},
+{"questie_creature_207754_1638_7",225,-950.2,232.77,p=true},
+{"questie_creature_207754_1638_8",225,-982.21,228.59,p=true},
+{"questie_creature_207754_1638_9",225,-998.91,224.42,p=true},
+{"questie_creature_207754_1638_10",225,-987.77,222.33,p=true},
+{"questie_creature_207754_1638_11",225,-1005.87,220.24,p=true},
+{"questie_creature_207754_1638_12",225,-1011.43,218.15,p=true},
+{"questie_creature_207754_1638_13",225,-1000.3,209.8,p=true},
+{"questie_creature_207754_1638_14",225,-1040.66,186.84,p=true},
+{"questie_creature_214096_1638_0",226,-1221.57,105.43,p=true},
+{"questie_creature_214096_1638_1",226,-1222.97,105.43,p=true},
+{"questie_creature_214096_1638_2",226,-1221.57,103.34,p=true},
+{"questie_creature_214096_1638_3",226,-1222.97,103.34,p=true},
+{"questie_creature_215369_1638_0",227,-1082.41,-213.96,p=true},
+{"questie_creature_215369_1638_1",227,-1083.8,-213.96,p=true},
+{"questie_creature_215369_1638_2",227,-1075.45,-222.31,p=true},
+{"questie_creature_215369_1638_3",227,-1076.84,-222.31,p=true},
+{"questie_creature_275033_1638_0",228,-1220.74,97.29,p=true},
+{"questie_gameobject_616992_1638_0",229,-1165.91,261.99,p=true},
+{"questie_gameobject_616992_1638_1",229,-990.56,211.89,p=true},
+{"questie_gameobject_616992_1638_2",229,-1079.62,149.27,p=true},
+{"questie_gameobject_616992_1638_3",229,-1221.57,43.85,p=true},
+{"questie_gameobject_616992_1638_4",229,-1108.15,-6.25,p=true},
+{"questie_gameobject_616992_1638_5",229,-1433.11,-48,p=true},
+{"questie_gameobject_616992_1638_6",229,-1108.15,-109.58,p=true},
+{"questie_gameobject_616992_1638_7",229,-1055.27,-233.79,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1456] = LogicalTargets

@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1457,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="7D846FE0FDA2B3F78C12B8F65B354F38F20C2AD1DEE62C1BEFE62BCD4801606F",navFingerprint="DF88A23FC5C3AEB68B44EABAC730FE3BA419F0BEC17B5B5D187348ADB64DF5E5",payloadSha256="EE929B9F8359161B8E541212026CEBE0043E58EE15FD36F1050D58F4E7B7F0FB"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1457,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="6C865669C16CE15F3B464EA50D5B763BFE612DC71A01114306897B23FCBE31A6",navFingerprint="DF88A23FC5C3AEB68B44EABAC730FE3BA419F0BEC17B5B5D187348ADB64DF5E5",payloadSha256="50E5E396FA3FDBCCE6F41BC2484BA517580A82F721C35CC9E3E2B2F1F7EFD483"}
 LogicalTargets.classes = {
 {"npc","quest_giver",15351,"Alliance Brigadier General","Brigadegeneral der Allianz"},
 {"creature","npc_or_mob",14602,"Swift Stormsaber","Schneller Sturmsäbler"},
@@ -198,6 +198,10 @@ LogicalTargets.classes = {
 {"gameobject","object",630867,"Guild Vault"},
 {"gameobject","object",703896,"Mailbox"},
 {"search_area","quest_explore",1479,"Go to the bank in Darnassus, otherwise known as the Bough of the Eternals."},
+{"npc","npc_or_mob",211188,"Maethra Slagheart","Maethra Schlackherz"},
+{"npc","npc_or_mob",215095,"Supplicant","Bittsteller"},
+{"mob","npc_or_mob",215367,"Dawnwatcher Selgorm (The Argent Dawn)"},
+{"npc","npc_or_mob",275027,"Furious Darnassus Sentinel","Zornige Schildwache von Darnassus"},
 }
 LogicalTargets.targets = {
 {"creature_49852",1,9997.07,2324.49,1330.87},
@@ -667,6 +671,25 @@ LogicalTargets.targets = {
 {"questie_gameobject_630867_1657_0",195,9939.65,2514.29,1318.111},
 {"questie_gameobject_703896_1657_0",196,9844.66,2314.58,1317.613},
 {"questie_Quest_1479_1657_0",197,9931.04,2501.17,1318.242},
+{"questie_creature_211188_1657_0",198,9611.63,2546.78,p=true},
+{"questie_creature_211188_1657_1",198,9617.27,2536.2,p=true},
+{"questie_creature_211188_1657_2",198,9610.22,2536.2,p=true},
+{"questie_creature_211188_1657_3",198,9605.98,2536.2,p=true},
+{"questie_creature_211188_1657_4",198,9610.22,2529.85,p=true},
+{"questie_creature_211188_1657_5",198,9605.98,2529.85,p=true},
+{"questie_creature_215095_1657_0",199,9621.51,2521.38,p=true},
+{"questie_creature_215095_1657_1",199,9618.69,2521.38,p=true},
+{"questie_creature_215095_1657_2",199,9629.98,2517.15,p=true},
+{"questie_creature_215095_1657_3",199,9625.74,2515.03,p=true},
+{"questie_creature_215095_1657_4",199,9613.04,2515.03,p=true},
+{"questie_creature_215095_1657_5",199,9618.69,2510.8,p=true},
+{"questie_creature_215095_1657_6",199,9615.86,2508.68,p=true},
+{"questie_creature_215095_1657_7",199,9629.98,2506.56,p=true},
+{"questie_creature_215367_1657_0",200,10068.94,2349.93,p=true},
+{"questie_creature_215367_1657_1",200,10054.83,2349.93,p=true},
+{"questie_creature_275027_1657_0",201,9946.71,2490.48,p=true},
+{"questie_creature_275027_1657_1",201,9918.41,2328.55,p=true},
+{"questie_creature_275027_1657_2",201,10122.93,2304.1,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1457] = LogicalTargets

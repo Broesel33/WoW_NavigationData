@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1454,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="D487992F76737F7F65CE175CC2C18C3DEBA1EB2E6EE1FBD14B8CDD3C48A8A972",navFingerprint="AE645CDC19AA7E9860ABE763CAD6266432F9BFE1DE0A456A0FFC5CA45ED425F8",payloadSha256="8A2B1CE6032D98E446549621007DD465186177A625348C3C87112604EAA1050A"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1454,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="75BD27E3DF0378E936D28F777E9B796209065E3870061CF1958CFDF38DCE7473",navFingerprint="AE645CDC19AA7E9860ABE763CAD6266432F9BFE1DE0A456A0FFC5CA45ED425F8",payloadSha256="20DB279F3042B8064E0604CCEC8201571DB33638CE8495C161F2A1DBD2B9BBDA"}
 LogicalTargets.classes = {
 {"npc","quest_giver",5875,"Gan'rul Bloodeye"},
 {"npc","quest_giver",8659,"Jes'rimon"},
@@ -349,6 +349,15 @@ LogicalTargets.classes = {
 {"search_area","quest_explore",8122,"Hold Five Bases."},
 {"herb","herb",1618,"Peacebloom","Friedensblume"},
 {"herb","herb",1617,"Silverleaf","Silberblatt"},
+{"mob","npc_or_mob",208071,"Back-alley Mugger","Gassenräuber"},
+{"npc","npc_or_mob",208875,"Back-alley Mugger","Gassenräuber"},
+{"mob","npc_or_mob",211875,"Decayed Elemental","Verfallener Elementar"},
+{"npc","npc_or_mob",215096,"Supplicant","Bittsteller"},
+{"npc",{"quest_giver","vendor"},216924,"Kaymard Copperpinch (Smokywood Pastures)"},
+{"mob","npc_or_mob",219663,"Nogg (Expert Engineer)","Nogg (Ingenieursexperte)"},
+{"mob","npc_or_mob",228976,"Altruist Ward","Altruistenschutz"},
+{"gameobject","object",404830,"Dusty Chest","Verstaubte Kiste"},
+{"gameobject","object",616992,"Elemental Convergence","Elementarkonvergenz"},
 }
 LogicalTargets.targets = {
 {"creature_256",1,1850.31,-4357.3,-14.798},
@@ -1286,6 +1295,38 @@ LogicalTargets.targets = {
 {"gathermate2_herb_1454_6290495000",348,1810.85,-4562.84,22.8},
 {"gathermate2_herb_1454_7380291000",348,2001.67,-4715.72,26.362},
 {"gathermate2_herb_1454_4950692000",348,1626.57,-4374.89,l={12.019,29.766}},
+{"questie_creature_208071_1637_0",349,1856.68,-4463.25,p=true},
+{"questie_creature_208071_1637_1",349,1862.29,-4466.06,p=true},
+{"questie_creature_208071_1637_2",349,1873.52,-4468.86,p=true},
+{"questie_creature_208071_1637_3",349,1860.42,-4474.48,p=true},
+{"questie_creature_208071_1637_4",349,1851.07,-4485.7,p=true},
+{"questie_creature_208071_1637_5",349,1798.69,-4505.33,p=true},
+{"questie_creature_208875_1637_0",350,1856.68,-4463.25,p=true},
+{"questie_creature_208875_1637_1",350,1864.16,-4466.06,p=true},
+{"questie_creature_208875_1637_2",350,1873.52,-4468.86,p=true},
+{"questie_creature_208875_1637_3",350,1860.42,-4480.09,p=true},
+{"questie_creature_208875_1637_4",350,1847.33,-4480.09,p=true},
+{"questie_creature_208875_1637_5",350,1851.07,-4485.7,p=true},
+{"questie_creature_208875_1637_6",350,1809.91,-4499.72,p=true},
+{"questie_creature_211875_1637_0",351,1561.09,-4199.56,p=true},
+{"questie_creature_215096_1637_0",352,1454.45,-4179.93,p=true},
+{"questie_creature_215096_1637_1",352,1467.55,-4182.73,p=true},
+{"questie_creature_215096_1637_2",352,1460.06,-4182.73,p=true},
+{"questie_creature_216924_1637_0",353,1652.76,-4426.79,p=true},
+{"questie_creature_216924_1637_1",353,1650.89,-4426.79,p=true},
+{"questie_creature_219663_1637_0",354,2041.89,-4738.16,p=true},
+{"questie_creature_228976_1637_0",355,1454.45,-4177.12,p=true},
+{"questie_creature_228976_1637_1",355,1452.58,-4182.73,p=true},
+{"questie_creature_228976_1637_2",355,1609.73,-4390.32,p=true},
+{"questie_creature_228976_1637_3",355,1630.31,-4407.15,p=true},
+{"questie_gameobject_404830_1637_0",356,1855.75,-4464.66,p=true},
+{"questie_gameobject_616992_1637_0",357,1773.43,-4324.4,p=true},
+{"questie_gameobject_616992_1637_1",357,1668.66,-4337.02,p=true},
+{"questie_gameobject_616992_1637_2",357,1935.26,-4407.15,p=true},
+{"questie_gameobject_616992_1637_3",357,1811.78,-4411.36,p=true},
+{"questie_gameobject_616992_1637_4",357,1624.7,-4435.2,p=true},
+{"questie_gameobject_616992_1637_5",357,1929.64,-4639.98,p=true},
+{"gathermate2_herb_1454_5560647000",347,1668.66,-4460.45,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1454] = LogicalTargets
