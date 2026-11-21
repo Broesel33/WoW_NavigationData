@@ -73,6 +73,9 @@ local KIND_TEXT = {
 -- that is no trigger). Nothing here is in the data: the activation mode of an action record names the way the player activates it.
 local MODE_TEXT = {
     click = { approach = "action_approach_prepoint.click", waiting = "action_waiting.click", activating = "action_activating.click" },
+    -- a walk-in portal or entrance is a link of the route: the route led the player into the trigger, so there is no "go to the pre-point" (false:
+    -- no text) and no "wait at the pre-point", only "walk on straight, the route continues by itself"
+    walk_into_volume = { approach = false, waiting = "action_waiting.walk_into_volume" },
 }
 
 -- A transition whose positions are estimates (the record says approximate) tells the player so where he is guided to it.
@@ -88,7 +91,9 @@ local function phaseText(action, phase, generic, ...)
     if type(action) == "table" then
         specific = KIND_TEXT[action.kind] or (type(action.activation) == "table" and MODE_TEXT[action.activation.mode]) or nil
     end
-    return WowVisionNavigationText(specific and specific[phase] or generic, ...) .. approximateSuffix(action, phase)
+    local key = specific and specific[phase]
+    if key == false then return nil end            -- a phase without a text of its own
+    return WowVisionNavigationText(key or generic, ...) .. approximateSuffix(action, phase)
 end
 
 local function speak(self, message)
@@ -111,6 +116,14 @@ local function completeWhenReady(self)
     if not current or current.phase ~= "disembarking" or current.autoComplete ~= true then return false end
     if type(self.exitReady) == "function" and self.exitReady(current.action) ~= true then return false end
     return self:ReachedExit()
+end
+
+-- True when a walk-in action (activation walk_into_volume: a portal or trigger) has the position inside its source volume. The game teleports
+-- the player the moment he is in it, at whatever waypoint of the route he is; the position carries the height of the route there (UnitPosition
+-- has none), so a level above or below the volume (Stormwind's sanctum ramp under the upper portal) is not in it.
+function Actions:InTrigger(action, position)
+    return type(action) == "table" and type(action.activation) == "table" and action.activation.mode == "walk_into_volume"
+        and inVolume(action.sourceVolume, position)
 end
 
 function Actions:Reset(preserveCurrent)

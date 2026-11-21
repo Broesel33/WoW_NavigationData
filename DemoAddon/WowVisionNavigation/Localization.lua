@@ -512,6 +512,8 @@ L.en = {
     ["action_approach_prepoint.wind_bridge"] = "Go to the wind bridge waiting point.",
     ["action_waiting.wind_bridge"] = "Wait here until you hear the bridge sound. Then step into the wind current. /vn action repeats the instructions; /vn continue only confirms this action.",
     ["action_activating.wind_bridge"] = "Step into the wind current now; the arrival is only confirmed after the matching target signal.",
+    -- a walk-in portal or entrance on the route: the route led into the trigger, the route continues by itself after the transition
+    ["action_waiting.walk_into_volume"] = "Keep walking straight on; the route continues by itself after the transition.",
     ["prepoint_reached_click"] = "Prepoint reached. Walk on to the portal; the acoustic guidance stays active until you are there.",
     ["activation_area_click"] = "At the portal. Target the portal with WowVision soft-targeting and interact with it; the route stays active until the transition is confirmed.",
     ["prepoint_reached_wind_bridge"] = "Prepoint reached. Walk on to the wind bridge waiting point; the acoustic guidance stays active until then.",
@@ -955,6 +957,7 @@ L.de = {
     ["action_approach_prepoint.wind_bridge"] = "Zum Wartepunkt der Windbruecke gehen.",
     ["action_waiting.wind_bridge"] = "Warte hier, bis du das Bruecken-Geraeusch hoerst. Dann tritt in den Windstrom. /vn aktion wiederholt die Anleitung; /vn weiter bestaetigt nur diese Aktion.",
     ["action_activating.wind_bridge"] = "Tritt jetzt in den Windstrom; Ankunft wird erst nach passendem Zielsignal bestaetigt.",
+    ["action_waiting.walk_into_volume"] = "Geradeaus weitergehen; nach dem Uebergang geht die Route von selbst weiter.",
     ["prepoint_reached_click"] = "Vorpunkt erreicht. Gehe weiter zum Portal; die akustische Fuehrung bleibt bis dahin aktiv.",
     ["activation_area_click"] = "Am Portal. Waehle das Portal mit WowVisions Soft-Targeting an und interagiere damit; die Route bleibt aktiv, bis der Uebergang bestaetigt ist.",
     ["prepoint_reached_wind_bridge"] = "Vorpunkt erreicht. Gehe weiter zum Wartepunkt der Windbruecke; die akustische Fuehrung bleibt bis dahin aktiv.",

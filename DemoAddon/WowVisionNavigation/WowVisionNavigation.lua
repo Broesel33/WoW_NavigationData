@@ -1362,7 +1362,7 @@ local function StartNavigationToNode(targetNodeId, targetName, targetStatus, foo
         WowVisionNavigationSay("no_route_found")
         return false
     end
-    local pendingAction = nil
+    local pendingAction, triggerPoint = nil, nil
     for _, edge in ipairs(pathEdges or {}) do
         if edge.action then
             local action = edge.action
@@ -1377,6 +1377,7 @@ local function StartNavigationToNode(targetNodeId, targetName, targetStatus, foo
                               waitTargetId = waitTargetId, footOnly = footOnly,
                               activationTargetId = activationTargetId }
             activationTargetId, activationTarget = nil, nil
+            triggerPoint = WowVisionNavigationTriggerPoint(action)
             local truncated = {}
             for _, id in ipairs(path) do
                 truncated[#truncated + 1] = id
@@ -1389,6 +1390,13 @@ local function StartNavigationToNode(targetNodeId, targetName, targetStatus, foo
     -- Steering targets are the waypoints of the route, nothing else (chapter 7 point 5).
     local rawLength = #path
     path = NavNetwork.SteeringTargets(path)
+    -- A walk-in portal is a link of the route: the leg does not stop at its pre-point but goes straight on to the activation point of the trigger
+    -- (a point inside it, the certified approach of the data), and the action begins where the player is in the trigger
+    -- (WowVisionNavigationPendingTriggerEntered), at the latest on that point.
+    if triggerPoint then
+        path[#path + 1] = NavNetwork.NewVirtual({ x = triggerPoint.x, y = triggerPoint.y, z = triggerPoint.z, type = "trigger",
+                                                  radius = triggerPoint.activationCaptureRadius })
+    end
     -- A new foot/transit stage ends a previously reached dock beacon; it must not jump on again after the end of that
     -- route.
     if _G.WowVisionNavigationDockNavigation then
@@ -1557,6 +1565,64 @@ function WowVisionNavigationActionArrival(action)
         Navigation.AppendLogicalTarget(pending.layerTargetSource,pending.layerTargetResult)
     end
     return started
+end
+
+-- The leg before an action is done: the action of the route starts (Actions:Start, the pre-point phase) and the rest of the route travels with it
+-- (Navigation.actionContinuation, taken up by WowVisionNavigationActionArrival). Global: the file is at the Lua 5.1 limit of file locals.
+function WowVisionNavigationBeginPendingAction()
+    local pending = Navigation.pendingAction
+    if not pending then return false end
+    StopNavigation(nil)
+    local mod = _G.WowVisionNavigationActionNavigation
+    local started, reason = mod and mod:Start(pending.actionId, nil)
+    if not started then
+        WowVisionNavigationSay("action_blocked", tostring(reason or WowVisionNavigationText("action_module_missing")))
+        return false
+    end
+    Navigation.actionContinuation = pending
+    mod:ReachedPrepoint()
+    return true
+end
+
+-- The activation point of a walk-in action (activation walk_into_volume): the entrance capture of the data whose pre-point is the start node of the
+-- action (x and y within the export tolerance of the node coordinates) and whose activation point lies inside the trigger: the same certified approach
+-- as for a route to the trigger itself (TransitActivation). nil when the data have none; the leg then ends at the pre-point as before.
+function WowVisionNavigationTriggerPoint(action)
+    local mod = _G.WowVisionNavigationActionNavigation
+    if not mod or type(action) ~= "table" or type(action.activation) ~= "table" or action.activation.mode ~= "walk_into_volume"
+        or type(NavData) ~= "table" or type(NavData.interactionCaptures) ~= "table"
+        or type(action.fromNode) ~= "number" or not NodeExists(action.fromNode) then return nil end
+    local px, py = NodePosition(action.fromNode)
+    local tolerance = NavNetwork.TARGET_XY_TOLERANCE
+    for _, capture in ipairs(NavData.interactionCaptures) do
+        if capture.activationMode == "walk_into_trigger" and capture.facilityRole == "entrance"
+            and type(capture.activationPreX) == "number" and type(capture.activationPreY) == "number"
+            and math.abs(capture.activationPreX - px) <= tolerance and math.abs(capture.activationPreY - py) <= tolerance
+            and type(capture.x) == "number" and type(capture.y) == "number" and type(capture.z) == "number"
+            and mod:InTrigger(action, capture) then
+            return capture
+        end
+    end
+    return nil
+end
+
+-- A walk-in portal is a link of the route like any other (Stormwind's sanctum 702/704, Rut'theran <-> Darnassus 542/527): the game teleports the
+-- player the moment he is in its trigger, and the leg towards its pre-point may cross the trigger before its last waypoint (at Darnassus the leg
+-- runs past the trigger to a pre-point just outside it). Checked every frame: as soon as the player, at the height of the route there, is in the
+-- source volume of the pending action, the leg is done as if its pre-point were reached, and the action proves the teleport and continues the route.
+function WowVisionNavigationPendingTriggerEntered(mod)
+    local pending = Navigation.active and Navigation.pendingAction
+    if not pending or not mod or mod.current or not Navigation.path then return false end
+    local action = mod.byId[pending.actionId]
+    local waypointId = Navigation.path[Navigation.pathIndex]
+    if not action or not waypointId or not NodeExists(waypointId) then return false end
+    local x, y = GetPlayerWorldPosition()
+    if not x then return false end
+    local previousId = Navigation.pathIndex > 1 and Navigation.path[Navigation.pathIndex - 1] or nil
+    local _, _, waypointZ = NodePosition(waypointId)
+    local z = Guidance.Height(previousId, waypointId, x, y) or waypointZ
+    if not mod:InTrigger(action, { x = x, y = y, z = z }) then return false end
+    return WowVisionNavigationBeginPendingAction()
 end
 
 function WowVisionNavigationLayerTargetContext(footOnly,startOverride)
@@ -1734,6 +1800,7 @@ frame:SetScript("OnUpdate", function(_, elapsed)
     end
     local actionModule = _G.WowVisionNavigationActionNavigation
     if actionModule then
+        WowVisionNavigationPendingTriggerEntered(actionModule)
         actionModule:Tick()
         if actionModule.current and type(_G.UnitPosition) == "function" then
             local ok, x, y, z, nativeMap = pcall(_G.UnitPosition, "player")
@@ -1979,16 +2046,7 @@ frame:SetScript("OnUpdate", function(_, elapsed)
                 return
             end
             if Navigation.pendingAction then
-                local pending = Navigation.pendingAction
-                StopNavigation(nil)
-                local mod = _G.WowVisionNavigationActionNavigation
-                local started, reason = mod and mod:Start(pending.actionId, nil)
-                if not started then
-                    WowVisionNavigationSay("action_blocked", tostring(reason or WowVisionNavigationText("action_module_missing")))
-                    return
-                end
-                Navigation.actionContinuation = pending
-                mod:ReachedPrepoint()
+                WowVisionNavigationBeginPendingAction()
                 return
             end
             if Navigation.layerTargetResult and Navigation.layerTargetResult.quality ~= "exact" then
@@ -4887,9 +4945,18 @@ eventFrame:SetScript("OnEvent", function(_, event, addonName)
         if _G.WowVisionNavigationActionNavigation then
             -- A teleport recognised without a height completes by itself as soon as the next leg can start: the zone of the exit is the active
             -- one (after a teleport into another zone the loader switches a moment after the position) and holds the exit node.
+            -- A teleport into another zone of the SAME native map (Rut'theran <-> Darnassus) is a link like one inside a zone (Stormwind's
+            -- sanctum): once its arrival is proven, the core activates the zone of the exit itself (a zone of the active continent: the route
+            -- state stays, as on the zone event) instead of waiting for the zone event of the client.
             _G.WowVisionNavigationActionNavigation.exitReady = function(action)
-                return NavData ~= nil and action.toZoneId == NavData.zoneId
-                    and type(action.toNode) == "number" and NodeExists(action.toNode)
+                if NavData == nil or type(action.toNode) ~= "number" then return false end
+                local loader = WowVisionNavigationZoneLoader
+                local exitZone = loader.zones[action.toZoneId]
+                if action.toZoneId ~= NavData.zoneId and exitZone and action.fromNativeMap == action.toNativeMap
+                    and NavData.zoneSet and NavData.zoneSet[action.toZoneId] then
+                    loader:LoadZone(exitZone)
+                end
+                return NavData ~= nil and action.toZoneId == NavData.zoneId and NodeExists(action.toNode)
             end
             _G.WowVisionNavigationActionNavigation:Initialize({}, function(message)
                 WowVisionNavigationPrint(message)

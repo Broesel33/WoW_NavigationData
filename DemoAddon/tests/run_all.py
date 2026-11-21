@@ -2,7 +2,7 @@
 
     C:/Users/Manu/projects/WowNav/tools/.build_env/Scripts/python.exe C:/Users/Manu/projects/WoW_NavigationData/DemoAddon/tests/run_all.py [--fast]
 
---fast leaves out the real-data test (test_wait_targets_real_data.py, a few minutes). Exit code 0 = all green.
+--fast leaves out the real-data tests (test_wait_targets_real_data.py, a few minutes; test_portal_link_real_data.py). Exit code 0 = all green.
 """
 
 import subprocess
@@ -11,8 +11,9 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 FAST = ["test_floor_arrival.py", "test_height_hint.py", "test_target_nodes.py", "test_wait_target_end.py", "test_dock_model.py",
-        "test_trigger_after_action.py", "test_teleport_arrival.py", "test_dock_portal_route.py", "test_height_question.py"]
-DATA = ["test_wait_targets_real_data.py"]
+        "test_trigger_after_action.py", "test_teleport_arrival.py", "test_dock_portal_route.py", "test_height_question.py",
+        "test_portal_link.py"]
+DATA = ["test_wait_targets_real_data.py", "test_portal_link_real_data.py"]
 
 
 def main(argv):

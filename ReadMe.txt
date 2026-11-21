@@ -1095,6 +1095,16 @@ is a good model for other implementations.
     destination inside the arrival volume of the action (or within the arrival radius of the exit
     waypoint) and was seen in the source volume before, or the map has changed; the action then
     completes by itself and the route continues, without a confirmation and without a time limit.
+    A walk-in portal or entrance (activation "walk_into_volume") is walked like a link of the
+    network, the same inside one zone (the Stormwind mage tower) as into a neighbouring zone of the
+    same map (Rut'theran Village and Darnassus): the leg does not stop at the pre-point but goes
+    straight on to the activation point of the trigger (the capture record whose activationPre is
+    the start waypoint of the action, a point inside the source volume), and the action begins as
+    soon as the player, at the height of the route there, is inside the source volume, also where
+    the leg crosses it before its last waypoint (the game teleports at once). The player is not
+    asked to wait. When the exit lies in another zone of the same map, the demo addon switches to
+    that zone itself once the arrival is proven, instead of waiting for the zone event of the
+    client.
 
 
 11. THE DEMO ADDON
