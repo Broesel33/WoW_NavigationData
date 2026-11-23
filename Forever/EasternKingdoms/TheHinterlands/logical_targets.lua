@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1425,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="853D40B6CFCABE105A8BEF78E20EE9D3FE777558DA8CF8B93A0149267AC6E3B2",navFingerprint="6B5E751319E595F93C8839F2027599BF26415DD05EB59683922E95B403A806BB",payloadSha256="03C43FCCC7C3D553B1AA84B924E718763ADDB2FDF0E0595BF398C50A887F42D4"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1425,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="4EA60863474B25D7A7F43F6293BCA4C8E64578863F2624E4FC2B2B4015D5FF97",navFingerprint="6B5E751319E595F93C8839F2027599BF26415DD05EB59683922E95B403A806BB",payloadSha256="833035B4F88E5E28A60FC004F22C512C2E20F357070EC0525BC89AFFF60992C6"}
 LogicalTargets.classes = {
 {"npc","spirit_healer",6491,"Spirit Healer","Geistheiler"},
 {"creature","npc_or_mob",8211,"Old Cliff Jumper","Klippenspringer",a="possible_spawn"},
@@ -293,6 +293,13 @@ LogicalTargets.classes = {
 {"gameobject","object",442398,"Treasure of the Bat","Fledermausschatz"},
 {"gameobject","object",445039,"Extraplanar Eye","Extraplanares Auge"},
 {"search_area","quest_explore",2989,"Search the Altar of Zul"},
+{"mob","npc_or_mob",272282,"Sharpbeak","Scharfschnabel"},
+{"gameobject","object",612082,"Trapper's Workbench","Werkbank des Fallenstellers"},
+{"herb","herb",657399,"Sungrass","Sonnengras"},
+{"herb","herb",657401,"Ghost Mushroom","Geisterpilz"},
+{"gameobject","object",668515,"Diplomatic Satchel","Diplomatenranzen"},
+{"gameobject","object",669105,"Vilebranch Totem","Totem der Vilebranch"},
+{"gameobject","object",669115,"Lost Gryphon Egg","Verlorenes Greifenei"},
 }
 LogicalTargets.targets = {
 {"creature_40539",1,-285,-4388,108.627},
@@ -3399,6 +3406,41 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1425_8070425001",256,375.83,-4681.95,p=true},
 {"gathermate2_mining_1425_8070425002",257,375.83,-4681.95,p=true},
 {"gathermate2_mining_1425_8270815001",257,-625.17,-4758.95,p=true},
+{"questie_creature_272282_47_0",293,324.76,-1953.84,p=true},
+{"questie_creature_272282_47_1",293,314.23,-1977.33,p=true},
+{"questie_gameobject_612082_47_0",294,-325.12,-4015.51,p=true},
+{"questie_gameobject_657399_47_42",295,283.69,-4187.61,p=true},
+{"questie_gameobject_657401_47_18",296,360.43,-3793.76,p=true},
+{"questie_gameobject_668515_47_0",297,373.52,-2095.9,p=true},
+{"questie_gameobject_669105_47_0",298,-209.37,-3352.93,p=true},
+{"questie_gameobject_669105_47_1",298,-235.03,-3374.88,p=true},
+{"questie_gameobject_669105_47_2",298,-182.42,-3377.95,p=true},
+{"questie_gameobject_669105_47_3",298,-276.61,-3389.12,p=true},
+{"questie_gameobject_669105_47_4",298,-212.45,-3407.22,p=true},
+{"questie_gameobject_669105_47_5",298,-289.96,-3428.01,p=true},
+{"questie_gameobject_669105_47_6",298,-224.25,-3441.48,p=true},
+{"questie_gameobject_669105_47_7",298,-263.78,-3456.49,p=true},
+{"questie_gameobject_669115_47_0",299,149.45,-2043.93,p=true},
+{"questie_gameobject_669115_47_1",299,107.1,-2051.24,p=true},
+{"questie_gameobject_669115_47_2",299,143.29,-2120.55,p=true},
+{"questie_gameobject_669115_47_3",299,195.91,-2132.1,p=true},
+{"questie_gameobject_669115_47_4",299,172.04,-2152.5,p=true},
+{"questie_gameobject_669115_47_5",299,208.49,-2161.36,p=true},
+{"questie_gameobject_669115_47_6",299,63.21,-2161.36,p=true},
+{"questie_gameobject_669115_47_7",299,191.29,-2189.85,p=true},
+{"questie_gameobject_669115_47_8",299,46.27,-2212.95,p=true},
+{"questie_gameobject_669115_47_9",299,71.43,-2213.72,p=true},
+{"questie_gameobject_669115_47_10",299,150.74,-2228.73,p=true},
+{"questie_gameobject_669115_47_11",299,18.04,-2237.2,p=true},
+{"questie_gameobject_669115_47_12",299,122.25,-2237.59,p=true},
+{"questie_gameobject_669115_47_13",299,254.94,-2278.01,p=true},
+{"questie_gameobject_669115_47_14",299,205.66,-2284.17,p=true},
+{"questie_gameobject_669115_47_15",299,256.23,-2308.43,p=true},
+{"questie_gameobject_669115_47_16",299,245.96,-2381.96,p=true},
+{"questie_gameobject_669115_47_17",299,88.11,-2400.44,p=true},
+{"questie_gameobject_669115_47_18",299,139.7,-2416.61,p=true},
+{"questie_gameobject_669115_47_19",299,257.25,-2432.39,p=true},
+{"questie_gameobject_669115_47_20",299,230.05,-2432.78,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1425] = LogicalTargets

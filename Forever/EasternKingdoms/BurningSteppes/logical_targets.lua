@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1428,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="A2312D713285CFCA7A5563FFABE3B4E156D3C0C0432B607192346087E2017225",navFingerprint="6A89F27C111D0C07BDBBBB1BD5BF3E50A0BEB24AABE3EAB37A9B13673BE83668",payloadSha256="65B041548E7F5D575A4BBF4637434CC7801C695D882BC83F2FD241ECC91A882D"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1428,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="C22864A2A582EEBF0B5E5886B1DE67F32AD725BAE3A1F3F978C047256CE9D8FA",navFingerprint="6A89F27C111D0C07BDBBBB1BD5BF3E50A0BEB24AABE3EAB37A9B13673BE83668",payloadSha256="AFA9161283D99E69096BBE2024E8D932EE4E626B92998389E590AB297C4BEF8D"}
 LogicalTargets.classes = {
 {"npc","quest_giver",9459,"Cyrus Therepentous"},
 {"npc","quest_giver",9520,"Grark Lorkrub"},
@@ -166,6 +166,8 @@ LogicalTargets.classes = {
 {"gameobject","object",456815,"Brass-fitted Flam-Tamp Flange","Messingbeschlagener Falschmalschflansch"},
 {"gameobject","object",457056,"Red Bag","Rote Tasche"},
 {"gameobject","object",457101,"The Rites of Mak'Gora","Die Riten von Mak'Gora"},
+{"mob","npc_or_mob",257480,"Traveler's Sign","Schild des Reisenden"},
+{"herb","herb",657409,"Black Lotus","Schwarzer Lotus"},
 }
 LogicalTargets.targets = {
 {"creature_9",1,-7647.31,-3051.95,131.25},
@@ -1979,6 +1981,16 @@ LogicalTargets.targets = {
 {"questie_gameobject_457056_46_0",164,-7504.43,-1819.12,p=true},
 {"questie_gameobject_457101_46_0",165,-7698.86,-1435.4,p=true},
 {"questie_gameobject_457101_46_1",165,-7704.72,-1438.33,p=true},
+{"questie_creature_257480_46_0",166,-7527.27,-1225.68,p=true},
+{"questie_gameobject_657409_46_0",167,-7983.67,-796.26,p=true},
+{"questie_gameobject_657409_46_1",167,-7899.34,-1598.85,p=true},
+{"questie_gameobject_657409_46_2",167,-8167.56,-1721.88,p=true},
+{"questie_gameobject_657409_46_3",167,-8336.02,-1805.65,p=true},
+{"questie_gameobject_657409_46_4",167,-7896.8,-2227.74,p=true},
+{"questie_gameobject_657409_46_5",167,-7693.4,-2384.16,p=true},
+{"questie_gameobject_657409_46_6",167,-7531.96,-2574.26,p=true},
+{"questie_gameobject_657409_46_7",167,-7996.16,-2691.43,p=true},
+{"questie_gameobject_657409_46_8",167,-7792.95,-2707.83,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1428] = LogicalTargets

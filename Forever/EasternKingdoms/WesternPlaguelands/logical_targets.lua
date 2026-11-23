@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1422,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="21E14A475EC97FBBE96002699EEBB458895B635D89F10F9AF2B7F62E48232D43",navFingerprint="1847CAB83EA91A178A098A58CDC4A7B498EADEB5ABF4CA7B2522FE5B7C4B9CBF",payloadSha256="645365A9456B0B31FB8BA219C9CFB4ED7155B62FBB86AA8C7D4D3FCD25239047"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1422,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="F4F739539618AACC4BC0A7FBBB3E033F260BD3B6D0033B7D430E3289C9F627A9",navFingerprint="1847CAB83EA91A178A098A58CDC4A7B498EADEB5ABF4CA7B2522FE5B7C4B9CBF",payloadSha256="C47A465E567876C4B8529BB8300B9BEE95EC25788329634199442F3FD56EF94B"}
 LogicalTargets.classes = {
 {"npc","quest_giver",11286,"Magistrate Marduke","Magistrat Marduke"},
 {"creature","npc_or_mob",1806,"Vile Slime","Böser Brühschleimer",a="possible_spawn"},
@@ -232,6 +232,9 @@ LogicalTargets.classes = {
 {"gameobject","object",642497,"An Old Tombstone","Ein alter Grabstein"},
 {"gameobject","quest_giver",668183,"Argent Wayfinder","Argentumwegfinderin"},
 {"transit_facility","dungeon",2807,"Dungeon entrance: Burning of Andorhal","Dungeon-Eingang: Burning of Andorhal",s={"Burning of Andorhal","The Burning of Andorhal"},nk="dungeon_entrance",nm=2807,np="Burning of Andorhal"},
+{"gameobject","object",612082,"Trapper's Workbench","Werkbank des Fallenstellers"},
+{"gameobject","object",612092,"Fishing Hut","Angelhütte"},
+{"herb","herb",657399,"Sungrass","Sonnengras"},
 }
 LogicalTargets.targets = {
 {"creature_18037",1,1245.52,-2616.74,90.442},
@@ -2091,6 +2094,9 @@ LogicalTargets.targets = {
 {"questie_gameobject_642497_28_0",229,1145,-1727.31,p=true},
 {"questie_gameobject_668183_28_0",230,2101.89,-2597.2,p=true},
 {"dungeon_entrance:2807:1",231,1084.8,-2576.13,p=true},
+{"questie_gameobject_612082_28_0",232,991.06,-1462.43,p=true},
+{"questie_gameobject_612092_28_0",233,1000.52,-2769.63,p=true},
+{"questie_gameobject_657399_28_0",234,1593.63,-1243.56,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1422] = LogicalTargets

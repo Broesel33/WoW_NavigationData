@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=18,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="1A9F395DDBFAB7D902EA5847370BBD7EFDF569231F5E22D874BD3BF535D4EB3E",navFingerprint="37E114DA9165056F9BC62B9A84DC84F96218890CEF3F140119E9D8489299C1D0",payloadSha256="71D56ED5364B7DCDF1A7C7B2468843E99CB86550ABF40595FFD655054564132F"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=18,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="E49A3A52AD508AD8BA64FF576C5CCB7808B861D963C8253343EED7C6724A2C73",navFingerprint="37E114DA9165056F9BC62B9A84DC84F96218890CEF3F140119E9D8489299C1D0",payloadSha256="56EA3CAAF9328F10A766F406DCD870BBE1E5A4B9FB0DDE1BF170800C101C64B8"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",5435,"Sand Shark","Sandhai",a="possible_spawn"},
 {"creature","npc_or_mob",1765,"Worg",a="possible_spawn"},
@@ -418,6 +418,12 @@ LogicalTargets.classes = {
 {"gameobject","object",459259,"Mech Arm","Mecharm"},
 {"gameobject","object",616992,"Elemental Convergence","Elementarkonvergenz"},
 {"gameobject","object",716528,"Portal To Orgrimmar"},
+{"mob","npc_or_mob",277185,"Deathstalker Agent"},
+{"mob","npc_or_mob",277186,"Deathstalker Agent"},
+{"gameobject","object",612082,"Trapper's Workbench","Werkbank des Fallenstellers"},
+{"herb","herb",657380,"Silverleaf","Silberblatt"},
+{"herb","herb",657382,"Peacebloom","Friedensblume"},
+{"gameobject","object",657455,"Stunted Silverleaf","Verkümmertes Silberblatt"},
 }
 LogicalTargets.targets = {
 {"creature_3514",1,3221.9,1710.47,-49.237},
@@ -5540,6 +5546,18 @@ LogicalTargets.targets = {
 {"questie_gameobject_716528_85_0",417,2063.14,281.41,p=true},
 {"gathermate2_mining_1420_2460593000",400,2051.09,1921.72,p=true},
 {"gathermate2_mining_1420_2770577000",400,2099.29,1781.64,p=true},
+{"questie_creature_277185_85_0",418,2114.05,608.57,p=true},
+{"questie_creature_277185_85_1",418,2098.99,591.4,p=true},
+{"questie_creature_277186_85_0",419,2126.7,628.45,p=true},
+{"questie_creature_277186_85_1",419,2111.34,608.57,p=true},
+{"questie_creature_277186_85_2",419,2098.99,591.4,p=true},
+{"questie_gameobject_612082_85_0",420,1904.08,230.8,p=true},
+{"questie_gameobject_657380_85_26",421,2608.4,161.22,p=true},
+{"questie_gameobject_657382_85_10",422,2640.03,918.11,p=true},
+{"questie_gameobject_657455_85_0",423,1758.27,1566.55,p=true},
+{"questie_gameobject_657455_85_1",423,2148.39,1536.72,p=true},
+{"questie_gameobject_657455_85_2",423,1923.66,1448.61,p=true},
+{"questie_gameobject_657455_85_3",423,1735.38,1351.91,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[18] = LogicalTargets

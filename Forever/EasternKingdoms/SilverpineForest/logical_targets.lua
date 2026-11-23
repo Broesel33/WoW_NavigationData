@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1421,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="AA1DB0C887B98DE043FE491C0BB5627758722A577A72EB426E64AB8577058A83",navFingerprint="8EAA27F9C1141B45FA2E10F3066238642F9EEA768AF5CD581E36E41F24CDC068",payloadSha256="BD4CC94C2375B066EB82F9A7CAB28012EB748C38425979FD937DAABC4A3310DE"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1421,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="F1C27F0483D4FDFB5158A989E99615C1CDC7CCC800C3F7EC56A1D197F769DBB6",navFingerprint="8EAA27F9C1141B45FA2E10F3066238642F9EEA768AF5CD581E36E41F24CDC068",payloadSha256="7FC68922ED65495E21E0B3832C2773E5FCCD95B83ECE5C0E5D45A3F00E247933"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",6033,"Lake Frenzy","Seefrenzy"},
 {"mob","npc_or_mob",1958,"Vile Fin Tidecaller","Gezeitenrufer der Finsterflossen",a="possible_spawn"},
@@ -290,6 +290,7 @@ LogicalTargets.classes = {
 {"gameobject","object",616992,"Elemental Convergence","Elementarkonvergenz"},
 {"search_area","quest_explore",96204,"Escort Lumina Windsinger to safety"},
 {"herb","herb",2041,"Liferoot","Lebenswurz"},
+{"herb","herb",657384,"Mageroyal"},
 }
 LogicalTargets.targets = {
 {"creature_16623",1,519.494,536.358,20.942},
@@ -3745,6 +3746,7 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1421_4730765000",268,-475.33,1463.4,p=true},
 {"gathermate2_mining_1421_6130371000",269,627.87,875.4,p=true},
 {"gathermate2_mining_1421_6330826000",268,-646.13,791.4,p=true},
+{"questie_gameobject_657384_130_15",290,-243.21,1215.6,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1421] = LogicalTargets

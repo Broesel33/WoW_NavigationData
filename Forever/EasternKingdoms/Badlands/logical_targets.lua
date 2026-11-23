@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1418,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="D7D8F16D825B3A121AB0381EFE8167A67B8D00F48275BA25E272D194CAC58081",navFingerprint="F97B963CDD0E7C2D4217BE224887EE5E09FD0D8F0CDD374FC884D141369A9309",payloadSha256="5443F518C1A69C974BD37AB47B02DCDBBF6E0354F292BC171B2DF2EF74C627C6"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1418,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="ACAD11CACAC2C5FC9CED65C2E7C99F9F320516ACB126EBEE23645367A012C978",navFingerprint="F97B963CDD0E7C2D4217BE224887EE5E09FD0D8F0CDD374FC884D141369A9309",payloadSha256="051A8B6068F866CD16D9032A661C013D024E21B9A619BC1E68ECC60A9E32169C"}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",2719,"Dustbelcher Lord","Lord der Staubspeier",a="possible_spawn"},
 {"npc","quest_giver",2785,"Theldurin the Lost","Theldurin der Verirrte"},
@@ -171,6 +171,12 @@ LogicalTargets.classes = {
 {"gameobject","object",422919,"Tapped Shadowforge Keg","Angezapftes Schattenschmiedefass"},
 {"gameobject","object",424110,"Swordsman's Reward","Belohnung des Schwertkämpfers"},
 {"mining","ore",2047,"Truesilver Deposit","Echtsilberablagerung"},
+{"gameobject","object",580100,"Conqueror's Helm","Helm des Eroberers"},
+{"gameobject","object",612082,"Trapper's Workbench","Werkbank des Fallenstellers"},
+{"herb","herb",657387,"Wild Steelbloom"},
+{"herb","herb",657391,"Fadeleaf","Blassblatt"},
+{"gameobject","object",667674,"Campfire"},
+{"gameobject","object",667676,"Pristine Mattock","Makellose Kreuzhacke"},
 }
 LogicalTargets.targets = {
 {"creature_5262",1,-7392.65,-2241.63,235.011},
@@ -1684,6 +1690,12 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1418_5600821000",161,-7251.07,-3472.17,p=true},
 {"gathermate2_mining_1418_5600821001",159,-7251.07,-3472.17,p=true},
 {"gathermate2_mining_1418_5600821002",170,-7251.07,-3472.17,p=true},
+{"questie_gameobject_580100_3_0",171,-6554.24,-3500.77,p=true},
+{"questie_gameobject_612082_3_0",172,-6695.37,-2172.7,p=true},
+{"questie_gameobject_657387_3_8",173,-7190.88,-3402.02,p=true},
+{"questie_gameobject_657391_3_9",174,-7062.52,-3682.11,p=true},
+{"questie_gameobject_667674_3_0",175,-6461.21,-3399.28,p=true},
+{"questie_gameobject_667676_3_0",176,-7023.39,-3304.26,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1418] = LogicalTargets

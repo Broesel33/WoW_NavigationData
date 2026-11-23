@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1442,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="CA6081A6698DE1D32CCE65C1A8A3F9A0EB025973F2AA7E218D0BD40FB1DF62BA",navFingerprint="F004F7F0F0CF799D2C61FC20BC2CD171AAE78F07F8E780209EE6A1F0DB34ADC5",payloadSha256="BA947F3195687BA2AC1A8B402CFEF3A22BEDE746EE482A233D952BF0599DAEFA"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1442,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="636C9066E559738C6556A19C350741E85C65F9D8EC7C0DC941C3A2085848E85D",navFingerprint="F004F7F0F0CF799D2C61FC20BC2CD171AAE78F07F8E780209EE6A1F0DB34ADC5",payloadSha256="946FC8B370985A7EF5EFABE92447B3F2B44E71A1BA092E9D5310D723E6C10ABE"}
 LogicalTargets.classes = {
 {"npc","spirit_healer",6491,"Spirit Healer","Geistheiler"},
 {"npc",{"quest_giver","vendor"},12043,"Kulwia (Trade Supplies)","Kulwia (Handwerksbedarf)"},
@@ -267,6 +267,7 @@ LogicalTargets.classes = {
 {"mob","npc_or_mob",212837,"Primordial Anomaly","Urzeitliche Anomalie"},
 {"gameobject","object",602735,"Leyline","Leylinie"},
 {"gameobject","object",616992,"Elemental Convergence","Elementarkonvergenz"},
+{"gameobject","object",612091,"Toxin Study"},
 }
 LogicalTargets.targets = {
 {"creature_5718",1,2734.82,1279.54,295.79},
@@ -2672,6 +2673,7 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1442_6500411000",258,1578.35,71.67,p=true},
 {"gathermate2_mining_1442_7340615000",259,914.07,-338.53,p=true},
 {"gathermate2_mining_1442_7590842000",258,174.9,-460.62,p=true},
+{"questie_gameobject_612091_406_0",267,966.17,911.6,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1442] = LogicalTargets

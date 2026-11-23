@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1451,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="AB14D6839E37ACFB4144F9C5F87BFAAABA0F3EFCF29B73AE7B47ABD5DD01F9F3",navFingerprint="F98911DE7ADC7A8AC3DAF011E243972498D989E622E6D06450ECCFD1AC15EFF8",payloadSha256="8E7730C13DACD80B7236F6D23DC9CE41F737C081A01CB6522E4067269808011B"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1451,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="C55E3576E543C8911FFB691FE1B68D8FFD36456E9DB538227A7FC9322954CBA2",navFingerprint="F98911DE7ADC7A8AC3DAF011E243972498D989E622E6D06450ECCFD1AC15EFF8",payloadSha256="8B93DFBC0EF8B9503877CEE5FAA839BFB1F308EE818EB379A3EF967E34D692B4"}
 LogicalTargets.classes = {
 {"npc","spirit_healer",6491,"Spirit Healer","Geistheiler"},
 {"creature","npc_or_mob",11880,"Twilight Avenger (Twilight's Hammer)","Rächer der Twilight (Twilight-Hammer)",a="possible_spawn"},
@@ -202,6 +202,7 @@ LogicalTargets.classes = {
 {"npc","npc_or_mob",261998,"Cenarion Hold Berserker","Berserker der Burg Cenarius"},
 {"gameobject","object",457096,"Be First: A Brawler's Guide to Boxing","Erster sein: Das Boxhandbuch eines Muskelprotzes"},
 {"gameobject","object",457100,"Renzik's Thoughts on \"Fair\" Fighting","Renziks Gedanken zu \"fairem\" Kämpfen"},
+{"herb","herb",657409,"Black Lotus","Schwarzer Lotus"},
 }
 LogicalTargets.targets = {
 {"creature_7716",1,-7981.09,1556.57,3.644},
@@ -2954,6 +2955,11 @@ LogicalTargets.targets = {
 {"questie_gameobject_457096_1377_0",200,-7012.94,1210.35,p=true},
 {"questie_gameobject_457096_1377_1",200,-7015.26,1206.87,p=true},
 {"questie_gameobject_457100_1377_0",201,-7935.14,1840.83,p=true},
+{"questie_gameobject_657409_1377_0",202,-6421.06,1791.02,p=true},
+{"questie_gameobject_657409_1377_1",202,-6813.17,1718.57,p=true},
+{"questie_gameobject_657409_1377_2",202,-7421.54,1641.24,p=true},
+{"questie_gameobject_657409_1377_3",202,-7141.4,632.46,p=true},
+{"questie_gameobject_657409_1377_4",202,-6560.9,626.54,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1451] = LogicalTargets

@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=49,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="27D03A49BF89DCF6349CF45EB9F138BBC79CFD780D0A1803E59B84DDD0337868",navFingerprint="A5D951779D7C098C9606D0EAB41EE08982DE2952E823B7EFB02857D5B3136C11",payloadSha256="669CC2B2C5D3AFEB44A82DC1C0925B820E8062E1F2916DD6C73A746660BD5612"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=49,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="F02684C4C65A729216977D01FC6EA6042DD0D2C3ADCF432242226503AA8A414E",navFingerprint="A5D951779D7C098C9606D0EAB41EE08982DE2952E823B7EFB02857D5B3136C11",payloadSha256="7243C07D8F3175FC5AE2E2D55232254BC4FFDA32AEFE51BA31D79BFE54363627"}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",433,"Shadowhide Gnoll","Gnoll der Schattenfelle",a="possible_spawn"},
 {"mob","npc_or_mob",434,"Rabid Shadowhide Gnoll","Tollwütiger Gnoll der Schattenfelle",a="possible_spawn"},
@@ -244,6 +244,8 @@ LogicalTargets.classes = {
 {"npc","npc_or_mob",269863,"Stormwind Crier","Ausrufer von Stormwind"},
 {"gameobject","quest_giver",654126,"Weathered Anchor","Verwitterter Anker"},
 {"search_area","quest_explore",93510,"Tobin's spot on Lake Everstill visited"},
+{"gameobject","object",673376,"Meat Haunch","Fleischkeule"},
+{"gameobject","object",673384,"Water Barrel","Wasserfass"},
 }
 LogicalTargets.targets = {
 {"creature_10053-433",1,-9263.246,-3208.555,102.128},
@@ -3438,6 +3440,17 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1433_8510492000",233,-9287.37,-3528.63,p=true},
 {"gathermate2_mining_1433_8630619000",235,-9471.26,-3554.68,p=true},
 {"gathermate2_mining_1433_8630620000",234,-9472.71,-3554.68,p=true},
+{"questie_gameobject_673376_44_0",244,-9760.12,-3142,p=true},
+{"questie_gameobject_673376_44_1",244,-9665.43,-3218.63,p=true},
+{"questie_gameobject_673376_44_2",244,-9555.09,-3257.71,p=true},
+{"questie_gameobject_673376_44_3",244,-9820.35,-3263.57,p=true},
+{"questie_gameobject_673384_44_0",245,-9643.13,-3119.64,p=true},
+{"questie_gameobject_673384_44_1",245,-9735.36,-3140.48,p=true},
+{"questie_gameobject_673384_44_2",245,-9729.57,-3171.53,p=true},
+{"questie_gameobject_673384_44_3",245,-9576.81,-3218.85,p=true},
+{"questie_gameobject_673384_44_4",245,-9535.84,-3259.23,p=true},
+{"questie_gameobject_673384_44_5",245,-9820.35,-3263.35,p=true},
+{"questie_gameobject_673384_44_6",245,-9513.97,-3299.61,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[49] = LogicalTargets

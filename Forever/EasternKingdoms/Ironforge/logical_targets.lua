@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=87,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="BC5D125F8370343501D04226E90254392CFB2043702B95E1655E12F45C269307",navFingerprint="7CF3ACFEC09A4494668280206A60CB266B110A4AD120DB6CA5DCEC65990A2168",payloadSha256="3DEC5E8FF0985F73FB7458024DE75AA2557B01541580EB6FAB787A8F8900DD04"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=87,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="DD7023A9ABAB72656A636F75E5A9D56C64BD8979AC11B82487CBC1720ADF0680",navFingerprint="7CF3ACFEC09A4494668280206A60CB266B110A4AD120DB6CA5DCEC65990A2168",payloadSha256="46AC36271A99AD0345C556179E913994EF7D22095B90187D47ABB416993D70C1"}
 LogicalTargets.classes = {
 {"npc","quest_giver",6569,"Gnoarn"},
 {"npc","vendor",5123,"Bretta Goldfury (Gun Merchant)","Bretta Goldfury (Schusswaffenhändlerin)"},
@@ -282,6 +282,7 @@ LogicalTargets.classes = {
 {"npc","npc_or_mob",208876,"Cut-throat Mugger","Halsabschneider"},
 {"npc","vendor",214099,"Tamelyn Aldridge (Supply Officer)","Tamelyn Aldridge (Versorgungsoffizierin)"},
 {"gameobject","object",405946,"Dusty Chest","Verstaubte Kiste"},
+{"mob","npc_or_mob",257480,"Traveler's Sign","Schild des Reisenden"},
 }
 LogicalTargets.targets = {
 {"creature_26",1,-4835.97,-1260.58,501.951},
@@ -987,6 +988,7 @@ LogicalTargets.targets = {
 {"questie_creature_214099_1537_3",280,-4925.9,-908.09,p=true},
 {"questie_gameobject_405946_1537_0",281,-4637.83,-1123.93,p=true},
 {"questie_gameobject_405946_1537_1",281,-4641,-1124.72,p=true},
+{"questie_creature_257480_1537_0",282,-4949.22,-923.98,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[87] = LogicalTargets

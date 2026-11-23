@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1413,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="AEB9243FBF0450DBE04EBCEE89480E3859D5AFAC5242488A3E37F87E45AC9EB6",navFingerprint="B8C66F74B9FDADEA49C142EFC130A2D7CB5D1D3F0BB0EA2C9448FBA38C16010E",payloadSha256="533EA928AD00D4BE18A88059802BFA0219097F26033F9415BFE748155465AFD2"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1413,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="F0B0D8366B7D651A9DC623C4E4548D871DBB15FE22522D92528C4BB1F2D7B215",navFingerprint="B8C66F74B9FDADEA49C142EFC130A2D7CB5D1D3F0BB0EA2C9448FBA38C16010E",payloadSha256="D8EFF1E68CEADF8A03964C64E0E7A1AF3CE4F468D41C20D4E841351424DA1BCD"}
 LogicalTargets.classes = {
 {"npc","quest_giver",11857,"Makaba Flathoof"},
 {"mob","npc_or_mob",3110,"Dreadmaw Crocolisk","Schaudermagenkrokilisk",a="possible_spawn"},
@@ -668,6 +668,9 @@ LogicalTargets.classes = {
 {"gameobject","object",407510,"Etched Carving","Geätzte Schnitzerei"},
 {"gameobject","object",602735,"Leyline","Leylinie"},
 {"gameobject","object",616992,"Elemental Convergence","Elementarkonvergenz"},
+{"mob","npc_or_mob",255669,"Virulent Blood of Agamaggan","Virulentes Blut von Agamaggan"},
+{"gameobject","object",612091,"Toxin Study"},
+{"herb","herb",657388,"Kingsblood","Königsblut"},
 }
 LogicalTargets.targets = {
 {"creature_2199",1,-263,-943,12.439},
@@ -7823,6 +7826,12 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1413_4730858000",642,-4184.36,-2170.15,p=true},
 {"gathermate2_mining_1413_5250526000",643,-1941.29,-2697.08,p=true},
 {"gathermate2_mining_1413_5550277000",643,-258.98,-3001.08,p=true},
+{"questie_creature_255669_17_0",668,-4730.27,-2284.66,p=true},
+{"questie_creature_255669_17_1",668,-4693.11,-2336.34,p=true},
+{"questie_creature_255669_17_2",668,-4761.35,-2362.68,p=true},
+{"questie_gameobject_612091_17_0",669,-4450.56,-1886.42,p=true},
+{"questie_gameobject_657388_17_15",670,-3653.32,-2094.15,p=true},
+{"questie_gameobject_657388_17_21",670,-3127.01,-2240.07,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1413] = LogicalTargets

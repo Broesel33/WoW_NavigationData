@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1443,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="2A9D028959453CE647D51EEA601B9E60618CE3CABCF1858613282F8C4D9C8133",navFingerprint="366A224DB72AF08BEFFBBF436FAE14B28DCD4DBE3C1D9586D291FA682E31CDED",payloadSha256="3D0FA4E7CDD998FA8B39F945293B120DBAD5A191C0848AE53C658BD9C6096EA0"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1443,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="819E12550FA8607CC0C491E4832014FD8BAE5D006E463A09A28277900CE534A0",navFingerprint="366A224DB72AF08BEFFBBF436FAE14B28DCD4DBE3C1D9586D291FA682E31CDED",payloadSha256="EB5DBDB45DC88F2FC5DEA197E602C5B8D2B48F40EE2C4CBBD513752D506037CE"}
 LogicalTargets.classes = {
 {"npc","quest_giver",13717,"Centaur Pariah","Zentaurenpariah",a="possible_spawn"},
 {"creature","npc_or_mob",4666,"Burning Blade Felsworn","Teufelsanbeter der Burning Blade",a="possible_spawn"},
@@ -340,6 +340,11 @@ LogicalTargets.classes = {
 {"gameobject","object",616992,"Elemental Convergence","Elementarkonvergenz"},
 {"gameobject","quest_giver",656789,"Lost Shipping Crate","Verlorene Transportkiste"},
 {"gameobject","quest_giver",658115,"Lost Shipping Crate","Verlorene Transportkiste"},
+{"gameobject","object",587299,"Tear of Theradras","Träne von Theradras"},
+{"gameobject","object",607122,"Pylon Shard","Pylonsplitter"},
+{"gameobject","object",607123,"Pylon Shard","Pylonsplitter"},
+{"gameobject","object",612091,"Toxin Study"},
+{"gameobject","object",613836,"Burning Keystone","Brennender Schlüsselstein"},
 }
 LogicalTargets.targets = {
 {"creature_29069",1,-2145.71,1966.42,84.492},
@@ -3292,6 +3297,14 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1443_6470875000",307,-2171.09,1324.53,p=true},
 {"gathermate2_mining_1443_6580901000",307,-2249.04,1275.07,p=true},
 {"gathermate2_mining_1443_7660752000",306,-1802.35,789.52,p=true},
+{"questie_gameobject_587299_405_0",340,-2403.73,2485.8,p=true},
+{"questie_gameobject_607122_405_0",341,-1913.87,1173.92,p=true},
+{"questie_gameobject_607123_405_0",342,-2115.33,2606.74,p=true},
+{"questie_gameobject_612091_405_0",343,-1659.35,3100.83,p=true},
+{"questie_gameobject_612091_405_1",343,-1418.02,2876.94,p=true},
+{"questie_gameobject_612091_405_2",343,-333.37,2560.43,p=true},
+{"questie_gameobject_612091_405_3",343,105.22,1228.32,p=true},
+{"questie_gameobject_613836_405_0",344,-1975.63,526.52,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1443] = LogicalTargets

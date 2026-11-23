@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1454,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="75BD27E3DF0378E936D28F777E9B796209065E3870061CF1958CFDF38DCE7473",navFingerprint="AE645CDC19AA7E9860ABE763CAD6266432F9BFE1DE0A456A0FFC5CA45ED425F8",payloadSha256="20DB279F3042B8064E0604CCEC8201571DB33638CE8495C161F2A1DBD2B9BBDA"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1454,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="CBC2BA56C9D8E5C979E0988C066BB7B9831780D6A3A925880507EF3857BC0D3F",navFingerprint="AE645CDC19AA7E9860ABE763CAD6266432F9BFE1DE0A456A0FFC5CA45ED425F8",payloadSha256="747FE5E97DC6F31144305E46D470B2FFAF8D2AB0D767339380D09FCC5D11C6D0"}
 LogicalTargets.classes = {
 {"npc","quest_giver",5875,"Gan'rul Bloodeye"},
 {"npc","quest_giver",8659,"Jes'rimon"},
@@ -358,6 +358,7 @@ LogicalTargets.classes = {
 {"mob","npc_or_mob",228976,"Altruist Ward","Altruistenschutz"},
 {"gameobject","object",404830,"Dusty Chest","Verstaubte Kiste"},
 {"gameobject","object",616992,"Elemental Convergence","Elementarkonvergenz"},
+{"mob","npc_or_mob",257480,"Traveler's Sign","Schild des Reisenden"},
 }
 LogicalTargets.targets = {
 {"creature_256",1,1850.31,-4357.3,-14.798},
@@ -1327,6 +1328,7 @@ LogicalTargets.targets = {
 {"questie_gameobject_616992_1637_4",357,1624.7,-4435.2,p=true},
 {"questie_gameobject_616992_1637_5",357,1929.64,-4639.98,p=true},
 {"gathermate2_herb_1454_5560647000",347,1668.66,-4460.45,p=true},
+{"questie_creature_257480_1637_0",358,1656.69,-4426.93,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1454] = LogicalTargets

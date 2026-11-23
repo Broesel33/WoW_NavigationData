@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=52,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="EE0F462AF74984F73E8301B3257E0990B4D5FA5CD13D01CAE08468893E33B43F",navFingerprint="6028528AA6FAF184E106259649AE81F3E5C686B01E4D1BDEA50A63F8E0AA0B08",payloadSha256="80B2449DBA59B440E9AA6DFD10625352016A35850FB81E99438285E7D1861EE6"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=52,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="7EB2AAD85F9C4686091D60328095542F4FCA0BE1DDE6EF935178CA5704B5EA80",navFingerprint="6028528AA6FAF184E106259649AE81F3E5C686B01E4D1BDEA50A63F8E0AA0B08",payloadSha256="3B2B41944046771CB510A847DE722D6F3D420BE6571DDB47206D1C52B7DB5979"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",596,"Brainwashed Noble","Manipulierter Adliger",a="possible_spawn"},
 {"mob","npc_or_mob",589,"Defias Pillager","Plünderer der Defias",a="possible_spawn"},
@@ -255,6 +255,8 @@ LogicalTargets.classes = {
 {"gameobject","object",459259,"Mech Arm","Mecharm"},
 {"gameobject","object",602735,"Leyline","Leylinie"},
 {"gameobject","quest_giver",611086,"Connery's Trunk","Connerys Truhe"},
+{"mob","npc_or_mob",277187,"SI:7 Agent"},
+{"mob","npc_or_mob",277188,"SI:7 Agent"},
 }
 LogicalTargets.targets = {
 {"creature_90014",1,-11229.19,1476.942,19.184},
@@ -3901,6 +3903,8 @@ LogicalTargets.targets = {
 {"gathermate2_herb_1436_2340420000",228,-10380,2197.67,p=true},
 {"gathermate2_herb_1436_2350419000",228,-10377.67,2194.17,p=true},
 {"gathermate2_herb_1436_4270555000",227,-10695,1522.17,p=true},
+{"questie_creature_277187_40_0",255,-10335.67,1140.32,p=true},
+{"questie_creature_277188_40_0",256,-10334.73,1141.37,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[52] = LogicalTargets

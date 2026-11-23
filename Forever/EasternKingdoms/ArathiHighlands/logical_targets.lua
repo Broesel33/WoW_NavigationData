@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1417,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="2101E3273392DEDDF3BF4A925A23331283E83FB3CA3386644ED8C61368BCFD69",navFingerprint="CFAF3A859FC9B06F815F5E786447E6A5056E123B4DBAFA275EC47BE0C5DB2CD3",payloadSha256="D7A51C3B7A369491F03226B33DB1E854D332B239CB244BE5327369AF2D90C7A8"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1417,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="81EFA99514D317F71DBB37C073EE60BFA3BCADD8E67E224A220AE47C4591FE5D",navFingerprint="CFAF3A859FC9B06F815F5E786447E6A5056E123B4DBAFA275EC47BE0C5DB2CD3",payloadSha256="26C15A85CE027118C1F69A9119D63C8EC356639252D78A6E6B58FC041AEF5EE7"}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",2595,"Daggerspine Raider","Räuber der Säbelflossen",a="possible_spawn"},
 {"mob","npc_or_mob",1418,"Bluegill Raider","Räuber der Blaukiemen",a="possible_spawn"},
@@ -301,6 +301,11 @@ LogicalTargets.classes = {
 {"gameobject","object",499987,"Spellbook","Zauberbuch"},
 {"gameobject","object",616992,"Elemental Convergence","Elementarkonvergenz"},
 {"gameobject","quest_giver",656157,"Syndicate Footlocker","Schließkiste des Syndikats"},
+{"gameobject","object",656398,"Secret Shipment","Geheime Lieferung"},
+{"gameobject","object",656405,"Anastasia's Stash","Anastasias Versteck"},
+{"herb","herb",657391,"Fadeleaf","Blassblatt"},
+{"herb","herb",657392,"Khadgar's Whisker","Khadgars Schnurrbart"},
+{"gameobject","object",667686,"Packaged Tonics","Verpackte Tonika"},
 }
 LogicalTargets.targets = {
 {"creature_9421",1,-2207.81,-1707.91,-64.187},
@@ -3741,6 +3746,14 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1417_8260332000",274,-930.13,-3840.27,p=true},
 {"gathermate2_mining_1417_8260332001",275,-930.13,-3840.27,p=true},
 {"gathermate2_mining_1417_8260332002",276,-930.13,-3840.27,p=true},
+{"questie_gameobject_656398_45_0",301,-1162.21,-1425.39,p=true},
+{"questie_gameobject_656405_45_0",302,-1694.05,-1927.59,p=true},
+{"questie_gameobject_657391_45_8",303,-1614.61,-2203.71,p=true},
+{"questie_gameobject_657391_45_10",303,-1825.33,-2336.19,p=true},
+{"questie_gameobject_657391_45_20",303,-1044.37,-3255.99,p=true},
+{"questie_gameobject_657392_45_3",304,-997.33,-2614.11,p=true},
+{"questie_gameobject_657392_45_7",304,-1770.13,-2880.15,p=true},
+{"questie_gameobject_667686_45_0",305,-1546.21,-3033.51,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1417] = LogicalTargets

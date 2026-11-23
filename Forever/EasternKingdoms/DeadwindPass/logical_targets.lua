@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1430,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="15569701EF1E747C0175ED60DACFCB0C8A7997B636E8D62A94432F9CD495077C",navFingerprint="AD5FE2791EA440DBE266B5B0D562A63BE15822778CDD794DFC58C89206C07E88",payloadSha256="579AE06E9F5B74466EB2BADEACCEC888E028FDDD85367CD9FAB5E358D1D8BED8"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1430,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="C323DADFA40DEBC0368AB27E6CE87C68367BA6B9F5AD740FC85E6A30651467E3",navFingerprint="AD5FE2791EA440DBE266B5B0D562A63BE15822778CDD794DFC58C89206C07E88",payloadSha256="5BCE6DD9617D366A99648B727BE37D9A34EC74ED0605041EADC7A803240314C0"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",7376,"Sky Shadow","Himmelsschatten",a="possible_spawn"},
 {"creature","npc_or_mob",7372,"Deadwind Warlock","Hexenmeister der Totenwindoger",a="possible_spawn"},
@@ -46,6 +46,7 @@ LogicalTargets.classes = {
 {"npc","vendor",240568,"Haunted Anvil","Verhexter Amboss"},
 {"gameobject","object",457088,"Advanced Swordplay","Fortgeschrittener Schwertkampf"},
 {"transit_facility","dungeon",2875,"Dungeon entrance: Karazhan Crypts","Dungeon-Eingang: Karazhan Crypts",s={"Karazhan Crypts"},nk="dungeon_entrance",nm=2875,np="Karazhan Crypts"},
+{"gameobject","object",612092,"Fishing Hut","Angelhütte"},
 }
 LogicalTargets.targets = {
 {"creature_3945",1,-10744.3,-1833.58,114.789},
@@ -220,6 +221,8 @@ LogicalTargets.targets = {
 {"questie_gameobject_457088_41_0",44,-11106.67,-1908.33,p=true},
 {"questie_gameobject_457088_41_1",44,-11110,-1910.83,p=true},
 {"dungeon_entrance:2875:1",45,-11102.67,-1833.08,p=true},
+{"questie_gameobject_612092_41_0",46,-10322.17,-1894.08,p=true},
+{"questie_gameobject_612092_41_1",46,-10356.33,-1913.33,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1430] = LogicalTargets

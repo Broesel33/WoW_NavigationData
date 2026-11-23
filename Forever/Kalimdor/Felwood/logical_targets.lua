@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1448,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="9AE44D245E43284FC5625CB9B59CB1AA06BCB4D8EA35F18F87DA42BC72C3018C",navFingerprint="FEF598DCE23F2D19D4446CCC785D4695DC0049DD24A0A12EFD1F4AF0E62FF423",payloadSha256="39F753251F8A4889CDD2FB732C61D3D54E2FE14EA786B45B759135568752DA9A"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1448,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="D929A19F6B78A9E2C91BE8A488B8783C4B2AB9A15CDBE4024F941C30D474E7F3",navFingerprint="FEF598DCE23F2D19D4446CCC785D4695DC0049DD24A0A12EFD1F4AF0E62FF423",payloadSha256="F2E1A955BD97BECB1ED31EC4EFD3B9769281E58A3DC4B64321E7C77DFCA4694C"}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",14344,"Mongress",a="possible_spawn"},
 {"npc",{"quest_giver","vendor"},11555,"Gorn One Eye","Gorn Einauge"},
@@ -254,6 +254,10 @@ LogicalTargets.classes = {
 {"gameobject","object",464128,"Gift of the Wisp","Gabe des Irrwischs"},
 {"gameobject","quest_giver",661778,"Statue of Malorne","Statue von Malorne"},
 {"search_area","quest_explore",96476,"Follow Aeonas's trail in Felwood"},
+{"gameobject","object",612091,"Toxin Study"},
+{"herb","herb",657462,"Sungrass"},
+{"herb","herb",657463,"Gromsblood"},
+{"herb","herb",657468,"Arthas' Tears"},
 }
 LogicalTargets.targets = {
 {"creature_140773",1,3914.9,-1063.66,243.252},
@@ -1947,6 +1951,12 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1448_3810618000",238,4764.33,-549.08,p=true},
 {"gathermate2_mining_1448_3810618001",239,4764.33,-549.08,p=true},
 {"gathermate2_mining_1448_3810618002",236,4764.33,-549.08,p=true},
+{"questie_gameobject_612091_361_0",254,3981.57,-1310.38,p=true},
+{"questie_gameobject_657462_361_8",255,6747.32,-1585.23,p=true},
+{"questie_gameobject_657463_361_1",256,4272.52,-528.38,p=true},
+{"questie_gameobject_657463_361_3",256,4453.07,-650.28,p=true},
+{"questie_gameobject_657463_361_12",256,5518.73,-985.51,p=true},
+{"questie_gameobject_657468_361_8",257,4546.6,-936.06,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1448] = LogicalTargets

@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1423,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="618D05838983FBD0D2387794D5675D60A7E283F014AC8FD9E4659D9FC375F054",navFingerprint="A5A0249EAA16D37696EDA16ED2DA401AF1C1748177F11D4C4496D1DB3257CD6F",payloadSha256="14A0E450D567944B105829553DD5FD57D83BBA613D985E69DCBF42B5AD95E797"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1423,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="F0E920FA3D1CA8D65298EEB9132E6880274EF2AF04B9D2598B61225B88C840E7",navFingerprint="A5A0249EAA16D37696EDA16ED2DA401AF1C1748177F11D4C4496D1DB3257CD6F",payloadSha256="B7B3007E589876DA91217E660A5BA38452707180F38D778A0FB16BC5B6DB9208"}
 LogicalTargets.classes = {
 {"npc","spirit_healer",6491,"Spirit Healer","Geistheiler"},
 {"creature","npc_or_mob",10821,"Hed'mush the Rotting","Hed'mush der Faulende",a="possible_spawn"},
@@ -307,6 +307,14 @@ LogicalTargets.classes = {
 {"gameobject","quest_giver",462236,"Mysterious Chest","Mysteriöse Truhe"},
 {"gameobject","quest_giver",668183,"Argent Wayfinder","Argentumwegfinderin"},
 {"herb","herb",1628,"Grave Moss","Grabmoos"},
+{"mob","npc_or_mob",257480,"Traveler's Sign","Schild des Reisenden"},
+{"gameobject","object",461639,"Orthas's Hammer","Orthas' Hammer"},
+{"gameobject","object",612110,"Plague Doctor's Laboratory","Labor des Seuchenarztes"},
+{"herb","herb",657398,"Arthas' Tears","Arthas' Tränen"},
+{"herb","herb",657404,"Dreamfoil","Traumblatt"},
+{"herb","herb",657405,"Mountain Silversage","Bergsilberweisling"},
+{"herb","herb",657408,"Plaguebloom","Pestblüte"},
+{"herb","herb",657409,"Black Lotus","Schwarzer Lotus"},
 }
 LogicalTargets.targets = {
 {"creature_9386",1,1989.31,-3650.44,120.369},
@@ -3651,6 +3659,24 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1423_8720798001",292,1404.07,-6007.67,p=true},
 {"gathermate2_mining_1423_8790438000",290,2436.07,-6037.78,p=true},
 {"gathermate2_mining_1423_8790438001",292,2436.07,-6037.78,p=true},
+{"questie_creature_257480_139_0",307,1482.61,-3675.51,p=true},
+{"questie_gameobject_461639_139_0",308,2011.8,-4557,p=true},
+{"questie_gameobject_612110_139_0",309,3390.95,-3407.92,p=true},
+{"questie_gameobject_612110_139_1",309,3167.07,-4047.21,p=true},
+{"questie_gameobject_657398_139_0",310,1573.49,-2978.57,p=true},
+{"questie_gameobject_657404_139_2",311,1945.58,-3819.2,p=true},
+{"questie_gameobject_657405_139_0",312,2215.33,-2782.83,p=true},
+{"questie_gameobject_657405_139_1",312,1690.45,-2911.03,p=true},
+{"questie_gameobject_657408_139_1",313,2973.28,-2821.97,p=true},
+{"questie_gameobject_657408_139_5",313,1907.74,-3501.7,p=true},
+{"questie_gameobject_657408_139_6",313,3192.58,-3582.58,p=true},
+{"questie_gameobject_657408_139_14",313,2413.99,-4430.09,p=true},
+{"questie_gameobject_657409_139_0",314,1926.66,-3115.81,p=true},
+{"questie_gameobject_657409_139_1",314,2057.67,-3256.05,p=true},
+{"questie_gameobject_657409_139_2",314,2818.77,-4050.65,p=true},
+{"questie_gameobject_657409_139_3",314,2927.13,-4986.78,p=true},
+{"questie_gameobject_657409_139_4",314,2082.61,-5036.69,p=true},
+{"questie_gameobject_657409_139_5",314,1592.41,-5443.66,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1423] = LogicalTargets

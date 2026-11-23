@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1427,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="31F3FF20AE65567952C1E2309EBD992AE909F1BE7AFF2E1CE3E65821372A9A59",navFingerprint="FBA574A3948404F559859255B126F0ADB0D6AB186138C8D14A7A1A114B640D41",payloadSha256="1F1A332E997ACC74AD488356401FC7726CD9EC9530566A091CF224B14A3E556B"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1427,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="AF334DF1A809AACE468A41352B81CACD5A4FBFF26328BF2505D3D75580222B84",navFingerprint="FBA574A3948404F559859255B126F0ADB0D6AB186138C8D14A7A1A114B640D41",payloadSha256="B98D06868006B5CA7402AE6CE8EF59ED61FEF92ED22E34F5A324BF5E45AA5DF6"}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",5855,"Magma Elemental","Magmaelementar",a="possible_spawn"},
 {"creature","npc_or_mob",8917,"Quarry Slave","Steinbruchsklave"},
@@ -159,6 +159,10 @@ LogicalTargets.classes = {
 {"gameobject","object",445037,"Extraplanar Eye","Extraplanares Auge"},
 {"gameobject","object",457097,"Elements for Dummies Volume II: Fire","Elemente für Dummies Band I: Feuer"},
 {"gameobject","object",462233,"Shimmering Molten Crag","Schimmerndes geschmolzenes Gestein"},
+{"mob","npc_or_mob",257480,"Traveler's Sign","Schild des Reisenden"},
+{"gameobject","object",612082,"Trapper's Workbench","Werkbank des Fallenstellers"},
+{"gameobject","object",628863,"Lavaforgotten Crucible","Lavavergessener Schmelztiegel"},
+{"herb","herb",657395,"Firebloom","Feuerblüte"},
 }
 LogicalTargets.targets = {
 {"creature_5761",1,-6988.11,-993.348,242.169,n=4171},
@@ -2875,6 +2879,15 @@ LogicalTargets.targets = {
 {"questie_gameobject_457097_51_2",157,-6628.06,-1226.57,p=true},
 {"questie_gameobject_462233_51_0",158,-6654.84,-1409.54,p=true},
 {"questie_gameobject_462233_51_1",158,-6657.81,-1409.54,p=true},
+{"questie_creature_257480_51_0",159,-7184.98,-912.41,p=true},
+{"questie_gameobject_612082_51_0",160,-7336.26,-1084,p=true},
+{"questie_gameobject_612082_51_1",160,-7262.33,-1092.7,p=true},
+{"questie_gameobject_628863_51_0",161,-6739.62,-1300.2,p=true},
+{"questie_gameobject_657395_51_17",162,-6989.08,-1151.16,p=true},
+{"questie_gameobject_657395_51_20",162,-6678.49,-1206.27,p=true},
+{"questie_gameobject_657395_51_23",162,-6674.92,-1307.12,p=true},
+{"questie_gameobject_657395_51_25",162,-6744.38,-1379.19,p=true},
+{"questie_gameobject_657395_51_28",162,-6625.53,-1484.06,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1427] = LogicalTargets

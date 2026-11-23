@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1441,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="73D26ACCA172E9E70E7ED197F2BDC7B9EABEDB7EA2DAFFE3D99E8055A6ED662C",navFingerprint="6E40E107BA3171FE77A6FCE3965CFD73CF5DC861F1416CB2751E11F93CF22773",payloadSha256="130C360C2702DFF41F7783B4CE2D13AD44CF2B6D61F4FF6072FC6E9812756E86"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1441,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="A2AF34B71883D24DA5878ECEC2A43E888DBEFDE057F3E73DA66D97CC391C1256",navFingerprint="6E40E107BA3171FE77A6FCE3965CFD73CF5DC861F1416CB2751E11F93CF22773",payloadSha256="D48A581B4D9AC2EA839D08629F1D4C1DAA2DD6CB745D04F0DCCB793C7FEBF622"}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",4158,"Salt Flats Vulture","Salzwüstengeier",a="possible_spawn"},
 {"creature","npc_or_mob",4093,"Galak Wrangler","Zänker der Galak",a="possible_spawn"},
@@ -258,6 +258,9 @@ LogicalTargets.classes = {
 {"gameobject","quest_giver",658117,"Lost Shipping Crate","Verlorene Transportkiste"},
 {"search_area","quest_explore",1149,"If you have faith, leap from the planks overlooking Thousand Needles."},
 {"search_area","quest_explore",92101,"Tobin's spot visited"},
+{"gameobject","object",612091,"Toxin Study"},
+{"gameobject","object",654508,"Burning Embers"},
+{"gameobject","object",670338,"Stolen Freewind Supplies","Gestohlene Vorräte vom Freiwindposten"},
 }
 LogicalTargets.targets = {
 {"creature_32583",1,-6040.3,-4084.69,-58.625},
@@ -2993,6 +2996,24 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1441_5910494001",221,-5415.73,-3033.73,p=true},
 {"gathermate2_mining_1441_5910494002",222,-5415.73,-3033.73,p=true},
 {"gathermate2_mining_1441_6310489000",221,-5401.07,-3209.73,p=true},
+{"questie_gameobject_612091_400_0",258,-5443.01,-2451.61,p=true},
+{"questie_gameobject_612091_400_1",258,-6281.36,-3784.37,p=true},
+{"questie_gameobject_654508_400_0",259,-5184.29,-2161.65,p=true},
+{"questie_gameobject_670338_400_0",260,-5575.31,-1580.85,p=true},
+{"questie_gameobject_670338_400_1",260,-5601.12,-1582.17,p=true},
+{"questie_gameobject_670338_400_2",260,-5502.56,-1583.93,p=true},
+{"questie_gameobject_670338_400_3",260,-5526.61,-1598.89,p=true},
+{"questie_gameobject_670338_400_4",260,-5618.13,-1602.41,p=true},
+{"questie_gameobject_670338_400_5",260,-5542.45,-1607.69,p=true},
+{"questie_gameobject_670338_400_6",260,-5496.69,-1612.97,p=true},
+{"questie_gameobject_670338_400_7",260,-5349.73,-1617.81,p=true},
+{"questie_gameobject_670338_400_8",260,-5590.56,-1620.89,p=true},
+{"questie_gameobject_670338_400_9",260,-5560.93,-1632.77,p=true},
+{"questie_gameobject_670338_400_10",260,-5463.55,-1634.97,p=true},
+{"questie_gameobject_670338_400_11",260,-5391.68,-1640.25,p=true},
+{"questie_gameobject_670338_400_12",260,-5420.13,-1650.81,p=true},
+{"questie_gameobject_670338_400_13",260,-5446.53,-1662.69,p=true},
+{"questie_gameobject_670338_400_14",260,-5418.37,-1677.21,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1441] = LogicalTargets

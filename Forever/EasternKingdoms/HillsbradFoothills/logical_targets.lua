@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1424,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="ED15AFD20F930C1196CC2D7FE84F3C20CDA031F480B9744B16C81E5865926354",navFingerprint="8E3D99A78E5335CA03AC2625E56E13F0CFEBF03DDF04BE1D5931CE1113A27515",payloadSha256="A4F3E742ED97A2F502CA78C7CAAE00FF1D52B223F8385D92FA361A4B82D6C159"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1424,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="15DF2C42924C04F7150DCC5BF50E9269593FCF1F26A39B2389004B19D94DFF7F",navFingerprint="8E3D99A78E5335CA03AC2625E56E13F0CFEBF03DDF04BE1D5931CE1113A27515",payloadSha256="C0010733ECE0E22AAF7EDA3D9FA3AB5AFCB2A06A603D4DE141AF80354483B0F7"}
 LogicalTargets.classes = {
 {"npc",{"quest_giver","vendor"},2698,"George Candarte (Leatherworking Supplies)","George Candarte (Lederverarbeitungsbedarf)"},
 {"mob","npc_or_mob",2356,"Elder Gray Bear","Alter Graubär",a="possible_spawn"},
@@ -342,6 +342,11 @@ LogicalTargets.classes = {
 {"npc","npc_or_mob",275086,"Southshore Defender","Verteidiger von Southshore"},
 {"gameobject","object",414713,"Storage Locker"},
 {"gameobject","object",616992,"Elemental Convergence","Elementarkonvergenz"},
+{"mob","npc_or_mob",270574,"Credit"},
+{"mob","npc_or_mob",270575,"Credit"},
+{"herb","herb",657380,"Silverleaf","Silberblatt"},
+{"herb","herb",657388,"Kingsblood","Königsblut"},
+{"gameobject","object",670348,"Wooden Chair"},
 }
 LogicalTargets.targets = {
 {"creature_11200",1,-415.486,-1877.95,73.265},
@@ -3063,6 +3068,14 @@ LogicalTargets.targets = {
 {"questie_gameobject_616992_267_28",341,-722.13,-1666.13,p=true},
 {"questie_gameobject_616992_267_29",341,-666.67,-1720.53,p=true},
 {"gathermate2_herb_1424_3670776000",276,-1255.47,-107.73,p=true},
+{"questie_creature_270574_267_0",342,-248.11,-1221.97,p=true},
+{"questie_creature_270575_267_0",343,-1165.01,-1309.01,p=true},
+{"questie_gameobject_657380_267_0",344,-3.2,-814.93,p=true},
+{"questie_gameobject_657388_267_9",345,-898.35,-6.93,p=true},
+{"questie_gameobject_670348_267_0",346,-1344,-1230.93,p=true},
+{"questie_gameobject_670348_267_1",346,-1315.84,-1238.29,p=true},
+{"questie_gameobject_670348_267_2",346,-1302.61,-1255.25,p=true},
+{"questie_gameobject_670348_267_3",346,-1313.28,-1267.41,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1424] = LogicalTargets

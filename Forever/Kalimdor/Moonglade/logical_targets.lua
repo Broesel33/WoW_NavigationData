@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1450,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="54B93648FAD83DD9F23725D1E3557388572CA19C991147DC027E406E1A56CCD8",navFingerprint="F3549E2AFE0184BD4AC5351DFC197ED53214AA6FDB565B3F028519116E647D24",payloadSha256="B6F8CC4493C61798255146BCC69E0027C7904B436E83FF79DA42ADAE241F73FD"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1450,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="924B4C11E7C7034031E79F9CCF701136D0D92B82E94D8C034E45EA1EA4FD4CD2",navFingerprint="F3549E2AFE0184BD4AC5351DFC197ED53214AA6FDB565B3F028519116E647D24",payloadSha256="F749778EC82923D192978B4E18AE30CACA779EBA2D7B3BB4B268FF84044153DE"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",11822,"Moonglade Warden","Moonglade-Aufseher",a="possible_spawn"},
 {"creature","npc_or_mob",11553,"Timbermaw Woodbender","Holzbieger der Holzschlundfeste",a="possible_spawn"},
@@ -86,6 +86,7 @@ LogicalTargets.classes = {
 {"mob","npc_or_mob",274963,"Roach","Schabe"},
 {"gameobject","object",422902,"Crystal Waters of Lake Elune'ara","Kristallwasser aus dem See von Elune'ara"},
 {"gameobject","object",602735,"Leyline","Leylinie"},
+{"gameobject","object",612092,"Fishing Hut","Angelhütte"},
 }
 LogicalTargets.targets = {
 {"creature_42393",1,7546.65,-2901.73,462.536},
@@ -452,6 +453,7 @@ LogicalTargets.targets = {
 {"questie_gameobject_422902_493_0",84,7470.92,-2666.99,p=true},
 {"questie_gameobject_422902_493_1",84,7467.84,-2669.3,p=true},
 {"questie_gameobject_602735_493_0",85,7992.84,-2680.84,p=true},
+{"questie_gameobject_612092_493_0",86,7676.46,-2782.18,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1450] = LogicalTargets

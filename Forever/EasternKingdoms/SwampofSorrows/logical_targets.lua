@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1435,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="CA9F0595DF58D49E477E3EBE948FC63FDE9094BBE33EADBF425E4BBEC18230D0",navFingerprint="56BC28F55AD6C1773828FC405CD6A1C0FD399D0452E8B59B73A4F2681AFB3E4E",payloadSha256="5A432D8C2BE62FB6EFB071F7EC06A6B11124D8DD28655D88BE3ABAE82432F72C"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1435,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="A206D7FF9406ECA3E67FDA547C8B4CF0C09111CCD3C6A3CE3985514AAD77AA15",navFingerprint="56BC28F55AD6C1773828FC405CD6A1C0FD399D0452E8B59B73A4F2681AFB3E4E",payloadSha256="46AE48C55ABC3D00FACAD6CD38A4D7C0E4F04F29E5D73A3DEFA68BC5B511C783"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",769,"Deathstrike Tarantula","Todesstoßtarantel",a="possible_spawn"},
 {"mob","npc_or_mob",1082,"Sawtooth Crocolisk","Sägezahnkrokilisk",a="possible_spawn"},
@@ -177,6 +177,8 @@ LogicalTargets.classes = {
 {"gameobject","object",424265,"Grave","Grab"},
 {"gameobject","object",428228,"Conspicuous Cache","Auffällige Truhe"},
 {"mining","ore",2047,"Truesilver Deposit","Echtsilberablagerung"},
+{"herb","herb",657397,"Goldthorn","Golddorn"},
+{"herb","herb",657400,"Blindweed","Blindkraut"},
 }
 LogicalTargets.targets = {
 {"creature_2689",1,-10674.4,-3613.39,45.504},
@@ -2204,6 +2206,9 @@ LogicalTargets.targets = {
 {"gathermate2_herb_1435_7600011000",160,-9637.65,-3966.17,p=true},
 {"gathermate2_mining_1435_6590100000",161,-9773.75,-3734.5,p=true},
 {"gathermate2_mining_1435_6600097000",176,-9769.16,-3736.79,p=true},
+{"questie_gameobject_657397_8_25",177,-9788.89,-3711.1,p=true},
+{"questie_gameobject_657400_8_19",178,-10149.47,-3411.08,p=true},
+{"questie_gameobject_657400_8_30",178,-10188.15,-3641.37,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1435] = LogicalTargets

@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1416,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="025AFC60860FA095DCC133BCD0B3FAF9A38C38E59A59F1F1544E5B3B1A85EB23",navFingerprint="80A77FCC76A669BA89427790AA1074384E7C6C274984146215F2465519ACFBA1",payloadSha256="C9A02C4E84A283A87D684EBC61C15641C6094A383ECDE1D4DD10C42248AB68B1"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1416,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="6F3A1AD02F269CA1F26AB5FCE0ED4755E0D78C77BCF0DD88D8E870A08A428227",navFingerprint="80A77FCC76A669BA89427790AA1074384E7C6C274984146215F2465519ACFBA1",payloadSha256="ED66662B78B272474E5B4BBE4438643479D068AE439761A7C8FDEADA1FEA0A79"}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",2431,"Jailor Borhuin","Kerkermeister Borhuin",a="possible_spawn"},
 {"npc","spirit_healer",6491,"Spirit Healer","Geistheiler"},
@@ -435,6 +435,15 @@ LogicalTargets.classes = {
 {"gameobject","object",602735,"Leyline","Leylinie"},
 {"gameobject","object",616992,"Elemental Convergence","Elementarkonvergenz"},
 {"transit_facility","dungeon",2959,"Dungeon entrance: City of Dalaran","Dungeon-Eingang: City of Dalaran",s={"City of Dalaran"},nk="dungeon_entrance",nm=2959,np="City of Dalaran"},
+{"mob","npc_or_mob",270573,"Credit"},
+{"gameobject","object",656100,"Blade of House Perenolde","Klinge von Haus Perenolde"},
+{"gameobject","object",656101,"Royal Aegis of Perenolde","Königliche Aegis der Perenoldes"},
+{"herb","herb",657388,"Kingsblood","Königsblut"},
+{"herb","herb",657389,"Grave Moss","Grabmoos"},
+{"herb","herb",657391,"Fadeleaf","Blassblatt"},
+{"herb","herb",657392,"Khadgar's Whisker","Khadgars Schnurrbart"},
+{"herb","herb",657397,"Goldthorn","Golddorn"},
+{"gameobject","object",670427,"Warden's Footlocker","Schließkiste der Aufseherin"},
 }
 LogicalTargets.targets = {
 {"creature_17171",1,750.198,-972.267,167.587},
@@ -3533,6 +3542,21 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1416_2780562001",389,450.93,4.93,p=true},
 {"gathermate2_mining_1416_2780562002",390,450.93,4.93,p=true},
 {"gathermate2_mining_1416_3510892000",388,-165.07,-199.47,p=true},
+{"questie_creature_270573_36_0",435,-275.01,-296.91,p=true},
+{"questie_gameobject_656100_36_0",436,418.45,-295.23,p=true},
+{"questie_gameobject_656101_36_0",437,749.6,-376.15,p=true},
+{"questie_gameobject_657388_36_2",438,-67.25,78.01,p=true},
+{"questie_gameobject_657388_36_26",438,880.27,-852.15,p=true},
+{"questie_gameobject_657389_36_0",439,486.96,-310.91,p=true},
+{"questie_gameobject_657391_36_0",440,-91.33,349.89,p=true},
+{"questie_gameobject_657391_36_1",440,-46.91,194.49,p=true},
+{"questie_gameobject_657391_36_2",440,416.03,116.09,p=true},
+{"questie_gameobject_657391_36_16",440,714.32,-985.99,p=true},
+{"questie_gameobject_657392_36_0",441,142.37,-92.23,p=true},
+{"questie_gameobject_657392_36_6",441,1211.6,-497.39,p=true},
+{"questie_gameobject_657392_36_13",441,867.76,-925.79,p=true},
+{"questie_gameobject_657397_36_8",442,908.08,-398.27,p=true},
+{"questie_gameobject_670427_36_0",443,-167.12,326.93,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1416] = LogicalTargets

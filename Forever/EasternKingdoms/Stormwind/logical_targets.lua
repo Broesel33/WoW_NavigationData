@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=84,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="D735EC3959F38E85F22773DEA161DFFD957D346929D7267C05DECF3600B1B57C",navFingerprint="CF38FAAF52B97C8FB28BEA433D8DAEE31E7C8F459D715F7C9754F937DE518CC8",payloadSha256="49CBE52BC59FD6C39F259F6104B43949FA7768D8BBFB204DFC50BBD30F8ADB9E"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=84,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="4D3A576E8737C0B32913B274819C7539AD08DFEFEE6EF2FF973D7A62F7F1DD40",navFingerprint="CF38FAAF52B97C8FB28BEA433D8DAEE31E7C8F459D715F7C9754F937DE518CC8",payloadSha256="80604086B2B9F16BF6D2617FB814E6ABAB4E183AD5D03B3005DC517975804205"}
 LogicalTargets.classes = {
 {"npc",{"quest_giver","trainer"},376,"High Priestess Laurena (Priest Trainer)","Hohepriesterin Laurena (Priesterlehrerin)"},
 {"npc","quest_giver",656,"Wilder Thistlenettle"},
@@ -514,6 +514,7 @@ LogicalTargets.classes = {
 {"gameobject","object",696503,"King Llane I of the House of Wrynn","König Llane I. aus dem Hause Wrynn"},
 {"gameobject","object",696504,"Grand Admiral Daelin Proudmoore","Großadmiral Daelin Proudmoore"},
 {"gameobject","object",696505,"Lady Mara Fordragon"},
+{"mob","npc_or_mob",257480,"Traveler's Sign","Schild des Reisenden"},
 }
 LogicalTargets.targets = {
 {"creature_1079",1,-8512.4,862.364,109.927},
@@ -1717,6 +1718,7 @@ LogicalTargets.targets = {
 {"questie_gameobject_696503_1519_0",511,-8338.7,524.04,p=true},
 {"questie_gameobject_696504_1519_0",512,-8341.13,507.88,p=true},
 {"questie_gameobject_696505_1519_0",513,-8348.78,521.61,p=true},
+{"questie_creature_257480_1519_0",514,-8458.36,674.51,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[84] = LogicalTargets

@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1452,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="9887F91CFD5EB56E385C535651428B264249D813C557EF5339A34C2BD86DCF16",navFingerprint="F313C35F3AD32DA2B24B2181DBB474F2B65FDC37BCB1F65F5D63849EA05FA4D2",payloadSha256="63073D4FF389C21BBF52C48C540BABC37F032697D0DACC1ED133428E97511607"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1452,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="9A5C96AA2CE78D5B6E2433E1413C5A7EF0E9E0F596978D137ACDB610155B1BF5",navFingerprint="F313C35F3AD32DA2B24B2181DBB474F2B65FDC37BCB1F65F5D63849EA05FA4D2",payloadSha256="A5211C4CC04D97148622C2BE26DFF57CC04B6CE9511C7DBAECC75EEF9D1EB28D"}
 LogicalTargets.classes = {
 {"npc","spirit_healer",6491,"Spirit Healer","Geistheiler"},
 {"mob","npc_or_mob",7428,"Frostmaul Giant","Frosthagelriese",a="possible_spawn"},
@@ -243,6 +243,12 @@ LogicalTargets.classes = {
 {"gameobject","object",457098,"Finding Your Inner Feline: A Guide to Modern Druidism","Die innere Katze finden: Ein Leitfaden für moderne Druidenkünste"},
 {"gameobject","object",467315,"Old Campsite"},
 {"gameobject","object",469796,"Campsite"},
+{"mob","npc_or_mob",257480,"Traveler's Sign","Schild des Reisenden"},
+{"gameobject","object",612082,"Trapper's Workbench","Werkbank des Fallenstellers"},
+{"gameobject","object",612091,"Toxin Study"},
+{"gameobject","object",612092,"Fishing Hut","Angelhütte"},
+{"herb","herb",657406,"Icecap"},
+{"herb","herb",657409,"Black Lotus","Schwarzer Lotus"},
 }
 LogicalTargets.targets = {
 {"creature_40586",1,6857.31,-4680,700.936},
@@ -2499,6 +2505,22 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1452_5420554000",205,5911.07,-4164.87,p=true},
 {"gathermate2_mining_1452_5420554001",206,5911.07,-4164.87,p=true},
 {"gathermate2_mining_1452_6670601000",205,5688.6,-5052.37,p=true},
+{"questie_creature_257480_618_0",243,6497.53,-3174.42,p=true},
+{"questie_gameobject_612082_618_0",244,6794.31,-3208.5,p=true},
+{"questie_gameobject_612091_618_0",245,7628.79,-4386.39,p=true},
+{"questie_gameobject_612092_618_0",246,6772.53,-2880.48,p=true},
+{"questie_gameobject_657406_618_5",247,6481.43,-3240.45,p=true},
+{"questie_gameobject_657406_618_8",247,7954.45,-3764.43,p=true},
+{"questie_gameobject_657406_618_19",247,7083.04,-4771.92,p=true},
+{"questie_gameobject_657406_618_27",247,6993.58,-5147.51,p=true},
+{"questie_gameobject_657409_618_0",248,7984.27,-3824.78,p=true},
+{"questie_gameobject_657409_618_1",248,8115.38,-3903.59,p=true},
+{"questie_gameobject_657409_618_2",248,6709.11,-4196.82,p=true},
+{"questie_gameobject_657409_618_3",248,6986.01,-4496.44,p=true},
+{"questie_gameobject_657409_618_4",248,7675.65,-4505.67,p=true},
+{"questie_gameobject_657409_618_5",248,5140.95,-4583.77,p=true},
+{"questie_gameobject_657409_618_6",248,5217.16,-4786.12,p=true},
+{"questie_gameobject_657409_618_7",248,5775.69,-4789.67,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1452] = LogicalTargets

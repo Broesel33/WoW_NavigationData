@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1440,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="6DDC4802C5C2F125C94511A36ABDAD4D012324012688348E531E9C5B3649C529",navFingerprint="C53F3EB3442B781BA4B7E4C30ABFA0AD542893B347B70A3099EEB83E05F4FAC9",payloadSha256="CE63735DAA85FBCBD7BF04D51E395F8B33623CBD4B5F081F78D1A63D00C3D691"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1440,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="FAF8A786712FD869379E2DFF586513982B324BDC1243FE41567F87C3FDAB41FF",navFingerprint="C53F3EB3442B781BA4B7E4C30ABFA0AD542893B347B70A3099EEB83E05F4FAC9",payloadSha256="82147E751B86B52AE10ED0E8BB78786C04734B5539E3237E1C86F68EC46BDABC"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",6073,"Searing Infernal","Sengende Höllenbestie",a="possible_spawn"},
 {"creature","npc_or_mob",6115,"Felguard","Teufelswache",a="possible_spawn"},
@@ -472,6 +472,8 @@ LogicalTargets.classes = {
 {"search_area","quest_explore",976,"Protect Feero Ironhand"},
 {"search_area","quest_explore",98252,"Eye of Kilrogg guided to the road"},
 {"transit_facility","dungeon",2784,"Dungeon entrance: Demon Fall Canyon","Dungeon-Eingang: Demon Fall Canyon",s={"Demon Fall Canyon"},nk="dungeon_entrance",nm=2784,np="Demon Fall Canyon"},
+{"gameobject","object",612091,"Toxin Study"},
+{"herb","herb",657388,"Kingsblood","Königsblut"},
 }
 LogicalTargets.targets = {
 {"creature_108862-6073",1,1421.6,-2795.28,153.376},
@@ -4897,6 +4899,9 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1440_4240364000",428,3273.79,-745.07,p=true},
 {"gathermate2_mining_1440_4240365000",428,3269.95,-745.07,p=true},
 {"gathermate2_mining_1440_5210732000",428,1859.29,-1304.43,p=true},
+{"questie_gameobject_612091_331_0",472,2848.29,-247.4,p=true},
+{"questie_gameobject_612091_331_1",472,2779.1,-324.68,p=true},
+{"questie_gameobject_657388_331_22",473,2234.06,-569.76,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1440] = LogicalTargets

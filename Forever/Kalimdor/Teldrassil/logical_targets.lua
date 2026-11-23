@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=57,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="ED8B2CA095C0C81458566EA38DC8EEB10B6E9237E8CF97D711A09AF585481C73",navFingerprint="A37B77332262BD78B86B763CA922D6A75A952DBD6195F05C27345CC485DC6A9B",payloadSha256="EF978D044076FB340A1E08C879634A9523EB2454C26EEE7EF7D3E64634B5C355"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=57,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="87E709E3A533CDDC6C169F45C44270A0EB815FAC03CF07C3A94EFEB8C7EC298C",navFingerprint="A37B77332262BD78B86B763CA922D6A75A952DBD6195F05C27345CC485DC6A9B",payloadSha256="9602FC97B98BF8EC5FC80D92D00EF857351C6B24D0D317CE73B1CA3875DCA6C2"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",6909,"Sethir the Ancient","Sethir der Uralte",a="possible_spawn"},
 {"creature","npc_or_mob",14429,"Grimmaw","Grimmtatze",a="possible_spawn"},
@@ -262,6 +262,8 @@ LogicalTargets.classes = {
 {"gameobject","object",406006,"Idol","Götze"},
 {"gameobject","object",407352,"Gnarlpine Stash","Kiste der Knarzklauen"},
 {"gameobject","object",407734,"Gnarlpine Cache","Knarzklauenkiste"},
+{"gameobject","object",612091,"Toxin Study"},
+{"gameobject","object",612110,"Plague Doctor's Laboratory","Labor des Seuchenarztes"},
 }
 LogicalTargets.targets = {
 {"creature_2499",1,11056.3,1925.18,1334.56},
@@ -3074,6 +3076,8 @@ LogicalTargets.targets = {
 {"questie_gameobject_407734_141_7",261,9859.48,1508.06,p=true},
 {"questie_gameobject_407734_141_8",261,9896.81,1487.69,p=true},
 {"gathermate2_herb_1438_6340354000",246,10629.86,586.47,p=true},
+{"questie_gameobject_612091_141_0",262,8671.33,880.77,p=true},
+{"questie_gameobject_612110_141_0",263,8722.58,929.65,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[57] = LogicalTargets

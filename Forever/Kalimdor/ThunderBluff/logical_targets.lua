@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1456,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="A5E86D4A823DC2ADB6C7FAA5E146E19A66404638CA97E766458282110075906C",navFingerprint="4BB993549EB79DC69B772936F1F53A8C5DB9FDED1779D44C0E7824593A7A47E1",payloadSha256="485F10BE5D63D4577644CBD8E3BA43FA3276F55525A307E94743F88F348334CB"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1456,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="185699C908F2F4E1B2C73645BED5EAB63CE88B546255D69562D691A0AE3A79E7",navFingerprint="4BB993549EB79DC69B772936F1F53A8C5DB9FDED1779D44C0E7824593A7A47E1",payloadSha256="4A03A435F107DE748E7F5706B9BA1CE88FC158E3AADD23301D240C4272917C44"}
 LogicalTargets.classes = {
 {"npc","npc_or_mob",7427,"Taim Ragetotem (Alterac Valley Battlemaster)","Taim Ragetotem (Kampfmeister des Alteractals)"},
 {"npc","quest_giver",6410,"Orm Stonehoof"},
@@ -230,6 +230,7 @@ LogicalTargets.classes = {
 {"mob","npc_or_mob",215369,"Bashana Runetotem"},
 {"mob","npc_or_mob",275033,"Bluffbruiser","Haudrauf von Thunder Bluff"},
 {"gameobject","object",616992,"Elemental Convergence","Elementarkonvergenz"},
+{"herb","herb",657380,"Silverleaf","Silberblatt"},
 }
 LogicalTargets.targets = {
 {"creature_24670",1,-1382.42,-77.847,160.602},
@@ -726,6 +727,7 @@ LogicalTargets.targets = {
 {"questie_gameobject_616992_1638_5",229,-1433.11,-48,p=true},
 {"questie_gameobject_616992_1638_6",229,-1108.15,-109.58,p=true},
 {"questie_gameobject_616992_1638_7",229,-1055.27,-233.79,p=true},
+{"questie_gameobject_657380_1638_0",230,-1099.94,298,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1456] = LogicalTargets

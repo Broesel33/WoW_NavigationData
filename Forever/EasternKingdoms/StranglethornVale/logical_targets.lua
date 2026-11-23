@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1434,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="2EE6B50284BC885F337F102F3E4DF358602C40ECBF1EE102C6062D4D46A52691",navFingerprint="3E46F38396FE1E5D64969D305294306530BF242E0260FA24A2D8FB9EEF385EC5",payloadSha256="A14F6323A64EE4EACE74469C9AB392E0AE3859B0CA7B46B2DA255D4404B925AD"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1434,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="6A9C2A3AE4F2227AF23BAA35029B2EA0B5749BF140E8B3E753FE371AD9924F15",navFingerprint="3E46F38396FE1E5D64969D305294306530BF242E0260FA24A2D8FB9EEF385EC5",payloadSha256="191329F84A648788D89BC015E141DF64782E04DE191091405982B385B1A56CB9"}
 LogicalTargets.classes = {
 {"npc","vendor",2843,"Jutak (Blade Trader)","Jutak (Klingentrödlerin)"},
 {"npc","quest_giver",7853,"Scooty (Chief Engineer)","Scooty (Chefingenieur)"},
@@ -472,6 +472,15 @@ LogicalTargets.classes = {
 {"gameobject","quest_giver",630887,"Venture Co. Ledger","Geschäftsbuch der Venture Co."},
 {"gameobject","quest_giver",658116,"Lost Shipping Crate","Verlorene Transportkiste"},
 {"search_area","quest_explore",95770,"Find the Drowned City Entrance"},
+{"mob","npc_or_mob",257480,"Traveler's Sign","Schild des Reisenden"},
+{"herb","herb",657387,"Wild Steelbloom"},
+{"herb","herb",657388,"Kingsblood","Königsblut"},
+{"herb","herb",657391,"Fadeleaf","Blassblatt"},
+{"herb","herb",657392,"Khadgar's Whisker","Khadgars Schnurrbart"},
+{"herb","herb",657397,"Goldthorn","Golddorn"},
+{"gameobject","object",661518,"Stolen Shipment","Gestohlene Lieferung"},
+{"gameobject","object",665153,"Drum of Crude Oil","Fass mit Rohöl"},
+{"search_area","quest_explore",97331,"Escort Zimmix Sputterspark to safety"},
 }
 LogicalTargets.targets = {
 {"creature_1",1,-14467.8,468.374,15.106},
@@ -6014,6 +6023,37 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1434_4420490000",442,-13253.29,-599.68,p=true},
 {"gathermate2_mining_1434_4420490001",444,-13253.29,-599.68,p=true},
 {"gathermate2_mining_1434_4450482000",443,-13219.26,-618.82,p=true},
+{"questie_creature_257480_33_0",472,-14270.89,591.7,p=true},
+{"questie_gameobject_657387_33_39",473,-12817.66,-707.52,p=true},
+{"questie_gameobject_657388_33_2",474,-13728.91,537.46,p=true},
+{"questie_gameobject_657388_33_45",474,-12578.58,-313.8,p=true},
+{"questie_gameobject_657388_33_46",474,-12929.12,-364.21,p=true},
+{"questie_gameobject_657391_33_17",475,-13384.75,-369.95,p=true},
+{"questie_gameobject_657392_33_69",476,-12956.35,-860.03,p=true},
+{"questie_gameobject_657397_33_25",477,-13406.44,6.54,p=true},
+{"questie_gameobject_657397_33_76",477,-12651.75,-770.7,p=true},
+{"questie_gameobject_657397_33_89",477,-12264.62,-913.64,p=true},
+{"questie_gameobject_661518_33_0",478,-11642.24,770.38,p=true},
+{"questie_gameobject_661518_33_1",478,-11686.91,755.7,p=true},
+{"questie_gameobject_661518_33_2",478,-11721.37,742.3,p=true},
+{"questie_gameobject_661518_33_3",478,-11596.72,731.45,p=true},
+{"questie_gameobject_661518_33_4",478,-11672.02,729.54,p=true},
+{"questie_gameobject_661518_33_5",478,-11510.36,728.9,p=true},
+{"questie_gameobject_661518_33_6",478,-11548.65,688.06,p=true},
+{"questie_gameobject_661518_33_7",478,-11684.78,679.12,p=true},
+{"questie_gameobject_661518_33_8",478,-11600.97,674.02,p=true},
+{"questie_gameobject_661518_33_9",478,-11714.98,638.92,p=true},
+{"questie_gameobject_661518_33_10",478,-11625.65,635.73,p=true},
+{"questie_gameobject_661518_33_11",478,-11552.48,632.54,p=true},
+{"questie_gameobject_661518_33_12",478,-11584.38,614.03,p=true},
+{"questie_gameobject_661518_33_13",478,-11705.63,575.75,p=true},
+{"questie_gameobject_661518_33_14",478,-11593.32,572.56,p=true},
+{"questie_gameobject_661518_33_15",478,-11566.09,569.37,p=true},
+{"questie_gameobject_661518_33_16",478,-11543.97,564.26,p=true},
+{"questie_gameobject_661518_33_17",478,-11518.87,563.62,p=true},
+{"questie_gameobject_661518_33_18",478,-11671.59,561.71,p=true},
+{"questie_gameobject_665153_33_0",479,-11954.49,-486.09,p=true},
+{"questie_Quest_97331_33_0",480,-11653.72,504.28,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1434] = LogicalTargets

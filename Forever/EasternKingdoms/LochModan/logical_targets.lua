@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1432,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="C25969EA972437865A845C8AC4C50B63BEE41F87CDF643E06230403E52083AD6",navFingerprint="797B5043B73F66027BACBF3D3A3F7C6122EB4B7F9AA6871BF02FD806E6E41A72",payloadSha256="6A6F20E044313C37AE2F9EC09A595022C08D787FA1B540F26E661BA184AFEA88"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1432,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="ACF3F8DC160DEACBB230A4CBDB0F415CAA5C0AE7F24FAD8935A8769EA418B8AE",navFingerprint="797B5043B73F66027BACBF3D3A3F7C6122EB4B7F9AA6871BF02FD806E6E41A72",payloadSha256="B381AB8919742F06B24C742F52103AB68AFEB4684264310143A41ACD93873382"}
 LogicalTargets.classes = {
 {"npc","quest_giver",1280,"Mountaineer Droken","Gebirgsjäger Droken",a="possible_spawn"},
 {"npc","quest_giver",1283,"Mountaineer Kalmir","Gebirgsjägerin Kalmir",a="possible_spawn"},
@@ -251,6 +251,7 @@ LogicalTargets.classes = {
 {"gameobject","object",407983,"Pile of Stolen Books","Haufen gestohlener Bücher"},
 {"gameobject","object",408004,"Tangled Blight Pile","Umschlungener Verseuchungsstapel"},
 {"gameobject","object",602735,"Leyline","Leylinie"},
+{"herb","herb",657380,"Silverleaf","Silberblatt"},
 }
 LogicalTargets.targets = {
 {"creature_8840",1,-5433.62,-2884.02,345.496},
@@ -2530,6 +2531,7 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1432_4140191000",240,-4838.86,-3135.7,p=true},
 {"gathermate2_mining_1432_4150190000",240,-4837.02,-3138.46,p=true},
 {"gathermate2_mining_1432_4150479000",240,-5368.66,-3138.46,p=true},
+{"questie_gameobject_657380_38_0",251,-4837.2,-2746.22,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1432] = LogicalTargets

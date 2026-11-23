@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1449,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="8C2347976C39497B513C08325899887011D5B1D29CA1879DAFA1889E011AB32E",navFingerprint="749EDEA1E46F678D8976BF2649DFDD3E754B68EC1E346B7629E829C3D8BB3B07",payloadSha256="754A3E1201204C56E22053D07B8647894E1DF2F3BA78F2A625D6071E60505BB6"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1449,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="A25D6F0BA0477C457A1EBFCEA79CC6C56A38D2A24AA85B62DB869FCECDAC5A35",navFingerprint="749EDEA1E46F678D8976BF2649DFDD3E754B68EC1E346B7629E829C3D8BB3B07",payloadSha256="D598D815BAD6237AF0BA068BF3261504274720F41BE98452B6DEC500A7E5397F"}
 LogicalTargets.classes = {
 {"npc","spirit_healer",6491,"Spirit Healer","Geistheiler"},
 {"mob","npc_or_mob",9165,"Fledgling Pterrordax","Pterrordaxjunges",a="possible_spawn"},
@@ -141,6 +141,11 @@ LogicalTargets.classes = {
 {"npc","npc_or_mob",269206,"Venomhide Ravasaur","Gifthautravasaurus"},
 {"npc","npc_or_mob",274795,"Viktor Walker","Viktor Wandler"},
 {"gameobject","object",489943,"Shallow Grave"},
+{"mob","npc_or_mob",257480,"Traveler's Sign","Schild des Reisenden"},
+{"gameobject","object",612082,"Trapper's Workbench","Werkbank des Fallenstellers"},
+{"gameobject","object",612091,"Toxin Study"},
+{"herb","herb",657399,"Sungrass","Sonnengras"},
+{"herb","herb",657404,"Dreamfoil","Traumblatt"},
 }
 LogicalTargets.targets = {
 {"creature_5749",1,-7348.79,-1316.54,-260.86},
@@ -1996,6 +2001,16 @@ LogicalTargets.targets = {
 {"questie_creature_274795_490_11",139,-6220.98,-1135.74,p=true},
 {"questie_creature_274795_490_12",139,-6183.24,-1142.03,p=true},
 {"questie_gameobject_489943_490_0",140,-6874.4,-258.47,p=true},
+{"questie_creature_257480_490_0",141,-6554.23,-1129.45,p=true},
+{"questie_gameobject_612082_490_0",142,-6207.91,-1114.28,p=true},
+{"questie_gameobject_612082_490_1",142,-6189.16,-1308.16,p=true},
+{"questie_gameobject_612091_490_0",143,-7399.31,-318.78,p=true},
+{"questie_gameobject_612091_490_1",143,-7821.85,-1909.78,p=true},
+{"questie_gameobject_612091_490_2",143,-7843.06,-2128.45,p=true},
+{"questie_gameobject_657399_490_23",144,-7822.83,-1682.97,p=true},
+{"questie_gameobject_657404_490_3",145,-6698.77,-775.36,p=true},
+{"questie_gameobject_657404_490_9",145,-7121.31,-982.19,p=true},
+{"questie_gameobject_657404_490_13",145,-7905.96,-1129.45,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1449] = LogicalTargets

@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="79D9D32CE847DFB0CBB0943E858153F87144080A18FC3A4174F275C3E3C6C96D",navFingerprint="3713F67E7E8FDFB397B376CD03532A04079F1411D583DE3634B8B4799592AC9C",payloadSha256="F9D9C29D989E88B106E57EE8A0A71D01EA0F5E456700C82F92ACE61C022FB527"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="311FEC1001375E203C52C787A86DE7C8F05ABDF0998E1B565F73CD0FA1439D42",navFingerprint="3713F67E7E8FDFB397B376CD03532A04079F1411D583DE3634B8B4799592AC9C",payloadSha256="85013BABAFBD44B40530759526D7538CCB66CE6339FED1E78B59270CCB23D55C"}
 LogicalTargets.classes = {
 {"mob","npc_or_mob",5893,"Minor Manifestation of Fire","Schwache Feuermanifestation"},
 {"npc","quest_giver",3294,"Ophek"},
@@ -319,6 +319,9 @@ LogicalTargets.classes = {
 {"gameobject","object",616992,"Elemental Convergence","Elementarkonvergenz"},
 {"gameobject","object",716527,"Portal To Undercity"},
 {"gameobject","object",716529,"Portal To Grom'gol"},
+{"gameobject","object",612091,"Toxin Study"},
+{"herb","herb",657391,"Fadeleaf","Blassblatt"},
+{"gameobject","object",657455,"Stunted Silverleaf","Verkümmertes Silberblatt"},
 }
 LogicalTargets.targets = {
 {"creature_170",1,-243.654,-4018.78,188.707},
@@ -4319,6 +4322,19 @@ LogicalTargets.targets = {
 {"questie_gameobject_716529_14_1",318,1339.51,-4637.97,p=true},
 {"questie_gameobject_716529_14_2",318,1332.46,-4643.26,p=true},
 {"gathermate2_herb_1411_4420577000",296,-225.59,-4299.57,p=true},
+{"questie_gameobject_612091_14_0",319,1350.79,-4372.54,p=true},
+{"questie_gameobject_657391_14_0",320,1084.65,-4402.68,p=true},
+{"questie_gameobject_657455_14_0",321,-409.95,-4063.22,p=true},
+{"questie_gameobject_657455_14_1",321,-553.42,-4067.45,p=true},
+{"questie_gameobject_657455_14_2",321,-390.91,-4107.64,p=true},
+{"questie_gameobject_657455_14_3",321,-441.67,-4122.44,p=true},
+{"questie_gameobject_657455_14_4",321,-256.61,-4163.69,p=true},
+{"questie_gameobject_657455_14_5",321,-257.32,-4222.38,p=true},
+{"questie_gameobject_657455_14_6",321,-747.29,-4270.49,p=true},
+{"questie_gameobject_657455_14_7",321,-405.01,-4273.67,p=true},
+{"questie_gameobject_657455_14_8",321,-564.34,-4318.61,p=true},
+{"questie_gameobject_657455_14_9",321,-648.94,-4426.47,p=true},
+{"questie_gameobject_657455_14_10",321,-643.66,-4500.5,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1] = LogicalTargets

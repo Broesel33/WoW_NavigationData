@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=27,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="480338E62CCA78981734EECB098C6EABB54A59DD514722A26B9C7C2CC67A1E76",navFingerprint="7C2AD54F01F68822868E2F3C5ADF3E30CC1052B65AC246F2155BB03E479E77A4",payloadSha256="0B787D870DC738DAC714C34DCB2FA78DAD49DCA6509C851467E86C8DFE4FB002"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=27,coordinateSpace="world",nativeMapId=0,availability="static",sourceSha256="FA445D1C10D24B00F8BB36ECC852432045DCA7CDFADFB2ADCD3E3BFA9F339DA1",navFingerprint="7C2AD54F01F68822868E2F3C5ADF3E30CC1052B65AC246F2155BB03E479E77A4",payloadSha256="5076334E62241D395D2CE66F75A566C3AB1EC985EA875F79CD0F2E01DC3368AA"}
 LogicalTargets.classes = {
 {"npc","npc_or_mob",5595,"Ironforge Guard","Wache von Ironforge"},
 {"npc","quest_giver",6181,"Jordan Stilwell"},
@@ -374,6 +374,10 @@ LogicalTargets.classes = {
 {"gameobject","object",405628,"Frostmane Loot Cache","Beutelager der Frostmane"},
 {"gameobject","object",405633,"Rockjaw Footlocker","Schließkiste der Felsenkiefer"},
 {"gameobject","object",602735,"Leyline","Leylinie"},
+{"mob","npc_or_mob",257480,"Traveler's Sign","Schild des Reisenden"},
+{"npc","npc_or_mob",260105,"Seed Hybridizer","Saatenkreuzer"},
+{"gameobject","object",612082,"Trapper's Workbench","Werkbank des Fallenstellers"},
+{"gameobject","object",612110,"Plague Doctor's Laboratory","Labor des Seuchenarztes"},
 }
 LogicalTargets.targets = {
 {"creature_132",1,-5030.98,-832.871,495.377},
@@ -3655,6 +3659,10 @@ LogicalTargets.targets = {
 {"questie_gameobject_602735_1_1",373,-5374.28,-985.47,p=true},
 {"questie_gameobject_602735_1_2",373,-5538.45,-1340.07,p=true},
 {"questie_gameobject_602735_1_3",373,-5577.85,-1980.32,p=true},
+{"questie_creature_257480_1_0",374,-5035.77,-804.72,p=true},
+{"questie_creature_260105_1_0",375,-5141.17,-848.06,p=true},
+{"questie_gameobject_612082_1_0",376,-5177.94,-732.81,p=true},
+{"questie_gameobject_612110_1_0",377,-5157.58,-867.27,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[27] = LogicalTargets

@@ -1,5 +1,5 @@
 -- Logical target catalogue, compact format 2 (TechnicalDocumentation/05). No graph bindings, no provenance.
-local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1444,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="F87DAF3CB4CE285665E831E1B2FE6FF81545924671FAD37A1366BEF17D632970",navFingerprint="56A27652C2254C394BBAA6F57B7357DF60A2428EB060C5CB5B55199067CF8BD7",payloadSha256="B625296EBD211DCB92D4388562712E30C7EE43069A908F644857D23D8AB6BF06"}
+local LogicalTargets = {format=2,schema=1,layer="logical",zoneId=1444,coordinateSpace="world",nativeMapId=1,availability="static",sourceSha256="7BDE2850FA2B351B70AB0F954A1B898C69D7A96C943E0F6CE82996CB4DEF92EF",navFingerprint="56A27652C2254C394BBAA6F57B7357DF60A2428EB060C5CB5B55199067CF8BD7",payloadSha256="6E505836D1C52506FB357A30C100078515D80CF93DFA218DA7241C70D3914B59"}
 LogicalTargets.classes = {
 {"creature","npc_or_mob",12418,"Gordok Hyena","Hyäne der Gordok"},
 {"npc",{"quest_giver","vendor"},6576,"Brienna Starglow (Tailoring Supplies)","Brienna Starglow (Schneiderbedarf)"},
@@ -367,6 +367,14 @@ LogicalTargets.classes = {
 {"gameobject","object",446468,"Wondergear Worldporter","Wunderrad-Weltteleporter"},
 {"gameobject","quest_giver",581918,"WANTED!","GESUCHT!"},
 {"gameobject","quest_giver",642451,"Old Chest","Alte Truhe"},
+{"mob","npc_or_mob",257480,"Traveler's Sign","Schild des Reisenden"},
+{"gameobject","object",612091,"Toxin Study"},
+{"gameobject","object",612092,"Fishing Hut","Angelhütte"},
+{"herb","herb",657396,"Purple Lotus"},
+{"herb","herb",657397,"Goldthorn","Golddorn"},
+{"herb","herb",657399,"Sungrass","Sonnengras"},
+{"gameobject","object",676838,"Shen'dralar Vault"},
+{"gameobject","object",676839,"Star of Elune"},
 }
 LogicalTargets.targets = {
 {"creature_51361",1,-4385.135,1529.655,150.755},
@@ -4280,6 +4288,24 @@ LogicalTargets.targets = {
 {"gathermate2_mining_1444_7920654000",316,-5396.87,-62.73,p=true},
 {"gathermate2_mining_1444_7920654001",318,-5396.87,-62.73,p=true},
 {"gathermate2_mining_1444_7920654002",317,-5396.87,-62.73,p=true},
+{"questie_creature_257480_357_0",367,-3780.3,1236.22,p=true},
+{"questie_gameobject_612091_357_0",368,-4396.53,241.68,p=true},
+{"questie_gameobject_612092_357_0",369,-2648.84,2054.24,p=true},
+{"questie_gameobject_657396_357_6",370,-5379.72,1266.11,p=true},
+{"questie_gameobject_657397_357_24",371,-4497.07,719.14,p=true},
+{"questie_gameobject_657399_357_3",372,-3253.02,2615.1,p=true},
+{"questie_gameobject_657399_357_13",372,-5451.54,1684.5,p=true},
+{"questie_gameobject_657399_357_18",372,-5789.77,1568.43,p=true},
+{"questie_gameobject_657399_357_24",372,-4561.01,1480.86,p=true},
+{"questie_gameobject_657399_357_29",372,-5253.23,1414.84,p=true},
+{"questie_gameobject_657399_357_32",372,-4944.65,1382.87,p=true},
+{"questie_gameobject_657399_357_42",372,-5152.69,646.86,p=true},
+{"questie_gameobject_657399_357_61",372,-5180.95,283.38,p=true},
+{"questie_gameobject_657399_357_62",372,-5004.89,252.1,p=true},
+{"questie_gameobject_657399_357_68",372,-4452.59,-105.82,p=true},
+{"questie_gameobject_676838_357_0",373,-5684.13,1382.87,p=true},
+{"questie_gameobject_676838_357_1",373,-5693.4,1375.92,p=true},
+{"questie_gameobject_676839_357_0",374,-5684.6,1377.31,p=true},
 }
 WVN7Logical = WVN7Logical or {}
 WVN7Logical[1444] = LogicalTargets
