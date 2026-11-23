@@ -142,7 +142,7 @@ function WowVisionNavigationNodeTypeName(key) return L.Text("nodetype." .. tostr
 -- Command words: the German words stay valid and every German word has an English alias, on all clients. The core
 -- works with the English word.
 L.commandAliases = {
-    sprache = "lang", komfort = "comfort", ankunft = "arrival", posten = "outposts",
+    sprache = "lang", komfort = "comfort", sicherheit = "safety", ankunft = "arrival", posten = "outposts",
     hier = "here", neu = "new", direkt = "direct", ebene = "level", fein = "fine", endanflug = "finalapproach",
     rueckfall = "fallback", stockwerk = "floor", ["rückfall"] = "fallback", aktion = "action", weiter = "continue",
     toleranz = "tolerance", leiche = "corpse", gruppe = "group", stopp = "stop", hilfe = "help",
@@ -155,7 +155,7 @@ function WowVisionNavigationNormalizeCommand(message)
     return canonical and (canonical .. rest) or message
 end
 
-L.helpKeys = { "help_title", "help_open", "help_direct", "help_here", "help_status", "help_stop", "help_prevnext", "help_new", "help_level", "help_radius", "help_finalapproach", "help_fallback", "help_floor", "help_showauto", "help_action", "help_live", "help_quest", "help_log", "help_lang", "help_comfort", "help_arrival", "help_outposts", "help_key" }
+L.helpKeys = { "help_title", "help_open", "help_direct", "help_here", "help_status", "help_stop", "help_prevnext", "help_new", "help_level", "help_radius", "help_finalapproach", "help_fallback", "help_floor", "help_showauto", "help_action", "help_live", "help_quest", "help_log", "help_lang", "help_comfort", "help_safety", "help_arrival", "help_outposts", "help_key" }
 
 -- /vn help: the command words of the client language.
 function WowVisionNavigationHelp()
@@ -303,6 +303,12 @@ L.en = {
     ["comfort_set"] = "Comfort level set to %s percent.",
     ["comfort_invalid"] = "Invalid comfort level '%s'. Use a number from 0 to 300, e.g. /vn comfort 50.",
     ["comfort_recalculated"] = "The running navigation is recalculated with the new level.",
+    ["help_safety"] = "/vn safety [0-300] - safety factor in percent (default 0 = off): how much longer a route may be to keep away from monsters",
+    ["safety_status"] = "Safety factor: %s percent (a route may be up to %s times as long as the shortest one to keep away from monsters; 0 = off).",
+    ["safety_set"] = "Safety factor set to %s percent.",
+    ["safety_invalid"] = "Invalid safety factor '%s'. Use a number from 0 to 300, e.g. /vn safety 100.",
+    ["safety_recalculated"] = "The running navigation is recalculated with the new factor.",
+    ["safety_route_info"] = "The route leads %s yards near monsters, the shortest route %s yards.",
     ["help_outposts"] = "/vn outposts [on|off] - routes avoid outposts and capitals of the opposing faction (default on); without a way around they lead through one and warn",
     ["outposts_status_on"] = "Routes avoid enemy outposts. Switch off with /vn outposts off.",
     ["outposts_status_off"] = "Routes do not avoid enemy outposts. Switch on with /vn outposts on.",
@@ -748,6 +754,12 @@ L.de = {
     ["comfort_set"] = "Komfortstufe auf %s Prozent gestellt.",
     ["comfort_invalid"] = "Ungueltige Komfortstufe '%s'. Gib eine Zahl von 0 bis 300 an, z. B. /vn komfort 50.",
     ["comfort_recalculated"] = "Die laufende Navigation wird mit der neuen Stufe neu berechnet.",
+    ["help_safety"] = "/vn sicherheit [0-300] - Sicherheitsfaktor in Prozent (Standard 0 = aus): wie viel laenger eine Route sein darf, um Monstern aus dem Weg zu gehen",
+    ["safety_status"] = "Sicherheitsfaktor: %s Prozent (eine Route darf bis zu %s mal so lang sein wie die kuerzeste, um Monstern aus dem Weg zu gehen; 0 = aus).",
+    ["safety_set"] = "Sicherheitsfaktor auf %s Prozent gestellt.",
+    ["safety_invalid"] = "Ungueltiger Sicherheitsfaktor '%s'. Gib eine Zahl von 0 bis 300 an, z. B. /vn sicherheit 100.",
+    ["safety_recalculated"] = "Die laufende Navigation wird mit dem neuen Faktor neu berechnet.",
+    ["safety_route_info"] = "Die Route fuehrt %s Yards in der Naehe von Monstern, die kuerzeste Route %s Yards.",
     ["help_outposts"] = "/vn posten [an|aus] - Routen meiden Posten und Hauptstaedte der gegnerischen Fraktion (Standard an); ohne Umweg fuehren sie hindurch und warnen",
     ["outposts_status_on"] = "Routen meiden feindliche Posten. Ausschalten mit /vn posten aus.",
     ["outposts_status_off"] = "Routen meiden feindliche Posten nicht. Einschalten mit /vn posten an.",

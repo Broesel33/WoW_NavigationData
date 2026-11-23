@@ -392,6 +392,38 @@ end
 
 C.SEARCH_LIMIT = 1000            -- at most this many entries per search of the target list
 
+-- Monster spawns of a zone for the safe routes (NavNetwork.DangerSource, /vn safety): the rows of the logical catalogue whose class has the kind
+-- mob or creature (npc and objects do not endanger). Returns the catalogue as the token of the data and the list { {x, y, z (or nil), name} }
+-- | nil when the zone has no logical catalogue.
+function C:DangerSpawns(zoneId)
+    local provider = self.providers["package_logical_" .. tostring(zoneId)]
+    local catalog = provider and provider.compact
+    if not catalog then return nil end
+    local classes = catalog.classObjects or C.ValidateCatalog(catalog)
+    if not classes then return nil end
+    local names, any = {}, false
+    for index = 1, #classes do
+        local class = classes[index]
+        if class.kind == "mob" or class.kind == "creature" then names[index] = class.nameEn; any = true end
+    end
+    local list = {}
+    if any then
+        local rows = catalog.targets
+        for index = 1, #rows do
+            local row = rows[index]
+            local name = names[row[2]]
+            if name then list[#list + 1] = { x = row[3], y = row[4], z = row[5], name = name } end
+        end
+    end
+    return catalog, list
+end
+
+-- A changed catalogue invalidates the danger tables of the zones (NavNetwork builds them again from the new data on the next safe route).
+local function DangerChanged()
+    local network = _G.WowVisionNavigationNavNetwork
+    if network then network.dangerGen = (network.dangerGen or 0) + 1 end
+end
+
 -- Candidate scan of the target list. Walks the active providers once and keeps the rows that pass the filters, without building a table
 -- per row: a compact catalogue is read as it is (classes are tested once per class, then the rows by class index).
 --   zones, mapId: scope as in C:List and the native map of the active zone (a catalogue of another map is skipped as a whole)
@@ -573,6 +605,7 @@ function C:ActivateZones(nav, zones)
     end
     self.expandedCatalogs = expanded
     self.activeNav = nav
+    DangerChanged()
     self:Changed()
     return true
 end
@@ -585,6 +618,7 @@ function C:Deactivate()
     for catalog in pairs(self.expandedCatalogs or {}) do catalog.expanded, catalog.classObjects = nil, nil end
     self.expandedCatalogs = nil
     self.activeNav = nil
+    DangerChanged()
     if removed then self:Changed() end
 end
 

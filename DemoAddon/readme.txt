@@ -18,5 +18,10 @@ player height. A walk-in portal is a link of the route, also into the neighbouri
 same map (Rut'theran Village - Darnassus): the route leads into the trigger and goes on by itself
 after the teleport, without a waiting point.
 
+Safe routes: /vn safety <p> (German /vn sicherheit <p>, p = 0 to 300 percent, default 0 = off) lets a route be up to 1 + p/100 times as
+long as the shortest one if it keeps away from monsters. The monster spawns (classes mob and creature of the logical targets) are read
+from the data already in the maps folder; no extra data. Spawns around the start and the target of a route do not count. /vn status
+and the start of a route say how many yards the route leads near monsters, compared with the shortest route.
+
 Tests (Lua 5.1 through lupa, no game needed; they use the harness of the build tools in the WowNav
 repository): tests/run_all.py [--fast], run with the Python environment of that repository.

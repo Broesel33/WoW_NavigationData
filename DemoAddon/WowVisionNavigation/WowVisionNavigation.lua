@@ -292,8 +292,9 @@ end
 
 -- A* search on the network. startId/targetId are real waypoints, link points or bindings from NavNetwork.Bind.
 -- Returns the waypoint sequence (including link-point attachments), the edge list and the result object.
-local function AStar(startId, targetId, footOnly, startPool, targetPool)
-    local result, reason = NavNetwork.RouteIds(startId, targetId, EdgePenalties, footOnly, startPool, targetPool)
+-- points (optional): the exact positions of the player and of the target; the monster spawns around them do not endanger the route (/vn safety).
+local function AStar(startId, targetId, footOnly, startPool, targetPool, points)
+    local result, reason = NavNetwork.RouteIds(startId, targetId, EdgePenalties, footOnly, startPool, targetPool, points)
     if not result then return nil, reason end
     return result.path, result.edges, result
 end
@@ -564,8 +565,13 @@ end
 -- attachments of that cell; endPool (optional) does the same for the target side. The pair with the lowest approach + network +
 -- approach cost wins; usedStartId and result.targetBinding name it. Unchecked attachments and those of neighbouring cells only
 -- serve as alternatives when no route exists (as before).
-local function RouteFromStart(startId, endId, footOnly, x, y, endPool)
+local function RouteFromStart(startId, endId, footOnly, x, y, endPool, endPoint)
     local options, startPool
+    local points = {}
+    if x then points[1] = { x = x, y = y, z = EstimatedHeightForSearch(x, y) } end
+    if endPoint and type(endPoint.x) == "number" and type(endPoint.y) == "number" then
+        points[#points + 1] = { x = endPoint.x, y = endPoint.y, z = endPoint.z }
+    end
     if x then
         options = { swimming = PlayerIsSwimming(), preferred = HeightAnchor.preferred, lastHeight = HeightAnchor.last }
         if not options.swimming then
@@ -578,14 +584,14 @@ local function RouteFromStart(startId, endId, footOnly, x, y, endPool)
             end
         end
     end
-    local path, edges, result = AStar(startId, endId, footOnly, startPool, endPool)
+    local path, edges, result = AStar(startId, endId, footOnly, startPool, endPool, points)
     if path then return path, edges, result, result and result.startBinding and result.startBinding.id or startId end
     if not x then return path, edges, result, startId end
     local reason = edges
     local list = NavNetwork.StartBindings(x, y, EstimatedHeightForSearch(x, y), options)
     for _, binding in ipairs(list or {}) do
         if binding.id ~= startId then
-            local alternative, alternativeEdges, alternativeResult = AStar(binding.id, endId, footOnly, nil, endPool)
+            local alternative, alternativeEdges, alternativeResult = AStar(binding.id, endId, footOnly, nil, endPool, points)
             if alternative then return alternative, alternativeEdges, alternativeResult, binding.id end
         end
     end
@@ -926,8 +932,9 @@ local function PerformRecalculation(x, y, fromId, toId, trigger)
     local startId = targetId and StartBinding(x, y) or nil
     local newPath
     if startId then
-        local path = RouteFromStart(startId, targetId, nil, x, y)
+        local path, _, result = RouteFromStart(startId, targetId, nil, x, y, nil, Navigation.routeEndPoint)
         newPath = path and NavNetwork.SteeringTargets(path) or nil
+        if newPath then Navigation.safetyDanger, Navigation.safetyDangerA = result and result.danger, result and result.dangerA end
         if newPath and Navigation.logicalTarget then newPath[#newPath + 1] = Navigation.logicalTarget end
     end
     if newPath and #newPath > 1 then
@@ -1357,7 +1364,7 @@ local function StartNavigationToNode(targetNodeId, targetName, targetStatus, foo
         startId = id
         startX, startY = x, y
     end
-    local path, pathEdges, routeResult = RouteFromStart(startId, targetNodeId, footOnly, startX, startY)
+    local path, pathEdges, routeResult = RouteFromStart(startId, targetNodeId, footOnly, startX, startY, nil, logicalSource)
     if not path then
         WowVisionNavigationSay("no_route_found")
         return false
@@ -1418,6 +1425,9 @@ local function StartNavigationToNode(targetNodeId, targetName, targetStatus, foo
     Navigation.pendingAction = pendingAction
     Navigation.directTarget = nil
     Navigation.targetBindingId = targetNodeId
+    -- Safe routes (/vn safety): the position of the target (spawns around it do not count) and the danger of this route, for a recalculation and /vn status.
+    Navigation.routeEndPoint = logicalSource and type(logicalSource.x) == "number" and { x = logicalSource.x, y = logicalSource.y, z = logicalSource.z } or nil
+    Navigation.safetyDanger, Navigation.safetyDangerA = routeResult and routeResult.danger, routeResult and routeResult.dangerA
     -- The first waypoint is the attachment of the start cell; Arrival advances along the same path.
     Navigation.pathIndex = 1
     Navigation.targetName = targetName
@@ -1450,6 +1460,11 @@ local function StartNavigationToNode(targetNodeId, targetName, targetStatus, foo
         WowVisionNavigationSay("outpost_through")
     elseif routeResult and routeResult.outpost == "target" then
         WowVisionNavigationSay("outpost_target")
+    end
+    -- Safe routes: with the option on, a route that still passes monsters says how far (against the shortest route)
+    if routeResult and routeResult.danger and routeResult.dangerA and routeResult.dangerA > 0 then
+        WowVisionNavigationSay("safety_route_info", string.format("%d", math.floor(routeResult.danger + 0.5)),
+            string.format("%d", math.floor(routeResult.dangerA + 0.5)))
     end
     -- 4.38 S1b: a target from a target update has no ZIEL waypoint; the guidance ends at the attachment cell, then the final
     -- approach goes to the coordinate (the logical end point), which the map does not prove
@@ -3877,6 +3892,27 @@ function WowVisionNavigationOutpostsCommand(argument)
     end
 end
 
+-- /vn safety [p] (German: /vn sicherheit): safety factor 0 to 300 percent, saved; without a value it announces the setting. A route may be up to
+-- 1 + p/100 times as long as the shortest one to keep away from monsters (NavNetwork.Route); 0 = off. (Global: the file is at the limit of file locals.)
+function WowVisionNavigationSafetyCommand(argument)
+    argument = argument:match("^%s*(.-)%s*$")
+    if argument == "" then
+        WowVisionNavigationSay("safety_status", string.format("%g", NavNetwork.safety), string.format("%g", NavNetwork.SAFETY_RATIO))
+        return
+    end
+    local number = tonumber((argument:gsub("%%$", ""):gsub(",", ".")))
+    if not number or not NavNetwork.SetSafety(number) then
+        WowVisionNavigationSay("safety_invalid", argument)
+        return
+    end
+    WowVisionNavigationDB.safety = number
+    WowVisionNavigationSay("safety_set", string.format("%g", number))
+    if Navigation.active and Navigation.path and not Navigation.directTarget then
+        WowVisionNavigationSay("safety_recalculated")
+        RecalculateRunningRoute(false)
+    end
+end
+
 local function ExecuteSlashCommand(msg)
     -- The German command words and their English aliases are both valid; the core works with the English word.
     local msgLower = WowVisionNavigationNormalizeCommand(msg:lower())
@@ -3898,6 +3934,8 @@ local function ExecuteSlashCommand(msg)
         LanguageCommand(msgLower:sub(5))
     elseif msgLower == "comfort" or msgLower:match("^comfort%s") then
         ComfortCommand(msgLower:sub(8))
+    elseif msgLower == "safety" or msgLower:match("^safety%s") then
+        WowVisionNavigationSafetyCommand(msgLower:sub(7))
     elseif msgLower == "arrival" or msgLower:match("^arrival%s") then
         WowVisionNavigationArrivalCommand(msgLower:sub(8))
     elseif msgLower == "outposts" or msgLower:match("^outposts%s") then
@@ -3943,6 +3981,13 @@ local function ExecuteSlashCommand(msg)
                 Navigation.targetName, Navigation.pathIndex, #Navigation.path)
         else
             WowVisionNavigationSay("no_active_navigation")
+        end
+        if NavNetwork.safety > 0 then
+            WowVisionNavigationSay("safety_status", string.format("%g", NavNetwork.safety), string.format("%g", NavNetwork.SAFETY_RATIO))
+            if Navigation.active and not Navigation.directTarget and Navigation.safetyDanger and Navigation.safetyDangerA then
+                WowVisionNavigationSay("safety_route_info", string.format("%d", math.floor(Navigation.safetyDanger + 0.5)),
+                    string.format("%d", math.floor(Navigation.safetyDangerA + 0.5)))
+            end
         end
         WowVisionNavigationSay("status_final_approach", FINAL_APPROACH_DISTANCE,
             WowVisionNavigationText(FinalApproachOn() and "state_on" or "state_off"))
@@ -4988,6 +5033,11 @@ eventFrame:SetScript("OnEvent", function(_, event, addonName)
         if not NavNetwork.SetComfort(WowVisionNavigationDB.comfort) then
             WowVisionNavigationDB.comfort = nil
             NavNetwork.SetComfort(NavNetwork.COMFORT_DEFAULT)
+        end
+        -- Safety factor (/vn safety): an invalid or missing saved value means off.
+        if not NavNetwork.SetSafety(WowVisionNavigationDB.safety) then
+            WowVisionNavigationDB.safety = nil
+            NavNetwork.SetSafety(NavNetwork.SAFETY_DEFAULT)
         end
         -- The former, meanwhile ineffective route profile and the /vn autoNew switch (10.6dg) are removed: automatic
         -- redirecting on blockage must never happen again. A value still stored in the SavedVariables (or imported from an
